@@ -1,0 +1,223 @@
+<form>
+    <div class="modal-header">
+        <h2 class="modal-title" id="sign_up_popupLabel">اشتراك</h2>
+        <p>اشترك والحصول على جميع ميزات منصة نسق</p>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+
+    <div class="modal-body">
+        <div class="twm-tabs-style-2">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <!--Signup Candidate-->
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#sign-candidate" type="button">
+                        <i class="fas fa-user-tie"></i>حساب شخصى
+                    </button>
+                </li>
+                <!--Signup Employer-->
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#sign-Employer" type="button">
+                        <i class="fas fa-building"></i>حساب مؤسسة
+                    </button>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <!--Signup Candidate Content-->
+                <div class="tab-pane fade show active" id="sign-candidate">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group mb-3">
+                                <input name="name" type="text" class="form-control" required=""
+                                    placeholder="الاسم الأول*">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="form-group mb-3">
+                                <input name="email" type="text" class="form-control" required=""
+                                    placeholder="الاسم الأخير*">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="form-group mb-3">
+                                <input name="email" type="text" class="form-control" required=""
+                                    placeholder="بريد إلكتروني*">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="form-group mb-3">
+                                <input name="password" type="text" class="form-control" required=""
+                                    placeholder="كلمة المرور*">
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <a href="dashboard-elmokiam.html" type="submit" class="site-button">
+                                اشتراك
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!--Signup Employer Content-->
+                <div class="tab-pane fade" id="sign-Employer">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group mb-3">
+                                <input name="name" type="text" class="form-control" required=""
+                                    placeholder="اسم المؤسسة*">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="form-group mb-3">
+                                <input name="email" type="text" class="form-control" required=""
+                                    placeholder="بريد إلكتروني*">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="form-group mb-3">
+                                <input name="password" type="text" class="form-control" required=""
+                                    placeholder="كلمة المرور*">
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 col-lg-6 col-md-12">
+                            <div class="form-group city-outer-bx has-feedback">
+                                <label>نوع المؤسسة</label>
+                                <div class="ls-inputicon-box">
+                                    <div class="dropdown bootstrap-select wt-select-box"><select
+                                            class="wt-select-box selectpicker" name="Job type" data-live-search="true"
+                                            title="نوع المؤسسة" id="city" data-bv-field="size">
+                                            <option class="bs-title-option" value=""></option>
+                                            <option class="" value="">وكالة أدبية</option>
+                                            <option class="" value="">دار نشر</option>
+                                            <option class="" value="">بيت ترجمة</option>
+
+                                        </select>
+
+                                        <div class="dropdown-menu ">
+                                            <div class="bs-searchbox"><input type="search" class="form-control"
+                                                    autocomplete="off" role="combobox" aria-label="Search"
+                                                    aria-controls="bs-select-1" aria-autocomplete="list"></div>
+                                            <div class="inner show" role="listbox" id="bs-select-1" tabindex="-1">
+                                                <ul class="dropdown-menu inner show" role="presentation">
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <i class="fs-input-icon fa fa-file-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <a href="dashboard-elwekala.html" type="submit" class="site-button">
+                                اشتراك
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!--Signup Employer Content-->
+                <div class="tab-pane fade" id="sign-Weqala">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group mb-3">
+                                <input name="name" type="text" class="form-control" required=""
+                                    placeholder="اسم الوكالة*">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="form-group mb-3">
+                                <input name="email" type="text" class="form-control" required=""
+                                    placeholder="بريد إلكتروني*">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="form-group mb-3">
+                                <input name="phone" type="text" class="form-control" required="" placeholder="هاتف*">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="form-group mb-3">
+                                <input name="password" type="text" class="form-control" required=""
+                                    placeholder="كلمة المرور*">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12">
+                            <div class="form-group">
+                                <div action="upload.php" class="dropzone dz-clickable">
+                                    <div class="dz-default dz-message">
+                                        <span><i class="sl sl-icon-plus"></i> انقر هنا أو
+                                            إسقاط اللوجو للتحميل</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <button type="submit" class="site-button">
+                                اشتراك
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Signup Employer Content-->
+                <div class="tab-pane fade" id="sign-Dar">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group mb-3">
+                                <input name="name" type="text" class="form-control" required=""
+                                    placeholder="اسم دار النشر*">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="form-group mb-3">
+                                <input name="email" type="text" class="form-control" required=""
+                                    placeholder="بريد إلكتروني*">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="form-group mb-3">
+                                <input name="phone" type="text" class="form-control" required="" placeholder="هاتف*">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12">
+                            <div class="form-group mb-3">
+                                <input name="password" type="text" class="form-control" required=""
+                                    placeholder="كلمة المرور*">
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12">
+                            <div class="form-group">
+                                <div action="upload.php" class="dropzone dz-clickable">
+                                    <div class="dz-default dz-message">
+                                        <span><i class="sl sl-icon-plus"></i> انقر هنا أو
+                                            إسقاط اللوجو للتحميل</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <button type="submit" class="site-button">
+                                اشتراك
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

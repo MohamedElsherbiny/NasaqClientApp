@@ -1,0 +1,28 @@
+<!-- Sidebar Holder -->
+<nav id="sidebar-admin-wraper">
+    <div class="page-logo">
+        <a href="index.html"><img src="assets/images/Sinan Logo.png" alt=""></a>
+    </div>
+
+    <div class="admin-nav ">
+        <ul>
+            <li [ngClass]="{ 'active': isActive(['/admin-dashboard']) }">
+                <a routerLink="/admin-dashboard"><i class="fa fa-home"></i><span class="admin-nav-text">لوحة
+                        التحكم</span></a>
+            </li>
+
+            <li [ngClass]="{ 'active': isActive(['/admin-dashboard/profile']) }">
+                <a routerLink="profile"><i class="fa fa-user-tie"></i><span class="admin-nav-text">تعديل
+                        الحساب</span></a>
+            </li>
+
+            <li>
+                <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#logout-dash-profile"><i
+                        class="fa fa-share-square"></i><span class="admin-nav-text">تسجيل خروج</span></a>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+
+<app-logout></app-logout>

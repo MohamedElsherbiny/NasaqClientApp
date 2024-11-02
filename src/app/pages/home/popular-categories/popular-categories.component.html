@@ -1,0 +1,48 @@
+<!-- Popular category SECTION START -->
+<div class="section-full p-t120 p-b0 site-bg-white twm-jobatglance-wrap8">
+    <div class="container">
+
+        <div class="wt-separator-two-part">
+            <div class="row wt-separator-two-part-row">
+                <div class="col-xl-6 col-lg-6 col-md-12 wt-separator-two-part-left">
+                    <!-- TITLE START-->
+                    <div class="section-head left wt-small-separator-outer">
+                        <div class="wt-small-separator site-text-primary">
+                            <div><span class="site-text-primary">إثراء تجربتك الأدبية</span></div>
+                        </div>
+                        <h2 class="wt-title">الخدمات المقدمة</h2>
+                    </div>
+                    <!-- TITLE END-->
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-12 wt-separator-two-part-right text-right">
+                    <a href="#" class=" site-button">عرض جميع الخدمات</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="twm-jobatglance-h8">
+            <div class="owl-carousel h-page8-jobs-slider">
+
+                @for (category of jobCategories; track $index) {
+                <div class="item">
+                    <div class="job-categories-home-8">
+                        <div class="twm-media cat-bg-clr-3">
+                            <div [class]="category.icon"></div>
+                        </div>
+                        <a href="#">{{ category.title }}</a>
+                        <div class="twm-content">
+                            <div class="twm-jobs-available">
+                                <span [style.color]="category.availability === 'متاح حالياً' ? 'darkgreen' : 'red'">{{
+                                    category.availability }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<!-- Popular category SECTION END -->

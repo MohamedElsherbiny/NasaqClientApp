@@ -1,0 +1,48 @@
+<!-- Sidebar Holder -->
+<nav id="sidebar-admin-wraper">
+    <div class="page-logo">
+        <a href="index.html"><img src="assets/images/Sinan Logo.png" alt=""></a>
+    </div>
+
+    <div class="admin-nav ">
+        <ul>
+            <li [ngClass]="{ 'active': isActive(['/corporate-dashboard']) }">
+                <a routerLink="/corporate-dashboard"><i class="fa fa-home"></i><span class="admin-nav-text">لوحة
+                        التحكم</span></a>
+            </li>
+
+            <li [ngClass]="{ 'active': isActive(['/corporate-dashboard/company-profile']) }">
+                <a routerLink="company-profile"><i class="fa fa-user-tie"></i><span class="admin-nav-text">تعديل
+                        الحساب</span></a>
+            </li>
+
+            <li [ngClass]="{ 'active': isActive(['/corporate-dashboard/help-support']) }">
+                <a routerLink="help-support"><i class="fa fa-question"></i><span class="admin-nav-text"> طلب
+                        مساعدة</span></a>
+            </li>
+
+            <li [ngClass]="{ 'active': isActive(['/corporate-dashboard/service-provider']) }">
+                <a routerLink="service-provider"><i class="fa fa-user-plus"></i><span class="admin-nav-text"> إضافة مقدم
+                        خدمة </span></a>
+            </li>
+
+            <li [ngClass]="{ 'active': isActive(['/corporate-dashboard/order-management']) }">
+                <a routerLink="order-management"><i class="fa fa-tasks"></i><span class="admin-nav-text">
+                        إدارة الطلبات </span></a>
+            </li>
+
+            <li [ngClass]="{ 'active': isActive(['/corporate-dashboard/team-management']) }">
+                <a routerLink="team-management"><i class="fa fa-stream"></i><span class="admin-nav-text"> إدارة فريق
+                        العمل </span></a>
+            </li>
+
+            <li>
+                <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#logout-dash-profile"><i
+                        class="fa fa-share-square"></i><span class="admin-nav-text">تسجيل خروج</span></a>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+
+<app-logout></app-logout>

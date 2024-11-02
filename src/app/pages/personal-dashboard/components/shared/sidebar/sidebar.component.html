@@ -1,0 +1,49 @@
+<!-- Sidebar Holder -->
+<nav id="sidebar-admin-wraper">
+    <div class="page-logo">
+        <a href="#"><img src="assets/images/user-avtar/pic5.png" alt=""></a>
+    </div>
+
+    <div class="admin-nav ">
+        <ul>
+            <li [ngClass]="{ 'active': isActive(['/personal-dashboard']) }">
+                <a routerLink="/personal-dashboard"><i class="fa fa-home"></i><span class="admin-nav-text">لوحة
+                        التحكم</span></a>
+            </li>
+
+            <li [ngClass]="{ 'active': isActive(['/personal-dashboard/profile']) }">
+                <a routerLink="profile"><i class="fa fa-user-tie"></i><span class="admin-nav-text">تعديل
+                        الحساب</span></a>
+            </li>
+
+            <li [ngClass]="{ 'active': isActive(['/personal-dashboard/help-support']) }">
+                <a routerLink="help-support"><i class="fa fa-question"></i><span class="admin-nav-text"> طلب
+                        مساعدة</span></a>
+            </li>
+
+            <li [ngClass]="{ 'active': isActive(['/personal-dashboard/request-to-join-institution']) }">
+                <a routerLink="request-to-join-institution"><i class="fa fa-user-plus"></i><span class="admin-nav-text">
+                        طلب إنضمام
+                        لمؤسسة</span></a>
+            </li>
+
+            <li [ngClass]="{ 'active': isActive(['/personal-dashboard/my-requests']) }">
+                <a routerLink="my-requests"><i class="fa fa-stream"></i><span class="admin-nav-text">
+                        طلباتي الخاصة </span></a>
+            </li>
+
+            <li [ngClass]="{ 'active': isActive(['/personal-dashboard/task-management']) }">
+                <a routerLink="task-management"><i class="fa fa-tasks"></i><span class="admin-nav-text"> إدارة المهام
+                    </span></a>
+            </li>
+
+            <li>
+                <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#logout-dash-profile"><i
+                        class="fa fa-share-square"></i><span class="admin-nav-text">تسجيل خروج</span></a>
+            </li>
+
+        </ul>
+    </div>
+</nav>
+
+<app-logout></app-logout>

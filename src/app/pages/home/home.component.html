@@ -1,0 +1,36 @@
+<app-navbar></app-navbar>
+<!-- CONTENT START -->
+<div class="page-content">
+
+    <app-banner></app-banner>
+
+    <app-how-it-work></app-how-it-work>
+
+    <div class="container" style="text-align: center">
+        <a href="#sign_up_popup" class="site-button" data-bs-toggle="modal" role="button">ابدأ رحلتك الأدبية الآن</a>
+    </div>
+
+    <app-popular-categories></app-popular-categories>
+
+    <app-top-companies></app-top-companies>
+
+    <app-our-blog></app-our-blog>
+
+</div>
+<!-- CONTENT END -->
+
+<!-- BUTTON TOP START -->
+<button class="scroltop"><span class="fa fa-angle-up  relative" id="btn-vibrate"></span></button>
+
+<!--Model Popup Section Start-->
+<!--Signup popup -->
+<div class="modal fade twm-sign-up" id="sign_up_popup" aria-labelledby="sign_up_popupLabel" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <app-signup></app-signup>
+        </div>
+    </div>
+</div>
+
+<!--Model Popup Section End-->
+<app-footer></app-footer>
