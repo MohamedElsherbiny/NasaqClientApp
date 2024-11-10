@@ -11,41 +11,26 @@
 
             <div class="col-lg-12 col-md-12 mb-4">
                 <div class="panel panel-default site-bg-white m-t30">
-                    <div class="panel-heading wt-panel-heading p-a20 d-flex flex-row justify-content-between">
-                        <h4 class="panel-tittle m-a0"><i class="far fa-list-alt"></i>جميع الطلبات</h4>
-
-                    </div>
-
                     <div class="panel-body wt-panel-body">
                         <div class="twm-D_table p-a20 table-responsive">
-                            <table id="candidate_data_table" class="table table-bordered">
+                            <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th><input type="checkbox" onclick="'تحقق من الكل(هذا)'"></th>
                                         <th>الاسم</th>
                                         <th>التخصص</th>
-                                        <th>التاريخ</th>
                                         <th>الحالة</th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <!--1-->
-                                    <tr>
-                                        <td><input type="checkbox"></td>
+                                    <tr *ngFor="let employee of employees">
                                         <td>
                                             <div class="twm-DT-candidates-list">
-                                                <div class="twm-media">
-                                                    <div class="twm-media-pic">
-                                                        <img src="images/candidates/pic1.jpg" alt="#">
-                                                    </div>
-                                                </div>
+
                                                 <div class="twm-mid-content">
                                                     <a href="#" class="twm-job-title">
-                                                        <h4>محمد على</h4>
-                                                        <p class="twm-candidate-address">
-                                                            <i class="feather-map-pin"></i>رياض
-                                                        </p>
+                                                        <h4>{{ employee.name }}</h4>
                                                     </a>
 
                                                 </div>
@@ -53,115 +38,11 @@
                                             </div>
                                         </td>
                                         <td>محقق لغوي</td>
-                                        <td>15/06/2023 في الساعة 10:35 صباحًا</td>
                                         <td>
-                                            <div class="twm-jobs-category"><span class="twm-bg-green">مفعل</span></div>
-                                        </td>
-                                        <td>
-                                            <div class="twm-table-controls">
-                                                <ul class="twm-DT-controls-icon list-unstyled">
-                                                    <li>
-                                                        <button title="View profile" data-bs-toggle="tooltip"
-                                                            data-bs-placement="top">
-                                                            <span class="fa fa-eye"></span>
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        <button title="Send message" data-bs-toggle="tooltip"
-                                                            data-bs-placement="top">
-                                                            <span class="far fa-envelope-open"></span>
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        <button title="Delete" data-bs-toggle="tooltip"
-                                                            data-bs-placement="top">
-                                                            <span class="far fa-trash-alt"></span>
-                                                        </button>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <!--2-->
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td>
-                                            <div class="twm-DT-candidates-list">
-                                                <div class="twm-media">
-                                                    <div class="twm-media-pic">
-                                                        <img src="images/candidates/pic2.jpg" alt="#">
-                                                    </div>
-                                                </div>
-                                                <div class="twm-mid-content">
-                                                    <a href="#" class="twm-job-title">
-                                                        <h4>
-                                                            اياد عبدالله</h4>
-                                                        <p class="twm-candidate-address">
-                                                            <i class="feather-map-pin"></i>جده
-                                                        </p>
-                                                    </a>
-
-                                                </div>
-
-                                            </div>
-                                        </td>
-                                        <td>صانع محتوى</td>
-                                        <td>16/06/2023في الساعة 11:35 صباحًا </td>
-                                        <td>
-                                            <div class="twm-jobs-category"><span class="twm-bg-green">مفعل</span></div>
-                                        </td>
-                                        <td>
-                                            <div class="twm-table-controls">
-                                                <ul class="twm-DT-controls-icon list-unstyled">
-                                                    <li>
-                                                        <button title="View profile" data-bs-toggle="tooltip"
-                                                            data-bs-placement="top">
-                                                            <span class="fa fa-eye"></span>
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        <button title="Send message" data-bs-toggle="tooltip"
-                                                            data-bs-placement="top">
-                                                            <span class="far fa-envelope-open"></span>
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        <button title="Delete" data-bs-toggle="tooltip"
-                                                            data-bs-placement="top">
-                                                            <span class="far fa-trash-alt"></span>
-                                                        </button>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </td>
-                                    </tr>
-
-                                    <!--3-->
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td>
-                                            <div class="twm-DT-candidates-list">
-                                                <div class="twm-media">
-                                                    <div class="twm-media-pic">
-                                                        <img src="images/candidates/pic3.jpg" alt="#">
-                                                    </div>
-                                                </div>
-                                                <div class="twm-mid-content">
-                                                    <a href="#" class="twm-job-title">
-                                                        <h4>محمد عامر&nbsp;</h4>
-                                                        <p class="twm-candidate-address">
-                                                            <i class="feather-map-pin"></i>مكة
-                                                        </p>
-                                                    </a>
-
-                                                </div>
-
-                                            </div>
-                                        </td>
-                                        <td>مدقق أدبى</td>
-                                        <td>17/06/2023 في الساعة 01:15 مساءً</td>
-                                        <td>
-                                            <div class="twm-jobs-category"><span class="twm-bg-red">غير مفعل</span>
+                                            <div class="twm-jobs-category">
+                                                <span [ngClass]="employee.isAdmin ? 'twm-bg-red' : 'twm-bg-green'">
+                                                    {{ employee.isAdmin ? 'مدير' : 'موظف' }}
+                                                </span>
                                             </div>
                                         </td>
                                         <td>
@@ -189,73 +70,7 @@
                                             </div>
                                         </td>
                                     </tr>
-
-                                    <!--4-->
-                                    <tr>
-                                        <td><input type="checkbox"></td>
-                                        <td>
-                                            <div class="twm-DT-candidates-list">
-                                                <div class="twm-media">
-                                                    <div class="twm-media-pic">
-                                                        <img src="images/candidates/pic4.jpg" alt="#">
-                                                    </div>
-                                                </div>
-                                                <div class="twm-mid-content">
-                                                    <a href="#" class="twm-job-title">
-                                                        <h4>أمانى محمد</h4>
-                                                        <p class="twm-candidate-address">
-                                                            <i class="feather-map-pin"></i>المدينة
-                                                        </p>
-                                                    </a>
-
-                                                </div>
-
-                                            </div>
-                                        </td>
-                                        <td>مترجم</td>
-                                        <td>18/06/2023 في الساعة 10:35 صباحًا</td>
-                                        <td>
-                                            <div class="twm-jobs-category"><span class="twm-bg-green">مفعل</span></div>
-                                        </td>
-                                        <td>
-                                            <div class="twm-table-controls">
-                                                <ul class="twm-DT-controls-icon list-unstyled">
-                                                    <li>
-                                                        <button title="View profile" data-bs-toggle="tooltip"
-                                                            data-bs-placement="top">
-                                                            <span class="fa fa-eye"></span>
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        <button title="Send message" data-bs-toggle="tooltip"
-                                                            data-bs-placement="top">
-                                                            <span class="far fa-envelope-open"></span>
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        <button title="Delete" data-bs-toggle="tooltip"
-                                                            data-bs-placement="top">
-                                                            <span class="far fa-trash-alt"></span>
-                                                        </button>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </td>
-                                    </tr>
-
-
-
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th></th>
-                                        <th>الاسم</th>
-                                        <th>التخصص</th>
-                                        <th>التاريخ</th>
-                                        <th>الحالة</th>
-                                        <th></th>
-                                    </tr>
-                                </tfoot>
                             </table>
                         </div>
                     </div>

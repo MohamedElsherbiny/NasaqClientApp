@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { CompanySignupComponent } from "./company-signup/company-signup.component";
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [],
+  imports: [CompanySignupComponent],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss'
 })

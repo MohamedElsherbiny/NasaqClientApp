@@ -8,10 +8,15 @@ import { FooterComponent } from "./shared/components/footer/footer.component";
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, LoaderComponent, NavbarComponent, HomeComponent, FooterComponent],
+  imports: [
+    RouterOutlet,
+    LoaderComponent,
+    NavbarComponent,
+    HomeComponent,
+    FooterComponent
+  ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
-export class AppComponent {
-  title = 'nsaq';
-}
+export class AppComponent { }
+

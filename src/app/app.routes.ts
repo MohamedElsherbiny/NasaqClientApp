@@ -20,6 +20,8 @@ import { tokenValidationGuard } from './shared/core/guards/token-validation.guar
 import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
 import { AdminProfileComponent } from './pages/admin-dashboard/components/admin-profile/admin-profile.component';
 import { adminGuard } from './shared/core/guards/admin.guard';
+import { publisherGuard } from './shared/core/guards/publisher.guard';
+import { authorGuard } from './shared/core/guards/author.guard';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -27,7 +29,7 @@ export const routes: Routes = [
     {
         path: 'corporate-dashboard',
         component: CorporateDashboardComponent,
-        canActivate: [tokenValidationGuard],
+        canActivate: [tokenValidationGuard, publisherGuard],
         children: [
             { path: '', component: CorporateDashboardIndexComponent },
             { path: 'company-profile', component: CompanyProfileComponent },
@@ -39,7 +41,7 @@ export const routes: Routes = [
     },
     {
         path: 'personal-dashboard',
-        canActivate: [tokenValidationGuard],
+        // canActivate: [tokenValidationGuard, authorGuard],
         component: PersonalDashboardComponent,
         children: [
             { path: '', component: PersonalDashboardIndexComponent },

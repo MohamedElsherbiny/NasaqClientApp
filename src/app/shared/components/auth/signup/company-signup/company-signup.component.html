@@ -1,0 +1,38 @@
+<form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-group mb-3">
+                <input formControlName="publisherName" type="text" class="form-control" placeholder="اسم المؤسسة*" required />
+            </div>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="form-group mb-3">
+                <input formControlName="email" type="text" class="form-control" placeholder="بريد إلكتروني*" required />
+            </div>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="form-group mb-3">
+                <input formControlName="password" type="password" class="form-control" placeholder="كلمة المرور*"
+                    required />
+            </div>
+        </div>
+
+        <div class="col-xl-4 col-lg-6 col-md-12">
+            <div class="form-group city-outer-bx has-feedback">
+                <label>نوع المؤسسة</label>
+                <select formControlName="type" class="form-control" required>
+                    <option value="" disabled selected>نوع المؤسسة</option>
+                    <option value="agency">وكالة أدبية</option>
+                    <option value="publishing_house">دار نشر</option>
+                    <option value="translation_house">بيت ترجمة</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <button type="submit" class="site-button" [disabled]="signupForm.invalid" data-bs-dismiss="modal">اشتراك</button>
+        </div>
+    </div>
+</form>
