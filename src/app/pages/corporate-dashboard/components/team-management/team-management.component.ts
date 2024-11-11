@@ -4,19 +4,14 @@ import { Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpService } from '../../../../shared/core/services/http.service';
 import { ToastrService } from 'ngx-toastr';
+import { DeleteServiceProviderComponent } from "./delete-service-provider/delete-service-provider.component";
+import { PublisherEmployee } from '../../../../shared/models/PublisherEmployee';
 
-interface PublisherEmployee {
-  employeeId: number;
-  publisherId: number;
-  name: string;
-  email: string;
-  isAdmin: boolean;
-}
 
 @Component({
   selector: 'app-team-management',
   standalone: true,
-  imports: [ReactiveFormsModule, HttpClientModule, CommonModule],
+  imports: [ReactiveFormsModule, HttpClientModule, CommonModule, DeleteServiceProviderComponent],
   providers: [HttpService],
   templateUrl: './team-management.component.html',
   styleUrl: './team-management.component.scss'
@@ -26,6 +21,7 @@ export class TeamManagementComponent implements OnInit {
   checkedAll: boolean = false;
   checkedEmployees: boolean[] = [];
   user = JSON.parse(localStorage.getItem('user') ?? '{}');
+  selectedEmployeeId: number | null = null;
 
   constructor(
     private http: HttpService,

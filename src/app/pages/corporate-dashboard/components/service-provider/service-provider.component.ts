@@ -74,6 +74,11 @@ export class ServiceProviderComponent implements OnInit {
         ...this.serviceProviderForm.value
       };
 
+      if (this.publisherRoleIds.length === 0) {
+        this.toastr.error('يجب اختيار على الأقل تخصص واحد', 'فشل');
+        return;
+      }
+
       this.http.post(`Publisher/AddEmployee/${this.user['publisherId']}`, formData).subscribe({
         next: () => {
           this.toastr.success('تم إرسال الدعوة بنجاح', 'نجاح');
@@ -89,4 +94,5 @@ export class ServiceProviderComponent implements OnInit {
       this.toastr.error('النموذج غير صالح، يرجى تصحيح الأخطاء والمحاولة مرة أخرى', 'فشل');
     }
   }
+
 }

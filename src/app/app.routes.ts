@@ -22,10 +22,12 @@ import { AdminProfileComponent } from './pages/admin-dashboard/components/admin-
 import { adminGuard } from './shared/core/guards/admin.guard';
 import { publisherGuard } from './shared/core/guards/publisher.guard';
 import { authorGuard } from './shared/core/guards/author.guard';
+import { ConfirmEmailComponent } from './pages/confirm-email/confirm-email.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
     { path: 'login', component: LoginComponent },
+    { path: 'confirm-email', component: ConfirmEmailComponent },
     {
         path: 'corporate-dashboard',
         component: CorporateDashboardComponent,

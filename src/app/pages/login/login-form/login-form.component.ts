@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { HttpService } from '../../../shared/core/services/http.service';
 import { HttpClientModule } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { LoaderComponent } from "../../../shared/components/loader/loader.component";
 import { ToastrService } from 'ngx-toastr';
 
 type LoginResponse = {
@@ -14,7 +13,7 @@ type LoginResponse = {
 @Component({
   selector: 'app-login-form',
   standalone: true,
-  imports: [FormsModule, HttpClientModule, LoaderComponent],
+  imports: [FormsModule, HttpClientModule],
   providers: [HttpService],
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.scss'

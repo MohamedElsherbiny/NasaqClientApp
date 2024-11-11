@@ -11,17 +11,20 @@
                         التحكم</span></a>
             </li>
 
-            <li [ngClass]="{ 'active': isActive(['/corporate-dashboard/company-profile']) }">
+            <li [ngClass]="{ 'active': isActive(['/corporate-dashboard/company-profile']) }"
+                *ngIf="roleService.isAuthorOrPublisher()">
                 <a routerLink="company-profile"><i class="fa fa-user-tie"></i><span class="admin-nav-text">تعديل
                         الحساب</span></a>
             </li>
 
-            <li [ngClass]="{ 'active': isActive(['/corporate-dashboard/help-support']) }">
+            <!-- <li [ngClass]="{ 'active': isActive(['/corporate-dashboard/help-support']) }"
+                *ngIf="roleService.isAuthorOrPublisher()">
                 <a routerLink="help-support"><i class="fa fa-question"></i><span class="admin-nav-text"> طلب
                         مساعدة</span></a>
-            </li>
+            </li> -->
 
-            <li [ngClass]="{ 'active': isActive(['/corporate-dashboard/service-provider']) }">
+            <li [ngClass]="{ 'active': isActive(['/corporate-dashboard/service-provider']) }"
+                *ngIf="roleService.isAuthorOrPublisher()">
                 <a routerLink="service-provider"><i class="fa fa-user-plus"></i><span class="admin-nav-text"> إضافة مقدم
                         خدمة </span></a>
             </li>
@@ -31,7 +34,8 @@
                         إدارة الطلبات </span></a>
             </li>
 
-            <li [ngClass]="{ 'active': isActive(['/corporate-dashboard/team-management']) }">
+            <li [ngClass]="{ 'active': isActive(['/corporate-dashboard/team-management']) }"
+                *ngIf="roleService.isAuthorOrPublisher()">
                 <a routerLink="team-management"><i class="fa fa-stream"></i><span class="admin-nav-text"> إدارة فريق
                         العمل </span></a>
             </li>

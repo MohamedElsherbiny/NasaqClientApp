@@ -1,0 +1,86 @@
+<div class="page-wraper">
+    <!-- CONTENT START -->
+    <div class="page-content">
+        <!-- Login Section Start -->
+        <div class="section-full site-bg-white">
+
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xl-8 col-lg-6 col-md-5 twm-log-reg-media-wrap">
+                        <div class="twm-log-reg-media">
+                            <div class="twm-l-media">
+                                <img src="assets/images/login-bg.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-6 col-md-7">
+                        <div class="twm-log-reg-form-wrap">
+                            <div class="twm-log-reg-logo-head">
+                                <a href="index.html">
+                                    <img src="assets/images/logo-dark.png" alt="" class="logo">
+                                </a>
+                            </div>
+
+                            <div class="twm-log-reg-inner">
+                                <div class="twm-log-reg-head">
+                                    <div class="twm-log-reg-logo">
+                                        <span class="log-reg-form-title">تأكيد البريد الإلكتروني</span>
+                                    </div>
+                                </div>
+                                <div class="twm-tabs-style-2">
+                                    <div class="tab-content" id="myTab2Content">
+                                        <!--Login Candidate Content-->
+                                        <div class="tab-pane fade show active" id="twm-login-candidate">
+                                            <div class="row">
+                                                <form (ngSubmit)="onSubmit()" #confirmForm="ngForm">
+                                                    <div class="form-group mb-3">
+                                                        <input name="password" type="password" [(ngModel)]="password"
+                                                            required class="form-control"
+                                                            placeholder="كلمة المرور الجديدة*" #passwordInput="ngModel">
+                                                        <div *ngIf="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)"
+                                                            class="text-danger">
+                                                            كلمة المرور مطلوبة
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group mb-3">
+                                                        <input name="confirmPassword" type="password"
+                                                            [(ngModel)]="confirmPassword" required class="form-control"
+                                                            placeholder="تأكيد كلمة المرور*"
+                                                            #confirmPasswordInput="ngModel">
+                                                        <div *ngIf="confirmPasswordInput.invalid && (confirmPasswordInput.dirty || confirmPasswordInput.touched)"
+                                                            class="text-danger">
+                                                            تأكيد كلمة المرور مطلوب
+                                                        </div>
+                                                        <div *ngIf="password !== confirmPassword && confirmForm.submitted"
+                                                            class="text-danger">
+                                                            كلمتا المرور غير متطابقتين
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <button type="submit" class="site-button"
+                                                            [disabled]="confirmForm.invalid">
+                                                            تأكيد البريد الإلكتروني وتعيين كلمة المرور
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Login Section End -->
+    </div>
+    <!-- CONTENT END -->
+
+    <app-footer></app-footer>
+    <!-- BUTTON TOP START -->
+    <button class="scroltop"><span class="fa fa-angle-up  relative" id="btn-vibrate"></span></button>
+
+</div>

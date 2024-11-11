@@ -17,6 +17,7 @@
                                 <thead>
                                     <tr>
                                         <th>الاسم</th>
+                                        <th>الإيميل</th>
                                         <th>التخصص</th>
                                         <th>الحالة</th>
                                         <th></th>
@@ -29,7 +30,7 @@
                                             <div class="twm-DT-candidates-list">
 
                                                 <div class="twm-mid-content">
-                                                    <a href="#" class="twm-job-title">
+                                                    <a class="twm-job-title">
                                                         <h4>{{ employee.name }}</h4>
                                                     </a>
 
@@ -37,7 +38,8 @@
 
                                             </div>
                                         </td>
-                                        <td>محقق لغوي</td>
+                                        <td><a [href]="'mailto:'+ employee.email">{{ employee.email }}</a></td>
+                                        <td>{{employee.roles.join(', ')}}</td>
                                         <td>
                                             <div class="twm-jobs-category">
                                                 <span [ngClass]="employee.isAdmin ? 'twm-bg-red' : 'twm-bg-green'">
@@ -51,18 +53,15 @@
                                                     <li>
                                                         <button title="View profile" data-bs-toggle="tooltip"
                                                             data-bs-placement="top">
-                                                            <span class="fa fa-eye"></span>
-                                                        </button>
-                                                    </li>
-                                                    <li>
-                                                        <button title="Send message" data-bs-toggle="tooltip"
-                                                            data-bs-placement="top">
-                                                            <span class="far fa-envelope-open"></span>
+                                                            <span class="fa fa-pen"></span>
                                                         </button>
                                                     </li>
                                                     <li>
                                                         <button title="Delete" data-bs-toggle="tooltip"
-                                                            data-bs-placement="top">
+                                                            data-bs-placement="top" href="javascript:;"
+                                                            data-bs-toggle="modal"
+                                                            (click)="selectedEmployeeId = employee.employeeId"
+                                                            data-bs-target="#delete-publisher-employee-confirm-popup">
                                                             <span class="far fa-trash-alt"></span>
                                                         </button>
                                                     </li>
@@ -82,3 +81,6 @@
     </div>
 
 </div>
+
+<app-delete-service-provider [employeeId]="selectedEmployeeId" [employees]="employees"
+    (employeeDeleted)="getEmployees()"></app-delete-service-provider>
