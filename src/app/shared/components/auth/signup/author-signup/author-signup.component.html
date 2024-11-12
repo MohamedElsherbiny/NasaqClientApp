@@ -1,0 +1,35 @@
+<form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="form-group mb-3">
+                <input formControlName="firstName" type="text" class="form-control" required=""
+                    placeholder="الاسم الأول*">
+            </div>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="form-group mb-3">
+                <input formControlName="lastName" type="text" class="form-control" required=""
+                    placeholder="الاسم الأخير*">
+            </div>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="form-group mb-3">
+                <input formControlName="email" type="text" class="form-control" placeholder="بريد إلكتروني*" required />
+            </div>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="form-group mb-3">
+                <input formControlName="password" type="password" class="form-control" placeholder="كلمة المرور*"
+                    required />
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <button type="submit" class="site-button" [disabled]="signupForm.invalid"
+                data-bs-dismiss="modal">اشتراك</button>
+        </div>
+    </div>
+</form>

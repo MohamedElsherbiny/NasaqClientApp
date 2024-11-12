@@ -4,6 +4,12 @@ export interface PublisherEmployee {
     name: string;
     email: string;
     isAdmin: boolean;
-    roles: string[];
+    roles: PublisherEmployeeRole[];
   }
+
+  export interface PublisherEmployeeRole {
+      name: string;
+      value: number;
+  }
+  
   

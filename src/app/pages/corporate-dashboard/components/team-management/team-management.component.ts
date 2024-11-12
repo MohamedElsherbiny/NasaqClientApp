@@ -6,12 +6,13 @@ import { HttpService } from '../../../../shared/core/services/http.service';
 import { ToastrService } from 'ngx-toastr';
 import { DeleteServiceProviderComponent } from "./delete-service-provider/delete-service-provider.component";
 import { PublisherEmployee } from '../../../../shared/models/PublisherEmployee';
+import { UpdatePublisherEmployeeComponent } from "./update-publisher-employee/update-publisher-employee.component";
 
 
 @Component({
   selector: 'app-team-management',
   standalone: true,
-  imports: [ReactiveFormsModule, HttpClientModule, CommonModule, DeleteServiceProviderComponent],
+  imports: [ReactiveFormsModule, HttpClientModule, CommonModule, DeleteServiceProviderComponent, UpdatePublisherEmployeeComponent],
   providers: [HttpService],
   templateUrl: './team-management.component.html',
   styleUrl: './team-management.component.scss'

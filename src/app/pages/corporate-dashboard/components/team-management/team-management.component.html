@@ -84,3 +84,6 @@
 
 <app-delete-service-provider [employeeId]="selectedEmployeeId" [employees]="employees"
     (employeeDeleted)="getEmployees()"></app-delete-service-provider>
+
+<app-update-publisher-employee [employeeId]="selectedEmployeeId" [employees]="employees"
+    (employeeUpdated)="getEmployees()"></app-update-publisher-employee>

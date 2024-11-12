@@ -12,7 +12,6 @@ import { DashboardComponent as PersonalDashboardIndexComponent } from './pages/p
 import { DashboardComponent as CorporateDashboardIndexComponent } from './pages/corporate-dashboard/components/dashboard/dashboard.component';
 import { DashboardComponent as AdminDashboardIndexComponent } from './pages/admin-dashboard/components/dashboard/dashboard.component';
 import { ProfileComponent } from './pages/personal-dashboard/components/profile/profile.component';
-import { RequestToJoinInstitutionComponent } from './pages/personal-dashboard/components/request-to-join-institution/request-to-join-institution.component';
 import { MyRequestsComponent } from './pages/personal-dashboard/components/my-requests/my-requests.component';
 import { TaskManagementComponent } from './pages/personal-dashboard/components/task-management/task-management.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -43,13 +42,12 @@ export const routes: Routes = [
     },
     {
         path: 'personal-dashboard',
-        // canActivate: [tokenValidationGuard, authorGuard],
+        canActivate: [tokenValidationGuard, authorGuard],
         component: PersonalDashboardComponent,
         children: [
             { path: '', component: PersonalDashboardIndexComponent },
             { path: 'profile', component: ProfileComponent },
             { path: 'help-support', component: PersonalHelpSupportComponent },
-            { path: 'request-to-join-institution', component: RequestToJoinInstitutionComponent },
             { path: 'my-requests', component: MyRequestsComponent },
             { path: 'task-management', component: TaskManagementComponent },
         ]

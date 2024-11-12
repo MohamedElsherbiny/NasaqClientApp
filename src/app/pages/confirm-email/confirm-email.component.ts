@@ -5,12 +5,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { LoaderComponent } from '../../shared/components/loader/loader.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-confirm-email',
   standalone: true,
-  imports: [FooterComponent, FormsModule, HttpClientModule],
+  imports: [FooterComponent, FormsModule, HttpClientModule, CommonModule],
   templateUrl: './confirm-email.component.html',
   styleUrl: './confirm-email.component.scss'
 })
