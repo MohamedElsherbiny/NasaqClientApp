@@ -12,7 +12,6 @@ import { DashboardComponent as PersonalDashboardIndexComponent } from './pages/p
 import { DashboardComponent as CorporateDashboardIndexComponent } from './pages/corporate-dashboard/components/dashboard/dashboard.component';
 import { DashboardComponent as AdminDashboardIndexComponent } from './pages/admin-dashboard/components/dashboard/dashboard.component';
 import { ProfileComponent } from './pages/personal-dashboard/components/profile/profile.component';
-import { MyRequestsComponent } from './pages/personal-dashboard/components/my-requests/my-requests.component';
 import { TaskManagementComponent } from './pages/personal-dashboard/components/task-management/task-management.component';
 import { LoginComponent } from './pages/login/login.component';
 import { tokenValidationGuard } from './shared/core/guards/token-validation.guard';
@@ -22,6 +21,10 @@ import { adminGuard } from './shared/core/guards/admin.guard';
 import { publisherGuard } from './shared/core/guards/publisher.guard';
 import { authorGuard } from './shared/core/guards/author.guard';
 import { ConfirmEmailComponent } from './pages/confirm-email/confirm-email.component';
+import { MyOrdersComponent } from './pages/personal-dashboard/components/my-orders/my-orders.component';
+import { OrderEditorComponent } from './pages/personal-dashboard/components/my-orders/order-editor/order-editor.component';
+import { MyBooksComponent } from './pages/personal-dashboard/components/my-books/my-books.component';
+import { BookEditorComponent } from './pages/personal-dashboard/components/my-books/book-editor/book-editor.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },
@@ -48,7 +51,11 @@ export const routes: Routes = [
             { path: '', component: PersonalDashboardIndexComponent },
             { path: 'profile', component: ProfileComponent },
             { path: 'help-support', component: PersonalHelpSupportComponent },
-            { path: 'my-requests', component: MyRequestsComponent },
+            { path: 'my-orders', component: MyOrdersComponent },
+            { path: 'new-order', component: OrderEditorComponent },
+            { path: 'my-books', component: MyBooksComponent },
+            { path: 'new-book', component: BookEditorComponent },
+            { path: 'update-order', component: OrderEditorComponent },
             { path: 'task-management', component: TaskManagementComponent },
         ]
     },

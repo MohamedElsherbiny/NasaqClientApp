@@ -20,9 +20,14 @@
                 <a routerLink="help-support"><i class="fa fa-question"></i><span class="admin-nav-text"> طلب
                         مساعدة</span></a>
             </li> -->
-          
-            <li [ngClass]="{ 'active': isActive(['/personal-dashboard/my-requests']) }">
-                <a routerLink="my-requests"><i class="fa fa-stream"></i><span class="admin-nav-text">
+
+            <li [ngClass]="{ 'active': isActive(['/personal-dashboard/my-books']) }">
+                <a routerLink="my-books"><i class="fa fa-book"></i><span class="admin-nav-text">
+                        الكتب </span></a>
+            </li>
+
+            <li [ngClass]="{ 'active': isActive(['/personal-dashboard/my-orders']) }">
+                <a routerLink="my-orders"><i class="fa fa-stream"></i><span class="admin-nav-text">
                         طلباتي الخاصة </span></a>
             </li>
 

@@ -1,0 +1,70 @@
+<div id="content">
+    <div class="content-admin-main">
+        <div class="wt-admin-right-page-header clearfix">
+            <h2>طلب خدمة جديد</h2>
+        </div>
+
+        <form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+            <!-- Basic Information -->
+            <div class="panel panel-default">
+                <div class="panel-heading wt-panel-heading p-a20">
+                    <h4 class="panel-tittle m-a0">بيانات الطلب</h4>
+                </div>
+                <div class="panel-body wt-panel-body p-a20 m-b30">
+                    <div class="row">
+                        <div class="col-xl-4 col-lg-6 col-md-12">
+                            <div class="form-group">
+                                <label>عنوان العمل</label>
+                                <div class="ls-inputicon-box">
+                                    <input formControlName="title" class="form-control" type="text"
+                                        placeholder="عنوان العمل" />
+                                    <i class="fs-input-icon fa fa-book"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-6 col-md-12">
+
+                        </div>
+                        <div class="col-lg-8 col-md-12">
+                            <div class="form-group">
+                                <label>نبذة عن الكتاب</label>
+                                <textarea formControlName="description" class="form-control" rows="3"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-12">
+                            <div class="form-group">
+                                <label>ISBN</label>
+                                <input formControlName="isbn" class="form-control" type="text" placeholder="ISBN" />
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-12">
+                            <div class="form-group">
+                                <label>تاريخ النشر</label>
+                                <input formControlName="publicationDate" class="form-control" type="date" />
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 col-md-12">
+                            <div class="form-group">
+                                <label>تحميل الكتاب</label>
+                                <div class="upload-btn-wrapper">
+                                    <button class="site-button button-sm">تحميل الملف</button>
+                                    <input type="file" (change)="onFileSelected($event)" accept=".pdf, .epub" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12">
+                            <div class="text-left">
+                                <button type="submit" class="site-button"
+                                    [disabled]="orderForm.invalid || !selectedFile">أرسل</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

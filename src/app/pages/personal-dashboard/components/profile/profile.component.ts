@@ -3,13 +3,13 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { HttpService } from '../../../../shared/core/services/http.service';
 import { ToastrService } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-profile',
   standalone: true,
   imports: [ReactiveFormsModule, HttpClientModule, CommonModule],
-  providers: [HttpService],
+  providers: [HttpService, DatePipe],
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.scss'
 })
@@ -20,7 +20,8 @@ export class ProfileComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private http: HttpService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private datePipe: DatePipe
   ) {
     this.profileForm = this.fb.group({
       firstName: ['', Validators.required],
@@ -59,7 +60,10 @@ export class ProfileComponent implements OnInit {
   private loadAuthorData(): void {
     this.http.get<any>(`Author/${this.user['authorId']}`).subscribe({
       next: (data) => {
-        this.profileForm.patchValue(data);
+        this.profileForm.patchValue({
+          ...data,
+          dateOfBirth: this.datePipe.transform(data.dateOfBirth, 'yyyy-MM-dd')
+        });
       },
       error: () => this.toastr.error('فشل في تحميل البيانات', 'خطأ')
     });
