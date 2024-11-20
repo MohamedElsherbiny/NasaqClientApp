@@ -13,226 +13,61 @@
                 <div class="panel panel-default site-bg-white m-t30">
                     <div class="panel-heading wt-panel-heading p-a20 d-flex flex-row justify-content-between">
                         <h4 class="panel-tittle m-a0"><i class="far fa-list-alt"></i>جميع الطلبات</h4>
-
-
                     </div>
 
                     <div class="panel-body wt-panel-body">
                         <div class="twm-D_table p-a20 table-responsive">
                             <div id="candidate_data_table_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
                                 <div class="row">
-                                    <div class="col-sm-12 col-md-6"></div>
-                                    <div class="col-sm-12 col-md-6">
-                                        <div id="candidate_data_table_filter" class="dataTables_filter"></div>
-                                    </div>
-                                </div>
-                                <div class="row">
                                     <div class="col-sm-12">
-                                        <table id="candidate_data_table"
-                                            class="table table-bordered dataTable no-footer"
-                                            aria-describedby="candidate_data_table_info">
+                                        <table class="table table-bordered dataTable no-footer">
                                             <thead>
                                                 <tr>
-                                                    <th class="sorting sorting_asc" tabindex="0"
-                                                        aria-controls="candidate_data_table" rowspan="1" colspan="1"
-                                                        aria-sort="ascending"
-                                                        aria-label=": activate to sort column descending"
-                                                        style="width: 58.9375px;"><input type="checkbox"
-                                                            onclick="'تحقق من الكل(هذا)'">
-                                                    </th>
-                                                    <th class="sorting" tabindex="0"
-                                                        aria-controls="candidate_data_table" rowspan="1" colspan="1"
-                                                        aria-label="اسم: activate to sort column ascending"
-                                                        style="width: 242.656px;">اسم العمل</th>
-                                                    <th class="sorting" tabindex="0"
-                                                        aria-controls="candidate_data_table" rowspan="1" colspan="1"
-                                                        aria-label="مُطبَّق ل: activate to sort column ascending"
-                                                        style="width: 159px;">التعيين</th>
-                                                    <th class="sorting" tabindex="0"
-                                                        aria-controls="candidate_data_table" rowspan="1" colspan="1"
-                                                        aria-label="تاريخ: activate to sort column ascending"
-                                                        style="width: 439.703px;">تاريخ</th>
-                                                    <th class="sorting" tabindex="0"
-                                                        aria-controls="candidate_data_table" rowspan="1" colspan="1"
-                                                        aria-label="حالة: activate to sort column ascending"
-                                                        style="width: 197.25px;">حالة</th>
-                                                    <th class="sorting" tabindex="0"
-                                                        aria-controls="candidate_data_table" rowspan="1" colspan="1"
-                                                        aria-label=": activate to sort column ascending"
-                                                        style="width: 155.453px;"></th>
+                                                    <th class="sorting">اسم العمل</th>
+                                                    <th>اسم المؤلف</th>
+                                                    <th>تاريخ</th>
+                                                    <th>حالة</th>
+                                                    <th></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-
+                                                @for (request of requests; track $index) {
                                                 <tr class="odd">
-                                                    <td class="sorting_1"><input type="checkbox"></td>
                                                     <td>
                                                         <div class="twm-DT-candidates-list">
-                                                            <div class="twm-media">
-                                                                <div class="twm-media-pic">
-                                                                    <img src="images/candidates/pic1.jpg" alt="#">
-                                                                </div>
-                                                            </div>
                                                             <div class="twm-mid-content">
-                                                                <a href="http://esnadsaudi-001-site1.mysitepanel.net/dash-order-takeem-taleb-elwekala.html#"
-                                                                    class="twm-job-title">
-                                                                    <h4>كتاب اول</h4>
-                                                                    <p class="twm-candidate-address">
-                                                                        <i class="feather-map-pin"></i>رياض
-                                                                    </p>
+                                                                <a class="twm-job-title">
+                                                                    <h4> {{request.bookName}}</h4>
                                                                 </a>
-
                                                             </div>
-
                                                         </div>
                                                     </td>
-                                                    <td>-</td>
-                                                    <td>15/06/2023 في الساعة 10:35 صباحًا</td>
-                                                    <td><a href="#sign_up_popup" class="twm-jobs-category"
-                                                            data-bs-toggle="modal" role="button"><span
-                                                                class="twm-bg-red">طلب جديد</span></a></td>
+                                                    <td>{{request.authorName}}</td>
+                                                    <td>{{request.requestDate | date}} </td>
+                                                    <td>
+                                                        <div class="twm-jobs-category">
+                                                            <span class="twm-bg-red">{{request.requstStatus}}</span>
+                                                        </div>
+                                                    </td>
                                                     <td>
                                                         <div class="twm-table-controls">
                                                             <ul class="twm-DT-controls-icon list-unstyled">
                                                                 <li>
-                                                                    <button title="" data-bs-toggle="tooltip"
-                                                                        data-bs-placement="top"
-                                                                        data-bs-original-title="View profile">
-                                                                        <span class="fa fa-eye"></span>
+                                                                    <button>
+                                                                        <span class="fa fa-check-circle"></span>
                                                                     </button>
                                                                 </li>
                                                                 <li>
-                                                                    <button title="" data-bs-toggle="tooltip"
-                                                                        data-bs-placement="top"
-                                                                        data-bs-original-title="Send message">
-                                                                        <span class="far fa-envelope-open"></span>
-                                                                    </button>
-                                                                </li>
-                                                                <li>
-                                                                    <button title="" data-bs-toggle="tooltip"
-                                                                        data-bs-placement="top"
-                                                                        data-bs-original-title="Delete">
-                                                                        <span class="far fa-trash-alt"></span>
+                                                                    <button>
+                                                                        <span class="fa fa-times-circle"></span>
                                                                     </button>
                                                                 </li>
                                                             </ul>
                                                         </div>
                                                     </td>
                                                 </tr>
-                                                <tr class="even">
-                                                    <td class="sorting_1"><input type="checkbox"></td>
-                                                    <td>
-                                                        <div class="twm-DT-candidates-list">
-                                                            <div class="twm-media">
-                                                                <div class="twm-media-pic">
-                                                                    <img src="images/candidates/pic1.jpg" alt="#">
-                                                                </div>
-                                                            </div>
-                                                            <div class="twm-mid-content">
-                                                                <a href="http://esnadsaudi-001-site1.mysitepanel.net/dash-order-takeem-taleb-elwekala.html#"
-                                                                    class="twm-job-title">
-                                                                    <h4>الكتاب الثانى</h4>
-                                                                    <p class="twm-candidate-address">
-                                                                        <i class="feather-map-pin"></i>جده
-                                                                    </p>
-                                                                </a>
-
-                                                            </div>
-
-                                                        </div>
-                                                    </td>
-                                                    <td>فوزي عادل</td>
-                                                    <td>16/06/2023في الساعة 11:35 صباحًا </td>
-                                                    <td>
-                                                        <div class="twm-jobs-category"><span class="twm-bg-golden"> جارى
-                                                                التقييم</span></div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="twm-table-controls">
-                                                            <ul class="twm-DT-controls-icon list-unstyled">
-                                                                <li>
-                                                                    <button title="" data-bs-toggle="tooltip"
-                                                                        data-bs-placement="top"
-                                                                        data-bs-original-title="View profile">
-                                                                        <span class="fa fa-eye"></span>
-                                                                    </button>
-                                                                </li>
-                                                                <li>
-                                                                    <button title="" data-bs-toggle="tooltip"
-                                                                        data-bs-placement="top"
-                                                                        data-bs-original-title="Send message">
-                                                                        <span class="far fa-envelope-open"></span>
-                                                                    </button>
-                                                                </li>
-                                                                <li>
-                                                                    <button title="" data-bs-toggle="tooltip"
-                                                                        data-bs-placement="top"
-                                                                        data-bs-original-title="Delete">
-                                                                        <span class="far fa-trash-alt"></span>
-                                                                    </button>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                                <tr class="odd">
-                                                    <td class="sorting_1"><input type="checkbox"></td>
-                                                    <td>
-                                                        <div class="twm-DT-candidates-list">
-                                                            <div class="twm-media">
-                                                                <div class="twm-media-pic">
-                                                                    <img src="images/candidates/pic1.jpg" alt="#">
-                                                                </div>
-                                                            </div>
-                                                            <div class="twm-mid-content">
-                                                                <a href="http://esnadsaudi-001-site1.mysitepanel.net/dash-order-takeem-taleb-elwekala.html#"
-                                                                    class="twm-job-title">
-                                                                    <h4>الكتاب الثالث</h4>
-                                                                    <p class="twm-candidate-address">
-                                                                        <i class="feather-map-pin"></i>مكة
-                                                                    </p>
-                                                                </a>
-
-                                                            </div>
-
-                                                        </div>
-                                                    </td>
-                                                    <td>أمانى محمد</td>
-                                                    <td>17/06/2023 في الساعة 01:15 مساءً</td>
-                                                    <td>
-                                                        <div class="twm-jobs-category"><span class="twm-bg-green">تم
-                                                                التقييم</span></div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="twm-table-controls">
-                                                            <ul class="twm-DT-controls-icon list-unstyled">
-                                                                <li>
-                                                                    <button title="" data-bs-toggle="tooltip"
-                                                                        data-bs-placement="top"
-                                                                        data-bs-original-title="View profile">
-                                                                        <span class="fa fa-eye"></span>
-                                                                    </button>
-                                                                </li>
-                                                                <li>
-                                                                    <button title="" data-bs-toggle="tooltip"
-                                                                        data-bs-placement="top"
-                                                                        data-bs-original-title="Send message">
-                                                                        <span class="far fa-envelope-open"></span>
-                                                                    </button>
-                                                                </li>
-                                                                <li>
-                                                                    <button title="" data-bs-toggle="tooltip"
-                                                                        data-bs-placement="top"
-                                                                        data-bs-original-title="Delete">
-                                                                        <span class="far fa-trash-alt"></span>
-                                                                    </button>
-                                                                </li>
-                                                            </ul>
-                                                        </div>
-                                                    </td>
-                                                </tr>
+                                                }
                                             </tbody>
-
                                         </table>
                                     </div>
                                 </div>

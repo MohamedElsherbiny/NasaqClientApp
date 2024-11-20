@@ -7,5 +7,6 @@ export interface BookRequest {
     bookName: string;
     publisherId: number;
     publisherName: string;
+    requstStatus: string;
     requestDate: Date; 
 }
