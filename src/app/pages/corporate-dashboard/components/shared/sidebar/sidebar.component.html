@@ -40,6 +40,11 @@
                         إدارة الطلبات </span></a>
             </li>
 
+            <li [ngClass]="{ 'active': isActive(['/corporate-dashboard/project-management']) }">
+                <a routerLink="project-management"><i class="fa fa-tasks"></i><span class="admin-nav-text">
+                        إدارة المشاريع </span></a>
+            </li>
+
             <li>
                 <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#logout-dash-profile"><i
                         class="fa fa-share-square"></i><span class="admin-nav-text">تسجيل خروج</span></a>

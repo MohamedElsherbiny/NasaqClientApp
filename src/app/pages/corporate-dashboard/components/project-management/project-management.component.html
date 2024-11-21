@@ -1,0 +1,89 @@
+<!-- Page Content Holder -->
+<div id="content">
+  <div class="content-admin-main">
+    <div class="wt-admin-right-page-header clearfix">
+      <h2>إدارة الطلبات</h2>
+    </div>
+
+    <div class="twm-pro-view-chart-wrap">
+      <div class="col-lg-12 col-md-12 mb-4">
+        <div class="panel panel-default site-bg-white m-t30">
+          <div
+            class="panel-heading wt-panel-heading p-a20 d-flex flex-row justify-content-between"
+          >
+            <h4 class="panel-tittle m-a0">
+              <i class="far fa-list-alt"></i>جميع الطلبات
+            </h4>
+          </div>
+
+          <div class="panel-body wt-panel-body">
+            <div class="twm-D_table p-a20 table-responsive">
+              <div
+                id="candidate_data_table_wrapper"
+                class="dataTables_wrapper dt-bootstrap5 no-footer"
+              >
+                <div class="row">
+                  <div class="col-sm-12">
+                    <table class="table table-bordered dataTable no-footer">
+                      <thead>
+                        <tr>
+                          <th class="sorting">اسم العمل</th>
+                          <th>اسم المؤلف</th>
+                          <th>تاريخ</th>
+                          <th>الخدمات المطلوبة</th>
+                          <th></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        @for (project of projects; track $index) {
+                        <tr class="odd">
+                          <td>
+                            <div class="twm-DT-candidates-list">
+                              <div class="twm-mid-content">
+                                <a class="twm-job-title">
+                                  <h4>{{ project.bookName }}</h4>
+                                </a>
+                              </div>
+                            </div>
+                          </td>
+                          <td>{{ project.authorName }}</td>
+                          <td>{{ project.projectDate | date }}</td>
+                          <td>
+                            @for (serviceType of project.projectServices; track
+                            serviceType.serviceTypeId) {
+                            <div class="twm-jobs-category mt-2">
+                              <span
+                                class="twm-bg-color service-{{
+                                  serviceType.serviceTypeId
+                                }}"
+                              >
+                                {{ serviceType.serviceTypeName }}
+                              </span>
+                            </div>
+                            }
+                          </td>
+                          <td>
+                            <div class="twm-table-controls">
+                              <ul class="twm-DT-controls-icon list-unstyled">
+                                <li>
+                                  <button [routerLink]="['/corporate-dashboard/project-management/project-editor', project.projectId]">
+                                    <span class="fa fa-eye"></span>
+                                  </button>
+                                </li>
+                              </ul>
+                            </div>
+                          </td>
+                        </tr>
+                        }
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

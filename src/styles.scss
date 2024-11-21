@@ -1,4 +1,31 @@
 /* based on angular-toastr css https://github.com/Foxandxss/angular-toastr/blob/cb508fe6801d6b288d3afc525bb40fee1b101650/dist/angular-toastr.css */
+/* Example color styles for service types */
+.service-1 {
+  background-color: #ffcccc; /* Light Red */
+  color: #660000 !important;
+}
+
+.service-2 {
+  background-color: #cce5ff; /* Light Blue */
+  color: #004085;
+}
+
+.service-3 {
+  background-color: #d4edda; /* Light Green */
+  color: #155724;
+}
+
+.service-4 {
+  background-color: #fff3cd; /* Light Yellow */
+  color: #856404;
+}
+
+.service-5 {
+  background-color: #f8d7da; /* Light Pink */
+  color: #721c24;
+}
+
+/* Add more colors as needed */
 
 /* position */
 .toast-center-center {
