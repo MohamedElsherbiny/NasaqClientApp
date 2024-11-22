@@ -108,10 +108,16 @@
                             <div class="twm-DT-candidates-list">
                               <div class="twm-mid-content">
                                 <a class="twm-job-title">
-                                  <h4>{{ task.assginTo.name }}</h4>
+                                  <h4>{{ task.assginTo.email }}</h4>
                                 </a>
                               </div>
                             </div>
+                            <button
+                              class="btn btn-primary btn-small"
+                              (click)="openAssignModal(task.projectTaskId)"
+                            >
+                              تعين موظف
+                            </button>
                             } @else {
                             <button
                               class="btn btn-primary btn-small"

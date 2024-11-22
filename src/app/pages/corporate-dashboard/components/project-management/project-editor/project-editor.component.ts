@@ -5,7 +5,7 @@ import { Project } from '../../../../../shared/models/Project';
 import { CommonModule } from '@angular/common';
 import { ProjectTaskStatus } from '../../../../../shared/models/ProjectTaskStatus';
 import { PublisherEmployee } from '../../../../../shared/models/PublisherEmployee';
-import { Modal } from 'bootstrap';
+import * as bootstrap from 'bootstrap';
 
 @Component({
   selector: 'app-project-editor',
@@ -60,7 +60,7 @@ export class ProjectEditorComponent implements OnInit {
     // Show the modal using Bootstrap
     const modalElement = document.getElementById('assgin-employee');
     if (modalElement) {
-      new Modal(modalElement).show();
+      new bootstrap.Modal(modalElement).show();
     }
   }
 
@@ -76,10 +76,15 @@ export class ProjectEditorComponent implements OnInit {
     };
 
     this.http
-      .post(`Publisher/${this.user['publisherId']}/assign-task`, request)
+      .post(`Publisher/${this.user['publisherId']}/tasks/assign-task`, request)
       .subscribe({
         next: () => {
           this.fetchProject();
+          const modalElement = document.getElementById('assgin-employee');
+          if (modalElement) {
+            const modalInstance = bootstrap.Modal.getInstance(modalElement) || new bootstrap.Modal(modalElement);
+            modalInstance.hide();
+          }
         },
         error: (error) => {
           console.error('Failed to assign employee to task', error);
