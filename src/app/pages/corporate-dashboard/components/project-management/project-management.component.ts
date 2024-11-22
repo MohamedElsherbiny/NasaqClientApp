@@ -5,11 +5,12 @@ import { HttpService } from '../../../../shared/core/services/http.service';
 import { CommonModule } from '@angular/common';
 import { Project } from '../../../../shared/models/Project';
 import { RouterLink } from '@angular/router';
+import { DownloadFileComponent } from "../../../../shared/components/download-file/download-file.component";
 
 @Component({
   selector: 'app-project-management',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, DownloadFileComponent],
   templateUrl: './project-management.component.html',
   styleUrl: './project-management.component.scss',
 })

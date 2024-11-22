@@ -14,23 +14,21 @@
 
           <div class="panel-body wt-panel-body">
             <div class="twm-D_table p-a20 table-responsive">
-              <div
-                id="candidate_data_table_wrapper"
-                class="dataTables_wrapper dt-bootstrap5 no-footer"
-              >
+              <div class="dataTables_wrapper dt-bootstrap5 no-footer">
                 <div class="row">
                   <div class="col-sm-12">
-                    <table class="table table-bordered dataTable no-footer">
+                    <table class="table table-bordered no-footer">
                       <thead>
                         <tr>
-                          <th class="sorting">اسم العمل</th>
+                          <th>اسم العمل</th>
                           <th>اسم المؤلف</th>
                           <th>تاريخ</th>
                           <th>الخدمات المطلوبة</th>
+                          <th></th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr class="odd">
+                        <tr>
                           <td>
                             <div class="twm-DT-candidates-list">
                               <div class="twm-mid-content">
@@ -56,11 +54,16 @@
                             </div>
                             }
                           </td>
+                          <td>
+                            <app-download-file
+                              [fileUrl]="project.fileName"
+                            ></app-download-file>
+                          </td>
                         </tr>
                       </tbody>
                     </table>
                     <h5 class="panel-tittle py-4">المهام</h5>
-                    <table class="table table-bordered dataTable no-footer">
+                    <table class="table table-bordered no-footer">
                       <thead>
                         <tr>
                           <th class="sorting">اسم المهمة</th>
@@ -112,19 +115,18 @@
                                 </a>
                               </div>
                             </div>
-                            <button
-                              class="btn btn-primary btn-small"
+                            <a
+                              class="twm-jobs-category"
                               (click)="openAssignModal(task.projectTaskId)"
+                              ><span class="twm-bg-green"> تغير الموظف</span></a
                             >
-                              تعين موظف
-                            </button>
                             } @else {
-                            <button
-                              class="btn btn-primary btn-small"
+
+                            <a
+                              class="twm-jobs-category"
                               (click)="openAssignModal(task.projectTaskId)"
+                              ><span class="twm-bg-green"> تعين موظف </span></a
                             >
-                              تعين موظف
-                            </button>
                             }
                           </td>
                         </tr>

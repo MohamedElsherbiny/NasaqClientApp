@@ -6,6 +6,7 @@ export interface BookRequest {
   authorId: number;
   authorName: string;
   bookName: string;
+  fileName: string;
   publisherId: number;
   publisherName: string;
   requstStatus: string;

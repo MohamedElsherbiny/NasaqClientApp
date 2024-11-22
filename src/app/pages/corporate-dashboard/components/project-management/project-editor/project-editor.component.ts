@@ -6,11 +6,12 @@ import { CommonModule } from '@angular/common';
 import { ProjectTaskStatus } from '../../../../../shared/models/ProjectTaskStatus';
 import { PublisherEmployee } from '../../../../../shared/models/PublisherEmployee';
 import * as bootstrap from 'bootstrap';
+import { DownloadFileComponent } from "../../../../../shared/components/download-file/download-file.component";
 
 @Component({
   selector: 'app-project-editor',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, DownloadFileComponent],
   templateUrl: './project-editor.component.html',
   styleUrl: './project-editor.component.scss',
 })

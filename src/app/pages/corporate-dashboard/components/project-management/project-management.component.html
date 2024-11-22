@@ -66,9 +66,19 @@
                             <div class="twm-table-controls">
                               <ul class="twm-DT-controls-icon list-unstyled">
                                 <li>
-                                  <button [routerLink]="['/corporate-dashboard/project-management/project-editor', project.projectId]">
+                                  <button
+                                    [routerLink]="[
+                                      '/corporate-dashboard/project-management/project-editor',
+                                      project.projectId
+                                    ]"
+                                  >
                                     <span class="fa fa-eye"></span>
                                   </button>
+                                </li>
+                                <li>
+                                  <app-download-file
+                                    [fileUrl]="project.fileName"
+                                  ></app-download-file>
                                 </li>
                               </ul>
                             </div>

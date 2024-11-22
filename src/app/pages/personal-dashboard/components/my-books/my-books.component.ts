@@ -4,13 +4,14 @@ import { RouterLink } from '@angular/router';
 import { HttpService } from '../../../../shared/core/services/http.service';
 import { Book } from '../../../../shared/models/Book';
 import { CommonModule } from '@angular/common';
+import { DownloadFileComponent } from "../../../../shared/components/download-file/download-file.component";
 
 
 
 @Component({
   selector: 'app-my-books',
   standalone: true,
-  imports: [RouterLink, HttpClientModule, CommonModule],
+  imports: [RouterLink, HttpClientModule, CommonModule, DownloadFileComponent],
   providers: [HttpService],
   templateUrl: './my-books.component.html',
   styleUrl: './my-books.component.scss'

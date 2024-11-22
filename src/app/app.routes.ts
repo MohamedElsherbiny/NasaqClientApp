@@ -12,7 +12,7 @@ import { DashboardComponent as PersonalDashboardIndexComponent } from './pages/p
 import { DashboardComponent as CorporateDashboardIndexComponent } from './pages/corporate-dashboard/components/dashboard/dashboard.component';
 import { DashboardComponent as AdminDashboardIndexComponent } from './pages/admin-dashboard/components/dashboard/dashboard.component';
 import { ProfileComponent } from './pages/personal-dashboard/components/profile/profile.component';
-import { TaskManagementComponent } from './pages/personal-dashboard/components/task-management/task-management.component';
+import { TaskManagementComponent } from './pages/corporate-dashboard/components/task-management/task-management.component';
 import { LoginComponent } from './pages/login/login.component';
 import { tokenValidationGuard } from './shared/core/guards/token-validation.guard';
 import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
@@ -29,49 +29,52 @@ import { ProjectManagementComponent } from './pages/corporate-dashboard/componen
 import { ProjectEditorComponent } from './pages/corporate-dashboard/components/project-management/project-editor/project-editor.component';
 
 export const routes: Routes = [
-    { path: '', component: HomeComponent },
-    { path: 'login', component: LoginComponent },
-    { path: 'confirm-email', component: ConfirmEmailComponent },
-    {
-        path: 'corporate-dashboard',
-        component: CorporateDashboardComponent,
-        canActivate: [tokenValidationGuard, publisherGuard],
-        children: [
-            { path: '', component: CorporateDashboardIndexComponent },
-            { path: 'company-profile', component: CompanyProfileComponent },
-            { path: 'help-support', component: CorporateHelpSupportComponent },
-            { path: 'service-provider', component: ServiceProviderComponent },
-            { path: 'order-management', component: OrderManagementComponent },
-            { path: 'project-management', component: ProjectManagementComponent },
-            { path: 'project-management/project-editor/:projectId', component: ProjectEditorComponent },
-            { path: 'team-management', component: TeamManagementComponent },
-        ]
-    },
-    {
-        path: 'personal-dashboard',
-        canActivate: [tokenValidationGuard, authorGuard],
-        component: PersonalDashboardComponent,
-        children: [
-            { path: '', component: PersonalDashboardIndexComponent },
-            { path: 'profile', component: ProfileComponent },
-            { path: 'help-support', component: PersonalHelpSupportComponent },
-            { path: 'my-orders', component: MyOrdersComponent },
-            { path: 'new-order', component: OrderEditorComponent },
-            { path: 'my-books', component: MyBooksComponent },
-            { path: 'new-book', component: BookEditorComponent },
-            { path: 'update-order', component: OrderEditorComponent },
-            { path: 'task-management', component: TaskManagementComponent },
-        ]
-    },
-    {
-        path: 'admin-dashboard',
-        canActivate: [tokenValidationGuard, adminGuard],
-        component: AdminDashboardComponent,
-        children: [
-            { path: '', component: AdminDashboardIndexComponent },
-            { path: 'profile', component: AdminProfileComponent },
-        ]
-    },
-    { path: '', redirectTo: '/', pathMatch: 'full' },
-    { path: '**', component: HomeComponent },
+  { path: '', component: HomeComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'confirm-email', component: ConfirmEmailComponent },
+  {
+    path: 'corporate-dashboard',
+    component: CorporateDashboardComponent,
+    canActivate: [tokenValidationGuard, publisherGuard],
+    children: [
+      { path: '', component: CorporateDashboardIndexComponent },
+      { path: 'company-profile', component: CompanyProfileComponent },
+      { path: 'help-support', component: CorporateHelpSupportComponent },
+      { path: 'service-provider', component: ServiceProviderComponent },
+      { path: 'order-management', component: OrderManagementComponent },
+      { path: 'project-management', component: ProjectManagementComponent },
+      {
+        path: 'project-management/project-editor/:projectId',
+        component: ProjectEditorComponent,
+      },
+      { path: 'task-management', component: TaskManagementComponent },
+      { path: 'team-management', component: TeamManagementComponent },
+    ],
+  },
+  {
+    path: 'personal-dashboard',
+    canActivate: [tokenValidationGuard, authorGuard],
+    component: PersonalDashboardComponent,
+    children: [
+      { path: '', component: PersonalDashboardIndexComponent },
+      { path: 'profile', component: ProfileComponent },
+      { path: 'help-support', component: PersonalHelpSupportComponent },
+      { path: 'my-orders', component: MyOrdersComponent },
+      { path: 'new-order', component: OrderEditorComponent },
+      { path: 'my-books', component: MyBooksComponent },
+      { path: 'new-book', component: BookEditorComponent },
+      { path: 'update-order', component: OrderEditorComponent },
+    ],
+  },
+  {
+    path: 'admin-dashboard',
+    canActivate: [tokenValidationGuard, adminGuard],
+    component: AdminDashboardComponent,
+    children: [
+      { path: '', component: AdminDashboardIndexComponent },
+      { path: 'profile', component: AdminProfileComponent },
+    ],
+  },
+  { path: '', redirectTo: '/', pathMatch: 'full' },
+  { path: '**', component: HomeComponent },
 ];

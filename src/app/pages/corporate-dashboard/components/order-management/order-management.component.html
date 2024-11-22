@@ -24,14 +24,13 @@
               >
                 <div class="row">
                   <div class="col-sm-12">
-                    <table class="table table-bordered dataTable no-footer">
+                    <table class="table table-bordered no-footer">
                       <thead>
                         <tr>
-                          <th class="sorting">اسم العمل</th>
+                          <th>اسم العمل</th>
                           <th>اسم المؤلف</th>
                           <th>تاريخ</th>
                           <th>حالة</th>
-                          <th></th>
                         </tr>
                       </thead>
                       <tbody>
@@ -66,7 +65,13 @@
                           </td>
                           <td>
                             <div class="twm-table-controls">
-                              <ul class="twm-DT-controls-icon list-unstyled" *ngIf="request.status === RequestStatus.Pending">
+                              <app-download-file
+                                [fileUrl]="request.fileName"
+                              ></app-download-file>
+                              <ul
+                                class="twm-DT-controls-icon list-unstyled"
+                                *ngIf="request.status === RequestStatus.Pending"
+                              >
                                 <li>
                                   <button
                                     data-bs-toggle="modal"
@@ -75,7 +80,9 @@
                                       selectedRequestId = request.requestId
                                     "
                                   >
-                                    <span class="fa fa-check-circle text-success"></span>
+                                    <span
+                                      class="fa fa-check-circle text-success"
+                                    ></span>
                                   </button>
                                 </li>
                                 <li>
@@ -86,7 +93,9 @@
                                       selectedRequestId = request.requestId
                                     "
                                   >
-                                    <span class="fa fa-times-circle text-danger"></span>
+                                    <span
+                                      class="fa fa-times-circle text-danger"
+                                    ></span>
                                   </button>
                                 </li>
                               </ul>

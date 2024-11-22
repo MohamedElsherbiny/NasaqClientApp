@@ -1,3 +1,4 @@
+import { Book } from './Book';
 import { ProjectTaskStatus } from './ProjectTaskStatus';
 import { PublisherEmployee } from './PublisherEmployee';
 
@@ -9,4 +10,5 @@ export interface ProjectTask {
   createdDate: Date;
   status: ProjectTaskStatus;
   assginTo?: PublisherEmployee;
+  book: Book
 }

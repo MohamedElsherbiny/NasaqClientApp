@@ -8,6 +8,7 @@ export interface Project {
   authorId: number;
   authorName: string;
   bookName: string;
+  fileName: string;
   publisherId: number;
   publisherName: string;
   requstStatus: string;
