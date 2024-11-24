@@ -1,29 +1,39 @@
 import { Component, Input, input } from '@angular/core';
-import { HttpService } from '../../core/services/http.service';
 import { environment } from '../../../../environments/environment.development';
+import { BookDocument } from '../../models/BookDocument';
+import * as bootstrap from 'bootstrap';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-download-file',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './download-file.component.html',
   styleUrl: './download-file.component.scss',
 })
 export class DownloadFileComponent {
-  @Input() fileUrl?: string;
+  @Input() bookId: number = 0;
+  @Input() bookDocuments?: BookDocument[] = [];
   private baseUrl: string = environment.apiUrl;
 
-  constructor(private http: HttpService) {}
-
-  downloadFile(): void {
-    if (!this.fileUrl) {
+  downloadFile(bookDocument: BookDocument): void {
+    if (!bookDocument.file) {
       console.error('File URL is required.');
       return;
     }
     const apiUrl = `${this.baseUrl}/Files/download?url=${encodeURIComponent(
-      this.fileUrl
+      bookDocument.file
     )}`;
-
     window.open(apiUrl, '_blank');
+  }
+
+  openDocumentListModal(): void {
+    const modalElement = document.getElementById('document-list-modal' + this.bookId);
+    if (modalElement) {
+      const modalInstance =
+        bootstrap.Modal.getInstance(modalElement) ||
+        new bootstrap.Modal(modalElement);
+      modalInstance.show();
+    }
   }
 }

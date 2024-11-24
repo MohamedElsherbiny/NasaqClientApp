@@ -65,7 +65,8 @@
                     <td>
                       <div class="twm-table-controls">
                         <app-download-file
-                          [fileUrl]="task.book.fileName"
+                          [bookId]="task.book.bookId!"
+                          [bookDocuments]="task.book.documents"
                         ></app-download-file>
 
                         <a

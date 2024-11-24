@@ -55,10 +55,11 @@
                     <td>
                       <div class="twm-table-controls">
                         <app-download-file
-                          [fileUrl]="book.fileName"
+                          [bookId]="book.bookId!"
+                          [bookDocuments]="book.documents"
                         ></app-download-file>
 
-                        <ul class="twm-DT-controls-icon list-unstyled">
+                        <!-- <ul class="twm-DT-controls-icon list-unstyled">
                           <li>
                             <button
                               title="View profile"
@@ -68,25 +69,7 @@
                               <span class="fa fa-eye"></span>
                             </button>
                           </li>
-                          <li>
-                            <button
-                              title="Send message"
-                              data-bs-toggle="tooltip"
-                              data-bs-placement="top"
-                            >
-                              <span class="far fa-envelope-open"></span>
-                            </button>
-                          </li>
-                          <li>
-                            <button
-                              title="Delete"
-                              data-bs-toggle="tooltip"
-                              data-bs-placement="top"
-                            >
-                              <span class="far fa-trash-alt"></span>
-                            </button>
-                          </li>
-                        </ul>
+                        </ul> -->
                       </div>
                     </td>
                   </tr>

@@ -3,6 +3,7 @@ import { RouterLink } from '@angular/router';
 import { HttpService } from '../../../../shared/core/services/http.service';
 import { BookRequest } from '../../../../shared/models/BookRequest';
 import { CommonModule } from '@angular/common';
+import { RequestStatus } from '../../../../shared/models/RequestStatus';
 
 @Component({
   selector: 'app-my-orders',
@@ -13,6 +14,7 @@ import { CommonModule } from '@angular/common';
 })
 export class MyOrdersComponent implements OnInit {
   requests: BookRequest[] = [];
+  RequestStatus = RequestStatus;
   user = JSON.parse(localStorage.getItem('user') ?? '{}');
 
   constructor(private http: HttpService) { }

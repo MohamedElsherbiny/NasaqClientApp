@@ -1,3 +1,4 @@
+import { BookDocument } from './BookDocument';
 import { ProjectService } from './ProjectService';
 import { ProjectTask } from './ProjectTask';
 import { RequestStatus } from './RequestStatus';
@@ -8,7 +9,7 @@ export interface Project {
   authorId: number;
   authorName: string;
   bookName: string;
-  fileName: string;
+  documents: BookDocument[];
   publisherId: number;
   publisherName: string;
   requstStatus: string;

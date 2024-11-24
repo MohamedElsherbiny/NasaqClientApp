@@ -1,3 +1,4 @@
+import { BookDocument } from './BookDocument';
 import { RequestStatus } from './RequestStatus';
 
 export interface BookRequest {
@@ -6,10 +7,10 @@ export interface BookRequest {
   authorId: number;
   authorName: string;
   bookName: string;
-  fileName: string;
+  documents: BookDocument[];
   publisherId: number;
   publisherName: string;
-  requstStatus: string;
+  requestStatus: string;
   status: RequestStatus;
   requestDate: Date;
 }

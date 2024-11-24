@@ -59,14 +59,15 @@
                                     request.status === RequestStatus.Rejected
                                 }"
                               >
-                                {{ request.requstStatus }}
+                                {{ request.requestStatus }}
                               </span>
                             </div>
                           </td>
                           <td>
                             <div class="twm-table-controls">
                               <app-download-file
-                                [fileUrl]="request.fileName"
+                                [bookId]="request.bookId"
+                                [bookDocuments]="request.documents"
                               ></app-download-file>
                               <ul
                                 class="twm-DT-controls-icon list-unstyled"

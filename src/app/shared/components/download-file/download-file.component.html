@@ -1,9 +1,56 @@
 <div class="twm-table-controls">
   <ul class="twm-DT-controls-icon list-unstyled">
     <li>
-      <button class="mx-2" (click)="downloadFile()">
+      <button class="mx-2" (click)="openDocumentListModal()">
         <span class="fa fa-download"></span>
       </button>
     </li>
   </ul>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" [id]="'document-list-modal' + bookId">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">المستندات المتوفرة</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">اسم المستند</th>
+              <th scope="col">التاريخ</th>
+              <th scope="col">الإجراء</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (document of bookDocuments; track $index) {
+            <tr>
+              <td>
+                {{ document.documentName || "مستند بدون اسم" | slice : 0 : 50 }}
+              </td>
+              <td>{{ document.createdDate | date : "yyyy/MM/dd HH:mm" }}</td>
+              <td>
+                <button
+                  class="mx-2"
+                  (click)="downloadFile(document)"
+                  [disabled]="!document.file"
+                >
+                  <span class="fa fa-download"></span>
+                </button>
+              </td>
+            </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>

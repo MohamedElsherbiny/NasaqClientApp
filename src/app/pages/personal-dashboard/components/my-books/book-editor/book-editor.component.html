@@ -4,7 +4,7 @@
             <h2>طلب خدمة جديد</h2>
         </div>
 
-        <form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
             <!-- Basic Information -->
             <div class="panel panel-default">
                 <div class="panel-heading wt-panel-heading p-a20">
@@ -59,7 +59,7 @@
                         <div class="col-lg-12 col-md-12">
                             <div class="text-left">
                                 <button type="submit" class="site-button"
-                                    [disabled]="orderForm.invalid || !selectedFile">أرسل</button>
+                                    [disabled]="bookForm.invalid || !selectedFile">أرسل</button>
                             </div>
                         </div>
                     </div>
