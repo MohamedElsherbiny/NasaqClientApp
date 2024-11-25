@@ -14,19 +14,16 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">المستندات المتوفرة</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <table class="table table-striped">
           <thead>
             <tr>
-              <th scope="col">اسم المستند</th>
+              <th scope="col">بواسطة</th>
+              <th scope="col-2" colspan="2">اسم المستند</th>
               <th scope="col">التاريخ</th>
+              <th scope="col">الإصدار</th>
               <th scope="col">الإجراء</th>
             </tr>
           </thead>
@@ -34,17 +31,24 @@
             @for (document of bookDocuments; track $index) {
             <tr>
               <td>
-                {{ document.documentName || "مستند بدون اسم" | slice : 0 : 50 }}
+                <a href="mailto:{{ document.createdBy }}">{{ document.createdBy | slice : 0 : 50 }}</a>
+              </td>
+              <td colspan="2">
+                {{ (document.documentName?.length ?? 0 > 30 ? (document.documentName | slice: 0:30) + '...' :
+                document.documentName) || "مستند بدون اسم" }}
               </td>
               <td>{{ document.createdDate | date : "yyyy/MM/dd HH:mm" }}</td>
+              <td>{{ document.version }}</td>
               <td>
-                <button
-                  class="mx-2"
-                  (click)="downloadFile(document)"
-                  [disabled]="!document.file"
-                >
-                  <span class="fa fa-download"></span>
-                </button>
+                <div class="twm-table-controls">
+                  <ul class="twm-DT-controls-icon list-unstyled">
+                    <li>
+                      <button class="mx-2" (click)="downloadFile(document)">
+                        <span class="fa fa-download"></span>
+                      </button>
+                    </li>
+                  </ul>
+                </div>
               </td>
             </tr>
             }

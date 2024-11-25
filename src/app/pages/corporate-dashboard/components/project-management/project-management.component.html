@@ -2,26 +2,26 @@
 <div id="content">
   <div class="content-admin-main">
     <div class="wt-admin-right-page-header clearfix">
-      <h2>إدارة الطلبات</h2>
+      <h2>إدارة المشاريع</h2>
     </div>
 
     <div class="twm-pro-view-chart-wrap">
       <div class="col-lg-12 col-md-12 mb-4">
         <div class="panel panel-default site-bg-white m-t30">
-          <div
-            class="panel-heading wt-panel-heading p-a20 d-flex flex-row justify-content-between"
-          >
+          <div class="panel-heading wt-panel-heading p-a20 d-flex flex-row justify-content-between">
             <h4 class="panel-tittle m-a0">
-              <i class="far fa-list-alt"></i>جميع الطلبات
+              <i class="far fa-list-alt"></i>جميع المشاريع
             </h4>
           </div>
 
+          @if(projects.length === 0) {
+          <div class="d-flex justify-content-center p-5">
+            <p>لا توجد مشاريع حالياً.</p>
+          </div>
+          } @else {
           <div class="panel-body wt-panel-body">
             <div class="twm-D_table p-a20 table-responsive">
-              <div
-                id="candidate_data_table_wrapper"
-                class="dataTables_wrapper dt-bootstrap5 no-footer"
-              >
+              <div id="candidate_data_table_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
                 <div class="row">
                   <div class="col-sm-12">
                     <table class="table table-bordered dataTable no-footer">
@@ -52,11 +52,9 @@
                             @for (serviceType of project.projectServices; track
                             serviceType.serviceTypeId) {
                             <div class="twm-jobs-category mt-2">
-                              <span
-                                class="twm-bg-color service-{{
-                                  serviceType.serviceTypeId
-                                }}"
-                              >
+                              <span class="twm-bg-color service-{{
+                                    serviceType.serviceTypeId
+                                  }}">
                                 {{ serviceType.serviceTypeName }}
                               </span>
                             </div>
@@ -66,20 +64,16 @@
                             <div class="twm-table-controls">
                               <ul class="twm-DT-controls-icon list-unstyled">
                                 <li>
-                                  <button
-                                    [routerLink]="[
-                                      '/corporate-dashboard/project-management/project-editor',
-                                      project.projectId
-                                    ]"
-                                  >
+                                  <button [routerLink]="[
+                                        '/corporate-dashboard/project-management/project-editor',
+                                        project.projectId
+                                      ]">
                                     <span class="fa fa-eye"></span>
                                   </button>
                                 </li>
                                 <li>
-                                  <app-download-file
-                                    [bookId]="project.bookId"
-                                    [bookDocuments]="project.documents"
-                                  ></app-download-file>
+                                  <app-download-file [bookId]="project.bookId"
+                                    [bookDocuments]="project.documents"></app-download-file>
                                 </li>
                               </ul>
                             </div>
@@ -93,6 +87,7 @@
               </div>
             </div>
           </div>
+          }
         </div>
       </div>
     </div>

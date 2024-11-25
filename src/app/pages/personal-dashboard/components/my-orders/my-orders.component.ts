@@ -4,11 +4,12 @@ import { HttpService } from '../../../../shared/core/services/http.service';
 import { BookRequest } from '../../../../shared/models/BookRequest';
 import { CommonModule } from '@angular/common';
 import { RequestStatus } from '../../../../shared/models/RequestStatus';
+import { DownloadFileComponent } from "../../../../shared/components/download-file/download-file.component";
 
 @Component({
   selector: 'app-my-orders',
   standalone: true,
-  imports: [RouterLink, CommonModule],
+  imports: [RouterLink, CommonModule, DownloadFileComponent],
   templateUrl: './my-orders.component.html',
   styleUrl: './my-orders.component.scss'
 })

@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { Publisher, ServiceType } from '../../../../../shared/models/Publisher';
 import { Book } from '../../../../../shared/models/Book';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-order-editor',
@@ -25,7 +26,8 @@ export class OrderEditorComponent implements OnInit {
 
   constructor(
     private http: HttpService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private router: Router,
   ) {
 
   }
@@ -53,6 +55,7 @@ export class OrderEditorComponent implements OnInit {
       }
     });
   }
+
   getPublisherServiceTypes() {
     const publisher = this.publishers.find(
       (p) => p.publisherId === this.selectedPublisherId
@@ -101,7 +104,7 @@ export class OrderEditorComponent implements OnInit {
     this.http.post(`Author/${this.user['authorId']}/requests`, request).subscribe({
       next: () => {
         this.toastr.success('تم إرسال الطلبات بنجاح', 'نجاح');
-        this.selectedServices = [];
+        this.router.navigate(['/personal-dashboard/my-orders']);
       },
       error: (error) => {
         console.error('Failed to create requests', error);

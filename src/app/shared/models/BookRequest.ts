@@ -1,3 +1,4 @@
+import { Book } from './Book';
 import { BookDocument } from './BookDocument';
 import { RequestStatus } from './RequestStatus';
 
@@ -8,6 +9,7 @@ export interface BookRequest {
   authorName: string;
   bookName: string;
   documents: BookDocument[];
+  book: Book;
   publisherId: number;
   publisherName: string;
   requestStatus: string;
