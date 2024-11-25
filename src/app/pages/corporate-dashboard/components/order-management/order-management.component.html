@@ -45,7 +45,7 @@
                             </div>
                           </td>
                           <td>{{ request.authorName }}</td>
-                          <td>{{ request.requestDate | date }}</td>
+                          <td>{{ request.requestDate | date : "yyyy/MM/dd HH:mm" }}</td>
                           <td>
                             <div class="twm-jobs-category">
                               <span [ngClass]="{

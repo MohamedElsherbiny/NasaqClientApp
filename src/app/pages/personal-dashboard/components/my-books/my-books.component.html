@@ -48,7 +48,7 @@
                       </div>
                     </td>
                     <td>{{ book.isbn }}</td>
-                    <td>{{ book.publicationDate | date : "dd/MM/yyyy" }}</td>
+                    <td>{{ book.publicationDate | date : "yyyy/MM/dd HH:mm" }}</td>
                     <td>
                       <div class="twm-table-controls">
                         <app-download-file [bookId]="book.bookId!" [bookDocuments]="book.documents"></app-download-file>

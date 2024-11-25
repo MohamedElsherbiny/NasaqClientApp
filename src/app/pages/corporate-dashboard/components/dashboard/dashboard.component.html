@@ -8,16 +8,18 @@
             <div class="breadcrumbs"><span>لوحة التحكم</span></div>
         </div>
 
-        <!-- <div class="twm-dash-b-blocks mb-5">
+        <div class="twm-dash-b-blocks mb-5" *ngIf="dashboard">
             <div class="row">
                 <div class="col-xl-3 col-lg-6 col-md-12 mb-3">
                     <div class="panel panel-default">
                         <div class="panel-body wt-panel-body gradi-1 dashboard-card ">
                             <div class="wt-card-wrap">
                                 <div class="wt-card-icon"><i class="far fa-address-book"></i></div>
-                                <div class="wt-card-right wt-total-active-listing counter ">25</div>
+                                <div class="wt-card-right wt-total-active-listing counter ">
+                                    {{dashboard.totalPublisherEmployees}}</div>
                                 <div class="wt-card-bottom ">
-                                    <h4 class="m-b0"> <a href="dash-order-takeem-taleb-elwekala.html">فريق العمل</a>
+                                    <h4 class="m-b0"> <a routerLink="/corporate-dashboard/team-management">فريق
+                                            العمل</a>
                                     </h4>
                                 </div>
                             </div>
@@ -30,7 +32,8 @@
                         <div class="panel-body wt-panel-body gradi-3 dashboard-card ">
                             <div class="wt-card-wrap">
                                 <div class="wt-card-icon"><i class="far fa-envelope"></i></div>
-                                <div class="wt-card-right wt-total-listing-review counter ">28</div>
+                                <div class="wt-card-right wt-total-listing-review counter ">{{dashboard.totalRequests}}
+                                </div>
                                 <div class="wt-card-bottom">
                                     <h4 class="m-b0">طلبات قيد التنفيذ</h4>
                                 </div>
@@ -42,17 +45,17 @@
                     <div class="panel panel-default">
                         <div class="panel-body wt-panel-body gradi-4 dashboard-card ">
                             <div class="wt-card-wrap">
-                                <div class="wt-card-icon"><i class="far fa-bell"></i></div>
-                                <div class="wt-card-right wt-total-listing-bookmarked counter ">18</div>
+                                <div class="wt-card-icon"><i class="fas fa-project-diagram"></i></div>
+                                <div class="wt-card-right wt-total-listing-bookmarked counter ">{{dashboard.totalProjects}}</div>
                                 <div class="wt-card-bottom">
-                                    <h4 class="m-b0">إشعارات</h4>
+                                    <h4 class="m-b0">المشاريع</h4>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div> -->
+        </div>
 
         <!-- <div class="twm-pro-view-chart-wrap">
             <div class="row">

@@ -25,8 +25,10 @@ import { MyOrdersComponent } from './pages/personal-dashboard/components/my-orde
 import { OrderEditorComponent } from './pages/personal-dashboard/components/my-orders/order-editor/order-editor.component';
 import { MyBooksComponent } from './pages/personal-dashboard/components/my-books/my-books.component';
 import { BookEditorComponent } from './pages/personal-dashboard/components/my-books/book-editor/book-editor.component';
-import { ProjectManagementComponent } from './pages/corporate-dashboard/components/project-management/project-management.component';
+import { ProjectManagementComponent as CorporateProjectManagementComponent } from './pages/corporate-dashboard/components/project-management/project-management.component';
+import { ProjectManagementComponent as PersonalProjectManagementComponent } from './pages/personal-dashboard/components/project-management/project-management.component';
 import { ProjectEditorComponent } from './pages/corporate-dashboard/components/project-management/project-editor/project-editor.component';
+import { ProjectDetailsComponent } from './pages/personal-dashboard/components/project-management/project-details/project-details.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -42,7 +44,7 @@ export const routes: Routes = [
       { path: 'help-support', component: CorporateHelpSupportComponent },
       { path: 'service-provider', component: ServiceProviderComponent },
       { path: 'order-management', component: OrderManagementComponent },
-      { path: 'project-management', component: ProjectManagementComponent },
+      { path: 'project-management', component: CorporateProjectManagementComponent },
       {
         path: 'project-management/project-editor/:projectId',
         component: ProjectEditorComponent,
@@ -64,6 +66,8 @@ export const routes: Routes = [
       { path: 'my-books', component: MyBooksComponent },
       { path: 'new-book', component: BookEditorComponent },
       { path: 'update-order', component: OrderEditorComponent },
+      { path: 'project-management/project-details/:projectId', component: ProjectDetailsComponent },
+      { path: 'project-management', component: PersonalProjectManagementComponent },
     ],
   },
   {

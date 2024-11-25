@@ -1,101 +1,60 @@
 <!-- Sidebar Holder -->
 <nav id="sidebar-admin-wraper">
   <div class="page-logo">
-    <!-- <a href="index.html"><img src="assets/images/Sinan Logo.png" alt="" /></a> -->
   </div>
 
   <div class="admin-nav">
     <ul>
       <li [ngClass]="{ active: isActive(['/corporate-dashboard']) }">
-        <a routerLink="/corporate-dashboard"
-          ><i class="fa fa-home"></i
-          ><span class="admin-nav-text">لوحة التحكم</span></a
-        >
+        <a routerLink="/corporate-dashboard"><i class="fa fa-home"></i><span class="admin-nav-text">لوحة
+            التحكم</span></a>
       </li>
 
-      <li
-        [ngClass]="{
+      <li [ngClass]="{
           active: isActive(['/corporate-dashboard/company-profile'])
-        }"
-        *ngIf="roleService.isAuthorOrPublisher()"
-      >
-        <a routerLink="company-profile"
-          ><i class="fa fa-user-tie"></i
-          ><span class="admin-nav-text">تعديل الحساب</span></a
-        >
+        }" *ngIf="roleService.isAuthorOrPublisher()">
+        <a routerLink="company-profile"><i class="fa fa-user-tie"></i><span class="admin-nav-text">تعديل
+            الحساب</span></a>
       </li>
 
-      <!-- <li [ngClass]="{ 'active': isActive(['/corporate-dashboard/help-support']) }"
-                *ngIf="roleService.isAuthorOrPublisher()">
-                <a routerLink="help-support"><i class="fa fa-question"></i><span class="admin-nav-text"> طلب
-                        مساعدة</span></a>
-            </li> -->
-
-      <li
-        [ngClass]="{
+      <li [ngClass]="{
           active: isActive(['/corporate-dashboard/service-provider'])
-        }"
-        *ngIf="roleService.isAuthorOrPublisher()"
-      >
-        <a routerLink="service-provider"
-          ><i class="fa fa-user-plus"></i
-          ><span class="admin-nav-text"> إضافة مقدم خدمة </span></a
-        >
+        }" *ngIf="roleService.isAuthorOrPublisher()">
+        <a routerLink="service-provider"><i class="fa fa-user-plus"></i><span class="admin-nav-text"> إضافة مقدم خدمة
+          </span></a>
       </li>
 
-      <li
-        [ngClass]="{
+      <li [ngClass]="{
           active: isActive(['/corporate-dashboard/team-management'])
-        }"
-        *ngIf="roleService.isAuthorOrPublisher()"
-      >
-        <a routerLink="team-management"
-          ><i class="fa fa-stream"></i
-          ><span class="admin-nav-text"> إدارة فريق العمل </span></a
-        >
+        }" *ngIf="roleService.isAuthorOrPublisher()">
+        <a routerLink="team-management"><i class="fa fa-users"></i><span class="admin-nav-text"> إدارة فريق العمل
+          </span></a>
       </li>
 
-      <li
-        [ngClass]="{
+      <li [ngClass]="{
           active: isActive(['/corporate-dashboard/order-management'])
-        }"
-      >
-        <a routerLink="order-management"
-          ><i class="fa fa-tasks"></i
-          ><span class="admin-nav-text"> إدارة الطلبات </span></a
-        >
+        }">
+        <a routerLink="order-management"><i class="fa fa-box"></i><span class="admin-nav-text"> إدارة الطلبات
+          </span></a>
       </li>
 
-      <li
-        [ngClass]="{
+      <li [ngClass]="{
           active: isActive(['/corporate-dashboard/project-management'])
-        }"
-      >
-        <a routerLink="project-management"
-          ><i class="fa fa-tasks"></i
-          ><span class="admin-nav-text"> إدارة المشاريع </span></a
-        >
+        }">
+        <a routerLink="project-management"><i class="fa fa-project-diagram"></i><span class="admin-nav-text"> إدارة المشاريع
+          </span></a>
       </li>
 
-      <li
-        [ngClass]="{
+      <li [ngClass]="{
           active: isActive(['/corporate-dashboard/task-management'])
-        }"
-      >
-        <a routerLink="task-management"
-          ><i class="fa fa-tasks"></i
-          ><span class="admin-nav-text"> إدارة المهام </span></a
-        >
+        }">
+        <a routerLink="task-management"><i class="fa fa-tasks"></i><span class="admin-nav-text"> إدارة المهام
+          </span></a>
       </li>
 
       <li>
-        <a
-          href="javascript:;"
-          data-bs-toggle="modal"
-          data-bs-target="#logout-dash-profile"
-          ><i class="fa fa-share-square"></i
-          ><span class="admin-nav-text">تسجيل خروج</span></a
-        >
+        <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#logout-dash-profile"><i
+            class="fa fa-share-square"></i><span class="admin-nav-text">تسجيل خروج</span></a>
       </li>
     </ul>
   </div>

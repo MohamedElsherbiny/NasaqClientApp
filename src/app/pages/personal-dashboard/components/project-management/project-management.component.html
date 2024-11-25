@@ -24,7 +24,7 @@
               <div id="candidate_data_table_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
                 <div class="row">
                   <div class="col-sm-12">
-                    <table class="table table-bordered dataTable no-footer">
+                    <table class="table table-bordered no-footer">
                       <thead>
                         <tr>
                           <th class="sorting">اسم العمل</th>
@@ -62,18 +62,16 @@
                           </td>
                           <td>
                             <div class="twm-table-controls">
+                              <app-download-file [bookId]="project.bookId"
+                                [bookDocuments]="project.documents"></app-download-file>
                               <ul class="twm-DT-controls-icon list-unstyled">
                                 <li>
                                   <button [routerLink]="[
-                                        '/corporate-dashboard/project-management/project-editor',
+                                        '/personal-dashboard/project-management/project-details',
                                         project.projectId
                                       ]">
                                     <span class="fa fa-eye"></span>
                                   </button>
-                                </li>
-                                <li>
-                                  <app-download-file [bookId]="project.bookId"
-                                    [bookDocuments]="project.documents"></app-download-file>
                                 </li>
                               </ul>
                             </div>

@@ -39,7 +39,7 @@
                             </div>
                           </td>
                           <td>{{ project.authorName }}</td>
-                          <td>{{ project.projectDate | date }}</td>
+                          <td>{{ project.projectDate | date : "yyyy/MM/dd HH:mm" }}</td>
                           <td>
                             @for (serviceType of project.projectServices; track
                             serviceType.serviceTypeId) {

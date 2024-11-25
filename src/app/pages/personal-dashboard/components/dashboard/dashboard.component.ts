@@ -1,12 +1,33 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { HttpService } from '../../../../shared/core/services/http.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
+  dashboard: any;
 
+  constructor(private http: HttpService) { }
+
+  ngOnInit(): void {
+    this.fetchDashboard();
+  }
+
+  fetchDashboard(): void {
+    this.http
+      .get(`Author/Dashboard`)
+      .subscribe({
+        next: (response: any) => {
+          this.dashboard = response;
+        },
+        error: (error) => {
+          console.error('Failed to fetch dashboard', error);
+        },
+      });
+  }
 }
