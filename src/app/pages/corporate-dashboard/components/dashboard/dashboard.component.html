@@ -46,7 +46,8 @@
                         <div class="panel-body wt-panel-body gradi-4 dashboard-card ">
                             <div class="wt-card-wrap">
                                 <div class="wt-card-icon"><i class="fas fa-project-diagram"></i></div>
-                                <div class="wt-card-right wt-total-listing-bookmarked counter ">{{dashboard.totalProjects}}</div>
+                                <div class="wt-card-right wt-total-listing-bookmarked counter ">
+                                    {{dashboard.totalProjects}}</div>
                                 <div class="wt-card-bottom">
                                     <h4 class="m-b0">المشاريع</h4>
                                 </div>
@@ -57,87 +58,62 @@
             </div>
         </div>
 
-        <!-- <div class="twm-pro-view-chart-wrap">
+        <div class="twm-pro-view-chart-wrap">
             <div class="row">
-                <div class="col-xl-6 col-lg-12 col-md-12 mb-4">
-                    <div class="panel panel-default site-bg-white">
-                        <div class="panel-heading wt-panel-heading p-a20">
-                            <h4 class="panel-tittle m-a0"><i class="far fa-chart-bar"></i>معدل الطلبات المنجزه</h4>
-                        </div>
-                        <div class="panel-body wt-panel-body twm-pro-view-chart">
-                            <canvas id="profileViewChart"></canvas>
-                        </div>
-                    </div>
-
-                </div>
-
-
                 <div class="col-xl-6 col-lg-12 col-md-12 mb-4">
                     <div class="panel panel-default">
                         <div class="panel-heading wt-panel-heading p-a20">
-                            <h4 class="panel-tittle m-a0">صندوق الوارد</h4>
+                            <h4 class="panel-tittle m-a0"> الطلبات</h4>
                         </div>
                         <div class="panel-body wt-panel-body bg-white">
                             <div class="dashboard-messages-box-scroll ">
-
+                                @for (request of requests; track $index) {
                                 <div class="dashboard-messages-box">
-                                    <div class="dashboard-message-avtar"><img src="assets/images/user-avtar/pic1.jpg"
-                                            alt="">
-                                    </div>
                                     <div class="dashboard-message-area">
-                                        <h5>لوسي سميث <span> 18 يونيو 2023</span></h5>
-                                        <p>إحضار استراتيجيات البقاء على قيد الحياة إلى الطاولة لضمان الهيمنة
-                                            الاستباقية. في نهاية اليوم ، المضي قدمًا ، وهو طبيعي جديد تطور من الجيل.
+                                        <h5>{{request.book.title}}
+                                            <span> {{request.requestDate | date :
+                                                "yyyy/MM/dd"}}</span>
+                                        </h5>
+                                        <p>
+                                            {{request.book.description}}
                                         </p>
                                     </div>
                                 </div>
-
-                                <div class="dashboard-messages-box">
-                                    <div class="dashboard-message-avtar"><img src="assets/images/user-avtar/pic3.jpg"
-                                            alt="">
-                                    </div>
-                                    <div class="dashboard-message-area">
-                                        <h5>غني بول <span> 19 يونيو 2023</span></h5>
-                                        <p>إحضار استراتيجيات البقاء على قيد الحياة إلى الطاولة لضمان الهيمنة
-                                            الاستباقية. في نهاية اليوم ، المضي قدمًا ، وهو طبيعي جديد تطور من الجيل.
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="dashboard-messages-box">
-                                    <div class="dashboard-message-avtar"><img src="assets/images/user-avtar/pic4.jpg"
-                                            alt="">
-                                    </div>
-                                    <div class="dashboard-message-area">
-                                        <h5>جون دو <span> 20 يونيو 2023</span></h5>
-                                        <p>إحضار استراتيجيات البقاء على قيد الحياة إلى الطاولة لضمان الهيمنة
-                                            الاستباقية. في نهاية اليوم ، المضي قدمًا ، وهو طبيعي جديد تطور من الجيل.
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="dashboard-messages-box">
-                                    <div class="dashboard-message-avtar"><img src="assets/images/user-avtar/pic1.jpg"
-                                            alt="">
-                                    </div>
-                                    <div class="dashboard-message-area">
-                                        <h5>توماس سميث<span>22 يونيو 2023</span></h5>
-                                        <p>إحضار استراتيجيات البقاء على قيد الحياة إلى الطاولة لضمان الهيمنة
-                                            الاستباقية. في نهاية اليوم ، المضي قدمًا ، وهو طبيعي جديد تطور من الجيل.
-                                        </p>
-                                    </div>
-                                </div>
+                                }
                             </div>
 
                         </div>
                     </div>
 
                 </div>
+                <div class="col-xl-6 col-lg-12 col-md-12 mb-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading wt-panel-heading p-a20">
+                            <h4 class="panel-tittle m-a0">المشاريع</h4>
+                        </div>
+                        <div class="panel-body wt-panel-body bg-white">
+                            <div class="dashboard-messages-box-scroll ">
 
+                                @for (project of projects; track $index) {
+                                <div class="dashboard-messages-box">
+                                    <div class="dashboard-message-area">
+                                        <h5>{{project.authorName}}
+                                            <span> {{project.projectDate | date :
+                                                "yyyy/MM/dd"}}</span>
+                                        </h5>
+                                        <p>{{project.bookName}} </p>
+                                    </div>
+                                </div>
+                                }
+                            </div>
 
+                        </div>
+                    </div>
+
+                </div>
             </div>
-        </div> -->
-
+        </div>
+        
     </div>
 
 </div>

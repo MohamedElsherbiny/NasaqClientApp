@@ -17,7 +17,7 @@
                             <div class="row">
 
                                 <!-- First Name -->
-                                <div class="col-xl-4 col-lg-6 col-md-12">
+                                <div class="col-xl-6 col-lg-6 col-md-12">
                                     <div class="form-group">
                                         <label>الاسم الأول</label>
                                         <div class="ls-inputicon-box">
@@ -29,7 +29,7 @@
                                 </div>
 
                                 <!-- Last Name -->
-                                <div class="col-xl-4 col-lg-6 col-md-12">
+                                <div class="col-xl-6 col-lg-6 col-md-12">
                                     <div class="form-group">
                                         <label>الاسم الأخير</label>
                                         <div class="ls-inputicon-box">
@@ -40,79 +40,87 @@
                                     </div>
                                 </div>
 
-                                <!-- Biography -->
-                                <div class="col-xl-4 col-lg-6 col-md-12">
-                                    <div class="form-group">
-                                        <label>السيرة الذاتية</label>
-                                        <div class="ls-inputicon-box">
-                                            <textarea class="form-control" formControlName="biography"
-                                                placeholder="نبذة مختصرة عنك"></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-
                                 <!-- Date of Birth -->
-                                <div class="col-xl-4 col-lg-6 col-md-12">
+                                <div class="col-xl-6 col-lg-6 col-md-12">
                                     <div class="form-group">
                                         <label>تاريخ الميلاد</label>
                                         <div class="ls-inputicon-box">
                                             <input class="form-control" formControlName="dateOfBirth" type="date">
+                                            <i class="fs-input-icon fa fa-calendar-alt"></i>
+                                            <!-- Added calendar icon -->
                                         </div>
                                     </div>
                                 </div>
 
                                 <!-- Email -->
-                                <div class="col-xl-4 col-lg-6 col-md-12">
+                                <div class="col-xl-6 col-lg-6 col-md-12">
                                     <div class="form-group">
                                         <label>عنوان البريد الإلكتروني</label>
                                         <div class="ls-inputicon-box">
                                             <input class="form-control" formControlName="email" type="email"
-                                                placeholder="name@domain.com">
+                                                placeholder="name@domain.com" readonly>
                                             <i class="fs-input-icon fas fa-at"></i>
                                         </div>
                                     </div>
                                 </div>
 
                                 <!-- Bank Name -->
-                                <div class="col-xl-4 col-lg-6 col-md-12">
+                                <div class="col-xl-6 col-lg-6 col-md-12">
                                     <div class="form-group">
                                         <label>اسم البنك</label>
                                         <div class="ls-inputicon-box">
                                             <input class="form-control" formControlName="bankName" type="text"
                                                 placeholder="اسم البنك">
+                                            <i class="fs-input-icon fa fa-university"></i> <!-- Bank icon -->
                                         </div>
                                     </div>
                                 </div>
 
                                 <!-- Account Holder Name -->
-                                <div class="col-xl-4 col-lg-6 col-md-12">
+                                <div class="col-xl-6 col-lg-6 col-md-12">
                                     <div class="form-group">
                                         <label>اسم صاحب الحساب</label>
                                         <div class="ls-inputicon-box">
                                             <input class="form-control" formControlName="accountHolderName" type="text"
                                                 placeholder="اسم صاحب الحساب">
+                                            <i class="fs-input-icon fa fa-id-card"></i> <!-- ID card icon -->
                                         </div>
                                     </div>
                                 </div>
 
                                 <!-- IBAN -->
-                                <div class="col-xl-4 col-lg-6 col-md-12">
+                                <div class="col-xl-6 col-lg-6 col-md-12">
                                     <div class="form-group">
                                         <label>رقم الآيبان</label>
                                         <div class="ls-inputicon-box">
                                             <input class="form-control" formControlName="iban" type="text"
                                                 placeholder="رقم الآيبان">
+                                            <i class="fs-input-icon fa fa-credit-card"></i> <!-- Credit card icon -->
                                         </div>
                                     </div>
                                 </div>
 
                                 <!-- SWIFT Code -->
-                                <div class="col-xl-4 col-lg-6 col-md-12">
+                                <div class="col-xl-6 col-lg-6 col-md-12">
                                     <div class="form-group">
                                         <label>رمز السويفت</label>
                                         <div class="ls-inputicon-box">
                                             <input class="form-control" formControlName="swiftCode" type="text"
                                                 placeholder="رمز السويفت">
+                                            <i class="fs-input-icon fa fa-random"></i>
+                                            <!-- Random icon for SWIFT code -->
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Biography -->
+                                <div class="col-xl-12 col-lg-6 col-md-12">
+                                    <div class="form-group">
+                                        <label>السيرة الذاتية</label>
+                                        <div class="ls-inputicon-box">
+                                            <textarea class="form-control" formControlName="biography"
+                                                placeholder="نبذة مختصرة عنك"></textarea>
+                                            <i class="fs-input-icon fa fa-pencil-alt"></i> <!-- Edit pencil icon -->
                                         </div>
                                     </div>
                                 </div>

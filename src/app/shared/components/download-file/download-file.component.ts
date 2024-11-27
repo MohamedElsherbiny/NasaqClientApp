@@ -23,7 +23,7 @@ export class DownloadFileComponent {
     }
     const apiUrl = `${this.baseUrl}/Files/download?url=${encodeURIComponent(
       bookDocument.file
-    )}`;
+    )}&name=${bookDocument.documentName}&version=${bookDocument.version}`;
     window.open(apiUrl, '_blank');
   }
 

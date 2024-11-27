@@ -4,7 +4,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { CompanyProfileComponent } from './pages/corporate-dashboard/components/company-profile/company-profile.component';
 import { HelpSupportComponent as CorporateHelpSupportComponent } from './pages/corporate-dashboard/components/help-support/help-support.component';
 import { HelpSupportComponent as PersonalHelpSupportComponent } from './pages/personal-dashboard/components/help-support/help-support.component';
-import { ServiceProviderComponent } from './pages/corporate-dashboard/components/service-provider/service-provider.component';
+import { ServiceProviderComponent } from './pages/corporate-dashboard/components/team-management/service-provider/service-provider.component';
 import { OrderManagementComponent } from './pages/corporate-dashboard/components/order-management/order-management.component';
 import { TeamManagementComponent } from './pages/corporate-dashboard/components/team-management/team-management.component';
 import { PersonalDashboardComponent } from './pages/personal-dashboard/personal-dashboard.component';

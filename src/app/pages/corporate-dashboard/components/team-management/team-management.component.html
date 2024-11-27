@@ -1,89 +1,80 @@
 <!-- Page Content Holder -->
 <div id="content">
-
     <div class="content-admin-main">
-
-        <div class="wt-admin-right-page-header clearfix">
-            <h2>إدارة فريق العمل</h2>
-        </div>
-
         <div class="twm-pro-view-chart-wrap">
-
             <div class="col-lg-12 col-md-12 mb-4">
                 <div class="panel panel-default site-bg-white m-t30">
-                    <div class="panel-body wt-panel-body">
-                        <div class="twm-D_table p-a20 table-responsive">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>الاسم</th>
-                                        <th>الإيميل</th>
-                                        <th>التخصص</th>
-                                        <th>الحالة</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <!--1-->
-                                    <tr *ngFor="let employee of employees">
-                                        <td>
-                                            <div class="twm-DT-candidates-list">
+                    <div class="panel-heading wt-panel-heading p-a20 d-flex flex-row justify-content-between">
+                        <h4 class="panel-tittle m-a0">
+                            <i class="fa fa-users"></i> مقدمي الخدمات
+                        </h4>
 
-                                                <div class="twm-mid-content">
-                                                    <a class="twm-job-title">
-                                                        <h4>{{ employee.name }}</h4>
-                                                    </a>
-
+                        <div class="text-left">
+                            <a routerLink="/corporate-dashboard/service-provider" type="submit" class="site-button m-r5">
+                                 دعوة مقدم خدمة</a>
+                        </div>
+                    </div>
+                    <div class="panel panel-default site-bg-white m-t30">
+                        <div class="panel-body wt-panel-body">
+                            <div class="twm-D_table p-a20 table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>المستخدم</th>
+                                            <th>الخدمات المقدمة</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!--1-->
+                                        <tr *ngFor="let employee of employees">
+                                            <td>
+                                                <div class="twm-DT-candidates-list">
+                                                    <div class="twm-mid-content">
+                                                        <a class="twm-job-title">
+                                                            <h4>{{ employee.name }}</h4>
+                                                            <a [href]="'mailto:' + employee.email">{{ employee.email
+                                                                }}</a>
+                                                        </a>
+                                                    </div>
                                                 </div>
-
-                                            </div>
-                                        </td>
-                                        <td><a [href]="'mailto:'+ employee.email">{{ employee.email }}</a></td>
-                                        <td>{{employee.roles.join(', ')}}</td>
-                                        <td>
-                                            <div class="twm-jobs-category">
-                                                <span [ngClass]="employee.isAdmin ? 'twm-bg-red' : 'twm-bg-green'">
-                                                    {{ employee.isAdmin ? 'مدير' : 'موظف' }}
-                                                </span>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="twm-table-controls">
-                                                <ul class="twm-DT-controls-icon list-unstyled">
-                                                    <!-- <li>
-                                                        <button title="View profile" data-bs-toggle="tooltip"
-                                                            data-bs-placement="top">
-                                                            <span class="fa fa-pen"></span>
-                                                        </button>
-                                                    </li> -->
-                                                    <li>
-                                                        <button title="Delete" data-bs-toggle="tooltip"
-                                                            data-bs-placement="top" href="javascript:;"
-                                                            data-bs-toggle="modal"
-                                                            (click)="selectedEmployeeId = employee.employeeId"
-                                                            data-bs-target="#delete-publisher-employee-confirm-popup">
-                                                            <span class="far fa-trash-alt"></span>
-                                                        </button>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                                            </td>
+                                            <td>
+                                                <div class="twm-jobs-category">
+                                                    <span *ngFor="let role of employee.roles"
+                                                        [ngClass]="getRoleStyle(role)" class="role-pill">
+                                                        {{ role.name }}
+                                                    </span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="twm-table-controls">
+                                                    <ul class="twm-DT-controls-icon list-unstyled">
+                                                        <li *ngIf="!employee.isAdmin">
+                                                            <button title="Delete" data-bs-toggle="tooltip"
+                                                                data-bs-placement="top" href="javascript:;"
+                                                                data-bs-toggle="modal"
+                                                                (click)="selectedEmployeeId = employee.employeeId"
+                                                                data-bs-target="#delete-publisher-employee-confirm-popup">
+                                                                <span class="far fa-trash-alt"></span>
+                                                            </button>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
-
     </div>
 
-</div>
+    <app-delete-service-provider [employeeId]="selectedEmployeeId" [employees]="employees"
+        (employeeDeleted)="getEmployees()"></app-delete-service-provider>
 
-<app-delete-service-provider [employeeId]="selectedEmployeeId" [employees]="employees"
-    (employeeDeleted)="getEmployees()"></app-delete-service-provider>
-
-<app-update-publisher-employee [employeeId]="selectedEmployeeId" [employees]="employees"
-    (employeeUpdated)="getEmployees()"></app-update-publisher-employee>
+    <app-update-publisher-employee [employeeId]="selectedEmployeeId" [employees]="employees"
+        (employeeUpdated)="getEmployees()"></app-update-publisher-employee>

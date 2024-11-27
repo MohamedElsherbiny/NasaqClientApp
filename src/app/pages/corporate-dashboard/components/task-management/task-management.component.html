@@ -23,8 +23,8 @@
               <table class="table table-bordered">
                 <thead>
                   <tr>
-                    <th>اسم المهمة</th>
-                    <th>تفاصيل المهمة</th>
+                    <th>اسم العمل</th>
+                    <th> الخدمة</th>
                     <th>التاريخ</th>
                     <th>الحالة</th>
                     <th></th>
@@ -38,12 +38,12 @@
                       <div class="twm-DT-candidates-list">
                         <div class="twm-mid-content">
                           <a class="twm-job-title">
-                            <h4>{{ task.taskName }}</h4>
+                            <h4>{{ task.book.title }}</h4>
                           </a>
                         </div>
                       </div>
                     </td>
-                    <td>{{ task.taskDescription }}</td>
+                    <td>{{ task.taskName }}</td>
                     <td>{{ task.createdDate | date : "yyyy/MM/dd HH:mm" }}</td>
                     <td>
                       <div class="twm-jobs-category">
@@ -72,14 +72,12 @@
                               </button>
                             </li>
                           </ul>
-                          <input #fileInput type="file" accept=".doc,.docx" (change)="onFileSelected($event, task.projectTaskId)"
-                            style="display: none" />
+                          <input #fileInput type="file" accept=".doc,.docx"
+                            (change)="onFileSelected($event, task.projectTaskId)" style="display: none" />
 
                           <app-download-file [bookId]="task.book.bookId!"
                             [bookDocuments]="task.book.documents"></app-download-file>
                         </div>
-
-
                         <a class="twm-jobs-category" (click)="updateTaskStatus(task)"
                           *ngIf="task.status !== ProjectTaskStatus.Completed">
                           <span [ngClass]="{

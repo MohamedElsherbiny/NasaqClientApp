@@ -61,7 +61,7 @@
                                         <table class="table table-bordered no-footer">
                                             <thead>
                                                 <tr>
-                                                    <th class="sorting">اسم المهمة</th>
+                                                    <th>اسم العمل</th>
                                                     <th>وصف المهمة</th>
                                                     <th>تاريخ</th>
                                                     <th>الحالة</th>
@@ -75,12 +75,12 @@
                                                         <div class="twm-DT-candidates-list">
                                                             <div class="twm-mid-content">
                                                                 <a class="twm-job-title">
-                                                                    <h4>{{ task.taskName }}</h4>
+                                                                    <h4>{{ task.book.title }}</h4>
                                                                 </a>
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    <td>{{ task.taskDescription }}</td>
+                                                    <td>{{ task.taskName }}</td>
                                                     <td>{{ task.createdDate | date : "yyyy/MM/dd HH:mm" }}</td>
                                                     <td>
                                                         <div class="twm-jobs-category">
@@ -92,7 +92,7 @@
                                     'twm-bg-red':
                                       task.status ===
                                       ProjectTaskStatus.NotAssigned,
-                                    'twm-bg-yellow':
+                                    'twm-bg-golden':
                                       task.status === ProjectTaskStatus.InProgress
                                   }">
                                                                 {{ task.taskStatus }}

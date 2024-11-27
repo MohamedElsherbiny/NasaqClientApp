@@ -57,6 +57,9 @@ export class LoginFormComponent {
     if ((user[this.roleKey] as string)?.includes('Author')) {
       this.router.navigate(['/personal-dashboard']);
       return;
+    } else if ((user[this.roleKey] as string)?.includes('PublisherEmployee')) {
+      this.router.navigate(['/corporate-dashboard/task-management']);
+      return;
     } else if ((user[this.roleKey] as string)?.includes('Publisher')) {
       this.router.navigate(['/corporate-dashboard']);
       return;

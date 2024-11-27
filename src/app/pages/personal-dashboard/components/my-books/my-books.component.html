@@ -28,9 +28,9 @@
               <table class="table table-bordered">
                 <thead>
                   <tr>
-                    <th>اسم العمل</th>
-                    <th>رقم الكتاب</th>
-                    <th>التاريخ</th>
+                    <th>العنوان </th>
+                    <th>الوصف </th>
+                    <th>تاريخ النشر</th>
                     <th></th>
                   </tr>
                 </thead>
@@ -43,27 +43,19 @@
                         <div class="twm-mid-content">
                           <a class="twm-job-title">
                             <h4>{{ book.title }}</h4>
+                            <span>{{book.isbn}}</span>
                           </a>
                         </div>
                       </div>
                     </td>
-                    <td>{{ book.isbn }}</td>
-                    <td>{{ book.publicationDate | date : "yyyy/MM/dd HH:mm" }}</td>
+                    <td>
+                      {{ (book.description?.length ?? 0 > 70 ? (book.description | slice: 0:70) + '...' :
+                      book.description) }}
+                    </td>
+                    <td>{{ book.publicationDate | date : "yyyy/MM/dd" }}</td>
                     <td>
                       <div class="twm-table-controls">
                         <app-download-file [bookId]="book.bookId!" [bookDocuments]="book.documents"></app-download-file>
-
-                        <!-- <ul class="twm-DT-controls-icon list-unstyled">
-                            <li>
-                              <button
-                                title="View profile"
-                                data-bs-toggle="tooltip"
-                                data-bs-placement="top"
-                              >
-                                <span class="fa fa-eye"></span>
-                              </button>
-                            </li>
-                          </ul> -->
                       </div>
                     </td>
                   </tr>

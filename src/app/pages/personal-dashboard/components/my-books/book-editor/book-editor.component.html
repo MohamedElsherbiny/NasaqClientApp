@@ -1,18 +1,19 @@
 <div id="content">
     <div class="content-admin-main">
         <div class="wt-admin-right-page-header clearfix">
-            <h2>طلب خدمة جديد</h2>
+            <h2> اضافة كتاب جديد</h2>
         </div>
 
         <form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
             <!-- Basic Information -->
             <div class="panel panel-default">
                 <div class="panel-heading wt-panel-heading p-a20">
-                    <h4 class="panel-tittle m-a0">بيانات الطلب</h4>
+                    <h4 class="panel-tittle m-a0"> معلومات الكتاب</h4>
                 </div>
                 <div class="panel-body wt-panel-body p-a20 m-b30">
                     <div class="row">
-                        <div class="col-xl-4 col-lg-6 col-md-12">
+                        <!-- Book Title -->
+                        <div class="col-xl-12 col-lg-6 col-md-12">
                             <div class="form-group">
                                 <label>عنوان العمل</label>
                                 <div class="ls-inputicon-box">
@@ -22,44 +23,64 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-xl-4 col-lg-6 col-md-12">
 
-                        </div>
-                        <div class="col-lg-8 col-md-12">
-                            <div class="form-group">
-                                <label>نبذة عن الكتاب</label>
-                                <textarea formControlName="description" class="form-control" rows="3"></textarea>
-                            </div>
-                        </div>
-
+                        <!-- ISBN -->
                         <div class="col-lg-6 col-md-12">
                             <div class="form-group">
-                                <label>ISBN</label>
-                                <input formControlName="isbn" class="form-control" type="text" placeholder="ISBN" />
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6 col-md-12">
-                            <div class="form-group">
-                                <label>تاريخ النشر</label>
-                                <input formControlName="publicationDate" class="form-control" type="date" />
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-12">
-                            <div class="form-group">
-                                <label>تحميل الكتاب</label>
-                                <div class="upload-btn-wrapper">
-                                    <button class="site-button button-sm">تحميل الملف</button>
-                                    <input type="file" (change)="onFileSelected($event)" accept=".pdf, .epub" />
+                                <label>رقم الكتاب الدولي (ISBN)</label>
+                                <div class="ls-inputicon-box">
+                                    <input formControlName="isbn" class="form-control" type="text" placeholder="ISBN" />
+                                    <i class="fs-input-icon fa fa-barcode"></i>
                                 </div>
                             </div>
                         </div>
 
+                        <!-- Publication Date -->
+                        <div class="col-lg-6 col-md-12">
+                            <div class="form-group">
+                                <label>تاريخ النشر</label>
+                                <div class="ls-inputicon-box">
+                                    <input formControlName="publicationDate" class="form-control" type="date" />
+                                    <i class="fs-input-icon fa fa-calendar-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Description -->
+                        <div class="col-lg-12 col-md-12">
+                            <div class="form-group">
+                                <label>نبذة عن الكتاب</label>
+                                <div class="ls-inputicon-box">
+                                    <textarea formControlName="description" class="form-control" rows="3"></textarea>
+                                    <i class="fs-input-icon fa fa-pencil-alt"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- File Upload Section -->
+                        <div class="col-lg-12 col-md-12">
+                            <div class="form-group">
+                                <label for="file-upload" class="custom-file-upload">
+                                    <span *ngIf="!selectedFile">اختيار ملف</span>
+                                    <span *ngIf="selectedFile">{{ selectedFile.name }}</span>
+                                    <i class="fa fa-upload mx-2"></i>
+                                </label>
+                                <input id="file-upload" type="file" (change)="onFileSelected($event)"
+                                    accept=".doc,.docx" />
+                                <div *ngIf="selectedFile" class="file-preview">
+                                    <span>{{ selectedFile.name }}</span>
+                                    <button type="button" (click)="removeFile()" class="remove-file-btn">إزالة</button>
+                                </div>
+                                <div *ngIf="fileError" class="file-error">
+                                    <span>الرجاء اختيار ملف بصيغة .doc أو .docx فقط.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Submit Button -->
                         <div class="col-lg-12 col-md-12">
                             <div class="text-left">
-                                <button type="submit" class="site-button"
-                                    [disabled]="bookForm.invalid || !selectedFile">أرسل</button>
+                                <button type="submit" class="site-button">أرسل</button>
                             </div>
                         </div>
                     </div>

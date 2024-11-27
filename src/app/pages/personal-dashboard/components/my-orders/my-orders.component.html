@@ -31,7 +31,8 @@
                   <tr>
                     <th>اسم العمل</th>
                     <th>المؤسسة</th>
-                    <th>التاريخ</th>
+                    <th>تاريخ النشر</th>
+                    <th>تاريخ إنشاء الطلب</th>
                     <th>الحالة</th>
                     <th></th>
                   </tr>
@@ -50,7 +51,8 @@
                       </div>
                     </td>
                     <td>{{ request.publisherName }}</td>
-                    <td>{{ request.requestDate | date : "dd/MM/yyyy" }}</td>
+                    <td>{{ request.book.publicationDate| date : "dd/MM/yyyy" }}</td>
+                    <td>{{ request.requestDate | date : "yyyy/MM/dd HH:mm"}}</td>
                     <td>
                       <div class="twm-jobs-category">
                         <span [ngClass]="{
@@ -67,35 +69,6 @@
                     <td>
                       <div class="twm-table-controls">
                         <app-download-file [bookDocuments]="request.book.documents"></app-download-file>
-                        <!-- <ul class="twm-DT-controls-icon list-unstyled">
-                              <li>
-                                <button
-                                  title="View profile"
-                                  data-bs-toggle="tooltip"
-                                  data-bs-placement="top"
-                                >
-                                  <span class="fa fa-eye"></span>
-                                </button>
-                              </li>
-                              <li>
-                                <button
-                                  title="Send message"
-                                  data-bs-toggle="tooltip"
-                                  data-bs-placement="top"
-                                >
-                                  <span class="far fa-envelope-open"></span>
-                                </button>
-                              </li>
-                              <li>
-                                <button
-                                  title="Delete"
-                                  data-bs-toggle="tooltip"
-                                  data-bs-placement="top"
-                                >
-                                  <span class="far fa-trash-alt"></span>
-                                </button>
-                              </li>
-                            </ul> -->
                       </div>
                     </td>
                   </tr>

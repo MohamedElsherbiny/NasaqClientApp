@@ -13,14 +13,14 @@
             <div class="panel-body wt-panel-body p-a20 m-b30 ">
                 <form [formGroup]="serviceProviderForm" (ngSubmit)="onSubmit()">
                     <div class="row">
-                        <!--First Name -->
-                        <div class="col-xl-4 col-lg-6 col-md-12">
+                        <!-- First Name -->
+                        <div class="col-xl-6 col-lg-6 col-md-12">
                             <div class="form-group">
                                 <label>الاسم الاول</label>
                                 <div class="ls-inputicon-box">
                                     <input class="form-control" formControlName="firstName" type="text"
                                         placeholder=" محمد" />
-                                    <i class="fs-input-icon fa fa-address-card"></i>
+                                    <i class="fs-input-icon fa fa-user"></i>
                                 </div>
                                 <div *ngIf="serviceProviderForm.get('firstName')?.invalid && serviceProviderForm.get('firstName')?.touched"
                                     class="text-danger">
@@ -29,13 +29,14 @@
                             </div>
                         </div>
 
-                        <div class="col-xl-4 col-lg-6 col-md-12">
+                        <!-- Last Name -->
+                        <div class="col-xl-6 col-lg-6 col-md-12">
                             <div class="form-group">
                                 <label>الاسم الاخير</label>
                                 <div class="ls-inputicon-box">
                                     <input class="form-control" formControlName="lastName" type="text"
                                         placeholder=" خالد" />
-                                    <i class="fs-input-icon fa fa-address-card"></i>
+                                    <i class="fs-input-icon fa fa-user"></i>
                                 </div>
                                 <div *ngIf="serviceProviderForm.get('lastName')?.invalid && serviceProviderForm.get('lastName')?.touched"
                                     class="text-danger">
@@ -51,7 +52,7 @@
                                 <div class="ls-inputicon-box">
                                     <input class="form-control" formControlName="email" type="email"
                                         placeholder="name@doamin.com" />
-                                    <i class="fs-input-icon fas fa-at"></i>
+                                    <i class="fs-input-icon fa fa-envelope"></i>
                                 </div>
                                 <div *ngIf="serviceProviderForm.get('email')?.invalid && serviceProviderForm.get('email')?.touched"
                                     class="text-danger">
@@ -61,18 +62,25 @@
                         </div>
 
                         <!-- Specializations -->
-                        <div class="col-lg-12">
-                            <div class="form-group mb-3">
-                                <label>التخصص</label>
-                                <div *ngFor="let option of publisherRoleIdsOptions">
-                                    <input type="checkbox" [value]="option.value" (change)="onCheckboxChange($event)" />
-                                    <label class="form-check-label">{{ option.name }}</label>
+                        <div class="panel panel-default">
+                            <div class="panel-heading wt-panel-heading py-3">
+                                <h4 class="panel-title m-a0">الخدمات المقدمة</h4>
+                            </div>
+                            <div class="my-3">
+                                <div class="d-flex flex-wrap gap-3"> <!-- Added gap-3 between checkbox items -->
+                                    <div *ngFor="let option of publisherRoleIdsOptions"
+                                        class="d-flex align-items-center gap-2">
+                                        <!-- Added gap-2 between input and label -->
+                                        <input class="form-check-input" type="checkbox" [value]="option.value"
+                                            (change)="onCheckboxChange($event)" />
+                                        <label class="form-check-label">{{ option.name }}</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Submit Button -->
-                        <div class="col-lg-12 col-md-12">
+                        <div class="col-lg-12 col-md-12 mt-3">
                             <div class="text-left">
                                 <button type="submit" class="site-button m-r5"
                                     [disabled]="serviceProviderForm.invalid">إرسال دعوة الانضمام</button>

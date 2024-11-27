@@ -51,7 +51,7 @@ export class ProjectEditorComponent implements OnInit {
       )
       .subscribe({
         next: (data) => {
-          this.employees = data;
+          this.employees = data.filter(employee => !employee.isAdmin);
         },
       });
   }

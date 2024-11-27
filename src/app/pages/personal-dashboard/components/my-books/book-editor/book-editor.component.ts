@@ -18,6 +18,7 @@ export class BookEditorComponent {
   bookForm: FormGroup;
   selectedFile: File | null = null;
   user = JSON.parse(localStorage.getItem('user') ?? '{}');
+  fileError: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -34,12 +35,23 @@ export class BookEditorComponent {
   }
 
   onFileSelected(event: Event): void {
+    debugger
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
-      this.selectedFile = input.files[0];
-      this.bookForm.get('fileName')?.setValue(this.selectedFile.name);
+      const file = input.files[0];
+      // Check file type (only .doc and .docx allowed)
+      if (file.type !== 'application/msword' && file.type !== 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
+        this.fileError = true;
+        this.selectedFile = null;
+        this.toastr.error('يرجى اختيار ملف بصيغة .doc أو .docx فقط', 'خطأ');
+      } else {
+        this.selectedFile = file;
+        this.fileError = false;
+        this.bookForm.get('fileName')?.setValue(this.selectedFile.name);
+      }
     }
   }
+
 
   onSubmit(): void {
     if (this.bookForm.valid && this.selectedFile) {
@@ -67,5 +79,11 @@ export class BookEditorComponent {
     } else {
       this.toastr.error('يرجى ملء جميع الحقول المطلوبة', 'خطأ');
     }
+  }
+
+  removeFile(): void {
+    this.selectedFile = null;
+    this.bookForm.get('fileName')?.reset();
+    this.fileError = false;
   }
 }
