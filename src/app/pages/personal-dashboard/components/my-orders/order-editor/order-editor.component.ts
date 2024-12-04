@@ -49,6 +49,7 @@ export class OrderEditorComponent implements OnInit {
     this.http.get(`Author/${this.user['authorId']}/books`).subscribe({
       next: (response: any) => {
         this.books = response || [];
+        this.selectedBookId = this.books[0]?.bookId ?? null;
       },
       error: (error) => {
         console.error('Failed to fetch books', error);

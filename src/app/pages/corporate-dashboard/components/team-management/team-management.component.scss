@@ -20,7 +20,7 @@
   /* Ensure no more than 3 items per row */
   .twm-jobs-category .role-pill {
     flex: 1 1 calc(33.333% - 10px); /* Each pill takes up 1/3 of the row minus gap */
-    max-width: calc(33.333% - 120px); /* Ensures that no more than 3 items appear in a row */
+    max-width: calc(33.333% - 70px); /* Ensures that no more than 3 items appear in a row */
   }
   
   .role-pill:hover {

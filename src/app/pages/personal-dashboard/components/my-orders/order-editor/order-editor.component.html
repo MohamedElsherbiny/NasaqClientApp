@@ -8,57 +8,43 @@
             <div class="col-lg-12 col-md-12 mb-4">
                 <div class="panel panel-default site-bg-white m-t30">
                     <div class="panel-heading wt-panel-heading p-a20 d-flex flex-row justify-content-between">
-                        <h4 class="panel-tittle m-a0"><i class="far fa-list-alt"></i>دور النشر </h4>
+                        <h4 class="panel-tittle m-a0"><i class="far fa-list-alt"></i> مقدمي الخدمات </h4>
                     </div>
 
                     <div class="panel-body wt-panel-body">
-                        <div class="twm-D_table p-a20 table-responsive">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>اسم دار النشر</th>
-                                        <th>الخدمات</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @for (publisher of publishers; track $index) {
-                                    <!--1-->
-                                    <tr>
-                                        <td>
-                                            <div class="twm-DT-candidates-list">
-
-                                                <div class="twm-mid-content">
-                                                    <a class="twm-job-title">
-                                                        <h4>{{publisher.companyName}}</h4>
-                                                    </a>
-                                                </div>
+                        <div class="twm-D_table p-a20">
+                            <div class="row">
+                                <!-- Loop through each publisher and display in a card -->
+                                @for (publisher of publishers; track $index) {
+                                <div class="col-lg-4 col-md-6 mb-4">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{publisher.companyName}}</h5>
+                                            <div class="service-types">
+                                                <ul class="list-group list-group-flush">
+                                                    @for (serviceType of publisher.serviceTypes; track
+                                                    serviceType.serviceTypeId) {
+                                                    <li
+                                                        class="list-group-item  d-flex justify-content-between align-items-center">
+                                                        <h4 class="badge service-{{serviceType.serviceTypeId}}">
+                                                            {{serviceType.name}}
+                                                        </h4>
+                                                        <span>{{serviceType.price}}</span>
+                                                    </li>
+                                                    }
+                                                </ul>
                                             </div>
-                                        </td>
-                                        <td>
-                                            @for (serviceType of publisher.serviceTypes; track
-                                            serviceType.serviceTypeId) {
-                                            <div class="twm-jobs-category mt-2">
-                                                <span class="twm-bg-color service-{{serviceType.serviceTypeId}}">
-                                                    {{serviceType.name}} - {{serviceType.price}}
-                                                </span>
-                                            </div>
-                                            }
-
-                                        </td>
-                                        <td>
-                                            <div class="twm-table-controls">
-                                                <button class="btn btn-primary" data-bs-target="#add-request-popup"
-                                                    data-bs-toggle="modal"
+                                            <div class="text-center mt-3">
+                                                <button class="btn btn-primary" style="border-radius: 100%;"
+                                                    data-bs-target="#add-request-popup" data-bs-toggle="modal"
                                                     (click)="selectedPublisherId = publisher.publisherId">
-                                                    طلب خدمة
-                                                </button>
+                                                    <i class="fas fa-plus"></i> </button>
                                             </div>
-                                        </td>
-                                    </tr>
-                                    }
-                                </tbody>
-                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -71,6 +57,7 @@
 </div>
 
 
+<!-- Modal for Service Request -->
 <div class="modal fade twm-model-popup" id="add-request-popup" data-bs-backdrop="static" data-bs-keyboard="false"
     tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
@@ -87,7 +74,26 @@
                         </option>
                     </select>
                 </div>
-                <div class="service-types mt-4">
+                <ul class="list-group list-group-flush">
+                    @for (serviceType of getPublisherServiceTypes(); track
+                    serviceType.serviceTypeId;) {
+                    <li class="list-group-item  d-flex justify-content-between align-items-center">
+                        <div>
+                            <input type="checkbox" class="form-check-input" [id]="'service-' + serviceType.serviceTypeId"
+                                (change)="toggleServiceSelection(serviceType)"
+                                [checked]="isServiceSelected(serviceType)" />
+                            <label [for]="'service-' + serviceType.serviceTypeId" class="mx-3">
+                                {{ serviceType.name }}
+                            </label>
+                        </div>
+                        <div>
+                            {{ serviceType.price }}
+                        </div>
+                    </li>
+                    }
+                </ul>
+
+                <!-- <div class="service-types mt-4">
                     <h5>الخدمات المتاحة:</h5>
                     <div *ngFor="let serviceType of getPublisherServiceTypes(); let serviceIndex = index">
                         <input type="checkbox" [id]="'service-' + serviceIndex"
@@ -96,7 +102,7 @@
                             {{ serviceType.name }} - {{ serviceType.price }}
                         </label>
                     </div>
-                </div>
+                </div> -->
             </div>
 
             <div class="modal-footer">

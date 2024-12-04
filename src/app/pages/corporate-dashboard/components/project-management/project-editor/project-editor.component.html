@@ -100,11 +100,11 @@
                             </div>
                           </td>
                           <td>
-                            @if (task.assginTo) {
+                          
                             <div class="twm-DT-candidates-list">
                               <div class="twm-mid-content d-flex">
-                                <a class="twm-job-title" href="mailto:{{ task.assginTo.email }}">
-                                  <h6>{{ task.assginTo.email }} - {{task.assginTo.name }}</h6>
+                                <a class="twm-job-title" href="mailto:{{ task.assginTo?.email }}">
+                                  <h6>{{ task.assginTo?.email }} - {{task.assginTo?.name }}</h6>
                                 </a>
                               </div>
 
@@ -112,7 +112,7 @@
                                 (click)="openAssignModal(task.projectTaskId)"></i>
 
                             </div>
-                            }
+                            
                           </td>
                         </tr>
                         }
