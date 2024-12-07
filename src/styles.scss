@@ -221,3 +221,93 @@ button.toast-close-button {
     width: 25em;
   }
 }
+
+
+/* content
+=====================*/
+#content{
+  background-color: #f1f1f1 !important;
+}
+// tables overwrite
+
+.table{
+  border-collapse: collapse;
+  border-color: transparent;
+  thead tr th{
+    border-top: 0!important;
+  }
+  td, 
+  th {
+    border-top: 1px solid #e5e9f2;
+    border-bottom: 0 !important;
+    padding: 8px 10px;
+    line-height: 1.5;
+    font-size: 13px;
+    vertical-align: middle !important;
+
+    padding-top: 5px;
+    color: #8392a5;
+    padding-bottom: 5px;
+    font-weight: 400;
+  }
+  tr:hover td{
+    background: #f2f7f8;
+  }
+
+  .twm-DT-candidates-list .twm-job-title h4{
+    color: #8392a5;
+    &:hover{
+      color: #1967d2;
+    }
+  }
+}
+
+
+/* side-menu and header
+==================*/
+#sidebar-admin-wraper{
+  background-color: #2d4b65;
+}
+.admin-nav ul {
+  padding: 0 12px;
+  > li {
+    > a{
+      color: #fff;
+      border-radius: 10px !important;
+      margin-bottom: 2px;
+    }
+    &.active > a,
+    a:hover{
+      background-color: #102332;
+      color: #fff;
+    }
+  }
+}
+
+.header-admin-fixed .nav-btn-wrap{
+  height: 90px;
+}
+
+
+/* site-button
+================*/
+.site-button{
+  padding: 6px 24px;
+  border-radius: 8px;
+  background-color: #0168fa;
+}
+
+
+/* forms
+===============*/
+.form-control{
+  background-color: #fff;
+  border: 1px solid #b3b3b3;
+  &:focus{
+    color: #495057;
+    background-color: #fff;
+    border-color: #7cb2fe;
+    outline: 0;
+    box-shadow: 0 0 0 .2rem rgba(1, 104, 250, .25);
+  }
+}
