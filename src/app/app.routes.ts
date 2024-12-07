@@ -29,6 +29,7 @@ import { ProjectManagementComponent as CorporateProjectManagementComponent } fro
 import { ProjectManagementComponent as PersonalProjectManagementComponent } from './pages/personal-dashboard/components/project-management/project-management.component';
 import { ProjectEditorComponent } from './pages/corporate-dashboard/components/project-management/project-editor/project-editor.component';
 import { ProjectDetailsComponent } from './pages/personal-dashboard/components/project-management/project-details/project-details.component';
+import { TaskEditorComponent } from './pages/corporate-dashboard/components/task-management/task-editor/task-editor.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -50,6 +51,7 @@ export const routes: Routes = [
         component: ProjectEditorComponent,
       },
       { path: 'task-management', component: TaskManagementComponent },
+      { path: 'new-task', component: TaskEditorComponent },
       { path: 'team-management', component: TeamManagementComponent },
     ],
   },
