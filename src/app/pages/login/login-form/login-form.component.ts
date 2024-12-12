@@ -55,13 +55,13 @@ export class LoginFormComponent {
     }
 
     if ((user[this.roleKey] as string)?.includes('Author')) {
-      this.router.navigate(['/personal-dashboard']);
+      this.router.navigate(['/author-dashboard']);
       return;
     } else if ((user[this.roleKey] as string)?.includes('PublisherEmployee')) {
-      this.router.navigate(['/corporate-dashboard/task-management']);
+      this.router.navigate(['/publisher-dashboard/task-management']);
       return;
     } else if ((user[this.roleKey] as string)?.includes('Publisher')) {
-      this.router.navigate(['/corporate-dashboard']);
+      this.router.navigate(['/publisher-dashboard']);
       return;
     } else if ((user[this.roleKey] as string)?.includes('Admin')) {
       this.router.navigate(['/admin-dashboard']);

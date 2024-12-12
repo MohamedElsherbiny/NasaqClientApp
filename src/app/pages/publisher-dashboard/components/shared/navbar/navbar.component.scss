@@ -1,0 +1,122 @@
+.header {
+  background: var(--bg-color);
+  padding: 0.5rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.header-title {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.burger-btn {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.burger-btn:hover {
+  background: var(--input-bg);
+  border-radius: 4px;
+}
+
+.header-title h1 {
+  color: var(--text-color);
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  background: var(--input-bg);
+  padding: 0.5rem;
+  border-radius: 4px;
+  width: 300px;
+  transition: all 0.3s ease;
+}
+
+.search-input {
+  background: none;
+  border: none;
+  color: var(--text-color);
+  width: 100%;
+  margin-right: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.search-input::placeholder {
+  color: var(--text-color);
+  opacity: 0.7;
+}
+
+.search-icon {
+  color: var(--text-color);
+  opacity: 0.7;
+}
+
+.theme-btn,
+.upgrade-btn {
+  background: var(--input-bg);
+  color: var(--text-color);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.theme-btn:hover,
+.upgrade-btn:hover {
+  background: var(--hover-bg);
+}
+
+.upgrade-btn {
+  background: #4573d2;
+  color: white;
+}
+
+.user-menu {
+  width: 32px;
+  height: 32px;
+  background: var(--input-bg);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.user-menu i {
+  color: var(--text-color);
+}
+
+@media (max-width: 768px) {
+  .search-bar {
+    width: 100%;
+  }
+
+  .upgrade-btn {
+    display: none;
+  }
+}

@@ -1,0 +1,45 @@
+<div class="team-list">
+    <div class="team-list-header">
+        <div class="header-controls">
+            <span></span>
+            <div class="view-controls">
+                <button class="add-team-btn" (click)="onAddPublisherEmployee()">
+                    <fa-icon [icon]="faPlus"></fa-icon>
+                    دعوة مفدم خدمة
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="team-table">
+        <div class="team-table-header">
+            <div class="team-cell">الاسم</div>
+            <div class="team-cell">الايميل</div>
+            <div class="team-cell"></div>
+        </div>
+        <div class="team-items">
+            <div class="team-item" *ngFor="let employee of employees">
+                <div class="team-cell">{{ employee.name }}</div>
+                <div class="team-cell">{{ employee.email }}</div>
+                <div class="team-cell">
+                    <div class="actions-menu">
+                        <button class="menu-btn" (click)="toggleMenu($event, employee.employeeId!)">
+                            <fa-icon [icon]="faEllipsisVertical"></fa-icon>
+                        </button>
+                        <div class="menu-dropdown" *ngIf="activeMenu === employee.employeeId">
+                            <button class="menu-item">
+                                <fa-icon [icon]="faPen"></fa-icon>
+                                تعديل
+                            </button>
+                            <button class="menu-item">
+                                <fa-icon [icon]="faTrash"></fa-icon>
+                                حذف
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-team-member-editor *ngIf="showForm" (close)="closeForm()"></app-team-member-editor>

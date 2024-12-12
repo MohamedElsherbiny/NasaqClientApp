@@ -1,0 +1,24 @@
+<form [formGroup]="teamMemberForm" (ngSubmit)="onSubmit()">
+    <div class="team-member-form-overlay" (click)="onClose()">
+        <div class="team-member-form" (click)="$event.stopPropagation()">
+            <div class="form-header">
+                <h2>{{ false ? 'تعديل الكتاب' : 'كتاب جديد' }}</h2>
+                <button class="close-btn" (click)="onClose()">
+                    <fa-icon [icon]="faTimes"></fa-icon>
+                </button>
+            </div>
+            <div class="form-content">
+                <!-- <div class="form-group">
+                    <label>اسم الكتاب</label>
+                    <input type="text" formControlName="title" class="form-control" placeholder="عنوان العمل">
+                </div> -->
+
+
+            </div>
+            <div class="form-actions">
+                <button class="cancel-btn" type="button" (click)="onClose()">إلغاء</button>
+                <button class="save-btn" type="submit">حفظ</button>
+            </div>
+        </div>
+    </div>
+</form>

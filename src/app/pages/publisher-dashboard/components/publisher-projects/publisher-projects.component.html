@@ -1,0 +1,52 @@
+<div class="project-list">
+  <div class="project-grid">
+    <div class="project-card" *ngFor="let project of projects">
+      <div class="project-header">
+        <div class="project-status" [class]="project.status">
+          <fa-icon [icon]="faCircle"></fa-icon>
+          {{ getStatusText(project.requstStatus) }}
+        </div>
+        <div class="actions-menu">
+          <button class="menu-btn" (click)="toggleMenu($event, project.projectId)">
+            <fa-icon [icon]="faEllipsisVertical"></fa-icon>
+          </button>
+          <div class="menu-dropdown" *ngIf="activeMenu === project.projectId">
+            <button class="menu-item" (click)="editProject(project)">
+              <fa-icon [icon]="faEye"></fa-icon>
+              تفاصيل
+            </button>
+            <!-- <button class="menu-item">
+              <fa-icon [icon]="faTrash"></fa-icon>
+              حذف
+            </button> -->
+          </div>
+        </div>
+      </div>
+      <h3 class="project-name">{{ project.bookName }}</h3>
+      <p class="project-description">{{ project.publisherName }}</p>
+      <div class="project-info">
+        <div class="info-item">
+          <fa-icon [icon]="faCalendar"></fa-icon>
+          {{ project.projectDate | date:'yyyy/MM/dd' }}
+        </div>
+        <div class="info-item">
+          <fa-icon [icon]="faUsers"></fa-icon>
+          {{ project.projectServices.length }} خدمات
+        </div>
+      </div>
+      <div class="project-members">
+        <div class="member-avatars">
+          <div class="member-avatar" *ngFor="let member of project.projectTasks.slice(0, 3)">
+            {{ member.taskName }}
+          </div>
+          <div class="member-more" *ngIf="project.projectTasks.length > 3">
+            +{{ project.projectTasks.length - 3 }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <app-project-details *ngIf="showForm" [projectId]="selectedProject?.projectId!"
+  (close)="closeForm()"></app-project-details> -->

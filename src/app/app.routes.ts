@@ -11,6 +11,8 @@ import { PersonalDashboardComponent } from './pages/personal-dashboard/personal-
 import { DashboardComponent as PersonalDashboardIndexComponent } from './pages/personal-dashboard/components/dashboard/dashboard.component';
 import { DashboardComponent as CorporateDashboardIndexComponent } from './pages/corporate-dashboard/components/dashboard/dashboard.component';
 import { DashboardComponent as AdminDashboardIndexComponent } from './pages/admin-dashboard/components/dashboard/dashboard.component';
+import { DashboardComponent as AuthorDashboardIndexComponent } from './pages/author-dashboard/components/dashboard/dashboard.component';
+import { DashboardComponent as PublisherDashboardIndexComponent } from './pages/publisher-dashboard/components/dashboard/dashboard.component';
 import { ProfileComponent } from './pages/personal-dashboard/components/profile/profile.component';
 import { TaskManagementComponent } from './pages/corporate-dashboard/components/task-management/task-management.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -29,6 +31,17 @@ import { ProjectManagementComponent as CorporateProjectManagementComponent } fro
 import { ProjectManagementComponent as PersonalProjectManagementComponent } from './pages/personal-dashboard/components/project-management/project-management.component';
 import { ProjectEditorComponent } from './pages/corporate-dashboard/components/project-management/project-editor/project-editor.component';
 import { ProjectDetailsComponent } from './pages/personal-dashboard/components/project-management/project-details/project-details.component';
+import { AuthorDashboardComponent } from './pages/author-dashboard/author-dashboard.component';
+import { AuthorRequestsComponent } from './pages/author-dashboard/components/author-requests/author-requests.component';
+import { AuthorRequestEditorComponent } from './pages/author-dashboard/components/author-requests/author-request-editor/author-request-editor.component';
+import { AuthorBooksComponent } from './pages/author-dashboard/components/author-books/author-books.component';
+import { AuthorBookEditorComponent } from './pages/author-dashboard/components/author-books/author-book-editor/author-book-editor.component';
+import { AuthorProjectsComponent } from './pages/author-dashboard/components/author-projects/author-projects.component';
+import { PublisherDashboardComponent } from './pages/publisher-dashboard/publisher-dashboard.component';
+import { PublisherRequestsComponent } from './pages/publisher-dashboard/components/publisher-requests/publisher-requests.component';
+import { PublisherProjectsComponent } from './pages/publisher-dashboard/components/publisher-projects/publisher-projects.component';
+import { TeamComponent } from './pages/publisher-dashboard/components/team/team.component';
+import { PublishersComponent } from './pages/author-dashboard/components/publishers/publishers.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -68,6 +81,29 @@ export const routes: Routes = [
       { path: 'update-order', component: OrderEditorComponent },
       { path: 'project-management/project-details/:projectId', component: ProjectDetailsComponent },
       { path: 'project-management', component: PersonalProjectManagementComponent },
+    ],
+  },
+  {
+    path: 'author-dashboard',
+    canActivate: [tokenValidationGuard, authorGuard],
+    component: AuthorDashboardComponent,
+    children: [
+      { path: '', component: AuthorDashboardIndexComponent },
+      { path: 'profile', component: ProfileComponent },
+      { path: 'requests', component: AuthorRequestsComponent },
+      { path: 'books', component: AuthorBooksComponent },
+      { path: 'projects', component: AuthorProjectsComponent },
+      { path: 'publishers', component: PublishersComponent },
+    ],
+  }, {
+    path: 'publisher-dashboard',
+    canActivate: [tokenValidationGuard, publisherGuard],
+    component: PublisherDashboardComponent,
+    children: [
+      { path: '', component: PublisherDashboardIndexComponent },
+      { path: 'requests', component: PublisherRequestsComponent },
+      { path: 'projects', component: PublisherProjectsComponent },
+      { path: 'team', component: TeamComponent },
     ],
   },
   {

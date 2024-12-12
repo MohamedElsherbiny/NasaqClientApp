@@ -49,7 +49,8 @@
               "src/assets/css/style.css",
               "src/assets/css/rtl.css",
               "src/assets/css/skins-type/skin-6.css",
-              "src/assets/css/switcher.css"
+              "src/assets/css/switcher.css",
+              "src/global_styles.css"
             ],
             "scripts": [
               "node_modules/bootstrap/dist/js/bootstrap.min.js"

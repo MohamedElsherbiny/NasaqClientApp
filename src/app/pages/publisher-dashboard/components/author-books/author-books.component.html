@@ -1,0 +1,55 @@
+<div class="book-list">
+  <div class="book-list-header">
+    <div class="header-controls">
+      <span></span>
+      <div class="view-controls">
+        <button class="add-book-btn" (click)="onAddBook()">
+          <fa-icon [icon]="faPlus"></fa-icon>
+          إنشاء كتاب
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="book-table">
+    <div class="book-table-header">
+      <div class="book-cell">العنوان</div>
+      <div class="book-cell">الوصف</div>
+      <div class="book-cell">تاريخ النشر</div>
+      <div class="book-cell">ISBN</div>
+      <div class="book-cell">تحميل</div>
+      <div class="book-cell"></div>
+    </div>
+    <div class="book-items">
+      <div class="book-item" *ngFor="let book of books">
+        <div class="book-cell">{{ book.title }}</div>
+        <div class="book-cell">{{ book.description }}</div>
+        <div class="book-cell">{{ book.publicationDate | date:'yyyy/MM/dd' }}</div>
+        <div class="book-cell">{{ book.isbn }}</div>
+        <div class="book-cell">
+          <button class="download-btn">
+            <fa-icon [icon]="faDownload"></fa-icon>
+          </button>
+        </div>
+        <div class="book-cell">
+          <div class="actions-menu">
+            <button class="menu-btn" (click)="toggleMenu($event, book.bookId!)">
+              <fa-icon [icon]="faEllipsisVertical"></fa-icon>
+            </button>
+            <div class="menu-dropdown" *ngIf="activeMenu === book.bookId">
+              <button class="menu-item">
+                <fa-icon [icon]="faPen"></fa-icon>
+                تعديل
+              </button>
+              <button class="menu-item">
+                <fa-icon [icon]="faTrash"></fa-icon>
+                حذف
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-author-book-editor *ngIf="showForm" (close)="closeForm()"></app-author-book-editor>

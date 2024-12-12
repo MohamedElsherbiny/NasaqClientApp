@@ -1,0 +1,40 @@
+<div class="publisher-list">
+  <div class="publisher-list-header">
+    <h2>دور النشر</h2>
+  </div>
+
+  <div class="publisher-grid">
+    <div class="publisher-card" *ngFor="let publisher of publishers">
+      <div class="publisher-header">
+        <h3>{{ publisher.companyName }}</h3>
+      </div>
+
+      <p class="description">{{ publisher.description }}</p>
+
+      <div class="services">
+        <div class="service-tag" *ngFor="let service of publisher.serviceTypes">
+          <fa-icon [icon]="getServiceIcon(service)"></fa-icon>
+          {{ service.name }}
+        </div>
+      </div>
+
+      <div class="contact-info">
+        <div class="contact-item">
+          <fa-icon [icon]="faEnvelope"></fa-icon>
+          {{ publisher.contactEmail }}
+        </div>
+        <div class="contact-item">
+          <fa-icon [icon]="faPhone"></fa-icon>
+          {{ publisher.phoneNumber }}
+        </div>
+      </div>
+
+      <button class="request-btn" (click)="addRequest(publisher)">
+        طلب خدمة
+      </button>
+    </div>
+  </div>
+</div>
+
+<app-add-publisher-request-editor *ngIf="showForm" [publisher]="selectedPublisher"
+  (close)="closeForm()"></app-add-publisher-request-editor>

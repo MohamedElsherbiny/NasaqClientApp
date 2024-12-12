@@ -1,0 +1,77 @@
+<div class="project-form-overlay" (click)="onClose()">
+    <div class="project-form" (click)="$event.stopPropagation()">
+        <div class="form-header">
+            <h2>تفاصيل المشروع</h2>
+            <button class="close-btn" (click)="onClose()">
+                <fa-icon [icon]="faTimes"></fa-icon>
+            </button>
+        </div>
+        <div class="form-content">
+            <div class="project-info-section">
+                <div class="info-card">
+                    <div class="info-item">
+                        <div class="info-label">
+                            <fa-icon [icon]="faBook"></fa-icon>
+                            اسم المشروع
+                        </div>
+                        <div class="info-value">{{ project.bookName }}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">
+                            <fa-icon [icon]="faUser"></fa-icon>
+                            دار النشر
+                        </div>
+                        <div class="info-value">{{ project.publisherName }}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">
+                            <fa-icon [icon]="faCalendar"></fa-icon>
+                            تاريخ البدء
+                        </div>
+                        <div class="info-value">{{ project.projectDate| date:'yyyy/MM/dd' }}</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">
+                            <fa-icon [icon]="faBook"></fa-icon>
+                            عدد المهام
+                        </div>
+                        <div class="info-value">{{ project?.projectTasks?.length ?? 0 }}</div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="task-list">
+                <div class="task-table">
+                    <div class="task-table-header">
+                        <div class="task-cell">اسم المهمة</div>
+                        <div class="task-cell">تاريخ </div>
+                        <div class="task-cell">الحالة</div>
+                    </div>
+                    <div class="task-items">
+                        <div class="task-item" *ngFor="let projectTask of project.projectTasks;"
+                            [class.completed]="projectTask.status == ProjectTaskStatus.Completed">
+                            <div class="task-cell">
+                                <span class="task-checkbox"
+                                    [class.checked]="projectTask.status == ProjectTaskStatus.Completed">
+
+                                    <fa-icon [icon]="faCheck"
+                                        *ngIf="projectTask.status == ProjectTaskStatus.Completed"></fa-icon>
+                                </span>
+                                {{ projectTask.taskName }}
+                            </div>
+                            <div class="task-cell">{{ projectTask.createdDate | date:'MMM d, y' }}</div>
+                            <div class="task-cell">
+                                <div class="tags">
+                                    <span class="tag" [style.background-color]="getStatusColor(projectTask.status)"
+                                        [style.color]="'white'">{{ projectTask.taskStatus
+                                        }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

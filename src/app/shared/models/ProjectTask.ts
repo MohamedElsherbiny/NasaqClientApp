@@ -10,5 +10,6 @@ export interface ProjectTask {
   createdDate: Date;
   status: ProjectTaskStatus;
   assginTo?: PublisherEmployee;
-  book: Book
+  book: Book,
+  dueDate?: Date;
 }

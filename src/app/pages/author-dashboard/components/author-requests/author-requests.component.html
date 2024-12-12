@@ -1,0 +1,47 @@
+<div class="request-list">
+  <div class="request-list-header">
+    <div class="header-controls">
+      <span></span>
+      <div class="view-controls">
+        <button class="add-request-btn" routerLink="/author-dashboard/publishers">
+          <fa-icon [icon]="faPlus"></fa-icon>
+          إنشاء طلب
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="request-table">
+    <div class="request-table-header">
+      <div class="request-cell">العنوان</div>
+      <div class="request-cell">دار النشر</div>
+      <div class="request-cell">تاريخ الطلب</div>
+      <div class="request-cell">الحالة</div>
+      <div class="request-cell"></div>
+    </div>
+    <div class="request-items">
+      <div class="request-item" *ngFor="let request of requests">
+        <div class="request-cell">{{ request.book.title }}</div>
+        <div class="request-cell">{{ request.publisherName }}</div>
+        <div class="request-cell">{{ request.requestDate | date:'yyyy/MM/dd' }}</div>
+        <div class="request-cell">{{ request.requestStatus }}</div>
+        <div class="request-cell">
+          <div class="actions-menu">
+            <button class="menu-btn" (click)="toggleMenu($event, request.requestId!)">
+              <fa-icon [icon]="faEllipsisVertical"></fa-icon>
+            </button>
+            <div class="menu-dropdown" *ngIf="activeMenu === request.requestId">
+              <button class="menu-item">
+                <fa-icon [icon]="faPen"></fa-icon>
+                تعديل
+              </button>
+              <button class="menu-item">
+                <fa-icon [icon]="faTrash"></fa-icon>
+                حذف
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

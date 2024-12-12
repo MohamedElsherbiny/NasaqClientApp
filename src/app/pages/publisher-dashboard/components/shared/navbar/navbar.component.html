@@ -1,0 +1,16 @@
+<header class="header">
+  <div class="header-title">
+    <button class="burger-btn" (click)="toggleSidebar()">
+      <i class="fa-regular fa-bars"></i>
+    </button>
+  </div>
+  <div class="header-actions">
+   
+    <button class="theme-btn" (click)="toggleTheme()">
+      <i [class]="isDark ? 'fa-regular fa-sun' : 'fa-regular fa-moon'"></i>
+    </button>
+    <div class="user-menu">
+      <i class="fa-regular fa-user"></i>
+    </div>
+  </div>
+</header>
