@@ -11,7 +11,6 @@ import {
   faCalendar
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { TaskService } from '../shared/services/task.service';
 import { ProjectTask } from '../../../../shared/models/ProjectTask';
 import { ProjectService } from '../publisher-projects/projects.service';
 import { Project } from '../../../../shared/models/Project';
@@ -51,7 +50,6 @@ export class TasksComponent implements OnInit {
   constructor(
     private http: HttpService,
     private projectService: ProjectService,
-    private taskService: TaskService,
     private elementRef: ElementRef
   ) { }
 

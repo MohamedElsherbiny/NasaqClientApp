@@ -14,6 +14,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { Publisher, ServiceType } from '../../../../shared/models/Publisher';
 import { AddPublisherRequestEditorComponent } from "./add-publisher-request-editor/add-publisher-request-editor.component";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-publisher-requests',
@@ -39,7 +40,7 @@ export class PublishersComponent implements OnInit {
   faBook = faBook;
   faClipboardCheck = faClipboardCheck;
 
-  constructor(private http: HttpService) { }
+  constructor(private http: HttpService, private router: Router) { }
 
   ngOnInit(): void {
     this.fetchPublishers();
@@ -75,9 +76,12 @@ export class PublishersComponent implements OnInit {
     this.activeMenu = null;
   }
 
-  closeForm(): void {
+  closeForm(event: boolean): void {
     this.showForm = false;
     this.selectedPublisher = null;
+    if (event) {
+      this.router.navigate(['/author-dashboard/requests']);
+    }
   }
 
   getServiceIcon(service: ServiceType): any {

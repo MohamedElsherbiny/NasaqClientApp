@@ -63,4 +63,30 @@ export class PublisherRequestsComponent implements OnInit {
       this.fetchRequests();
     }
   }
+
+  approveRequest(requestId: number): void {
+    this.http
+      .post(`Requests/${this.user['publisherId']}/approve`, { requestId })
+      .subscribe({
+        next: () => {
+          this.fetchRequests();
+        },
+        error: (error) => {
+          console.error('Failed to approve the request', error);
+        },
+      });
+  }
+
+  rejectRequest(requestId: number): void {
+    this.http
+      .post(`Requests/${this.user['publisherId']}/reject`, { requestId })
+      .subscribe({
+        next: () => {
+          this.fetchRequests();
+        },
+        error: (error) => {
+          console.error('Failed to approve the request', error);
+        },
+      });
+  }
 }

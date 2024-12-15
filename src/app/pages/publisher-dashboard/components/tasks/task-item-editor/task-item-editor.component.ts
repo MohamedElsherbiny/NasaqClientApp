@@ -36,7 +36,7 @@ export class TaskItemEditorComponent {
       taskName: ['', Validators.required],
       employeeId: [''],
       taskDescription: ['', Validators.required],
-      requireAdminApproval: ['', [Validators.required]],
+      requireAdminApproval: [''],
       dueDate: [new Date().toISOString().split('T')[0]],
     });
   }

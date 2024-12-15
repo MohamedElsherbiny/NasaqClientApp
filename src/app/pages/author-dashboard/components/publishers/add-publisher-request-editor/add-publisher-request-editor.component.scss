@@ -9,6 +9,11 @@
     animation: fadeIn 0.3s ease;
 }
 
+.list-group-item {
+    background: var(--bg-color);
+    color: var(--text-color);
+}
+
 .publisher-form {
     width: 500px;
     max-width: 90vw;

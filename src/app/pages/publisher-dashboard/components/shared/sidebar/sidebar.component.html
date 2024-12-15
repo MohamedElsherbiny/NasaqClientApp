@@ -1,6 +1,6 @@
 <aside class="sidebar" [class.collapsed]="isCollapsed">
     <div class="project-selector">
-        <select class="project-select" (change)="toggleProjectSelector($event)">
+        <select class="project-select" [(ngModel)]="selectedProjectId" (change)="toggleProjectSelector($event)">
             <option value="">اختر المشروع</option>
             <option *ngFor="let project of projects" [value]="project.projectId">
                 {{ project.bookName }}
@@ -8,15 +8,15 @@
         </select>
     </div>
     <nav class="nav-menu">
-        <a routerLink="/publisher-dashboard/team" class="nav-item" routerLinkActive="active">
+        <a routerLink="/publisher-dashboard/team" class="nav-item" routerLinkActive="active" *ngIf="roleService.isPublisher()">
             <fa-icon [icon]="faBook"></fa-icon>
             <span class="nav-text" [class.hidden]="isCollapsed">فريق العمل</span>
         </a>
-        <a routerLink="/publisher-dashboard/requests" class="nav-item" routerLinkActive="active">
+        <a routerLink="/publisher-dashboard/requests" class="nav-item" routerLinkActive="active" *ngIf="roleService.isPublisher()">
             <fa-icon [icon]="faBuilding"></fa-icon>
             <span class="nav-text" [class.hidden]="isCollapsed">الطلبات</span>
         </a>
-        <a routerLink="/publisher-dashboard/projects" class="nav-item" routerLinkActive="active">
+        <a routerLink="/publisher-dashboard/projects" class="nav-item" routerLinkActive="active" *ngIf="roleService.isPublisher()">
             <fa-icon [icon]="faProjectDiagram"></fa-icon>
             <span class="nav-text" [class.hidden]="isCollapsed">المشاريع</span>
         </a>
@@ -28,8 +28,8 @@
             <fa-icon [icon]="faElevator"></fa-icon>
             <span class="nav-text" [class.hidden]="isCollapsed">التقيمات</span>
         </a>
-        <a class="nav-item">
-            <fa-icon [icon]="faShareSquare" (click)="logout()"></fa-icon>
+        <a class="nav-item"  (click)="logout()">
+            <fa-icon [icon]="faShareSquare"></fa-icon>
             <span class="nav-text" [class.hidden]="isCollapsed">تسجيل الخروج</span>
         </a>
     </nav>

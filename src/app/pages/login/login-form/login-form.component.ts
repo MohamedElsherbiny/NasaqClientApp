@@ -58,7 +58,7 @@ export class LoginFormComponent {
       this.router.navigate(['/author-dashboard']);
       return;
     } else if ((user[this.roleKey] as string)?.includes('PublisherEmployee')) {
-      this.router.navigate(['/publisher-dashboard/task-management']);
+      this.router.navigate(['/publisher-dashboard/tasks']);
       return;
     } else if ((user[this.roleKey] as string)?.includes('Publisher')) {
       this.router.navigate(['/publisher-dashboard']);
