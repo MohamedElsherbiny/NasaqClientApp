@@ -24,6 +24,10 @@
             <fa-icon [icon]="faBuilding"></fa-icon>
             <span class="nav-text" [class.hidden]="isCollapsed">دور النشر</span>
         </a>
+        <a class="nav-item">
+            <fa-icon [icon]="faShareSquare" (click)="logout()"></fa-icon>
+            <span class="nav-text" [class.hidden]="isCollapsed">تسجيل الخروج</span>
+        </a>
         <!-- <a routerLink="/evaluation" class="nav-item" routerLinkActive="active">
             <fa-icon [icon]="faStarHalf"></fa-icon>
             <span class="nav-text" [class.hidden]="isCollapsed">التقييم</span>

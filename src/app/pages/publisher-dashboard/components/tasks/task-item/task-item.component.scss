@@ -1,0 +1,144 @@
+.task-item {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr 0.5fr 0.5fr;
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+    transition: background-color 0.2s;
+    cursor: move;
+}
+
+.task-item:hover {
+    background: var(--hover-bg);
+}
+
+.task-item.completed {
+    opacity: 0.6;
+}
+
+.task-cell {
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-color);
+}
+
+.drag-handle {
+    cursor: move;
+    color: var(--text-color);
+    opacity: 0.5;
+    transition: opacity 0.2s;
+}
+
+.task-item:hover .drag-handle {
+    opacity: 1;
+}
+
+.task-checkbox {
+    width: 16px;
+    height: 16px;
+    border: 2px solid var(--text-color);
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.task-checkbox.checked {
+    background: #4573d2;
+    border-color: #4573d2;
+}
+
+.task-checkbox i {
+    color: white;
+    font-size: 10px;
+}
+
+.tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.tag {
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.download-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+    color: var(--text-color);
+}
+
+.download-btn:hover {
+    background: var(--input-bg);
+}
+
+.actions-menu {
+    position: relative;
+}
+
+.menu-btn {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 1.2rem;
+    transition: background-color 0.2s;
+}
+
+.menu-btn:hover {
+    background: var(--input-bg);
+}
+
+.menu-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    min-width: 150px;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 8px 16px;
+    text-align: right;
+    background: none;
+    border: none;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.menu-item:hover {
+    background: var(--input-bg);
+}
+
+@media (max-width: 768px) {
+    .task-item {
+        grid-template-columns: 1fr auto auto;
+    }
+
+    .task-cell:not(:first-child):not(:last-child):not(:nth-last-child(2)) {
+        display: none;
+    }
+}

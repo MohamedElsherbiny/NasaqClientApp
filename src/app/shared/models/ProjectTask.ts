@@ -3,13 +3,21 @@ import { ProjectTaskStatus } from './ProjectTaskStatus';
 import { PublisherEmployee } from './PublisherEmployee';
 
 export interface ProjectTask {
-  projectTaskId: number;
-  taskName: string;
-  taskDescription: string;
-  taskStatus: string;
-  createdDate: Date;
-  status: ProjectTaskStatus;
+  projectTaskId?: number;
+  taskName?: string;
+  taskDescription?: string;
+  taskStatus?: string;
+  createdDate?: Date;
+  status?: ProjectTaskStatus;
   assginTo?: PublisherEmployee;
-  book: Book,
+  book?: Book,
   dueDate?: Date;
+  requireAdminApproval: boolean,
+  comments: Comment[];
+}
+
+export interface Comment {
+  username: string;
+  text: string;
+  timestamp: Date;
 }

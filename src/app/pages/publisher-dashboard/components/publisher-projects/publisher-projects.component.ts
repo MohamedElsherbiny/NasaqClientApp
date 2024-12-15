@@ -14,11 +14,12 @@ import {
   faCircle,
   faEye
 } from '@fortawesome/free-solid-svg-icons';
+import { PublisherProjectDetailsComponent } from "./project-details/publisher-project-details.component";
 
 @Component({
   selector: 'app-publisher-projects',
   standalone: true,
-  imports: [CommonModule, FontAwesomeModule],
+  imports: [CommonModule, FontAwesomeModule, PublisherProjectDetailsComponent],
   templateUrl: './publisher-projects.component.html',
   styleUrl: './publisher-projects.component.scss',
 })

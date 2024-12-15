@@ -1,0 +1,51 @@
+<form [formGroup]="projectTaskForm" (ngSubmit)="onSubmit()">
+    <div class="task-item-form-overlay" (click)="onClose()">
+        <div class="task-item-form" (click)="$event.stopPropagation()">
+            <div class="form-header">
+                <h2>{{ false ? 'تعديل مهمة' : ' إضافة مهمة' }}</h2>
+                <button class="close-btn" (click)="onClose()">
+                    <fa-icon [icon]="faTimes"></fa-icon>
+                </button>
+            </div>
+            <div class="form-content">
+                <div class="form-group">
+                    <label> اسم المهمة</label>
+                    <input type="text" formControlName="taskName" class="form-control" placeholder="اسم المهمة">
+                </div>
+
+                <div class="form-group">
+                    <label> نبذة عن المهمة</label>
+                    <input type="text" formControlName="taskDescription" class="form-control"
+                        placeholder="نبذة عن المهمة">
+                </div>
+
+                <div class="form-group">
+                    <label> تاريخ الانتهاء</label>
+                    <input type="date" formControlName="dueDate" class="form-control" placeholder="تاريخ الانتهاء">
+                </div>
+
+                <div class="form-group toggle-group">
+                    <label class="toggle-label">
+                        <span>يتطلب موافقة المسؤول</span>
+                        <input type="checkbox" formControlName="requireAdminApproval" class="toggle-checkbox">
+                        <span class="toggle-switch"></span>
+                    </label>
+                </div>
+
+                <div class="form-group">
+                    <label>تعين الي</label>
+                    <select formControlName="employeeId" class="form-control">
+                        <option *ngFor="let employee of employees" [value]="employee.employeeId">
+                            {{ employee.name }}
+                        </option>
+                    </select>
+                </div>
+
+            </div>
+            <div class="form-actions">
+                <button class="cancel-btn" type="button" (click)="onClose()">إلغاء</button>
+                <button class="save-btn" type="submit">حفظ</button>
+            </div>
+        </div>
+    </div>
+</form>

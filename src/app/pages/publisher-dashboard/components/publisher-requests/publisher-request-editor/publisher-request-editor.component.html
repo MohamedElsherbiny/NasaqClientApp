@@ -1,115 +1,26 @@
-<!-- Page Content Holder -->
-<div id="content">
-
-    <div class="content-admin-main">
-
-        <div class="twm-pro-view-chart-wrap">
-
-            <div class="col-lg-12 col-md-12 mb-4">
-                <div class="panel panel-default site-bg-white m-t30">
-                    <div class="panel-heading wt-panel-heading p-a20 d-flex flex-row justify-content-between">
-                        <h4 class="panel-tittle m-a0"><i class="far fa-list-alt"></i> مقدمي الخدمات </h4>
-                    </div>
-
-                    <div class="panel-body wt-panel-body">
-                        <div class="twm-D_table p-a20">
-                            <div class="row">
-                                <!-- Loop through each publisher and display in a card -->
-                                @for (publisher of publishers; track $index) {
-                                <div class="col-lg-4 col-md-6 mb-4">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{publisher.companyName}}</h5>
-                                            <div class="service-types">
-                                                <ul class="list-group list-group-flush">
-                                                    @for (serviceType of publisher.serviceTypes; track
-                                                    serviceType.serviceTypeId) {
-                                                    <li
-                                                        class="list-group-item  d-flex justify-content-between align-items-center">
-                                                        <h4 class="badge service-{{serviceType.serviceTypeId}}">
-                                                            {{serviceType.name}}
-                                                        </h4>
-                                                        <span>{{serviceType.price}}</span>
-                                                    </li>
-                                                    }
-                                                </ul>
-                                            </div>
-                                            <div class="text-center mt-3">
-                                                <button class="btn btn-primary" style="border-radius: 100%;"
-                                                    data-bs-target="#add-request-popup" data-bs-toggle="modal"
-                                                    (click)="selectedPublisherId = publisher.publisherId">
-                                                    <i class="fas fa-plus"></i> </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                }
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<form [formGroup]="requestForm" (ngSubmit)="onSubmit()">
+    <div class="request-form-overlay" (click)="onClose()">
+        <div class="request-form" (click)="$event.stopPropagation()">
+            <div class="form-header">
+                <h2>تفاصيل الطلب</h2>
+                <button class="close-btn" (click)="onClose()">
+                    <fa-icon [icon]="faTimes"></fa-icon>
+                </button>
             </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-<!-- Modal for Service Request -->
-<div class="modal fade twm-model-popup" id="add-request-popup" data-bs-backdrop="static" data-bs-keyboard="false"
-    tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
+            <div class="form-content">
                 <div class="form-group">
-                    <label for="bookSelect">اختر الكتاب:</label>
-                    <select id="bookSelect" class="form-control" [(ngModel)]="selectedBookId" (change)="onBookChange()">
-                        <option *ngFor="let book of books" [value]="book.bookId">
-                            {{ book.title }}
+                    <label>تعين الي</label>
+                    <select formControlName="employeeId" class="form-control">
+                        <option *ngFor="let employee of employees" [value]="employee.employeeId">
+                            {{ employee.name }}
                         </option>
                     </select>
                 </div>
-                <ul class="list-group list-group-flush">
-                    @for (serviceType of getPublisherServiceTypes(); track
-                    serviceType.serviceTypeId;) {
-                    <li class="list-group-item  d-flex justify-content-between align-items-center">
-                        <div>
-                            <input type="checkbox" class="form-check-input" [id]="'service-' + serviceType.serviceTypeId"
-                                (change)="toggleServiceSelection(serviceType)"
-                                [checked]="isServiceSelected(serviceType)" />
-                            <label [for]="'service-' + serviceType.serviceTypeId" class="mx-3">
-                                {{ serviceType.name }}
-                            </label>
-                        </div>
-                        <div>
-                            {{ serviceType.price }}
-                        </div>
-                    </li>
-                    }
-                </ul>
-
-                <!-- <div class="service-types mt-4">
-                    <h5>الخدمات المتاحة:</h5>
-                    <div *ngFor="let serviceType of getPublisherServiceTypes(); let serviceIndex = index">
-                        <input type="checkbox" [id]="'service-' + serviceIndex"
-                            (change)="toggleServiceSelection(serviceType)" [checked]="isServiceSelected(serviceType)" />
-                        <label [for]="'service-' + serviceIndex">
-                            {{ serviceType.name }} - {{ serviceType.price }}
-                        </label>
-                    </div>
-                </div> -->
             </div>
-
-            <div class="modal-footer">
-                <button type="button" class="site-button" data-bs-dismiss="modal">لا</button>
-                <button type="button" class="site-button outline-primary" data-bs-dismiss="modal"
-                    (click)="addRequest()">تاكيد طلب الخدمات</button>
+            <div class="form-actions">
+                <button class="cancel-btn" type="button" (click)="onClose()">إلغاء</button>
+                <button class="save-btn" type="submit">حفظ</button>
             </div>
         </div>
     </div>
-</div>
+</form>

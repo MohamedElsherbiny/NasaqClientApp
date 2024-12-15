@@ -1,116 +1,78 @@
-import { Component, OnInit } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { HttpService } from '../../../../../shared/core/services/http.service';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { Publisher, ServiceType } from '../../../../../shared/models/Publisher';
-import { Book } from '../../../../../shared/models/Book';
-import { Router } from '@angular/router';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { BookRequest } from '../../../../../shared/models/BookRequest';
+import { PublisherEmployee } from '../../../../../shared/models/PublisherEmployee';
 
 @Component({
   selector: 'app-publisher-request-editor',
   standalone: true,
-  imports: [ReactiveFormsModule, HttpClientModule, FormsModule, CommonModule],
+  imports: [ReactiveFormsModule, HttpClientModule, FormsModule, CommonModule, FontAwesomeModule],
   providers: [HttpService],
   templateUrl: './publisher-request-editor.component.html',
   styleUrls: ['./publisher-request-editor.component.scss']
 })
 export class PublisherRequestEditorComponent implements OnInit {
-  publishers: Publisher[] = [];
-  books: Book[] = [];
+  @Input() request: BookRequest | null = null;
+  @Output() close = new EventEmitter<boolean>();
   user = JSON.parse(localStorage.getItem('user') ?? '{}');
-  selectedPublisherId: number | null = null;
-  selectedBookId: number | null = null;
-  selectedServices: ServiceType[] = [];
+  requestForm: FormGroup;
+
+  faTimes = faTimes;
+  employees: PublisherEmployee[] = [];
 
   constructor(
+    private fb: FormBuilder,
     private http: HttpService,
-    private toastr: ToastrService,
-    private router: Router,
+    private toastr: ToastrService
   ) {
-
-  }
-  ngOnInit(): void {
-    this.loadPublishers();
-    this.fetchBooks();
-  }
-
-  private loadPublishers(): void {
-    this.http.get<any>(`Publisher`).subscribe({
-      next: (data) => {
-        this.publishers = data;
-      },
-      error: () => this.toastr.error('فشل في تحميل البيانات', 'خطأ')
+    this.requestForm = this.fb.group({
+      employeeId: ['', Validators.required]
     });
   }
 
-  fetchBooks(): void {
-    this.http.get(`Author/${this.user['authorId']}/books`).subscribe({
-      next: (response: any) => {
-        this.books = response || [];
-        this.selectedBookId = this.books[0]?.bookId ?? null;
-      },
-      error: (error) => {
-        console.error('Failed to fetch books', error);
+  ngOnInit(): void {
+    if (this.request) {
+      this.requestForm.patchValue({
+        employeeId: this.request?.evaluator?.employeeId
+      });
+    }
+    this.getEmployees();
+  }
+
+  getEmployees(): void {
+    this.http.get<PublisherEmployee[]>(`Publisher/${this.user['publisherId']}/employees`).subscribe({
+      next: (data) => {
+        this.employees = data.filter(employee => !employee.isAdmin);
       }
     });
   }
 
-  getPublisherServiceTypes() {
-    const publisher = this.publishers.find(
-      (p) => p.publisherId === this.selectedPublisherId
-    );
-    return publisher ? publisher.serviceTypes : [];
-  }
+  onSubmit(): void {
+    if (this.requestForm.valid) {
+      const formData = {
+        requestId: this.request?.requestId,
+        ...this.requestForm.value
+      };
 
-  toggleServiceSelection(serviceType: any) {
-    if (this.selectedServices.some((s) => s.serviceTypeId === serviceType.serviceTypeId)) {
-      this.selectedServices = this.selectedServices.filter(
-        (s) => s.serviceTypeId !== serviceType.serviceTypeId
-      );
+      this.http.post(`Requests/${this.user['publisherId']}/assign-evaluator`, formData).subscribe({
+        next: () => {
+          this.requestForm.reset();
+          this.close.emit(true);
+        },
+        error: (error) => {
+        }
+      });
     } else {
-      this.selectedServices.push(serviceType);
     }
   }
 
-  isServiceSelected(serviceType: any): boolean {
-    return this.selectedServices.some(
-      (s) => s.serviceTypeId === serviceType.serviceTypeId
-    );
-  }
-
-  onBookChange() {
-    this.selectedServices = [];
-  }
-
-  addRequest() {
-    if (!this.selectedPublisherId || !this.selectedBookId) {
-      this.toastr.warning('يرجى اختيار دار نشر وكتاب أولاً', 'تحذير');
-      return;
-    }
-
-    if (this.selectedServices.length === 0) {
-      this.toastr.warning('يرجى اختيار خدمات قبل تقديم الطلب', 'تحذير');
-      return;
-    }
-
-    const request = {
-      bookId: this.selectedBookId,
-      publisherId: this.selectedPublisherId,
-      authorId: this.user['authorId'],
-      serviceTypeIds: this.selectedServices.map((service) => (service.serviceTypeId))
-    };
-
-    this.http.post(`Author/${this.user['authorId']}/requests`, request).subscribe({
-      next: () => {
-        this.toastr.success('تم إرسال الطلبات بنجاح', 'نجاح');
-        this.router.navigate(['/publisher-dashboard/publisher-request-editors']);
-      },
-      error: (error) => {
-        console.error('Failed to create requests', error);
-        this.toastr.error('فشل في إرسال الطلبات', 'خطأ');
-      },
-    });
+  onClose() {
+    this.close.emit();
   }
 }

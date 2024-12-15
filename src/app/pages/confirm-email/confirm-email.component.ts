@@ -31,7 +31,6 @@ export class ConfirmEmailComponent {
 
 
   onSubmit() {
-    debugger;
     if (this.password !== this.confirmPassword) {
       this.toastr.error('كلمات المرور لا تتطابق', 'خطأ');
       return;

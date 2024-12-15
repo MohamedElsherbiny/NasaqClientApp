@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   faTasks,
   faBook,
   faProjectDiagram,
   faStarHalf,
-  faBuilding
+  faBuilding,
+  faShareSquare
 } from '@fortawesome/free-solid-svg-icons';
 import { RoleService } from '../../../../../shared/core/services/role.service';
 import { LogoutComponent } from '../../../../../shared/components/logout/logout.component';
@@ -33,10 +34,12 @@ export class SidebarComponent {
   faBook = faBook;
   faStarHalf = faStarHalf;
   faBuilding = faBuilding;
+  faShareSquare = faShareSquare;
 
   constructor(
     private sidebarService: SidebarService,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -47,5 +50,10 @@ export class SidebarComponent {
     this.projectService.getProjects().subscribe(
       projects => this.projects = projects
     );
+  }
+
+  logout() {
+    localStorage.clear();
+    this.router.navigate(['/']);
   }
 }

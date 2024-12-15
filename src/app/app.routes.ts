@@ -42,6 +42,7 @@ import { PublisherRequestsComponent } from './pages/publisher-dashboard/componen
 import { PublisherProjectsComponent } from './pages/publisher-dashboard/components/publisher-projects/publisher-projects.component';
 import { TeamComponent } from './pages/publisher-dashboard/components/team/team.component';
 import { PublishersComponent } from './pages/author-dashboard/components/publishers/publishers.component';
+import { TasksComponent } from './pages/publisher-dashboard/components/tasks/tasks.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -104,6 +105,7 @@ export const routes: Routes = [
       { path: 'requests', component: PublisherRequestsComponent },
       { path: 'projects', component: PublisherProjectsComponent },
       { path: 'team', component: TeamComponent },
+      { path: 'tasks', component: TasksComponent },
     ],
   },
   {

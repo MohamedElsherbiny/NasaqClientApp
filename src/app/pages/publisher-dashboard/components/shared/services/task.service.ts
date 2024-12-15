@@ -2,88 +2,67 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Task } from '../models/task.model';
 import { Comment } from '../models/comment.model';
+import { ProjectTask } from '../../../../../shared/models/ProjectTask';
+import { ProjectTaskStatus } from '../../../../../shared/models/ProjectTaskStatus';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
-  private tasks = new BehaviorSubject<Task[]>([
-    {
-      id: '1',
-      title: 'إكمال توثيق المشروع',
-      dueDate: new Date('2024-01-20'),
-      collaborators: ['أحمد', 'سارة'],
-      projects: ['التوثيق'],
-      tags: ['أولوية عالية'],
-      completed: false,
-      enabled: true,
-      comments: [
-        {
-          username: 'أحمد',
-          text: 'يجب أن نبدأ العمل على هذا في أقرب وقت ممكن',
-          timestamp: new Date('2024-01-09T10:30:00')
-        }
-      ]
-    },
-    {
-      id: '2',
-      title: 'مراجعة طلبات السحب',
-      dueDate: new Date('2024-01-18'),
-      collaborators: ['محمد'],
-      projects: ['التطوير'],
-      tags: ['مراجعة الكود'],
-      completed: false,
-      enabled: true,
-      comments: []
-    },
-    {
-      id: '3',
-      title: 'تحديث المكتبات',
-      dueDate: new Date('2024-01-25'),
-      collaborators: [],
-      projects: ['الصيانة'],
-      tags: ['تقني'],
-      completed: false,
-      enabled: true,
-      comments: []
-    }
+  private tasks = new BehaviorSubject<ProjectTask[]>([
+    // {
+    //   projectTaskId: 1,
+    //   taskName: 'إكمال توثيق المشروع',
+    //   dueDate: new Date('2024-01-20'),
+    //   taskDescription: 'يجب أن نبدأ العمل على هذا في أقرب وقت ممكن',
+    //   taskStatus: 'قيد التقدم',
+    //   createdDate: new Date('2024-01-05'),
+    //   status: ProjectTaskStatus.InProgress,
+    //   comments: [
+    //     {
+    //       username: 'أحمد',
+    //       text: 'يجب أن نبدأ العمل على هذا في أقرب وقت ممكن',
+    //       timestamp: new Date('2024-01-09T10:30:00')
+    //     }
+    //   ]
+    // }
   ]);
 
-  getTasks(): Observable<Task[]> {
+  getTasks(): Observable<ProjectTask[]> {
     return this.tasks.asObservable();
   }
 
-  toggleTaskCompletion(taskId: string): void {
+  toggleTaskCompletion(taskId: number): void {
     const currentTasks = this.tasks.value;
-    const updatedTasks = currentTasks.map(task => 
-      task.id === taskId ? { ...task, completed: !task.completed } : task
+    const updatedTasks = currentTasks.map(task =>
+      task.projectTaskId === taskId ? { ...task, status: task.status === ProjectTaskStatus.InProgress ? ProjectTaskStatus.Completed : ProjectTaskStatus.InProgress } : task
     );
     this.tasks.next(updatedTasks);
   }
 
-  addTask(task: Task): void {
+  addTask(task: ProjectTask): void {
     const currentTasks = this.tasks.value;
     this.tasks.next([...currentTasks, task]);
   }
 
-  updateTask(updatedTask: Task): void {
+  updateTask(updatedTask: ProjectTask): void {
     const currentTasks = this.tasks.value;
-    const updatedTasks = currentTasks.map(task => 
-      task.id === updatedTask.id ? updatedTask : task
+    const updatedTasks = currentTasks.map(task =>
+      task.projectTaskId === updatedTask.projectTaskId ? updatedTask : task
     );
     this.tasks.next(updatedTasks);
   }
 
-  deleteTask(taskId: string): void {
+  deleteTask(taskId: number): void {
     const currentTasks = this.tasks.value;
-    const updatedTasks = currentTasks.filter(task => task.id !== taskId);
+    const updatedTasks = currentTasks.filter(task => task.projectTaskId !== taskId);
     this.tasks.next(updatedTasks);
   }
 
-  addComment(taskId: string, comment: Comment): void {
+  addComment(taskId: number, comment: Comment): void {
     const currentTasks = this.tasks.value;
     const updatedTasks = currentTasks.map(task => {
-      if (task.id === taskId) {
+      if (task.projectTaskId === taskId) {
         return {
           ...task,
           comments: [...task.comments, comment]
@@ -94,7 +73,7 @@ export class TaskService {
     this.tasks.next(updatedTasks);
   }
 
-  reorderTasks(tasks: Task[]): void {
+  reorderTasks(tasks: ProjectTask[]): void {
     this.tasks.next(tasks);
   }
 }

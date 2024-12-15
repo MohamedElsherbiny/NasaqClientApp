@@ -1,5 +1,6 @@
 import { Book } from './Book';
 import { BookDocument } from './BookDocument';
+import { PublisherEmployee } from './PublisherEmployee';
 import { RequestStatus } from './RequestStatus';
 
 export interface BookRequest {
@@ -15,4 +16,5 @@ export interface BookRequest {
   requestStatus: string;
   status: RequestStatus;
   requestDate: Date;
+  evaluator: PublisherEmployee;
 }

@@ -1,4 +1,4 @@
-.book-form-overlay {
+.task-item-form-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -9,7 +9,7 @@
     animation: fadeIn 0.3s ease;
 }
 
-.book-form {
+.task-item-form {
     width: 500px;
     max-width: 90vw;
     height: 100vh;
@@ -224,3 +224,56 @@ input[type="file"] {
     color: #e74c3c;
     font-size: 12px;
 }
+
+.toggle-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 1rem 0;
+  
+    .toggle-label {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      position: relative;
+      font-size: 1rem;
+      font-weight: 500;
+      user-select: none;
+  
+      .toggle-checkbox {
+        display: none; // Hide the default checkbox
+      }
+  
+      .toggle-switch {
+        position: relative;
+        width: 50px;
+        height: 25px;
+        background-color: #ccc;
+        border-radius: 25px;
+        transition: background-color 0.3s ease-in-out;
+        margin: 2rem;
+  
+        &::after {
+          content: '';
+          position: absolute;
+          top: 3px;
+          left: 3px;
+          width: 19px;
+          height: 19px;
+          background-color: #fff;
+          border-radius: 50%;
+          transition: all 0.3s ease-in-out;
+        }
+      }
+  
+      // When checked, toggle the styles
+      .toggle-checkbox:checked + .toggle-switch {
+        background-color: #3d348b;
+  
+        &::after {
+          transform: translateX(25px);
+        }
+      }
+    }
+  }
+  

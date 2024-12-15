@@ -36,6 +36,7 @@
   border: 1px solid var(--border-color);
   border-radius: 4px;
   overflow: hidden;
+  min-height: 15rem;
 }
 
 .team-table-header {
@@ -126,10 +127,10 @@
 
   .team-table-header,
   .team-item {
-      grid-template-columns: 1fr auto auto;
+    grid-template-columns: 1fr auto auto;
   }
 
   .team-cell:not(:first-child):not(:last-child):not(:nth-last-child(2)) {
-      display: none;
+    display: none;
   }
 }

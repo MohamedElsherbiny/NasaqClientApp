@@ -39,7 +39,7 @@ export class TaskManagementComponent implements OnInit {
   }
 
   updateTaskStatus(task: ProjectTask): void {
-    const nextStatus = this.getNextTaskStatus(task.status);
+    const nextStatus = this.getNextTaskStatus(task.status!);
 
     this.http
       .post(`Publisher/${this.user['publisherId']}/tasks/update-status`, {

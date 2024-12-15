@@ -1,33 +1,37 @@
 <aside class="sidebar" [class.collapsed]="isCollapsed">
-    <!-- <div class="project-selector">
-        <select class="project-select">
+    <div class="project-selector">
+        <select class="project-select" (change)="toggleProjectSelector($event)">
             <option value="">اختر المشروع</option>
-            <option *ngFor="let project of projects" [value]="project.id">
-                {{ project.name }}
+            <option *ngFor="let project of projects" [value]="project.projectId">
+                {{ project.bookName }}
             </option>
         </select>
-    </div> -->
+    </div>
     <nav class="nav-menu">
         <a routerLink="/publisher-dashboard/team" class="nav-item" routerLinkActive="active">
             <fa-icon [icon]="faBook"></fa-icon>
             <span class="nav-text" [class.hidden]="isCollapsed">فريق العمل</span>
         </a>
+        <a routerLink="/publisher-dashboard/requests" class="nav-item" routerLinkActive="active">
+            <fa-icon [icon]="faBuilding"></fa-icon>
+            <span class="nav-text" [class.hidden]="isCollapsed">الطلبات</span>
+        </a>
         <a routerLink="/publisher-dashboard/projects" class="nav-item" routerLinkActive="active">
             <fa-icon [icon]="faProjectDiagram"></fa-icon>
             <span class="nav-text" [class.hidden]="isCollapsed">المشاريع</span>
         </a>
-        <a routerLink="/tasks" class="nav-item" routerLinkActive="active">
+        <a routerLink="/publisher-dashboard/tasks" class="nav-item" routerLinkActive="active">
             <fa-icon [icon]="faTasks"></fa-icon>
             <span class="nav-text" [class.hidden]="isCollapsed">المهام</span>
         </a>
-        <a routerLink="/publisher-dashboard/publishers" class="nav-item" routerLinkActive="active">
-            <fa-icon [icon]="faBuilding"></fa-icon>
-            <span class="nav-text" [class.hidden]="isCollapsed">دور النشر</span>
+        <a routerLink="/publisher-dashboard/elevator" class="nav-item" routerLinkActive="active">
+            <fa-icon [icon]="faElevator"></fa-icon>
+            <span class="nav-text" [class.hidden]="isCollapsed">التقيمات</span>
         </a>
-        <!-- <a routerLink="/evaluation" class="nav-item" routerLinkActive="active">
-            <fa-icon [icon]="faStarHalf"></fa-icon>
-            <span class="nav-text" [class.hidden]="isCollapsed">التقييم</span>
-        </a> -->
+        <a class="nav-item">
+            <fa-icon [icon]="faShareSquare" (click)="logout()"></fa-icon>
+            <span class="nav-text" [class.hidden]="isCollapsed">تسجيل الخروج</span>
+        </a>
     </nav>
 </aside>
 <app-logout></app-logout>

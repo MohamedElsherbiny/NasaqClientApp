@@ -15,11 +15,15 @@
             <div class="team-cell">الاسم</div>
             <div class="team-cell">الايميل</div>
             <div class="team-cell"></div>
+            <div class="team-cell"></div>
+            <div class="team-cell"></div>
         </div>
         <div class="team-items">
             <div class="team-item" *ngFor="let employee of employees">
                 <div class="team-cell">{{ employee.name }}</div>
                 <div class="team-cell">{{ employee.email }}</div>
+                <div class="team-cell"></div>
+                <div class="team-cell"></div>
                 <div class="team-cell">
                     <div class="actions-menu">
                         <button class="menu-btn" (click)="toggleMenu($event, employee.employeeId!)">
@@ -41,5 +45,4 @@
         </div>
     </div>
 </div>
-
 <app-team-member-editor *ngIf="showForm" (close)="closeForm()"></app-team-member-editor>

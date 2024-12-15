@@ -2,17 +2,43 @@
     <div class="team-member-form-overlay" (click)="onClose()">
         <div class="team-member-form" (click)="$event.stopPropagation()">
             <div class="form-header">
-                <h2>{{ false ? 'تعديل الكتاب' : 'كتاب جديد' }}</h2>
+                <h2>{{ false ? 'تعديل الكتاب' : 'دعوة مقدم خدمة' }}</h2>
                 <button class="close-btn" (click)="onClose()">
                     <fa-icon [icon]="faTimes"></fa-icon>
                 </button>
             </div>
             <div class="form-content">
-                <!-- <div class="form-group">
-                    <label>اسم الكتاب</label>
-                    <input type="text" formControlName="title" class="form-control" placeholder="عنوان العمل">
-                </div> -->
+                <div class="form-group">
+                    <label>الإسم الاول</label>
+                    <input type="text" formControlName="firstName" class="form-control" placeholder="الاسم الاول">
+                </div>
 
+                <div class="form-group">
+                    <label>الإسم الاخير</label>
+                    <input type="text" formControlName="lastName" class="form-control" placeholder="الاسم الاخير">
+                </div>
+
+                <div class="form-group">
+                    <label> البريد الالكتروني</label>
+                    <input type="email" formControlName="email" class="form-control" placeholder="البريد الالكتروني">
+                </div>
+
+                <!-- Specializations -->
+                <div class="panel panel-default">
+                    <div class="panel-heading wt-panel-heading py-3">
+                        <h4 class="panel-title m-a0">الخدمات المقدمة</h4>
+                    </div>
+                    <div class="my-3">
+                        <div class="d-flex flex-wrap gap-3"> <!-- Added gap-3 between checkbox items -->
+                            <div *ngFor="let option of publisherRoleIdsOptions" class="d-flex align-items-center gap-2">
+                                <!-- Added gap-2 between input and label -->
+                                <input class="form-check-input" type="checkbox" [value]="option.value"
+                                    (change)="onCheckboxChange($event)" />
+                                <label class="form-check-label">{{ option.name }}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
             <div class="form-actions">

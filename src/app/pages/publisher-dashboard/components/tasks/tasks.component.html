@@ -1,0 +1,28 @@
+<div class="task-list">
+    <!-- <app-project-info></app-project-info> -->
+    <div class="task-list-header">
+        <div class="header-controls">
+            <div class="control-buttons">
+                <button class="add-task-btn" (click)="onAddTask()">
+                    <fa-icon [icon]="faPlus"></fa-icon>
+                    إضافة مهمة
+                </button>
+            </div>
+            <div></div>
+        </div>
+    </div>
+    <div class="task-table">
+        <div class="task-table-header">
+            <div class="task-cell">اسم المهمة</div>
+            <div class="task-cell">تاريخ الاستحقاق</div>
+            <div class="task-cell">الحالة</div>
+            <div class="task-cell">معين إلي</div>
+            <div class="task-cell">إجراءات</div>
+        </div>
+        <div class="task-items" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
+            <app-task-item *ngFor="let task of tasks; let i = index" [task]="task" [index]="i"
+                (editTaskEvent)="onEditTask($event)"></app-task-item>
+        </div>
+    </div>
+</div>
+<app-task-item-editor *ngIf="showForm" (close)="closeForm($event)" [projectTask]="selectedTask"></app-task-item-editor>

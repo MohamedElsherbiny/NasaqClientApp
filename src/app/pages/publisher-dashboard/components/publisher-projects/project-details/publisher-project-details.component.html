@@ -16,13 +16,7 @@
                         </div>
                         <div class="info-value">{{ project.bookName }}</div>
                     </div>
-                    <div class="info-item">
-                        <div class="info-label">
-                            <fa-icon [icon]="faUser"></fa-icon>
-                            دار النشر
-                        </div>
-                        <div class="info-value">{{ project.publisherName }}</div>
-                    </div>
+
                     <div class="info-item">
                         <div class="info-label">
                             <fa-icon [icon]="faCalendar"></fa-icon>
@@ -30,16 +24,8 @@
                         </div>
                         <div class="info-value">{{ project.projectDate| date:'yyyy/MM/dd' }}</div>
                     </div>
-                    <div class="info-item">
-                        <div class="info-label">
-                            <fa-icon [icon]="faBook"></fa-icon>
-                            عدد المهام
-                        </div>
-                        <div class="info-value">{{ project.projectTasks.length }}</div>
-                    </div>
                 </div>
             </div>
-
 
             <div class="task-list">
                 <div class="task-table">

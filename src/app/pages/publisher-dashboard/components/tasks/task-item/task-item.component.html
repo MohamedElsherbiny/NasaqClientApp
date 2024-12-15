@@ -1,0 +1,36 @@
+<div class="task-item" [class.completed]="task.status == ProjectTaskStatus.Completed" draggable="true"
+    (dragstart)="onDragStart($event)">
+    <div class="task-cell">
+        <span class="drag-handle">
+            <fa-icon [icon]="faGripVertical"></fa-icon>
+        </span>
+        <span class="task-checkbox" [class.checked]="task.status == ProjectTaskStatus.Completed"
+            (click)="toggleComplete()">
+            <fa-icon *ngIf="task?.status == ProjectTaskStatus.Completed" [icon]="faCheck"></fa-icon>
+        </span>
+        {{ task.taskName }}
+    </div>
+    <div class="task-cell">{{ task.dueDate | date:'MMM d, y' }}</div>
+    <div class="task-cell">
+        <div class="tags">
+            <span class="tag" [style.background-color]="getStatusColor(task.status!)" [style.color]="'white'">{{
+                task.taskStatus
+                }}</span>
+        </div>
+    </div>
+    <div class="task-cell">{{ task.assginTo?.name }}</div>
+
+    <div class="task-cell">
+        <div class="actions-menu">
+            <button class="menu-btn" (click)="toggleMenu($event)">
+                <fa-icon [icon]="faEllipsisVertical"></fa-icon>
+            </button>
+            <div class="menu-dropdown" *ngIf="showMenu">
+                <button class="menu-item" (click)="editTask(task)">
+                    <fa-icon [icon]="faPen"></fa-icon>
+                    تعديل
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

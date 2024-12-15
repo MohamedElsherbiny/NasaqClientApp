@@ -5,9 +5,7 @@ import { ReactiveFormsModule, FormsModule, FormGroup, FormBuilder, Validators, F
 import { HttpService } from '../../../../../shared/core/services/http.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import { Book } from '../../../../../shared/models/Book';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
 import { PublisherEmployee } from '../../../../../shared/models/PublisherEmployee';
 
 @Component({
