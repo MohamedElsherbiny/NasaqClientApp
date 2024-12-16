@@ -8,15 +8,18 @@
         </select>
     </div>
     <nav class="nav-menu">
-        <a routerLink="/publisher-dashboard/team" class="nav-item" routerLinkActive="active" *ngIf="roleService.isPublisher()">
+        <a routerLink="/publisher-dashboard/team" class="nav-item" routerLinkActive="active"
+            *ngIf="roleService.isPublisher()">
             <fa-icon [icon]="faBook"></fa-icon>
             <span class="nav-text" [class.hidden]="isCollapsed">فريق العمل</span>
         </a>
-        <a routerLink="/publisher-dashboard/requests" class="nav-item" routerLinkActive="active" *ngIf="roleService.isPublisher()">
+        <a routerLink="/publisher-dashboard/requests" class="nav-item" routerLinkActive="active"
+            *ngIf="roleService.isPublisher()">
             <fa-icon [icon]="faBuilding"></fa-icon>
             <span class="nav-text" [class.hidden]="isCollapsed">الطلبات</span>
         </a>
-        <a routerLink="/publisher-dashboard/projects" class="nav-item" routerLinkActive="active" *ngIf="roleService.isPublisher()">
+        <a routerLink="/publisher-dashboard/projects" class="nav-item" routerLinkActive="active"
+            *ngIf="roleService.isPublisher()">
             <fa-icon [icon]="faProjectDiagram"></fa-icon>
             <span class="nav-text" [class.hidden]="isCollapsed">المشاريع</span>
         </a>
@@ -24,11 +27,11 @@
             <fa-icon [icon]="faTasks"></fa-icon>
             <span class="nav-text" [class.hidden]="isCollapsed">المهام</span>
         </a>
-        <a routerLink="/publisher-dashboard/elevator" class="nav-item" routerLinkActive="active">
+        <a routerLink="/publisher-dashboard/evaluations" class="nav-item" routerLinkActive="active">
             <fa-icon [icon]="faElevator"></fa-icon>
             <span class="nav-text" [class.hidden]="isCollapsed">التقيمات</span>
         </a>
-        <a class="nav-item"  (click)="logout()">
+        <a class="nav-item" (click)="logout()">
             <fa-icon [icon]="faShareSquare"></fa-icon>
             <span class="nav-text" [class.hidden]="isCollapsed">تسجيل الخروج</span>
         </a>

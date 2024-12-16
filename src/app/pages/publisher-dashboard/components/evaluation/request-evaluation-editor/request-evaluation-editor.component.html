@@ -1,0 +1,268 @@
+<form [formGroup]="evaluationForm">
+    <div class="request-form-overlay" (click)="onClose()">
+        <div class="request-form" (click)="$event.stopPropagation()">
+            <div class="form-header">
+                <h2>تفاصيل الطلب</h2>
+                <button class="close-btn" (click)="onClose()">
+                    <fa-icon [icon]="faTimes"></fa-icon>
+                </button>
+            </div>
+            <div class="form-content">
+                <div class="evaluation-page">
+                    <div class="evaluation-form">
+                        <div class="evaluation-section">
+                            <div class="section-header">
+                                <h3>المستوى اللغوي</h3>
+                                <p class="hint">التطابق مع ما يتجاوز 100 كلمة</p>
+                            </div>
+                            <div class="rating-group">
+                                <div class="rating-numbers">
+                                    <label *ngFor="let n of [1,2,3,4,5,6,7,8,9,10]">
+                                        <input type="radio" [value]="n"
+                                            (change)="evaluationForm.get('languageLevel')!.setValue(n)"
+                                            [checked]="evaluationForm.get('languageLevel')?.value == n">
+                                        <span>{{ n }}</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group mt-3">
+                                <input type="text" formControlName="languageLevelComment" class="form-control"
+                                    placeholder="التعليق بما لا يتجاوز ال100 كلمة">
+                            </div>
+                        </div>
+
+                        <div class="evaluation-section">
+                            <div class="section-header">
+                                <h3>الفكرة العامة</h3>
+                                <div class="form-group">
+                                    <select class="form-control">
+                                        <option *ngFor="let idea of generalIdeas" [value]="idea.value"> {{idea.label}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="rating-group">
+                                <div class="rating-numbers">
+                                    <label *ngFor="let n of [1,2,3,4,5,6,7,8,9,10]">
+                                        <input type="radio" [value]="n"
+                                            (change)="evaluationForm.get('theGeneralIdea')!.setValue(n)"
+                                            [checked]="evaluationForm.get('theGeneralIdea')?.value == n">
+                                        <span>{{ n }}</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group mt-3">
+                                <input type="text" class="form-control" formControlName="theGeneralIdeaComment"
+                                    placeholder="التعليق بما لا يتجاوز ال100 كلمة">
+                            </div>
+                        </div>
+
+                        <div class="evaluation-section">
+                            <div class="section-header">
+                                <h3>الأصالة والإبداع</h3>
+                                <p class="hint">تفرد العمل وابتكاره وخروجه عن الأعراف الراسخة</p>
+                            </div>
+                            <div class="rating-group">
+                                <div class="rating-numbers">
+                                    <label *ngFor="let n of [1,2,3,4,5,6,7,8,9,10]">
+                                        <input type="radio" [value]="n"
+                                            (change)="evaluationForm.get('originalityAndCreativity')!.setValue(n)"
+                                            [checked]="evaluationForm.get('originalityAndCreativity')?.value == n">
+                                        <span>{{ n }}</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="evaluation-section">
+                            <div class="section-header">
+                                <h3>الجاذبية الإبداعية</h3>
+                                <p class="hint">جاذبية العمل البصرية أو السمعية أو الفكرية وقدرته على إثارة العواطف أو
+                                    الأفكار</p>
+                            </div>
+                            <div class="rating-group">
+                                <div class="rating-numbers">
+                                    <label *ngFor="let n of [1,2,3,4,5,6,7,8,9,10]">
+                                        <input type="radio" [value]="n"
+                                            (change)="evaluationForm.get('creativeAttraction')!.setValue(n)"
+                                            [checked]="evaluationForm.get('creativeAttraction')?.value == n">
+                                        <span>{{ n }}</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="evaluation-section">
+                            <div class="section-header">
+                                <h3>التقنية والحرفية</h3>
+                                <p class="hint">التقييد الماهر والإتقان في الشكل والأسلوب والوسيلة</p>
+                            </div>
+                            <div class="rating-group">
+                                <div class="rating-numbers">
+                                    <label *ngFor="let n of [1,2,3,4,5,6,7,8,9,10]">
+                                        <input type="radio" [value]="n"
+                                            (change)="evaluationForm.get('technologyAndCraftsmanship')!.setValue(n)"
+                                            [checked]="evaluationForm.get('technologyAndCraftsmanship')?.value == n">
+                                        <span>{{ n }}</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="evaluation-section">
+                            <div class="section-header">
+                                <h3> المحتوى الموضوعي </h3>
+                                <p class="hint">أهمية وعمق وأهمية موضوعات العمل أو رسائله أو أفكاره. </p>
+                            </div>
+                            <div class="rating-group">
+                                <div class="rating-numbers">
+                                    <label *ngFor="let n of [1,2,3,4,5,6,7,8,9,10]">
+                                        <input type="radio" [value]="n"
+                                            (change)="evaluationForm.get('objectiveContent')!.setValue(n)"
+                                            [checked]="evaluationForm.get('objectiveContent')?.value == n">
+                                        <span>{{ n }}</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="evaluation-section">
+                            <div class="section-header">
+                                <h3> التأثير </h3>
+                                <p class="hint">التأثير الدائم للعمل على الفن أو الأدب اللاحق ودوره كمحفز للتغيير. </p>
+                            </div>
+                            <div class="rating-group">
+                                <div class="rating-numbers">
+                                    <label *ngFor="let n of [1,2,3,4,5,6,7,8,9,10]">
+                                        <input type="radio" [value]="n"
+                                            (change)="evaluationForm.get('impact')!.setValue(n)"
+                                            [checked]="evaluationForm.get('impact')?.value == n">
+                                        <span>{{ n }}</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="evaluation-section">
+                            <div class="section-header">
+                                <h3> إمكانية الوصول </h3>
+                                <p class="hint">قدرة العمل على التواصل بشكل فعال مع جمهور واسع. </p>
+                            </div>
+                            <div class="rating-group">
+                                <div class="rating-numbers">
+                                    <label *ngFor="let n of [1,2,3,4,5,6,7,8,9,10]">
+                                        <input type="radio" [value]="n"
+                                            (change)="evaluationForm.get('accessibility')!.setValue(n)"
+                                            [checked]="evaluationForm.get('accessibility')?.value == n">
+                                        <span>{{ n }}</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="evaluation-section">
+                            <div class="section-header">
+                                <h3> هل هذا الكتاب سيهم القراء؟ </h3>
+                            </div>
+                            <div class="rating-group">
+                                <div class="rating-numbers">
+                                    <label *ngFor="let n of [1,2,3,4,5,6,7,8,9,10]">
+                                        <input type="radio" [value]="n"
+                                            (change)="evaluationForm.get('willInterestReaders')!.setValue(n)"
+                                            [checked]="evaluationForm.get('willInterestReaders')?.value == n">
+                                        <span>{{ n }}</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group mt-3">
+                                <input type="text" class="form-control" formControlName="willInterestReadersComment"
+                                    placeholder="التعليق بما لا يتجاوز ال100 كلمة">
+                            </div>
+                        </div>
+
+                        <div class="evaluation-section">
+                            <div class="section-header">
+                                <h3> هل هذا الكتاب مبيعات ام جوائز ام اخرى </h3>
+                                <div class="form-group">
+                                    <select name="idea" class="form-control">
+                                        <option *ngFor="let category of bookCategory" [value]="category.value">
+                                            {{category.label}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="rating-group">
+                                <div class="rating-numbers">
+                                    <label *ngFor="let n of [1,2,3,4,5,6,7,8,9,10]">
+                                        <input type="radio" [value]="n"
+                                            (change)="evaluationForm.get('isSalesOrAwardsOrOther')!.setValue(n)"
+                                            [checked]="evaluationForm.get('isSalesOrAwardsOrOther')?.value == n">
+                                        <span>{{ n }}</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group mt-3">
+                                <input type="text" class="form-control" formControlName="isSalesOrAwardsOrOtherComment"
+                                    placeholder="التعليق بما لا يتجاوز ال100 كلمة">
+                            </div>
+                        </div>
+
+                        <div class="evaluation-section">
+                            <div class="section-header">
+                                <h3> هل هذا الكتاب مسروق ام أصلى ام مقتبس </h3>
+                                <div class="form-group">
+                                    <select name="idea" class="form-control"
+                                        formControlName="isStolenOrOriginalOrCopied">
+                                        <option *ngFor="let category of stolenOrOriginal" [value]="category.value">
+                                            {{category.label}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="rating-group">
+                                <div class="rating-numbers">
+                                    <label *ngFor="let n of [1,2,3,4,5,6,7,8,9,10]">
+                                        <input type="radio" [value]="n"
+                                            (change)="evaluationForm.get('isStolenOrOriginalOrCopiedComment')!.setValue(n)"
+                                            [checked]="evaluationForm.get('isStolenOrOriginalOrCopiedComment')?.value == n">
+                                        <span>{{ n }}</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="evaluation-section">
+                            <div class="section-header">
+                                <h3> درجة التقييم </h3>
+                                <p class="hint">من وجهه نظر المقيم الشخصية </p>
+                            </div>
+                            <div class="rating-group">
+                                <div class="rating-numbers">
+                                    <label *ngFor="let n of [1,2,3,4,5,6,7,8,9,10]">
+                                        <input type="radio" [value]="n"
+                                            (change)="evaluationForm.get('evaluationScore')!.setValue(n)"
+                                            [checked]="evaluationForm.get('evaluationScore')?.value == n">
+                                        <span>{{ n }}</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group mt-3">
+                                <input type="text" class="form-control" formControlName="evaluationScoreComment"
+                                    placeholder="التعليق بما لا يتجاوز ال100 كلمة">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button class="cancel-btn" type="button" (click)="onClose()">إلغاء</button>
+                <button class="save-btn" type="button" (click)="onSubmit(EvaluationStatus.Completed)">إرسال
+                    التقييم</button>
+                <button class="save-btn" type="submit" (click)="onSubmit(EvaluationStatus.InProgress)">حفظ</button>
+            </div>
+        </div>
+    </div>
+</form>
