@@ -8,11 +8,12 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { ProjectTask } from '../../../../../shared/models/ProjectTask';
 import { PublisherEmployee } from '../../../../../shared/models/PublisherEmployee';
 import { ProjectTaskStatus } from '../../../../../shared/models/ProjectTaskStatus';
+import { CommentsComponent } from "../comments/comments.component";
 
 @Component({
   selector: 'app-task-item-details',
   standalone: true,
-  imports: [ReactiveFormsModule, HttpClientModule, CommonModule, FontAwesomeModule, FormsModule],
+  imports: [ReactiveFormsModule, HttpClientModule, CommonModule, FontAwesomeModule, FormsModule, CommentsComponent],
   providers: [HttpService],
   templateUrl: './task-item-details.component.html',
   styleUrl: './task-item-details.component.scss'

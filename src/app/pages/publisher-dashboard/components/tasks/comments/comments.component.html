@@ -1,0 +1,43 @@
+<!-- Comments Section -->
+<div class="comments-section">
+    <div class="section-header">
+        <h3>
+            <fa-icon [icon]="faComment"></fa-icon>
+            التعليقات
+        </h3>
+    </div>
+
+    <div class="comments-list">
+        <div class="comment-item" *ngFor="let comment of comments; let i = index">
+            <div class="comment-header">
+                <span class="username">{{ comment.username }}</span>
+                <div class="comment-actions">
+                    <span class="timestamp">{{ comment.timestamp | date:'short' }}</span>
+                    <!-- <button class="action-btn" (click)="editComment(i)" *ngIf="!comment.isEditing">
+                        <fa-icon [icon]="faPen"></fa-icon>
+                    </button> -->
+                    <!-- <button class="action-btn delete" (click)="deleteComment(i)">
+                        <fa-icon [icon]="faTrash"></fa-icon>
+                    </button> -->
+                </div>
+            </div>
+            <div class="comment-content" *ngIf="!comment.isEditing">
+                <p class="comment-text">{{ comment.text }}</p>
+            </div>
+            <div class="comment-edit" *ngIf="comment.isEditing">
+                <input type="text" [(ngModel)]="editingText" (keyup.enter)="saveComment(i)" class="edit-input">
+                <div class="edit-actions">
+                    <button class="save-edit-btn" (click)="saveComment(i)">حفظ</button>
+                    <button class="cancel-edit-btn" (click)="cancelEdit(i)">إلغاء</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="add-comment">
+        <input type="text" [(ngModel)]="newComment" placeholder="أضف تعليقاً..." (keyup.enter)="addComment()">
+        <button type="button" class="send-btn" (click)="addComment()">
+            <fa-icon [icon]="faPaperPlane"></fa-icon>
+        </button>
+    </div>
+</div>
