@@ -26,9 +26,15 @@
                 <fa-icon [icon]="faEllipsisVertical"></fa-icon>
             </button>
             <div class="menu-dropdown" *ngIf="showMenu">
-                <button class="menu-item" (click)="editTask(task)">
+                <button class="menu-item" (click)="editTask(task)" *ngIf="!roleService.isPublisherEmployee()">
                     <fa-icon [icon]="faPen"></fa-icon>
                     تعديل
+                </button>
+            </div>
+            <div class="menu-dropdown" *ngIf="showMenu">
+                <button class="menu-item" (click)="viewDetails(task)">
+                    <fa-icon [icon]="faEye"></fa-icon>
+                    التفاصيل
                 </button>
             </div>
         </div>

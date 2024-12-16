@@ -17,6 +17,8 @@ import { Project } from '../../../../shared/models/Project';
 import { filter } from 'rxjs';
 import { TaskItemEditorComponent } from "./task-item-editor/task-item-editor.component";
 import { TaskItemComponent } from "./task-item/task-item.component";
+import { TaskItemDetailsComponent } from "./task-item-details/task-item-details.component";
+import { RoleService } from '../../../../shared/core/services/role.service';
 
 @Component({
   selector: 'app-tasks',
@@ -27,7 +29,8 @@ import { TaskItemComponent } from "./task-item/task-item.component";
     CommonModule,
     FontAwesomeModule,
     TaskItemEditorComponent,
-    TaskItemComponent
+    TaskItemComponent,
+    TaskItemDetailsComponent
   ],
   providers: [HttpService],
   templateUrl: './tasks.component.html',
@@ -38,6 +41,7 @@ export class TasksComponent implements OnInit {
   showSortMenu = false;
   showFilterMenu = false;
   showForm = false;
+  showDetails = false;
   selectedTask: ProjectTask | null = null;
 
   // Font Awesome icons
@@ -50,7 +54,8 @@ export class TasksComponent implements OnInit {
   constructor(
     private http: HttpService,
     private projectService: ProjectService,
-    private elementRef: ElementRef
+    private elementRef: ElementRef,
+    public roleService: RoleService
   ) { }
 
   ngOnInit(): void {
@@ -90,6 +95,14 @@ export class TasksComponent implements OnInit {
 
   closeForm(event: boolean): void {
     this.showForm = false;
+    this.selectedTask = null;
+    if (event) {
+      this.fetchProject(this.projectService.selectedProjectId.value);
+    }
+  }
+
+  closeDetails(event: boolean): void {
+    this.showDetails = false;
     this.selectedTask = null;
     if (event) {
       this.fetchProject(this.projectService.selectedProjectId.value);
@@ -149,4 +162,10 @@ export class TasksComponent implements OnInit {
     this.showForm = true;
     this.selectedTask = task;
   }
+
+  onViewDetails(task: ProjectTask) {
+    this.showDetails = true;
+    this.selectedTask = task;
+  }
+
 }

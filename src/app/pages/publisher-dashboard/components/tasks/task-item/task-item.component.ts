@@ -6,7 +6,8 @@ import { HttpService } from '../../../../../shared/core/services/http.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ProjectTask } from '../../../../../shared/models/ProjectTask';
 import { ProjectTaskStatus } from '../../../../../shared/models/ProjectTaskStatus';
-import { faGripVertical, faCheck, faPen, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
+import { faGripVertical, faCheck, faPen, faEllipsisVertical, faEye } from '@fortawesome/free-solid-svg-icons';
+import { RoleService } from '../../../../../shared/core/services/role.service';
 
 @Component({
   selector: 'app-task-item',
@@ -20,14 +21,16 @@ export class TaskItemComponent {
   @Input() task!: ProjectTask;
   @Input() index!: number;
   @Output() editTaskEvent = new EventEmitter<ProjectTask>();
+  @Output() viewDetailsEvent = new EventEmitter<ProjectTask>();
   ProjectTaskStatus = ProjectTaskStatus;
   showMenu = false;
   faGripVertical = faGripVertical;
   faCheck = faCheck;
   faPen = faPen;
+  faEye = faEye;
   faEllipsisVertical = faEllipsisVertical;
 
-  constructor(private http: HttpService, private elementRef: ElementRef) { }
+  constructor(private http: HttpService, private elementRef: ElementRef, public roleService: RoleService) { }
 
   toggleMenu($event: MouseEvent) {
     $event.stopPropagation();
@@ -56,6 +59,10 @@ export class TaskItemComponent {
 
   editTask(task: ProjectTask) {
     this.editTaskEvent.emit(task);
+  }
+
+  viewDetails(task: ProjectTask) {
+    this.viewDetailsEvent.emit(task);
   }
 
   getStatusColor(status: ProjectTaskStatus): string {

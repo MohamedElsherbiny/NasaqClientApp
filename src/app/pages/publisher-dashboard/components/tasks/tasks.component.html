@@ -3,7 +3,7 @@
     <div class="task-list-header">
         <div class="header-controls">
             <div class="control-buttons">
-                <button class="add-task-btn" (click)="onAddTask()">
+                <button class="add-task-btn" (click)="onAddTask()" *ngIf="!roleService.isPublisherEmployee()">
                     <fa-icon [icon]="faPlus"></fa-icon>
                     إضافة مهمة
                 </button>
@@ -21,8 +21,10 @@
         </div>
         <div class="task-items" (dragover)="onDragOver($event)" (drop)="onDrop($event)">
             <app-task-item *ngFor="let task of tasks; let i = index" [task]="task" [index]="i"
-                (editTaskEvent)="onEditTask($event)"></app-task-item>
+                (editTaskEvent)="onEditTask($event)" (viewDetailsEvent)="onViewDetails($event)"></app-task-item>
         </div>
     </div>
 </div>
 <app-task-item-editor *ngIf="showForm" (close)="closeForm($event)" [projectTask]="selectedTask"></app-task-item-editor>
+<app-task-item-details *ngIf="showDetails" (close)="closeDetails($event)"
+    [projectTask]="selectedTask"></app-task-item-details>
