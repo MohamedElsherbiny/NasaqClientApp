@@ -5,13 +5,16 @@ import { ActivatedRoute } from '@angular/router';
 import { ProjectTaskStatus } from '../../../../../shared/models/ProjectTaskStatus';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faTimes, faUser, faBook, faCalendar, faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faTimes, faUser, faBook, faCalendar, faCheck, faDownload } from '@fortawesome/free-solid-svg-icons';
 import { FormsModule } from '@angular/forms';
+import { BookDocumentsComponent } from "../../../../../shared/components/book-documents/book-documents.component";
+import { BookDocument } from '../../../../../shared/models/BookDocument';
+import { environment } from '../../../../../../environments/environment.development';
 
 @Component({
   selector: 'app-project-details',
   standalone: true,
-  imports: [CommonModule, FontAwesomeModule, FormsModule],
+  imports: [CommonModule, FontAwesomeModule, FormsModule, BookDocumentsComponent],
   templateUrl: './project-details.component.html',
   styleUrl: './project-details.component.scss'
 })
@@ -21,6 +24,7 @@ export class ProjectDetailsComponent implements OnInit {
   selectedTaskId: number | null = null;
   ProjectTaskStatus = ProjectTaskStatus;
   @Output() close = new EventEmitter<void>();
+  private baseUrl: string = environment.apiUrl;
 
   // Font Awesome icons
   faTimes = faTimes;
@@ -28,6 +32,7 @@ export class ProjectDetailsComponent implements OnInit {
   faBook = faBook;
   faCalendar = faCalendar;
   faCheck = faCheck;
+  faDownload = faDownload;
 
   constructor(private route: ActivatedRoute, private http: HttpService) { }
 
@@ -67,4 +72,14 @@ export class ProjectDetailsComponent implements OnInit {
     }
   }
 
+  downloadFile(bookDocument: BookDocument): void {
+    if (!bookDocument.file) {
+      console.error('File URL is required.');
+      return;
+    }
+    const apiUrl = `${this.baseUrl}/Files/download?url=${encodeURIComponent(
+      bookDocument.file
+    )}&name=${bookDocument.documentName}&version=${bookDocument.version}`;
+    window.open(apiUrl, '_blank');
+  }
 }

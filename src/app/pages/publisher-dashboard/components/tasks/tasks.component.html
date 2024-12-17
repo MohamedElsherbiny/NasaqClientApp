@@ -3,12 +3,22 @@
     <div class="task-list-header">
         <div class="header-controls">
             <div class="control-buttons">
-                <button class="add-task-btn" (click)="onAddTask()" *ngIf="!roleService.isPublisherEmployee()">
+                <button class="add-task-btn" (click)="openDocuments()">
+                    <fa-icon [icon]="faDownload"></fa-icon>
+                </button>
+                <button class="add-task-btn mx-2" (click)="onAddTask()" *ngIf="!roleService.isPublisherEmployee()">
                     <fa-icon [icon]="faPlus"></fa-icon>
                     إضافة مهمة
                 </button>
             </div>
-            <div></div>
+            <div>
+                <select class="project-select" [(ngModel)]="selectedProjectId" (change)="toggleProjectSelector($event)">
+                    <option value="">اختر المشروع</option>
+                    <option *ngFor="let project of projects" [value]="project.projectId">
+                        {{ project.bookName }}
+                    </option>
+                </select>
+            </div>
         </div>
     </div>
     <div class="task-table">
@@ -28,3 +38,6 @@
 <app-task-item-editor *ngIf="showForm" (close)="closeForm($event)" [projectTask]="selectedTask"></app-task-item-editor>
 <app-task-item-details *ngIf="showDetails" (close)="closeDetails($event)"
     [projectTask]="selectedTask"></app-task-item-details>
+
+<app-book-documents *ngIf="showDocuments" [bookDocuments]="selectedProject?.documents"
+    (close)="closeDocuments()"></app-book-documents>

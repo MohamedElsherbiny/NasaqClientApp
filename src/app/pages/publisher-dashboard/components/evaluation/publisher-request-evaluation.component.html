@@ -1,12 +1,12 @@
 <div class="request-list">
   <div class="request-grid">
-    <div class="request-card" *ngFor="let request of requests">
+    <div class="request-card" *ngFor="let request of requests" (click)="editBookRequest(request)">
       <div class="request-header">
         <div class="request-status">
           <fa-icon [icon]="faCircle"></fa-icon>
-          {{ getStatusText(request.requestStatus) }}
+          {{ request.requestStatus }}
         </div>
-        <div class="actions-menu">
+        <!-- <div class="actions-menu">
           <button class="menu-btn" (click)="toggleMenu($event, request.requestId)">
             <fa-icon [icon]="faEllipsisVertical"></fa-icon>
           </button>
@@ -16,7 +16,7 @@
               تقيم
             </button>
           </div>
-        </div>
+        </div> -->
       </div>
       <h3 class="request-name">{{ request.bookName }}</h3>
       <p class="request-description">{{ request.publisherName }}</p>

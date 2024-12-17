@@ -25,6 +25,11 @@
         <div class="request-cell">{{ request.requestDate | date:'yyyy/MM/dd' }}</div>
         <div class="request-cell">{{ request.requestStatus }}</div>
         <div class="request-cell">
+          <button class="download-btn" (click)="openDocuments(request)">
+            <fa-icon [icon]="faDownload"></fa-icon>
+          </button>
+        </div>
+        <!-- <div class="request-cell">
           <div class="actions-menu">
             <button class="menu-btn" (click)="toggleMenu($event, request.requestId!)">
               <fa-icon [icon]="faEllipsisVertical"></fa-icon>
@@ -40,8 +45,10 @@
               </button>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
 </div>
+<app-book-documents *ngIf="showDocuments" [bookDocuments]="selectedBookRequest?.book?.documents"
+  (close)="closeDocuments()"></app-book-documents>

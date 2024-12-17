@@ -60,15 +60,15 @@ export class AddPublisherRequestEditorComponent implements OnInit {
     return this.publisher ? this.publisher.serviceTypes : [];
   }
 
-  toggleServiceSelection(serviceType: any) {
-    if (this.selectedServices.some((s) => s.serviceTypeId === serviceType.serviceTypeId)) {
-      this.selectedServices = this.selectedServices.filter(
-        (s) => s.serviceTypeId !== serviceType.serviceTypeId
-      );
-    } else {
-      this.selectedServices.push(serviceType);
-    }
-  }
+  // toggleServiceSelection(serviceType: any) {
+  //   if (this.selectedServices.some((s) => s.serviceTypeId === serviceType.serviceTypeId)) {
+  //     this.selectedServices = this.selectedServices.filter(
+  //       (s) => s.serviceTypeId !== serviceType.serviceTypeId
+  //     );
+  //   } else {
+  //     this.selectedServices.push(serviceType);
+  //   }
+  // }
 
   isServiceSelected(serviceType: any): boolean {
     return this.selectedServices.some(
@@ -107,4 +107,46 @@ export class AddPublisherRequestEditorComponent implements OnInit {
   onClose() {
     this.close.emit();
   }
+
+  toggleServiceSelection(serviceType: ServiceType) {
+    if (serviceType.serviceTypeId === 1) {
+      // If serviceTypeId 1 is selected, clear all others and add only this one
+      if (this.isServiceSelected(serviceType)) {
+        // If already selected, unselect it
+        this.selectedServices = this.selectedServices.filter(
+          (s) => s.serviceTypeId !== serviceType.serviceTypeId
+        );
+      } else {
+        // Otherwise, unselect all others and select this one
+        this.selectedServices = [serviceType];
+      }
+    } else {
+      // For other service types
+      if (this.selectedServices.some((s) => s.serviceTypeId === serviceType.serviceTypeId)) {
+        // If already selected, unselect it
+        this.selectedServices = this.selectedServices.filter(
+          (s) => s.serviceTypeId !== serviceType.serviceTypeId
+        );
+      } else {
+        // Otherwise, check if serviceTypeId 1 is selected
+        const serviceType1Index = this.selectedServices.findIndex((s) => s.serviceTypeId === 1);
+        if (serviceType1Index !== -1) {
+          // If serviceTypeId 1 is selected, remove it and add the new one
+          this.selectedServices.splice(serviceType1Index, 1);
+        }
+        this.selectedServices.push(serviceType);
+      }
+    }
+  }
+  
+  // Check whether a service is disabled
+  isServiceDisabled(serviceType: ServiceType): boolean {
+    const isServiceType1Selected = this.selectedServices.some((s) => s.serviceTypeId === 1);
+    const isOtherServiceSelected = this.selectedServices.some((s) => s.serviceTypeId !== 1);
+    if (serviceType.serviceTypeId === 1) {
+      return isOtherServiceSelected; // Disable serviceTypeId 1 if any other is selected
+    }
+    return isServiceType1Selected; // Disable other services if serviceTypeId 1 is selected
+  }
+  
 }

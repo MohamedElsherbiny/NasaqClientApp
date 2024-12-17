@@ -6,7 +6,7 @@ import { HttpService } from '../../../../../shared/core/services/http.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ProjectTask } from '../../../../../shared/models/ProjectTask';
 import { ProjectTaskStatus } from '../../../../../shared/models/ProjectTaskStatus';
-import { faGripVertical, faCheck, faPen, faEllipsisVertical, faEye } from '@fortawesome/free-solid-svg-icons';
+import { faGripVertical, faCheck, faPen, faEllipsisVertical, faEye, faUpload } from '@fortawesome/free-solid-svg-icons';
 import { RoleService } from '../../../../../shared/core/services/role.service';
 
 @Component({
@@ -29,6 +29,7 @@ export class TaskItemComponent {
   faPen = faPen;
   faEye = faEye;
   faEllipsisVertical = faEllipsisVertical;
+  faUpload = faUpload;
 
   constructor(private http: HttpService, private elementRef: ElementRef, public roleService: RoleService) { }
 
@@ -78,5 +79,33 @@ export class TaskItemComponent {
       default:
         return '#ef4444';
     }
+  }
+
+
+  onFileSelected(event: any, taskId: number): void {
+    const file: File = event.target.files[0];
+
+    if (file && (file.type === 'application/msword' || file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document')) {
+      this.uploadFile(file, taskId);
+    } else {
+      alert('Please select a valid Word document (.doc or .docx)');
+    }
+  }
+
+  uploadFile(file: File, taskId: number): void {
+    const user = JSON.parse(localStorage.getItem('user') ?? '{}');
+    const formData = new FormData();
+    formData.append('formFile', file);
+    formData.append('taskId', taskId.toString());
+
+    this.http.post(`Publisher/${user['publisherId']}/tasks/upload-file`, formData).subscribe({
+      next: (response) => {
+        console.log('File uploaded successfully', response);
+        // this.fetchTasks();
+      },
+      error: (error) => {
+        console.error('Failed to upload file', error);
+      },
+    });
   }
 }

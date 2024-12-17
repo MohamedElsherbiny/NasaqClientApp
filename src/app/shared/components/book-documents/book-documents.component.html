@@ -1,0 +1,32 @@
+<div class="request-form-overlay" (click)="onClose()">
+    <div class="request-form" (click)="$event.stopPropagation()">
+        <div class="form-header">
+            <h2>المستندات</h2>
+            <button class="close-btn" (click)="onClose()">
+                <fa-icon [icon]="faTimes"></fa-icon>
+            </button>
+        </div>
+        <div class="book-list">
+            <div class="book-table">
+                <div class="book-table-header">
+                    <div class="book-cell">الاسم</div>
+                    <div class="book-cell">التاريخ</div>
+                    <div class="book-cell">الاصدار</div>
+                    <div class="book-cell"></div>
+                </div>
+                <div class="book-items">
+                    <div class="book-item" *ngFor="let document of bookDocuments;">
+                        <div class="book-cell">{{ (document.documentName?.length ?? 0 > 30 ?
+                            (document.documentName | slice: 0:30) + '...' :
+                            document.documentName) || "مستند بدون اسم" }}</div>
+                        <div class="book-cell">{{ document.createdDate | date : "yyyy/MM/dd HH:mm" }}</div>
+                        <div class="book-cell">{{ document.version }}</div>
+                        <div class="book-cell">
+                            <fa-icon [icon]="faDownload" (click)="downloadFile(document)"></fa-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

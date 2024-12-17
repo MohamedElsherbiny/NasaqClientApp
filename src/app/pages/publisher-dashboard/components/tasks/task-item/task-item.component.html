@@ -1,6 +1,6 @@
 <div class="task-item" [class.completed]="task.status == ProjectTaskStatus.Completed" draggable="true"
     (dragstart)="onDragStart($event)">
-    <div class="task-cell">
+    <div class="task-cell" style="cursor: pointer;" (click)="viewDetails(task)">
         <span class="drag-handle">
             <fa-icon [icon]="faGripVertical"></fa-icon>
         </span>
@@ -20,7 +20,13 @@
     </div>
     <div class="task-cell">{{ task.assginTo?.name }}</div>
 
+    <input #fileInput type="file" accept=".doc,.docx" (change)="onFileSelected($event, task.projectTaskId!)"
+        style="display: none" />
+
     <div class="task-cell">
+        <button class="btn btn-primary" (click)="fileInput.click()">
+            <fa-icon [icon]="faUpload"></fa-icon>
+        </button>
         <div class="actions-menu">
             <button class="menu-btn" (click)="toggleMenu($event)">
                 <fa-icon [icon]="faEllipsisVertical"></fa-icon>

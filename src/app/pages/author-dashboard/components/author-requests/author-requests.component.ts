@@ -13,16 +13,18 @@ import {
   faTable
 } from '@fortawesome/free-solid-svg-icons';
 import { RouterLink } from '@angular/router';
+import { BookDocumentsComponent } from "../../../../shared/components/book-documents/book-documents.component";
 
 @Component({
   selector: 'app-author-requests',
   standalone: true,
-  imports: [CommonModule, FontAwesomeModule, RouterLink],
+  imports: [CommonModule, FontAwesomeModule, RouterLink, BookDocumentsComponent],
   templateUrl: './author-requests.component.html',
   styleUrl: './author-requests.component.scss'
 })
 export class AuthorRequestsComponent implements OnInit {
   requests: BookRequest[] = [];
+  selectedBookRequest: BookRequest | null = null;
   RequestStatus = RequestStatus;
   user = JSON.parse(localStorage.getItem('user') ?? '{}');
   activeMenu: number | null = null;
@@ -34,6 +36,7 @@ export class AuthorRequestsComponent implements OnInit {
   faPen = faPen;
   faTrash = faTrash;
   faTable = faTable;
+  showDocuments = false;
 
   constructor(private http: HttpService) { }
 
@@ -60,5 +63,15 @@ export class AuthorRequestsComponent implements OnInit {
   @HostListener('document:click')
   closeMenu(): void {
     this.activeMenu = null;
+  }
+
+  openDocuments(book: BookRequest): void {
+    this.selectedBookRequest = book;
+    this.showDocuments = true;
+  }
+
+  closeDocuments() {
+    this.showDocuments = false;
+    this.selectedBookRequest = null;
   }
 }

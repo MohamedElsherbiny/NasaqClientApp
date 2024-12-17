@@ -23,14 +23,14 @@
                 </div>
 
                 <ul class="list-group list-group-flush">
-                    @for (serviceType of getPublisherServiceTypes(); track
-                    serviceType.serviceTypeId;) {
-                    <li class="list-group-item  d-flex justify-content-between align-items-center">
+                    <li class="list-group-item d-flex justify-content-between align-items-center"
+                        *ngFor="let serviceType of getPublisherServiceTypes()">
                         <div>
                             <input type="checkbox" class="form-check-input"
                                 [id]="'service-' + serviceType.serviceTypeId"
                                 (change)="toggleServiceSelection(serviceType)"
-                                [checked]="isServiceSelected(serviceType)" />
+                                [checked]="isServiceSelected(serviceType)"
+                                [disabled]="isServiceDisabled(serviceType)" />
                             <label [for]="'service-' + serviceType.serviceTypeId" class="mx-3">
                                 {{ serviceType.name }}
                             </label>
@@ -39,8 +39,8 @@
                             {{ serviceType.price }}
                         </div>
                     </li>
-                    }
                 </ul>
+
             </div>
             <div class="form-actions">
                 <button class="cancel-btn" type="button" (click)="onClose()">إلغاء</button>

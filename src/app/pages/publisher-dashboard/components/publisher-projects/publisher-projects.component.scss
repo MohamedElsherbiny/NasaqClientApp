@@ -32,6 +32,48 @@
     background: #3b63b8;
 }
 
+.project-list-header {
+    padding: 1rem;
+    min-height: 4rem;
+    border-bottom: 1px solid var(--border-color);
+    background: var(--bg-color);
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  
+  .header-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .control-buttons {
+    order: 2;
+  }
+  
+  .view-controls {
+    order: 1;
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .add-task-btn {
+    background: #4573d2;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .add-task-btn:hover {
+    background: #3b63b8;
+  }
+
 .project-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -44,6 +86,7 @@
     border-radius: 8px;
     padding: 1.5rem;
     transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .project-card:hover {

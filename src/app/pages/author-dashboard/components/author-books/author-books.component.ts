@@ -13,11 +13,12 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { AuthorBookEditorComponent } from "./author-book-editor/author-book-editor.component";
 import { Book } from '../../../../shared/models/Book';
+import { BookDocumentsComponent } from "../../../../shared/components/book-documents/book-documents.component";
 
 @Component({
   selector: 'app-author-books',
   standalone: true,
-  imports: [HttpClientModule, CommonModule, FontAwesomeModule, AuthorBookEditorComponent],
+  imports: [HttpClientModule, CommonModule, FontAwesomeModule, AuthorBookEditorComponent, BookDocumentsComponent],
   providers: [HttpService],
   templateUrl: './author-books.component.html',
   styleUrl: './author-books.component.scss'
@@ -27,6 +28,7 @@ export class AuthorBooksComponent implements OnInit {
   user = JSON.parse(localStorage.getItem('user') ?? '{}');
   activeMenu: number | null = null;
   showForm = false;
+  showDocuments = false;
   selectedBook: Book | null = null;
 
   // Font Awesome icons
@@ -77,6 +79,16 @@ export class AuthorBooksComponent implements OnInit {
 
   closeForm(): void {
     this.showForm = false;
+    this.selectedBook = null;
+  }
+
+  openDocuments(book: Book): void {
+    this.selectedBook = book;
+    this.showDocuments = true;
+  }
+
+  closeDocuments(): void {
+    this.showDocuments = false;
     this.selectedBook = null;
   }
 }

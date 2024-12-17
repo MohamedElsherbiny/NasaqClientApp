@@ -10,9 +10,9 @@
     <div class="comments-list">
         <div class="comment-item" *ngFor="let comment of comments; let i = index">
             <div class="comment-header">
-                <span class="username">{{ comment.username }}</span>
+                <span class="username">{{ comment.createdByName }}</span>
                 <div class="comment-actions">
-                    <span class="timestamp">{{ comment.timestamp | date:'short' }}</span>
+                    <span class="timestamp">{{ comment.createdDate | date:'short' }}</span>
                     <!-- <button class="action-btn" (click)="editComment(i)" *ngIf="!comment.isEditing">
                         <fa-icon [icon]="faPen"></fa-icon>
                     </button> -->
@@ -22,7 +22,7 @@
                 </div>
             </div>
             <div class="comment-content" *ngIf="!comment.isEditing">
-                <p class="comment-text">{{ comment.text }}</p>
+                <p class="comment-text">{{ comment.content }}</p>
             </div>
             <div class="comment-edit" *ngIf="comment.isEditing">
                 <input type="text" [(ngModel)]="editingText" (keyup.enter)="saveComment(i)" class="edit-input">

@@ -58,15 +58,6 @@ export class PublisherRequestEvaluationsComponent implements OnInit {
     });
   }
 
-  getStatusText(status: string): string {
-    switch (status) {
-      case 'active': return 'نشط';
-      case 'completed': return 'مكتمل';
-      case 'on-hold': return 'معلق';
-      default: return status;
-    }
-  }
-
   editBookRequest(request: BookRequest): void {
     this.selectedBookRequest = request;
     this.showForm = true;

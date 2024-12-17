@@ -1,14 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpService } from '../../../../shared/core/services/http.service';
 import {
   faPlus,
   faArrowUpWideShort,
   faCheck,
   faFilter,
-  faCalendar
+  faCalendar,
+  faDownload
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ProjectTask } from '../../../../shared/models/ProjectTask';
@@ -19,6 +20,7 @@ import { TaskItemEditorComponent } from "./task-item-editor/task-item-editor.com
 import { TaskItemComponent } from "./task-item/task-item.component";
 import { TaskItemDetailsComponent } from "./task-item-details/task-item-details.component";
 import { RoleService } from '../../../../shared/core/services/role.service';
+import { BookDocumentsComponent } from "../../../../shared/components/book-documents/book-documents.component";
 
 @Component({
   selector: 'app-tasks',
@@ -30,7 +32,9 @@ import { RoleService } from '../../../../shared/core/services/role.service';
     FontAwesomeModule,
     TaskItemEditorComponent,
     TaskItemComponent,
-    TaskItemDetailsComponent
+    TaskItemDetailsComponent,
+    BookDocumentsComponent,
+    FormsModule
   ],
   providers: [HttpService],
   templateUrl: './tasks.component.html',
@@ -43,6 +47,9 @@ export class TasksComponent implements OnInit {
   showForm = false;
   showDetails = false;
   selectedTask: ProjectTask | null = null;
+  selectedProject: Project | null = null;
+  showDocuments = false;
+  selectedProjectId: number | null = null;
 
   // Font Awesome icons
   faPlus = faPlus;
@@ -50,6 +57,8 @@ export class TasksComponent implements OnInit {
   faArrowUpWideShort = faArrowUpWideShort;
   faCheck = faCheck;
   faCalendar = faCalendar;
+  faDownload = faDownload;
+  projects: Project[] = [];
 
   constructor(
     private http: HttpService,
@@ -64,6 +73,13 @@ export class TasksComponent implements OnInit {
       .subscribe((projectId) => {
         this.fetchProject(projectId);
       });
+
+    this.projectService.getProjects().subscribe(
+      projects => {
+        this.projects = projects;
+        this.selectedProjectId = projects[0]?.projectId;
+      }
+    );
   }
 
   fetchProject(selectedProjectId: number): void {
@@ -73,6 +89,7 @@ export class TasksComponent implements OnInit {
       .subscribe({
         next: (response: Project) => {
           this.tasks = response.projectTasks || [];
+          this.selectedProject = response;
         },
         error: (error) => {
           console.error('Failed to fetch project', error);
@@ -168,4 +185,14 @@ export class TasksComponent implements OnInit {
     this.selectedTask = task;
   }
 
+  closeDocuments() {
+    this.showDocuments = false;
+  }
+  openDocuments() {
+    this.showDocuments = true;
+  }
+
+  toggleProjectSelector($event: any) {
+    this.projectService.setSelectedProjectId($event.target.value);
+  }
 }

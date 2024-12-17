@@ -28,9 +28,9 @@ export class CommentsComponent implements OnInit {
 
   fetchTaskComments(): void {
     const user = JSON.parse(localStorage.getItem('user') ?? '{}');
-    this.http.get(`Tasks/${user['publisherId']}/${this.projectTask?.projectTaskId}/comments`).subscribe({
-      next: (response: any) => {
-        console.log(response);
+    this.http.get<Comment[]>(`Tasks/${user['publisherId']}/${this.projectTask?.projectTaskId}/comments`).subscribe({
+      next: (response: Comment[]) => {
+        this.comments = response || [];
       },
       error: (error) => {
         console.error('Failed to fetch tasks', error);
@@ -38,10 +38,10 @@ export class CommentsComponent implements OnInit {
     });
   }
 
-  comments: any[] = [{
-    username: 'أحمد',
-    text: 'يجب أن نبدأ العمل على هذا في أقرب وقت ممكن',
-    timestamp: new Date('2024-01-09T10:30:00')
+  comments: Comment[] = [{
+    createdByName: 'أحمد',
+    content: 'يجب أن نبدأ العمل على هذا في أقرب وقت ممكن',
+    createdDate: new Date('2024-01-09T10:30:00')
   }];
 
   newCollaborator = '';
@@ -53,7 +53,7 @@ export class CommentsComponent implements OnInit {
   editComment(index: number) {
     this.comments = this.comments?.map((comment, i) => {
       if (i === index) {
-        this.editingText = comment.text;
+        this.editingText = comment.content;
         return { ...comment, isEditing: true };
       }
       return { ...comment, isEditing: false };
@@ -92,16 +92,41 @@ export class CommentsComponent implements OnInit {
 
   addComment() {
     if (this.newComment.trim()) {
-      const comment: any = {
-        username: 'أنت',
-        text: this.newComment.trim(),
-        timestamp: new Date()
+      const comment: Comment = {
+        createdByName: 'أنت',
+        content: this.newComment.trim(),
+        createdDate: new Date()
       };
+
       this.comments = [
         ...(this.comments || []),
         comment
       ];
       this.newComment = '';
+
+      this.createComment(comment);
     }
   }
+
+  createComment(comment: Comment) {
+    const user = JSON.parse(localStorage.getItem('user') ?? '{}');
+    this.http.post(`Tasks/${user['publisherId']}/${this.projectTask?.projectTaskId}/add-employee-comment`, {
+      content: comment.content,
+      taskId: this.projectTask?.projectTaskId
+    }).subscribe({
+      next: (response) => {
+        console.log('Comment created successfully', response);
+      },
+      error: (error) => {
+        console.error('Failed to create comment', error);
+      }
+    });
+  }
+}
+
+export interface Comment {
+  createdByName: string;
+  content: string;
+  createdDate: Date;
+  isEditing?: boolean;
 }
