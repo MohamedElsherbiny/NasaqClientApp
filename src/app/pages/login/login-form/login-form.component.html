@@ -1,36 +1,47 @@
-<div class="row">
-    <form (ngSubmit)="onSubmit()">
-        <div class="col-lg-12">
-            <div class="form-group mb-3">
-                <input name="username" type="text" [(ngModel)]="email" required class="form-control"
-                    placeholder="اسم المستخدم*">
-            </div>
-        </div>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+    <!-- Error Message -->
+    <div class="error-message" *ngIf="error">
+        {{ error }}
+    </div>
 
-        <div class="col-lg-12">
-            <div class="form-group mb-3">
-                <input name="password" type="password" [(ngModel)]="password" required class="form-control"
-                    placeholder="كلمة المرور*">
-            </div>
+    <!-- Email Field -->
+    <div class="form-group">
+        <label for="email">البريد الإلكتروني</label>
+        <div class="input-group">
+            <fa-icon [icon]="icons.envelope"></fa-icon>
+            <input id="email" type="email" formControlName="email" placeholder="أدخل بريدك الإلكتروني"
+                [class.error]="isFieldInvalid('email')">
         </div>
-
-        <!-- <div class="col-lg-12">
-            <div class="twm-forgot-wrap">
-                <div class="form-group mb-3">
-                    <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="Password4">
-                        <label class="form-check-label rem-forgot" for="Password4">تذكرنى
-                            <a href="javascript:;" class="site-text-primary">هل نسيت كلمة السر</a>
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-
-        <div class="col-md-12">
-            <div class="form-group">
-                <button type="submit" class="site-button">تسجيل الدخول</button>
-            </div>
+        <div class="validation-error" *ngIf="isFieldInvalid('email')">
+            {{ getErrorMessage('email') }}
         </div>
-    </form>
-</div>
+    </div>
+
+    <!-- Password Field -->
+    <div class="form-group">
+        <label for="password">كلمة المرور</label>
+        <div class="input-group">
+            <fa-icon [icon]="icons.lock"></fa-icon>
+            <input id="password" type="password" formControlName="password" placeholder="أدخل كلمة المرور"
+                [class.error]="isFieldInvalid('password')">
+        </div>
+        <div class="validation-error" *ngIf="isFieldInvalid('password')">
+            {{ getErrorMessage('password') }}
+        </div>
+    </div>
+
+    <!-- Remember Me & Forgot Password -->
+    <div class="form-actions">
+        <!-- <label class="remember-me">
+            <input type="checkbox" formControlName="rememberMe">
+            <span>تذكرني</span>
+        </label> -->
+        <a href="#" class="forgot-password">نسيت كلمة المرور؟</a>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="submit-btn" [disabled]="loginForm.invalid || isLoading">
+        <fa-icon [icon]="icons.spinner" [spin]="true" *ngIf="isLoading"></fa-icon>
+        <span>{{ isLoading ? 'جاري تسجيل الدخول...' : 'تسجيل الدخول' }}</span>
+    </button>
+</form>

@@ -1,73 +1,94 @@
-import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpService } from '../../../shared/core/services/http.service';
 import { HttpClientModule } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ToastrService } from 'ngx-toastr';
+import { faEnvelope, faLock, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { CommonModule } from '@angular/common';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-type LoginResponse = {
+export type LoginResponse = {
   token: string;
 }
-
+export interface LoginCredentials {
+  email: string;
+  password: string;
+  rememberMe?: boolean;
+}
+export function getFormValue<T>(form: FormGroup): T {
+  return form.value as T;
+}
 @Component({
   selector: 'app-login-form',
   standalone: true,
-  imports: [FormsModule, HttpClientModule],
+  imports: [FontAwesomeModule, CommonModule, ReactiveFormsModule],
   providers: [HttpService],
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.scss'
 })
 export class LoginFormComponent {
-  private roleKey = 'http://schemas.microsoft.com/ws/2008/06/identity/claims/role';
-  email: string = '';
-  password: string = '';
+  @Output() formSubmit = new EventEmitter<LoginCredentials>();
+
+  @Input() isLoading = false;
+  @Input() error: string | null = null;
+
+  loginForm: FormGroup;
 
   constructor(
-    private http: HttpService,
-    private router: Router,
-    private toastr: ToastrService) { }
-
-
-  onSubmit() {
-    this.http.post<LoginResponse>('account/login', { email: this.email, password: this.password }).subscribe({
-      next: (response) => {
-        localStorage.setItem('token', response.token);
-        const jwtHelper = new JwtHelperService();
-        localStorage.setItem('user', JSON.stringify(jwtHelper.decodeToken(response.token)));
-        this.redirectToDashboard();
-      },
-      error: (error) => {
-        if (error.status === 401) {
-          this.toastr.error('البريد الإلكتروني أو كلمة المرور غير صحيحة', 'فشل تسجيل الدخول');
-        } else {
-          this.toastr.error('حدث خطأ غير متوقع، يرجى المحاولة مرة أخرى لاحقًا', 'فشل تسجيل الدخول');
-        }
-      }
+    private fb: FormBuilder
+  ) {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
+      rememberMe: [false]
     });
   }
-  redirectToDashboard(): void {
-    const user = JSON.parse(localStorage.getItem('user') ?? '{}');
 
-    if (!user) {
-      this.router.navigate(['/']);
-      return;
+  onSubmit() {
+    if (this.loginForm.valid) {
+      this.formSubmit.emit(getFormValue<LoginCredentials>(this.loginForm));
+    }
+  }
+
+  // Font Awesome icons
+  readonly icons = {
+    envelope: faEnvelope,
+    lock: faLock,
+    spinner: faSpinner
+  };
+
+  isFieldInvalid(field: string): boolean {
+    const control = this.loginForm.get(field);
+    return !!control && control.invalid && (control.dirty || control.touched);
+  }
+
+  getErrorMessage(field: string): string {
+    const control = this.loginForm.get(field);
+    if (!control?.errors) return '';
+
+    const messages = LOGIN_VALIDATION_MESSAGES[field as keyof typeof LOGIN_VALIDATION_MESSAGES];
+    const firstError = Object.keys(control.errors)[0];
+
+    if (typeof messages === 'object') {
+      if (firstError === 'minlength' && 'minlength' in messages) {
+        return messages.minlength(control.errors[firstError].requiredLength);
+      }
+      return messages[firstError as keyof typeof messages] || '';
     }
 
-    if ((user[this.roleKey] as string)?.includes('Author')) {
-      this.router.navigate(['/author-dashboard/books']);
-      return;
-    } else if ((user[this.roleKey] as string)?.includes('PublisherEmployee')) {
-      this.router.navigate(['/publisher-dashboard/tasks']);
-      return;
-    } else if ((user[this.roleKey] as string)?.includes('Publisher')) {
-      this.router.navigate(['/publisher-dashboard/team']);
-      return;
-    } else if ((user[this.roleKey] as string)?.includes('Admin')) {
-      this.router.navigate(['/admin-dashboard']);
-      return;
-    }
-
-    this.router.navigate(['/']);
+    return '';
   }
 }
+
+export const LOGIN_VALIDATION_MESSAGES = {
+  email: {
+    required: 'البريد الإلكتروني مطلوب',
+    email: 'يرجى إدخال بريد إلكتروني صحيح'
+  },
+  password: {
+    required: 'كلمة المرور مطلوبة',
+    minlength: (length: number) => `كلمة المرور يجب أن تكون ${length} أحرف على الأقل`
+  }
+} as const;
