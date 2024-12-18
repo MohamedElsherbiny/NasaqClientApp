@@ -2,7 +2,7 @@
   <div class="project-list-header">
     <div class="header-controls">
       <div class="control-buttons">
-        <button class="add-task-btn">
+        <button class="add-task-btn" (click)="openCreateProjectEditor()">
           <fa-icon [icon]="faPlus"></fa-icon>
           إضافة مشروع
         </button>
@@ -61,3 +61,6 @@
 
 <app-publisher-project-details *ngIf="showForm" [projectId]="selectedProject?.projectId!"
   (close)="closeForm()"></app-publisher-project-details>
+
+<app-publisher-project-editor *ngIf="showCreateProjectEditor"
+  (close)="closeCreateProjectEditor($event)"></app-publisher-project-editor>

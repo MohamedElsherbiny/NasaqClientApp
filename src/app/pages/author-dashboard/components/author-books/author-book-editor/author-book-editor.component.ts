@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ReactiveFormsModule, FormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HttpService } from '../../../../../shared/core/services/http.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -17,9 +17,9 @@ import { Router } from '@angular/router';
   templateUrl: './author-book-editor.component.html',
   styleUrl: './author-book-editor.component.scss'
 })
-export class AuthorBookEditorComponent {
+export class AuthorBookEditorComponent implements OnInit {
   @Input() book: Book | null = null;
-  @Output() close = new EventEmitter<void>();
+  @Output() close = new EventEmitter<boolean>();
   bookForm: FormGroup;
   selectedFile: File | null = null;
   user = JSON.parse(localStorage.getItem('user') ?? '{}');
@@ -38,6 +38,14 @@ export class AuthorBookEditorComponent {
       isbn: ['', Validators.required],
       publicationDate: ['', Validators.required]
     });
+  }
+  ngOnInit(): void {
+    if (this.book) {
+      this.bookForm.patchValue({
+        ...this.book,
+        publicationDate: this.book.publicationDate?.split('T')[0]
+      });
+    }
   }
 
   onFileSelected(event: Event): void {
@@ -59,7 +67,6 @@ export class AuthorBookEditorComponent {
   }
 
   onSubmit(): void {
-    this.close.emit();
     if (this.bookForm.valid && this.selectedFile) {
       const formData = new FormData();
       formData.append('title', this.bookForm.get('title')?.value);
@@ -70,25 +77,43 @@ export class AuthorBookEditorComponent {
       formData.append('formFile', this.selectedFile, this.selectedFile.name);
       formData.append('fileName', this.selectedFile.name);
 
-      this.http.post(`Author/${this.user['authorId']}/book`, formData).subscribe({
-        next: () => {
-          this.toastr.success('تم إرسال الطلب بنجاح', 'نجاح');
-          this.bookForm.reset();
-          this.selectedFile = null;
-          this.router.navigate(['/personal-dashboard/my-books']);
-          this.close.emit();
-        },
-        error: (error) => {
-          console.error('فشل في إرسال الطلب', error);
-          this.toastr.error('فشل في إرسال الطلب، يرجى المحاولة مرة أخرى', 'خطأ');
-          this.close.emit();
-        }
-      });
+      if (this.book) {
+        this.updateBook(formData);
+      } else {
+        this.createBook(formData);
+      }
     } else {
       this.toastr.error('يرجى ملء جميع الحقول المطلوبة', 'خطأ');
     }
   }
 
+  private createBook(formData: FormData) {
+    this.http.post(`Author/${this.user['authorId']}/book`, formData).subscribe({
+      next: () => {
+        this.toastr.success('تم إرسال الكتاب بنجاح', 'نجاح');
+        this.bookForm.reset();
+        this.selectedFile = null;
+        this.close.emit(true);
+      },
+      error: (error) => {
+        this.toastr.error('فشل في إرسال الكتاب، يرجى المحاولة مرة أخرى', 'خطأ');
+      }
+    });
+  }
+
+  private updateBook(formData: FormData) {
+    this.http.put(`Author/${this.user['authorId']}/book/${this.book?.bookId}`, formData).subscribe({
+      next: () => {
+        this.toastr.success('تم تحديث الكتاب بنجاح', 'نجاح');
+        this.bookForm.reset();
+        this.selectedFile = null;
+        this.close.emit(true);
+      },
+      error: (error) => {
+        this.toastr.error('فشل في تحديث الكتاب، يرجى المحاولة مرة أخرى', 'خطأ');
+      }
+    });
+  }
   removeFile(): void {
     this.selectedFile = null;
     this.bookForm.get('fileName')?.reset();

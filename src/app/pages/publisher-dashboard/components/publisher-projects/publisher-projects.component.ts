@@ -15,11 +15,12 @@ import {
   faEye
 } from '@fortawesome/free-solid-svg-icons';
 import { PublisherProjectDetailsComponent } from "./project-details/publisher-project-details.component";
+import { PublisherProjectEditorComponent } from "./publisher-project-editor/publisher-project-editor.component";
 
 @Component({
   selector: 'app-publisher-projects',
   standalone: true,
-  imports: [CommonModule, FontAwesomeModule, PublisherProjectDetailsComponent],
+  imports: [CommonModule, FontAwesomeModule, PublisherProjectDetailsComponent, PublisherProjectEditorComponent],
   templateUrl: './publisher-projects.component.html',
   styleUrl: './publisher-projects.component.scss',
 })
@@ -30,6 +31,7 @@ export class PublisherProjectsComponent implements OnInit {
   activeMenu: number | null = null;
   showForm = false;
   selectedProject: Project | null = null;
+  showCreateProjectEditor = false;
 
   // Font Awesome icons
   faPlus = faPlus;
@@ -83,14 +85,14 @@ export class PublisherProjectsComponent implements OnInit {
     this.selectedProject = null;
   }
 
-  onSaveProject(project: Project): void {
-    // if (this.selectedProject) {
-    //   this.projectService.updateProject({ ...project, id: this.selectedProject.id });
-    // } else {
-    //   this.projectService.addProject({ ...project, id: Date.now().toString() });
-    // }
-    this.closeForm();
-  }
+  // onSaveProject(project: Project): void {
+  //   // if (this.selectedProject) {
+  //   //   this.projectService.updateProject({ ...project, id: this.selectedProject.id });
+  //   // } else {
+  //   //   this.projectService.addProject({ ...project, id: Date.now().toString() });
+  //   // }
+  //   this.closeForm();
+  // }
 
   toggleMenu(event: Event, projectId: number): void {
     event.stopPropagation();
@@ -100,5 +102,16 @@ export class PublisherProjectsComponent implements OnInit {
   @HostListener('document:click')
   closeMenu(): void {
     this.activeMenu = null;
+  }
+
+  closeCreateProjectEditor($event: boolean) {
+    this.showCreateProjectEditor = false;
+    if ($event) {
+      this.fetchProjects();
+    }
+  }
+
+  openCreateProjectEditor() {
+    this.showCreateProjectEditor = true;
   }
 }

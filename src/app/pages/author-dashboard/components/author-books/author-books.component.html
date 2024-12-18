@@ -21,7 +21,7 @@
     </div>
     <div class="book-items">
       <div class="book-item" *ngFor="let book of books">
-        <div class="book-cell">{{ book.title }}</div>
+        <div class="book-cell" style="cursor: pointer;" (click)="editBook(book)">{{ book.title }}</div>
         <div class="book-cell">
           {{ (book.description?.length ?? 0 > 60 ? (book.description | slice: 0:60) + '...' :
           book.description) }}
@@ -55,6 +55,6 @@
   </div>
 </div>
 
-<app-author-book-editor *ngIf="showForm" (close)="closeForm()"></app-author-book-editor>
+<app-author-book-editor *ngIf="showForm" (close)="closeForm($event)" [book]="selectedBook"></app-author-book-editor>
 <app-book-documents *ngIf="showDocuments" [bookDocuments]="selectedBook?.documents"
   (close)="closeDocuments()"></app-book-documents>

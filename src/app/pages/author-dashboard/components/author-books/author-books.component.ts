@@ -77,9 +77,12 @@ export class AuthorBooksComponent implements OnInit {
     this.activeMenu = null;
   }
 
-  closeForm(): void {
+  closeForm(event: boolean): void {
     this.showForm = false;
     this.selectedBook = null;
+    if (event) {
+      this.fetchBooks();
+    }
   }
 
   openDocuments(book: Book): void {

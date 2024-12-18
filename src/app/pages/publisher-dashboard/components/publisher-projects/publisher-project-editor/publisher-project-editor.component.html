@@ -1,0 +1,56 @@
+<form [formGroup]="publisherProjectForm" (ngSubmit)="onSubmit()">
+    <div class="publisher-project-form-overlay" (click)="onClose()">
+        <div class="publisher-project-form" (click)="$event.stopPropagation()">
+            <div class="form-header">
+                <h2>إضافة مشروع جديد</h2>
+                <button class="close-btn" (click)="onClose()">
+                    <fa-icon [icon]="faTimes"></fa-icon>
+                </button>
+            </div>
+            <div class="form-content">
+                <div class="form-group">
+                    <label>عنوان العمل</label>
+                    <input type="text" formControlName="authorBookTitle" class="form-control" placeholder="عنوان العمل">
+                </div>
+
+                <div class="form-group">
+                    <label>إسم المؤلف الاول</label>
+                    <input type="text" formControlName="authorFirstName" class="form-control" placeholder="إسم المؤلف الاول">
+                </div>
+
+                <div class="form-group">
+                    <label>إسم المؤلف الاخير</label>
+                    <input type="text" formControlName="authorLastName" class="form-control" placeholder="إسم المؤلف الاخير">
+                </div>
+
+                <div class="form-group">
+                    <label>البريد الالكتروني للمؤلف</label>
+                    <input type="email" formControlName="authorEmail" class="form-control"
+                        placeholder="البريد الالكتروني للمؤلف">
+                </div>
+
+                <!-- Specializations -->
+                <div class="panel panel-default">
+                    <div class="panel-heading wt-panel-heading py-3">
+                        <h4 class="panel-title m-a0">الخدمات المطلوبة</h4>
+                    </div>
+                    <div class="my-3">
+                        <div class="d-flex flex-wrap gap-3">
+                            <div *ngFor="let option of serviceTypeOptions" class="d-flex align-items-center gap-2">
+                                <input class="form-check-input" type="checkbox" [value]="option.value"
+                                    (change)="onCheckboxChange($event)" [disabled]="option.disabled"
+                                    [checked]="isOptionChecked(option.value)" />
+                                <label class="form-check-label">{{ option.name }}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="form-actions">
+                <button class="cancel-btn" type="button" (click)="onClose()">إلغاء</button>
+                <button class="save-btn" type="submit">حفظ</button>
+            </div>
+        </div>
+    </div>
+</form>

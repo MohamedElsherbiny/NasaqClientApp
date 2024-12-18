@@ -26,11 +26,15 @@ export class ConfirmEmailComponent {
     private router: Router,
     private toastr: ToastrService) {
     this.userId = this.route.snapshot.queryParamMap.get('userId');
-    this.token = this.route.snapshot.queryParamMap.get('amp;token');
+    this.token = this.route.snapshot.queryParamMap.get('token');
+    if (!this.token) {
+      this.token = this.route.snapshot.queryParamMap.get('amp;token');
+    }
   }
 
 
   onSubmit() {
+    debugger
     if (this.password !== this.confirmPassword) {
       this.toastr.error('كلمات المرور لا تتطابق', 'خطأ');
       return;
