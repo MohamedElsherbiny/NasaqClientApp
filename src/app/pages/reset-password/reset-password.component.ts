@@ -1,30 +1,32 @@
 import { Component } from '@angular/core';
-import { FooterComponent } from "../../shared/components/footer/footer.component";
-import { HttpService } from '../../shared/core/services/http.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+import { ResetPasswordCredentials, ResetPasswordFormComponent } from "./reset-password-form/reset-password-form.component";
+import { ActivatedRoute, Router } from '@angular/router';
+import { HttpService } from '../../shared/core/services/http.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-confirm-email',
+  selector: 'app-reset-password',
   standalone: true,
-  imports: [FooterComponent, FormsModule, HttpClientModule, CommonModule],
-  templateUrl: './confirm-email.component.html',
-  styleUrl: './confirm-email.component.scss'
+  imports: [FontAwesomeModule, CommonModule, ReactiveFormsModule, ResetPasswordFormComponent],
+  templateUrl: './reset-password.component.html',
+  styleUrl: './reset-password.component.scss'
 })
-export class ConfirmEmailComponent {
-  password: string = '';
-  confirmPassword: string = '';
+export class ResetPasswordComponent {
+  isLoading = false;
+  error: string | null = null;
   userId: string | null = null;
   token: string | null = null;
+  resetPassword: string | null = null;
 
   constructor(
-    private route: ActivatedRoute,
     private http: HttpService,
     private router: Router,
+    private route: ActivatedRoute,
     private toastr: ToastrService) {
+    this.resetPassword = this.route.snapshot.queryParamMap.get('ResetPassword');
     this.userId = this.route.snapshot.queryParamMap.get('userId');
     this.token = this.route.snapshot.queryParamMap.get('token');
     if (!this.token) {
@@ -32,9 +34,8 @@ export class ConfirmEmailComponent {
     }
   }
 
-
-  onSubmit() {
-    if (this.password !== this.confirmPassword) {
+  onSubmit(credentials: ResetPasswordCredentials) {
+    if (credentials.password !== credentials.confirmPassword) {
       this.toastr.error('كلمات المرور لا تتطابق', 'خطأ');
       return;
     }
@@ -43,7 +44,8 @@ export class ConfirmEmailComponent {
       const confirmData = {
         userId: this.userId,
         token: this.token,
-        password: this.password
+        password: credentials.password,
+        resetPassword: this.resetPassword ?? false
       };
 
       this.http.post<any>('account/confirm-email', confirmData).subscribe({
@@ -63,6 +65,4 @@ export class ConfirmEmailComponent {
       this.toastr.error('رقم المستخدم أو رمز التأكيد غير موجود.', 'خطأ');
     }
   }
-
 }
-

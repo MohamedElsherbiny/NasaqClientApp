@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { HttpService } from '../../../shared/core/services/http.service';
 import { HttpClientModule } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -23,7 +23,7 @@ export function getFormValue<T>(form: FormGroup): T {
 @Component({
   selector: 'app-login-form',
   standalone: true,
-  imports: [FontAwesomeModule, CommonModule, ReactiveFormsModule],
+  imports: [FontAwesomeModule, CommonModule, ReactiveFormsModule, RouterLink],
   providers: [HttpService],
   templateUrl: './login-form.component.html',
   styleUrl: './login-form.component.scss'

@@ -33,9 +33,7 @@ import { ProjectEditorComponent } from './pages/corporate-dashboard/components/p
 import { ProjectDetailsComponent } from './pages/personal-dashboard/components/project-management/project-details/project-details.component';
 import { AuthorDashboardComponent } from './pages/author-dashboard/author-dashboard.component';
 import { AuthorRequestsComponent } from './pages/author-dashboard/components/author-requests/author-requests.component';
-import { AuthorRequestEditorComponent } from './pages/author-dashboard/components/author-requests/author-request-editor/author-request-editor.component';
 import { AuthorBooksComponent } from './pages/author-dashboard/components/author-books/author-books.component';
-import { AuthorBookEditorComponent } from './pages/author-dashboard/components/author-books/author-book-editor/author-book-editor.component';
 import { AuthorProjectsComponent } from './pages/author-dashboard/components/author-projects/author-projects.component';
 import { PublisherDashboardComponent } from './pages/publisher-dashboard/publisher-dashboard.component';
 import { PublisherRequestsComponent } from './pages/publisher-dashboard/components/publisher-requests/publisher-requests.component';
@@ -44,11 +42,15 @@ import { TeamComponent } from './pages/publisher-dashboard/components/team/team.
 import { PublishersComponent } from './pages/author-dashboard/components/publishers/publishers.component';
 import { TasksComponent } from './pages/publisher-dashboard/components/tasks/tasks.component';
 import { PublisherRequestEvaluationsComponent } from './pages/publisher-dashboard/components/evaluation/publisher-request-evaluation.component';
+import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
+import { ResetPasswordEmailComponent } from './pages/reset-password-email/reset-password-email.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'confirm-email', component: ConfirmEmailComponent },
+  { path: 'reset-password', component: ResetPasswordComponent },
+  { path: 'reset-password-request', component: ResetPasswordEmailComponent },
   {
     path: 'corporate-dashboard',
     component: CorporateDashboardComponent,
