@@ -9,7 +9,7 @@
     <button class="theme-btn" (click)="toggleTheme()">
       <i [class]="isDark ? 'fa-regular fa-sun' : 'fa-regular fa-moon'"></i>
     </button>
-   
+
 
     <div class="user-profile" (click)="toggleProfileMenu()" #profileMenu>
       <div class="user-avatar">
@@ -33,14 +33,14 @@
         </div>
 
         <div class="menu-items">
-          <button class="menu-item" (click)="navigateToProfile()">
+          <button class="menu-item" (click)="openProfileForm()">
             <fa-icon [icon]="faUser"></fa-icon>
             <span>الملف الشخصي</span>
           </button>
-          <!-- <button class="menu-item" (click)="navigateToSettings()">
-            <fa-icon [icon]="faCog"></fa-icon>
-            <span>الإعدادات</span>
-          </button> -->
+          <button class="menu-item" (click)="openServicesForm()">
+            <fa-icon [icon]="faUser"></fa-icon>
+            <span>إعدادات الخدمات</span>
+          </button>
           <div class="menu-divider"></div>
           <button class="menu-item logout" (click)="logout()">
             <fa-icon [icon]="faSignOutAlt"></fa-icon>
@@ -51,3 +51,7 @@
     </div>
   </div>
 </header>
+
+<app-publisher-profile-editor *ngIf="showProfileForm" (close)="closeProfileForm()"></app-publisher-profile-editor>
+
+<app-publisher-services-editor *ngIf="showServicesForm" (close)="closeServiceForm()"></app-publisher-services-editor>
