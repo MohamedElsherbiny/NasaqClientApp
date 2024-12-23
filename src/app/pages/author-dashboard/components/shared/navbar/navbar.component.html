@@ -13,9 +13,41 @@
     <button class="theme-btn" (click)="toggleTheme()">
       <i [class]="isDark ? 'fa-regular fa-sun' : 'fa-regular fa-moon'"></i>
     </button>
-    <!-- <button class="upgrade-btn">ترقية</button> -->
-    <div class="user-menu">
-      <i class="fa-regular fa-user"></i>
+    <div class="user-profile" (click)="toggleProfileMenu()" #profileMenu>
+      <div class="user-avatar">
+        <i class="fa-regular fa-user"></i>
+      </div>
+      <div class="user-info">
+        <span class="user-name">{{ currentUser?.name }}</span>
+        <fa-icon [icon]="faChevronDown" class="dropdown-icon" [class.open]="isProfileMenuOpen"></fa-icon>
+      </div>
+
+      <!-- Profile Menu Dropdown -->
+      <div class="profile-menu" *ngIf="isProfileMenuOpen">
+        <div class="menu-header">
+          <!-- <div class="user-avatar large">
+            {{ userInitials }}
+          </div> -->
+          <div class="user-details">
+            <span class="user-name">{{ currentUser?.name }}</span>
+            <span class="user-email">{{ currentUser?.email }}</span>
+          </div>
+        </div>
+
+        <div class="menu-items">
+          <button class="menu-item" (click)="openProfileForm()">
+            <fa-icon [icon]="faUser"></fa-icon>
+            <span>الملف الشخصي</span>
+          </button>
+          <div class="menu-divider"></div>
+          <button class="menu-item logout" (click)="logout()">
+            <fa-icon [icon]="faSignOutAlt"></fa-icon>
+            <span>تسجيل الخروج</span>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </header>
+
+<app-profile-editor *ngIf="showProfileForm" (close)="closeProfileForm()"></app-profile-editor>

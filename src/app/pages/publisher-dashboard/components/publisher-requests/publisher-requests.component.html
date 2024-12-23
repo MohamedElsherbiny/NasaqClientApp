@@ -14,22 +14,25 @@
         <div class="request-cell">{{ request.requestDate| date:'yyyy/MM/dd' }}</div>
         <div class="request-cell">{{ request.requestStatus }}</div>
         <div class="request-cell">
-          <div class="actions-menu">
+          <div class="actions-menu"
+            *ngIf="request.status != RequestStatus.Approved && request.status != RequestStatus.Rejected">
             <button class="menu-btn" (click)="toggleMenu($event, request.requestId!)">
               <fa-icon [icon]="faEllipsisVertical"></fa-icon>
             </button>
             <div class="menu-dropdown" *ngIf="activeMenu === request.requestId">
-              <button class="menu-item" *ngIf="request.status == RequestStatus.Pending"
+              <button class="menu-item"
+                *ngIf="request.status == RequestStatus.Pending|| request.status == RequestStatus.EvaluationCompleted"
                 (click)="approveRequest(request.requestId)">
                 <fa-icon [icon]="faCheckCircle"></fa-icon>
                 قبول
               </button>
-              <button class="menu-item" *ngIf="request.status == RequestStatus.Pending"
+              <button class="menu-item"
+                *ngIf="request.status == RequestStatus.Pending || request.status == RequestStatus.EvaluationCompleted"
                 (click)="rejectRequest(request.requestId)">
                 <fa-icon [icon]="faCancel"></fa-icon>
                 رفض
               </button>
-              <button class="menu-item" (click)="editRequest(request)">
+              <button class="menu-item" (click)="editRequest(request)" *ngIf="request.status == RequestStatus.Pending">
                 <fa-icon [icon]="faPerson"></fa-icon>
                 تعيين المُقيِّم
               </button>

@@ -40,4 +40,8 @@
         <fa-icon [icon]="icons.spinner" [spin]="true" *ngIf="isLoading"></fa-icon>
         <span>{{ isLoading ? 'جاري تسجيل الدخول...' : 'تسجيل الدخول' }}</span>
     </button>
+
+    <button type="button" class="submit-btn" routerLink="/">
+        العودة إلى الصفحة الرئيسية
+    </button>
 </form>

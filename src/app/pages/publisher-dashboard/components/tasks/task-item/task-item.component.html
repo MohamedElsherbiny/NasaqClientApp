@@ -24,9 +24,6 @@
         style="display: none" />
 
     <div class="task-cell">
-        <button class="btn btn-primary" (click)="fileInput.click()">
-            <fa-icon [icon]="faUpload"></fa-icon>
-        </button>
         <div class="actions-menu">
             <button class="menu-btn" (click)="toggleMenu($event)">
                 <fa-icon [icon]="faEllipsisVertical"></fa-icon>
@@ -39,6 +36,10 @@
                 <button class="menu-item" (click)="viewDetails(task)">
                     <fa-icon [icon]="faEye"></fa-icon>
                     التفاصيل
+                </button>
+                <button class="menu-item" (click)="fileInput.click()">
+                    <fa-icon [icon]="faUpload"></fa-icon>
+                    تحميل ملف
                 </button>
             </div>
         </div>

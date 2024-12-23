@@ -4,6 +4,7 @@ import { HttpService } from '../../../shared/core/services/http.service';
 import { faEnvelope, faLock, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { RouterLink } from '@angular/router';
 
 export type ResetPasswordEmailResponse = {
   token: string;
@@ -17,7 +18,7 @@ export function getFormValue<T>(form: FormGroup): T {
 @Component({
   selector: 'app-reset-password-email-form',
   standalone: true,
-  imports: [FontAwesomeModule, CommonModule, ReactiveFormsModule],
+  imports: [FontAwesomeModule, CommonModule, ReactiveFormsModule, RouterLink],
   providers: [HttpService],
   templateUrl: './reset-password-email-form.component.html',
   styleUrl: './reset-password-email-form.component.scss'
