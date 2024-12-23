@@ -35,9 +35,10 @@
         </div>
     </div>
 </div>
-<app-task-item-editor *ngIf="showForm" (close)="closeForm($event)" [projectTask]="selectedTask"></app-task-item-editor>
-<app-task-item-details *ngIf="showDetails" (close)="closeDetails($event)"
-    [projectTask]="selectedTask"></app-task-item-details>
+<app-task-item-editor *ngIf="showForm" (close)="closeForm($event)" [projectTask]="selectedTask"
+    [tasks]="tasks"></app-task-item-editor>
+<app-task-item-details *ngIf="showDetails" (close)="closeDetails($event)" [projectTask]="selectedTask"
+    [tasks]="tasks"></app-task-item-details>
 
 <app-book-documents *ngIf="showDocuments" [bookDocuments]="selectedProject?.documents"
     (close)="closeDocuments()"></app-book-documents>

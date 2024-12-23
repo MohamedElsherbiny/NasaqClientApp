@@ -8,6 +8,8 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { ProjectTask } from '../../../../../shared/models/ProjectTask';
 import { ProjectService } from '../../publisher-projects/projects.service';
 import { PublisherEmployee } from '../../../../../shared/models/PublisherEmployee';
+import { ToastrService } from 'ngx-toastr';
+import { ProjectTaskStatus } from '../../../../../shared/models/ProjectTaskStatus';
 
 @Component({
   selector: 'app-task-item-editor',
@@ -18,25 +20,32 @@ import { PublisherEmployee } from '../../../../../shared/models/PublisherEmploye
   styleUrl: './task-item-editor.component.scss'
 })
 export class TaskItemEditorComponent {
+  @Input() tasks: ProjectTask[] = [];
   @Input() projectTask: ProjectTask | null = null;
   @Output() close = new EventEmitter<boolean>();
   projectId: number | null = null;
   user = JSON.parse(localStorage.getItem('user') ?? '{}');
   projectTaskForm: FormGroup;
-
+  ProjectTaskStatus = ProjectTaskStatus;
+  
   faTimes = faTimes;
   employees: PublisherEmployee[] = [];
+  public get taskList(): ProjectTask[] {
+    return this.tasks.filter(task => task.projectTaskId !== this.projectTask?.projectTaskId);
+  }
 
   constructor(
     private fb: FormBuilder,
     private http: HttpService,
-    private projectsService: ProjectService
+    private projectsService: ProjectService,
+    private tostar: ToastrService
   ) {
     this.projectTaskForm = this.fb.group({
       taskName: ['', Validators.required],
       employeeId: [''],
       taskDescription: ['', Validators.required],
       requireAdminApproval: [''],
+      predecessorId: [''],
       dueDate: [new Date().toISOString().split('T')[0]],
     });
   }
@@ -49,6 +58,7 @@ export class TaskItemEditorComponent {
         taskDescription: this.projectTask.taskDescription,
         requireAdminApproval: this.projectTask.requireAdminApproval,
         employeeId: this.projectTask.assginTo?.employeeId,
+        predecessorId: this.projectTask?.predecessorId,
         dueDate: this.projectTask.dueDate?.toString().split('T')[0],
       });
     }
@@ -61,7 +71,8 @@ export class TaskItemEditorComponent {
       const formData = {
         projectId: this.projectId,
         taskId: this.projectTask?.projectTaskId,
-        ...this.projectTaskForm.value
+        ...this.projectTaskForm.value,
+        predecessorId: this.projectTaskForm.value.predecessorId == "null" ? null : this.projectTaskForm.value.predecessorId,
       };
 
       if (this.projectTask) {
@@ -84,6 +95,8 @@ export class TaskItemEditorComponent {
           }
         });
       }
+    } else {
+      this.tostar.error('الرجاء ملء جميع الحقول', 'خطأ');
     }
   }
 

@@ -9,6 +9,7 @@ import { ProjectTask } from '../../../../../shared/models/ProjectTask';
 import { PublisherEmployee } from '../../../../../shared/models/PublisherEmployee';
 import { ProjectTaskStatus } from '../../../../../shared/models/ProjectTaskStatus';
 import { CommentsComponent } from "../comments/comments.component";
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-task-item-details',
@@ -19,6 +20,7 @@ import { CommentsComponent } from "../comments/comments.component";
   styleUrl: './task-item-details.component.scss'
 })
 export class TaskItemDetailsComponent {
+  @Input() tasks: ProjectTask[] = [];
   @Input() projectTask: ProjectTask | null = null;
   @Output() close = new EventEmitter<boolean>();
   projectId: number | null = null;
@@ -27,15 +29,20 @@ export class TaskItemDetailsComponent {
   ProjectTaskStatus = ProjectTaskStatus;
   faTimes = faTimes;
   employees: PublisherEmployee[] = [];
+  public get predecessor(): ProjectTask | null {
+    return this.tasks.find(task => task.projectTaskId === this.projectTask?.predecessorId) ?? null;
+  }
 
   constructor(
     private fb: FormBuilder,
-    private http: HttpService
+    private http: HttpService,
+    private tostar: ToastrService
   ) {
     this.projectTaskForm = this.fb.group({
       taskName: ['', Validators.required],
       employeeId: [''],
       taskDescription: ['', Validators.required],
+      predecessorId: [''],
       requireAdminApproval: [''],
       dueDate: [new Date().toISOString().split('T')[0]],
     });
@@ -47,12 +54,12 @@ export class TaskItemDetailsComponent {
         taskName: this.projectTask.taskName,
         taskDescription: this.projectTask.taskDescription,
         requireAdminApproval: this.projectTask.requireAdminApproval,
+        predecessorId: this.projectTask?.predecessorId,
         employeeId: this.projectTask.assginTo?.employeeId,
         dueDate: this.projectTask.dueDate?.toString().split('T')[0],
       });
     }
   }
-
 
   onClose() {
     this.close.emit();
@@ -60,6 +67,12 @@ export class TaskItemDetailsComponent {
 
 
   updateTaskStatus(): void {
+    if (this.predecessor && this.predecessor.status !== ProjectTaskStatus.Completed) {
+      const predecessorTaskName = this.predecessor?.taskName ?? '(لا يوجد)';
+      this.tostar.error(`لا يمكن تحديث حالة المهمة حتى يتم الانتهاء من المهمة المعتمد عليها (${predecessorTaskName})`);
+      return;
+    }
+
     const nextStatus = this.getNextTaskStatus(this.projectTask?.status!);
 
     this.http
@@ -72,10 +85,11 @@ export class TaskItemDetailsComponent {
           this.close.emit(true);
         },
         error: (error) => {
-          console.error('Failed to update task status', error);
+          console.error('فشل في تحديث حالة المهمة', error);
         },
       });
   }
+
 
   getNextTaskStatus(currentStatus: ProjectTaskStatus): ProjectTaskStatus {
     switch (currentStatus) {

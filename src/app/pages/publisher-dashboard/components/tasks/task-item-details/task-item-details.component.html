@@ -35,6 +35,11 @@
                         placeholder="تاريخ الانتهاء">
                 </div>
 
+                <div class="form-group" *ngIf="predecessor">
+                    <label> معتمد علي</label>
+                    <input type="text" value="{{predecessor.taskName}}" readonly class="form-control"
+                        placeholder="معتمد علي">
+                </div>
                 <app-comments [projectTask]="projectTask"></app-comments>
             </div>
         </div>

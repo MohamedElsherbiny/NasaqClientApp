@@ -12,6 +12,7 @@ export interface ProjectTask {
   assginTo?: PublisherEmployee;
   book?: Book,
   dueDate?: Date;
+  predecessorId?: number;
   requireAdminApproval: boolean,
   comments: Comment[];
 }

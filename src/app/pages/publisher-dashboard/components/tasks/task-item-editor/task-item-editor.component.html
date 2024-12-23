@@ -41,6 +41,16 @@
                     </select>
                 </div>
 
+                <div class="form-group" *ngIf="projectTask?.status == ProjectTaskStatus.Pending">
+                    <label>معتمد علي</label>
+                    <select formControlName="predecessorId" class="form-control">
+                        <option [value]="null">لا يوجد</option>
+                        <option *ngFor="let task of taskList" [value]="task.projectTaskId">
+                            {{ task.taskName }}
+                        </option>
+                    </select>
+                </div>
+
             </div>
             <div class="form-actions">
                 <button class="cancel-btn" type="button" (click)="onClose()">إلغاء</button>
