@@ -1,0 +1,32 @@
+<div class="request-form-overlay" (click)="onClose()">
+    <div class="request-form" (click)="$event.stopPropagation()">
+        <div class="form-header">
+            <h2>المستندات</h2>
+            <button class="close-btn" (click)="onClose()">
+                <fa-icon [icon]="faTimes"></fa-icon>
+            </button>
+        </div>
+        <div class="contract-list">
+            <div class="contract-table">
+                <div class="contract-table-header">
+                    <div class="contract-cell">الاسم</div>
+                    <div class="contract-cell">التاريخ</div>
+                    <div class="contract-cell">الاصدار</div>
+                    <div class="contract-cell"></div>
+                </div>
+                <div class="contract-items">
+                    <div class="contract-item" *ngFor="let document of contractDocuments;">
+                        <div class="contract-cell">{{ (document.fileName.length > 30 ?
+                            (document.fileName | slice: 0:30) + '...' :
+                            document.fileName) || "مستند بدون اسم" }}</div>
+                        <div class="contract-cell">{{ document.createdDate | date : "yyyy/MM/dd HH:mm" }}</div>
+                        <div class="contract-cell">{{ document.version }}</div>
+                        <div class="contract-cell">
+                            <fa-icon [icon]="faDownload" (click)="downloadFile(document)"></fa-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

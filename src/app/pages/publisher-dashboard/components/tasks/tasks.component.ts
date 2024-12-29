@@ -68,16 +68,13 @@ export class TasksComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.projectService.selectedProjectId
-      .pipe(filter((id) => !!id))
-      .subscribe((projectId) => {
-        this.fetchProject(projectId);
-      });
-
     this.projectService.getProjects().subscribe(
       projects => {
         this.projects = projects;
         this.selectedProjectId = projects[0]?.projectId;
+        if (this.selectedProjectId) {
+          this.fetchProject(this.selectedProjectId);
+        }
       }
     );
   }
@@ -167,7 +164,7 @@ export class TasksComponent implements OnInit {
     this.http
       .post(`Tasks/${user['publisherId']}/sort`, { tasks: tasksToSort })
       .subscribe({
-        next: (response: any) => {
+        next: () => {
         },
         error: (error) => {
           console.error('Failed to sort tasks', error);

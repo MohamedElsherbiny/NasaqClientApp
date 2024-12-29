@@ -1,0 +1,74 @@
+<div class="contract-list">
+  <div class="contract-list-header">
+    <div class="header-controls">
+      <span></span>
+      <div class="view-controls">
+        <button class="add-contract-btn" (click)="addContract()">
+          <fa-icon [icon]="faFileContract"></fa-icon>
+          إنشاء عقد
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="contract-table">
+    <div class="contract-table-header">
+      <div class="contract-cell">اسم العمل </div>
+      <div class="contract-cell">اسم المؤلف</div>
+      <div class="contract-cell">الحالة</div>
+      <div class="contract-cell"></div>
+      <div class="contract-cell"></div>
+    </div>
+    <div class="contract-items">
+      <div class="contract-item" *ngFor="let contract of contracts">
+        <div class="contract-cell" (click)="editContract(contract)">{{ contract.request.book.title }}</div>
+        <div class="contract-cell" (click)="editContract(contract)">{{ contract.request.authorName }}</div>
+        <div class="contract-cell d-flex">
+          <div>{{ contract.contractStatus }}</div>
+          <div class="member-tag mx-3" *ngIf="contract.includePublisherServices">{{ 'خدمات نشر' }}</div>
+        </div>
+        <div class="contract-cell">
+          <button class="download-btn" (click)="openDocuments(contract)" *ngIf="contract.includePublisherServices">
+            <fa-icon [icon]="faDownload"></fa-icon>
+          </button>
+        </div>
+        <div class="contract-cell">
+          <div class="actions-menu"
+            *ngIf="contract.status != ContractStatus.Approved && contract.status != ContractStatus.Rejected">
+            <button class="menu-btn" (click)="toggleMenu($event, contract.contractId!)">
+              <fa-icon [icon]="faEllipsisVertical"></fa-icon>
+            </button>
+            <input #fileInput type="file" accept=".doc,.docx" (change)="onFileSelected($event, contract.contractId!)"
+              style="display: none" />
+            <div class="menu-dropdown" *ngIf="activeMenu === contract.contractId">
+              <button class="menu-item" (click)="fileInput.click()" *ngIf="contract.includePublisherServices">
+                <fa-icon [icon]="faUpload"></fa-icon>
+                تحميل ملف
+              </button>
+              <button class="menu-item" (click)="updateContractStatus(contract.contractId, ContractStatus.Pending)"
+                *ngIf="contract.status === ContractStatus.Preparing  && contract.includePublisherServices">
+                <fa-icon [icon]="faSignature"></fa-icon>
+                إرسال للتوقيع
+              </button>
+              <button class="menu-item" (click)="updateContractStatus(contract.contractId, ContractStatus.Approved)"
+                *ngIf="contract.status === ContractStatus.SignedByAuthor">
+                <fa-icon [icon]="faCheckCircle"></fa-icon>
+                قبول
+              </button>
+              <button class="menu-item" (click)="updateContractStatus(contract.contractId, ContractStatus.Rejected)"
+                *ngIf="contract.status === ContractStatus.SignedByAuthor">
+                <fa-icon [icon]="faCancel"></fa-icon>
+                رفض
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-publisher-contract-editor [contract]="selectedContract" *ngIf="showForm"
+  (close)="closeForm($event)"></app-publisher-contract-editor>
+
+<app-contract-documents *ngIf="showDocuments" (close)="closeDocuments()"
+  [contractDocuments]="selectedContract?.contractFiles"></app-contract-documents>

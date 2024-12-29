@@ -7,7 +7,14 @@
             </option>
         </select>
     </div> -->
-    <nav class="nav-menu">
+    <div>
+        <img src="assets/images/nasaq-logo.png" alt="logo" class="logo" />
+    </div>
+    <nav class="nav-menu pt-4">
+        <a routerLink="/author-dashboard/home" class="nav-item" routerLinkActive="active">
+            <fa-icon [icon]="faDashboard"></fa-icon>
+            <span class="nav-text" [class.hidden]="isCollapsed">الرئيسية</span>
+        </a>
         <a routerLink="/author-dashboard/books" class="nav-item" routerLinkActive="active">
             <fa-icon [icon]="faBook"></fa-icon>
             <span class="nav-text" [class.hidden]="isCollapsed">كتبي</span>
@@ -15,6 +22,10 @@
         <a routerLink="/author-dashboard/requests" class="nav-item" routerLinkActive="active">
             <fa-icon [icon]="faTasks"></fa-icon>
             <span class="nav-text" [class.hidden]="isCollapsed">الطلبات</span>
+        </a>
+        <a routerLink="/author-dashboard/contracts" class="nav-item" routerLinkActive="active">
+            <fa-icon [icon]="faFileContract"></fa-icon>
+            <span class="nav-text" [class.hidden]="isCollapsed">العقود</span>
         </a>
         <a routerLink="/author-dashboard/projects" class="nav-item" routerLinkActive="active">
             <fa-icon [icon]="faProjectDiagram"></fa-icon>

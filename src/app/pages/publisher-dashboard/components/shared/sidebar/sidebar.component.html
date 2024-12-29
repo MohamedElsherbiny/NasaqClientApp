@@ -7,7 +7,14 @@
             </option>
         </select>
     </div> -->
-    <nav class="nav-menu">
+    <div>
+        <img src="assets/images/nasaq-logo.png" alt="logo" class="logo" />
+    </div>
+    <nav class="nav-menu pt-4">
+        <a routerLink="/publisher-dashboard/home" class="nav-item" routerLinkActive="active">
+            <fa-icon [icon]="faDashboard"></fa-icon>
+            <span class="nav-text" [class.hidden]="isCollapsed">الرئيسية</span>
+        </a>
         <a routerLink="/publisher-dashboard/team" class="nav-item" routerLinkActive="active"
             *ngIf="roleService.isPublisher()">
             <fa-icon [icon]="faBook"></fa-icon>
@@ -17,6 +24,11 @@
             *ngIf="roleService.isPublisher()">
             <fa-icon [icon]="faBuilding"></fa-icon>
             <span class="nav-text" [class.hidden]="isCollapsed">الطلبات</span>
+        </a>
+        <a routerLink="/publisher-dashboard/contracts" class="nav-item" routerLinkActive="active"
+            *ngIf="roleService.isPublisher()">
+            <fa-icon [icon]="faFileContract"></fa-icon>
+            <span class="nav-text" [class.hidden]="isCollapsed">العقود</span>
         </a>
         <a routerLink="/publisher-dashboard/projects" class="nav-item" routerLinkActive="active"
             *ngIf="roleService.isPublisher()">

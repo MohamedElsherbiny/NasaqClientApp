@@ -21,7 +21,7 @@
             </button>
             <div class="menu-dropdown" *ngIf="activeMenu === request.requestId">
               <button class="menu-item"
-                *ngIf="request.status == RequestStatus.Pending|| request.status == RequestStatus.EvaluationCompleted"
+                *ngIf="request.status == RequestStatus.Pending || request.status == RequestStatus.EvaluationCompleted"
                 (click)="approveRequest(request.requestId)">
                 <fa-icon [icon]="faCheckCircle"></fa-icon>
                 قبول
@@ -32,7 +32,7 @@
                 <fa-icon [icon]="faCancel"></fa-icon>
                 رفض
               </button>
-              <button class="menu-item" (click)="editRequest(request)" *ngIf="request.status == RequestStatus.Pending">
+              <button class="menu-item" (click)="editRequest(request)">
                 <fa-icon [icon]="faPerson"></fa-icon>
                 تعيين المُقيِّم
               </button>

@@ -9,7 +9,9 @@ import {
   faStarHalf,
   faBuilding,
   faShareSquare,
-  faElevator
+  faElevator,
+  faFileContract,
+  faDashboard
 } from '@fortawesome/free-solid-svg-icons';
 import { RoleService } from '../../../../../shared/core/services/role.service';
 import { LogoutComponent } from '../../../../../shared/components/logout/logout.component';
@@ -39,6 +41,8 @@ export class SidebarComponent {
   faBuilding = faBuilding;
   faShareSquare = faShareSquare;
   faElevator = faElevator;
+  faFileContract = faFileContract;
+  faDashboard = faDashboard;
 
   constructor(
     private sidebarService: SidebarService,
@@ -64,7 +68,6 @@ export class SidebarComponent {
     localStorage.clear();
     this.router.navigate(['/']);
   }
-
 
   toggleProjectSelector($event: any): void {
     this.projectService.setSelectedProjectId($event.target.value);

@@ -24,6 +24,8 @@ import { TasksComponent } from './pages/publisher-dashboard/components/tasks/tas
 import { PublisherRequestEvaluationsComponent } from './pages/publisher-dashboard/components/evaluation/publisher-request-evaluation.component';
 import { ResetPasswordComponent } from './pages/reset-password/reset-password.component';
 import { ResetPasswordEmailComponent } from './pages/reset-password-email/reset-password-email.component';
+import { PublisherContractsComponent } from './pages/publisher-dashboard/components/publisher-contracts/publisher-contracts.component';
+import { AuthorContractsComponent } from './pages/author-dashboard/components/author-contracts/author-contracts.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -36,23 +38,27 @@ export const routes: Routes = [
     canActivate: [tokenValidationGuard, authorGuard],
     component: AuthorDashboardComponent,
     children: [
-      { path: '', component: AuthorDashboardIndexComponent },
+      { path: 'home', component: AuthorDashboardIndexComponent },
       { path: 'requests', component: AuthorRequestsComponent },
+      { path: 'contracts', component: AuthorContractsComponent },
       { path: 'books', component: AuthorBooksComponent },
       { path: 'projects', component: AuthorProjectsComponent },
       { path: 'publishers', component: PublishersComponent },
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
     ],
   }, {
     path: 'publisher-dashboard',
     canActivate: [tokenValidationGuard, publisherGuard],
     component: PublisherDashboardComponent,
     children: [
-      { path: '', component: PublisherDashboardIndexComponent },
+      { path: 'home', component: PublisherDashboardIndexComponent },
       { path: 'requests', component: PublisherRequestsComponent },
+      { path: 'contracts', component: PublisherContractsComponent },
       { path: 'projects', component: PublisherProjectsComponent },
       { path: 'team', component: TeamComponent },
       { path: 'tasks', component: TasksComponent },
       { path: 'evaluations', component: PublisherRequestEvaluationsComponent },
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
     ],
   },
   {

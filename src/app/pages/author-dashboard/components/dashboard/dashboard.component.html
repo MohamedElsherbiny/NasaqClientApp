@@ -1,0 +1,20 @@
+<div class="dashboard">
+    <div class="dashboard-header">
+        <h1>مرحباً، {{user?.name}}</h1>
+        <p class="date">{{ currentDate | date:'EEEE, d MMMM yyyy' }}</p>
+    </div>
+
+    <div class="metrics-grid">
+        <app-metrics-card title="عدد الكتب" [value]="dashboard?.totalBooks" trend="+5%"
+            icon="project"></app-metrics-card>
+        <app-metrics-card title="إجمالي المشاريع " [value]="dashboard?.totalProjects" trend="+12%"
+            icon="task"></app-metrics-card>
+        <app-metrics-card title="إجمالي الطلبات" [value]="dashboard?.totalRequests" trend="+5%"
+            icon="book"></app-metrics-card>
+    </div>
+
+    <div class="dashboard-grid">
+        <!-- <app-project-status></app-project-status>-->
+        <!-- <app-request-card></app-request-card> -->
+    </div>
+</div>

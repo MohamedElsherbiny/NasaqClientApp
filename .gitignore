@@ -4,6 +4,9 @@
 /tmp
 /out-tsc
 /bazel-out
+/dist
+.angular/
+node_modules/
 
 # Node
 /node_modules

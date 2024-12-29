@@ -8,7 +8,9 @@ import {
   faProjectDiagram,
   faStarHalf,
   faBuilding,
-  faShareSquare
+  faShareSquare,
+  faFileContract,
+  faDashboard
 } from '@fortawesome/free-solid-svg-icons';
 import { RoleService } from '../../../../../shared/core/services/role.service';
 import { LogoutComponent } from '../../../../../shared/components/logout/logout.component';
@@ -35,6 +37,8 @@ export class SidebarComponent {
   faStarHalf = faStarHalf;
   faBuilding = faBuilding;
   faShareSquare = faShareSquare;
+  faFileContract = faFileContract;
+  faDashboard = faDashboard;
 
   constructor(
     private sidebarService: SidebarService,
