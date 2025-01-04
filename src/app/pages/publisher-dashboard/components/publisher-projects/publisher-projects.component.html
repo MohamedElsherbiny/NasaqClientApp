@@ -47,11 +47,11 @@
       </div>
       <div class="project-members">
         <div class="member-avatars">
-          <div class="member-avatar" *ngFor="let member of project.projectTasks.slice(0, 3)">
+          <div class="member-avatar" *ngFor="let member of project.projectTasks!.slice(0, 3)">
             {{ member.taskName }}
           </div>
-          <div class="member-more" *ngIf="project.projectTasks.length > 3">
-            +{{ project.projectTasks.length - 3 }}
+          <div class="member-more" *ngIf="project.projectTasks!.length > 3">
+            +{{ project.projectTasks!.length - 3 }}
           </div>
         </div>
       </div>

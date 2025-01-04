@@ -16,5 +16,5 @@ export interface Project {
   status: RequestStatus;
   projectDate: Date;
   projectServices: ProjectService[];
-  projectTasks: ProjectTask[];
+  projectTasks?: ProjectTask[];
 }
