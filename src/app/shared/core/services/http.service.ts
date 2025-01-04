@@ -15,6 +15,10 @@ export class HttpService {
     return this.http.get<T>(`${this.baseUrl}/${endpoint}`);
   }
 
+  getBlobData(endpoint: string): Observable<Blob> {
+    return this.http.get(`${this.baseUrl}/${endpoint}`, { responseType: 'blob' });
+  }
+
   post<T>(endpoint: string, body: any): Observable<T> {
     return this.http.post<T>(`${this.baseUrl}/${endpoint}`, body);
   }

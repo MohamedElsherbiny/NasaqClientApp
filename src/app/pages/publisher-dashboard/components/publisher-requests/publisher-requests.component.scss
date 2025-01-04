@@ -42,7 +42,7 @@
 
 .request-table-header {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr .5fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 0.1fr 0.5fr;
     padding: 1rem;
     background: var(--input-bg);
     border-bottom: 1px solid var(--border-color);
@@ -55,7 +55,7 @@
 
 .request-item {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr .5fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 0.1fr 0.5fr;
     padding: 1rem;
     border-bottom: 1px solid var(--border-color);
     transition: background-color 0.2s;

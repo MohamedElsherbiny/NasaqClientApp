@@ -3,10 +3,16 @@
     <div class="header-controls">
       <span></span>
       <div class="view-controls">
-        <button class="add-contract-btn" (click)="addContract()">
-          <fa-icon [icon]="faFileContract"></fa-icon>
-          إنشاء عقد
-        </button>
+        <div class="d-flex gap-3">
+          <button class="add-contract-btn" (click)="addContract()">
+            <fa-icon [icon]="faFileContract"></fa-icon>
+            إنشاء عقد
+          </button>
+          <button class="add-contract-btn" routerLink="/publisher-dashboard/contract-template">
+            <fa-icon [icon]="faFileContract"></fa-icon>
+            تعديل قالب العقد
+          </button>
+        </div>
       </div>
     </div>
   </div>

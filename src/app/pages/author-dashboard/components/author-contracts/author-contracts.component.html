@@ -9,16 +9,16 @@
     </div>
     <div class="contract-items">
       <div class="contract-item" *ngFor="let contract of contracts">
-        <div class="contract-cell" (click)="editContract(contract)">{{ contract.request.book.title }}</div>
-        <div class="contract-cell" (click)="editContract(contract)">{{ contract.request.authorName }}</div>
+        <div class="contract-cell">{{ contract.request.book.title }}</div>
+        <div class="contract-cell">{{ contract.request.authorName }}</div>
         <div class="contract-cell d-flex">
           <div>{{ contract.contractStatus }}</div>
           <div class="member-tag mx-3" *ngIf="contract.includePublisherServices">{{ 'خدمات نشر' }}</div>
         </div>
-        <div class="contract-cell">
-          <button class="download-btn" (click)="openDocuments(contract)" *ngIf="contract.includePublisherServices">
+        <div class="contract-cell d-flex">
+          <!-- <button class="download-btn" (click)="openDocuments(contract)" *ngIf="contract.includePublisherServices">
             <fa-icon [icon]="faDownload"></fa-icon>
-          </button>
+          </button> -->
         </div>
         <div class="contract-cell">
           <div class="actions-menu"
@@ -30,9 +30,17 @@
               style="display: none" />
 
             <div class="menu-dropdown" *ngIf="activeMenu === contract.contractId">
+              <button class="menu-item" (click)="openDocuments(contract)" *ngIf="contract.includePublisherServices">
+                <fa-icon [icon]="faEye"></fa-icon>
+                استعراض الملفات
+              </button>
+              <button class="menu-item" (click)="downloadContract(contract)" *ngIf="contract.includePublisherServices">
+                <fa-icon [icon]="faDownload"></fa-icon>
+                تحميل العقد
+              </button>
               <button class="menu-item" (click)="fileInput.click()" *ngIf="contract.includePublisherServices">
                 <fa-icon [icon]="faUpload"></fa-icon>
-                تحميل ملف
+                رفع ملف
               </button>
               <button class="menu-item" (click)="updateContractStatus(contract.contractId, ContractStatus.Preparing)"
                 *ngIf="contract.status === ContractStatus.Pending">
@@ -46,9 +54,6 @@
     </div>
   </div>
 </div>
-
-<app-author-contract-editor [contract]="selectedContract" *ngIf="showForm"
-  (close)="closeForm($event)"></app-author-contract-editor>
 
 <app-contract-documents *ngIf="showDocuments" (close)="closeDocuments()"
   [contractDocuments]="selectedContract?.contractFiles"></app-contract-documents>

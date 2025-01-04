@@ -4,6 +4,7 @@ import { ContractStatus } from "./ContractStatus";
 export interface Contract {
     contractId: number;
     requestId: number;
+    totalPrice: number;
     request: BookRequest;
     status: ContractStatus;
     contractStatus: string;

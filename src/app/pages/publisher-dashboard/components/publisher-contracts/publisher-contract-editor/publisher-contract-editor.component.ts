@@ -23,7 +23,6 @@ export class PublisherContractEditorComponent implements OnInit {
   @Output() close = new EventEmitter<boolean>();
   user = JSON.parse(localStorage.getItem('user') ?? '{}');
   contractForm: FormGroup;
-  private baseUrl: string = environment.apiUrl;
 
   faTimes = faTimes;
   requests: BookRequest[] = [];
@@ -35,14 +34,17 @@ export class PublisherContractEditorComponent implements OnInit {
     private toastr: ToastrService
   ) {
     this.contractForm = this.fb.group({
-      requestId: ['', Validators.required]
+      requestId: ['', Validators.required],
+      totalPrice: ['', Validators.required],
     });
   }
 
   ngOnInit(): void {
+    console.log(this.contract);
     if (this.contract) {
       this.contractForm.patchValue({
-        requestId: this.contract?.requestId
+        requestId: this.contract?.requestId,
+        totalPrice: this.contract?.totalPrice
       });
     }
     this.fetchRequests();
@@ -67,12 +69,21 @@ export class PublisherContractEditorComponent implements OnInit {
         ...this.contractForm.value
       };
 
-      this.http.post(`Publishers/Contracts`, formData).subscribe({
-        next: () => {
-          this.contractForm.reset();
-          this.close.emit(true);
-        }
-      });
+      if (this.contract) {
+        this.http.put(`Publishers/Contracts`, formData).subscribe({
+          next: () => {
+            this.contractForm.reset();
+            this.close.emit(true);
+          }
+        });
+      } else {
+        this.http.post(`Publishers/Contracts`, formData).subscribe({
+          next: () => {
+            this.contractForm.reset();
+            this.close.emit(true);
+          }
+        });
+      }
     }
   }
 

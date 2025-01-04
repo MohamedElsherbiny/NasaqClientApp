@@ -2,16 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../../../../shared/core/services/http.service';
 import { CommonModule } from '@angular/common';
 import { ContractStatus } from '../../../../shared/models/ContractStatus';
-import { faEllipsisVertical, faFileContract, faUpload, faDownload, faSignature } from '@fortawesome/free-solid-svg-icons';
+import { faEllipsisVertical, faFileContract, faUpload, faDownload, faSignature, faEye } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { AuthorContractEditorComponent } from "./author-contract-editor/author-contract-editor.component";
 import { Contract } from '../../../../shared/models/Contract';
 import { ContractDocumentsComponent } from "../../../../shared/components/contract-documents/contract-documents.component";
+import { environment } from '../../../../../environments/environment.development';
 
 @Component({
   selector: 'app-author-contracts',
   standalone: true,
-  imports: [CommonModule, FontAwesomeModule, AuthorContractEditorComponent, ContractDocumentsComponent],
+  imports: [CommonModule, FontAwesomeModule, ContractDocumentsComponent],
   templateUrl: './author-contracts.component.html',
   styleUrl: './author-contracts.component.scss'
 })
@@ -30,6 +30,7 @@ export class AuthorContractsComponent implements OnInit {
   faDownload = faDownload;
   faFileContract = faFileContract;
   faSignature = faSignature;
+  faEye = faEye;
 
   constructor(private http: HttpService) { }
 
@@ -102,6 +103,14 @@ export class AuthorContractsComponent implements OnInit {
   openDocuments(contract: Contract): void {
     this.showDocuments = true;
     this.selectedContract = contract;
+  }
+
+  downloadContract(contract: Contract): void {
+    const requestId = contract.requestId;
+    const baseUrl = environment.apiUrl;
+
+    const url = `${baseUrl}/Publishers/Contracts/PrintContract/${requestId}`;
+    window.open(url);
   }
 
   closeDocuments(): void {

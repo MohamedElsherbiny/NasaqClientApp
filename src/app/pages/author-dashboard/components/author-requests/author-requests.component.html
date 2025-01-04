@@ -20,7 +20,9 @@
     </div>
     <div class="request-items">
       <div class="request-item" *ngFor="let request of requests">
-        <div class="request-cell">{{ request.book.title }}</div>
+        <div class="request-cell">{{ request.book.title }}
+          <p>عدد الكلمات: {{ request.book.wordCount }}</p>
+        </div>
         <div class="request-cell">{{ request.publisherName }}</div>
         <div class="request-cell">{{ request.requestDate | date:'yyyy/MM/dd' }}</div>
         <div class="request-cell">{{ request.requestStatus }}</div>

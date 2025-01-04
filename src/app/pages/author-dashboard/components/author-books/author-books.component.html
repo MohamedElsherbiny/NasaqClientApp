@@ -21,7 +21,9 @@
     </div>
     <div class="book-items">
       <div class="book-item" *ngFor="let book of books">
-        <div class="book-cell" style="cursor: pointer;" (click)="editBook(book)">{{ book.title }}</div>
+        <div class="book-cell" style="cursor: pointer;" (click)="editBook(book)">{{ book.title }}
+          <p>عدد الكلمات: {{ book.wordCount }}</p>
+        </div>
         <div class="book-cell">
           {{ (book.description?.length ?? 0 > 60 ? (book.description | slice: 0:60) + '...' :
           book.description) }}

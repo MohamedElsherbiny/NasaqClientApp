@@ -26,6 +26,7 @@ import { ResetPasswordComponent } from './pages/reset-password/reset-password.co
 import { ResetPasswordEmailComponent } from './pages/reset-password-email/reset-password-email.component';
 import { PublisherContractsComponent } from './pages/publisher-dashboard/components/publisher-contracts/publisher-contracts.component';
 import { AuthorContractsComponent } from './pages/author-dashboard/components/author-contracts/author-contracts.component';
+import { ContarctTemplateEditorComponent } from './pages/publisher-dashboard/components/publisher-contracts/template-editor/template-editor.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -57,6 +58,7 @@ export const routes: Routes = [
       { path: 'projects', component: PublisherProjectsComponent },
       { path: 'team', component: TeamComponent },
       { path: 'tasks', component: TasksComponent },
+      { path: 'contract-template', component: ContarctTemplateEditorComponent },
       { path: 'evaluations', component: PublisherRequestEvaluationsComponent },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
     ],

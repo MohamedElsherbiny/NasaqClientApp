@@ -13,7 +13,6 @@ export interface ProjectTask {
   book?: Book,
   dueDate?: Date;
   predecessorId?: number;
-  requireAdminApproval: boolean,
   comments: Comment[];
 }
 

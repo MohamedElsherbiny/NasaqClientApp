@@ -2,17 +2,26 @@
   <div class="request-table">
     <div class="request-table-header">
       <div class="request-cell">اسم العمل </div>
+      <div class="request-cell">عدد الكلمات </div>
       <div class="request-cell">اسم المؤلف</div>
       <div class="request-cell">تاريخ انشاء الطلب </div>
       <div class="request-cell">الحالة</div>
       <div class="request-cell"></div>
+      <div class="request-cell"></div>
     </div>
     <div class="request-items">
       <div class="request-item" *ngFor="let request of requests">
-        <div class="request-cell">{{ request.bookName }}</div>
+        <div class="request-cell">{{ request.bookName }}
+          <p>عدد الكلمات: {{ request.book.wordCount }}</p>
+        </div>
         <div class="request-cell">{{ request.authorName }}</div>
         <div class="request-cell">{{ request.requestDate| date:'yyyy/MM/dd' }}</div>
         <div class="request-cell">{{ request.requestStatus }}</div>
+        <div class="request-cell">
+          <button class="download-btn" (click)="openDocuments(request)">
+            <fa-icon [icon]="faDownload"></fa-icon>
+          </button>
+        </div>
         <div class="request-cell">
           <div class="actions-menu"
             *ngIf="request.status != RequestStatus.Approved && request.status != RequestStatus.Rejected">
@@ -46,3 +55,6 @@
 
 <app-publisher-request-editor [request]="selectedRequest" *ngIf="showForm"
   (close)="closeForm($event)"></app-publisher-request-editor>
+
+<app-book-documents *ngIf="showDocuments" [bookDocuments]="selectedRequest?.documents"
+  (close)="closeDocuments()"></app-book-documents>

@@ -7,11 +7,18 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PublisherContractEditorComponent } from "./publisher-contract-editor/publisher-contract-editor.component";
 import { Contract } from '../../../../shared/models/Contract';
 import { ContractDocumentsComponent } from "../../../../shared/components/contract-documents/contract-documents.component";
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-publisher-contracts',
   standalone: true,
-  imports: [CommonModule, FontAwesomeModule, PublisherContractEditorComponent, ContractDocumentsComponent],
+  imports: [
+    CommonModule,
+    RouterLink,
+    FontAwesomeModule,
+    PublisherContractEditorComponent,
+    ContractDocumentsComponent
+  ],
   templateUrl: './publisher-contracts.component.html',
   styleUrl: './publisher-contracts.component.scss'
 })

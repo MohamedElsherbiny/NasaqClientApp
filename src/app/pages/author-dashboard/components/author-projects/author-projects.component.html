@@ -2,10 +2,10 @@
   <div class="project-grid">
     <div class="project-card" *ngFor="let project of projects" (click)="editProject(project)">
       <div class="project-header">
-        <div class="project-status" [class]="project.status">
+        <!-- <div class="project-status" [class]="project.status">
           <fa-icon [icon]="faCircle"></fa-icon>
           {{ getStatusText(project.requstStatus) }}
-        </div>
+        </div> -->
         <!-- <div class="actions-menu">
           <button class="menu-btn" (click)="toggleMenu($event, project.projectId)">
             <fa-icon [icon]="faEllipsisVertical"></fa-icon>

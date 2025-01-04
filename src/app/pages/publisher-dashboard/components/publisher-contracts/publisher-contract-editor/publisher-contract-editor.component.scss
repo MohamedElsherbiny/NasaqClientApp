@@ -63,27 +63,27 @@
     padding: 0.5rem;
     font-size: 1.25rem;
 }
-
 .form-content {
     flex: 1;
     padding: 1.5rem;
     overflow-y: auto;
-}
+  }
 
-.form-group {
+  .form-group {
     margin-bottom: 1.5rem;
-}
+  }
 
-.form-group label {
+  .form-group label {
     display: block;
     margin-bottom: 0.5rem;
     color: var(--text-color);
     font-weight: 500;
-}
+  }
 
-.form-group input,
-.form-group select,
-.form-group textarea {
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    appearance: auto;
     width: 100%;
     padding: 0.75rem;
     border: 1px solid var(--border-color);
@@ -91,18 +91,18 @@
     background: var(--input-bg);
     color: var(--text-color);
     font-size: 0.95rem;
-}
+  }
 
-.form-group textarea {
+  .form-group textarea {
     resize: vertical;
-}
+  }
 
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
     border-color: #4573d2;
     outline: none;
-}
+  }
 
 .member-tags {
     display: flex;

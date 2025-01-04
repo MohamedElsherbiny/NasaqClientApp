@@ -43,7 +43,6 @@ export class TaskItemDetailsComponent {
       employeeId: [''],
       taskDescription: ['', Validators.required],
       predecessorId: [''],
-      requireAdminApproval: [''],
       dueDate: [new Date().toISOString().split('T')[0]],
     });
   }
@@ -53,7 +52,6 @@ export class TaskItemDetailsComponent {
       this.projectTaskForm.patchValue({
         taskName: this.projectTask.taskName,
         taskDescription: this.projectTask.taskDescription,
-        requireAdminApproval: this.projectTask.requireAdminApproval,
         predecessorId: this.projectTask?.predecessorId,
         employeeId: this.projectTask.assginTo?.employeeId,
         dueDate: this.projectTask.dueDate?.toString().split('T')[0],
