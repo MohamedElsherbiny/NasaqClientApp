@@ -4,6 +4,10 @@
             <div class="form-group mb-3">
                 <input formControlName="publisherName" type="text" class="form-control" placeholder="اسم المؤسسة*"
                     required />
+                <div class="validation-error"
+                    *ngIf="signupForm.get('publisherName')?.touched && signupForm.get('publisherName')?.invalid">
+                    <span *ngIf="signupForm.get('publisherName')?.errors?.['required']">اسم المؤسسة مطلوب</span>
+                </div>
             </div>
         </div>
 
@@ -11,6 +15,10 @@
             <div class="form-group mb-3">
                 <input formControlName="firstName" type="text" class="form-control" required=""
                     placeholder="الاسم الأول*">
+                <div class="validation-error"
+                    *ngIf="signupForm.get('firstName')?.touched && signupForm.get('firstName')?.invalid">
+                    <span *ngIf="signupForm.get('firstName')?.errors?.['required']">الاسم الأول مطلوب</span>
+                </div>
             </div>
         </div>
 
@@ -18,12 +26,21 @@
             <div class="form-group mb-3">
                 <input formControlName="lastName" type="text" class="form-control" required=""
                     placeholder="الاسم الأخير*">
+                <div class="validation-error"
+                    *ngIf="signupForm.get('lastName')?.touched && signupForm.get('lastName')?.invalid">
+                    <span *ngIf="signupForm.get('lastName')?.errors?.['required']">الاسم الأخير مطلوب</span>
+                </div>
             </div>
         </div>
 
         <div class="col-lg-12">
             <div class="form-group mb-3">
                 <input formControlName="email" type="text" class="form-control" placeholder="بريد إلكتروني*" required />
+                <div class="validation-error"
+                    *ngIf="signupForm.get('email')?.touched && signupForm.get('email')?.invalid">
+                    <span *ngIf="signupForm.get('email')?.errors?.['required']">بريد ألكتروني مطلوب</span>
+                    <span *ngIf="signupForm.get('email')?.errors?.['email']">البريد الالكتروني غير صحيح.</span>
+                </div>
             </div>
         </div>
 
@@ -31,6 +48,10 @@
             <div class="form-group mb-3">
                 <input formControlName="password" type="password" class="form-control" placeholder="كلمة المرور*"
                     required />
+                <div class="validation-error"
+                    *ngIf="signupForm.get('password')?.touched && signupForm.get('password')?.invalid">
+                    <span *ngIf="signupForm.get('password')?.errors?.['required']">كلمة المرور مطلوبة</span>
+                </div>
             </div>
         </div>
 
@@ -47,7 +68,7 @@
         </div> -->
 
         <div class="col-md-12">
-            <button type="submit" class="site-button" [disabled]="signupForm.invalid"
+            <button type="submit" class="site-button save-btn" [disabled]="signupForm.invalid"
                 data-bs-dismiss="modal">اشتراك</button>
         </div>
     </div>

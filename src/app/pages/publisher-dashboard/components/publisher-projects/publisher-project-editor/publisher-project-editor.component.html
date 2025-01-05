@@ -9,30 +9,58 @@
             </div>
             <div class="form-content">
                 <div class="form-group">
-                    <label>عنوان العمل</label>
-                    <input type="text" formControlName="authorBookTitle" class="form-control" placeholder="عنوان العمل">
+                    <label>عنوان العمل*</label>
+                    <input type="text" formControlName="authorBookTitle" class="form-control"
+                        placeholder="عنوان العمل*">
+                    <div class="validation-error"
+                        *ngIf="publisherProjectForm.get('authorBookTitle')?.touched && publisherProjectForm.get('authorBookTitle')?.invalid">
+                        <span *ngIf="publisherProjectForm.get('authorBookTitle')?.errors?.['required']">
+                            عنوان العمل مطلوب.</span>
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <label>إسم المؤلف الاول</label>
-                    <input type="text" formControlName="authorFirstName" class="form-control" placeholder="إسم المؤلف الاول">
+                    <label>إسم المؤلف الاول*</label>
+                    <input type="text" formControlName="authorFirstName" class="form-control"
+                        placeholder="إسم المؤلف الاول*">
+
+                    <div class="validation-error"
+                        *ngIf="publisherProjectForm.get('authorFirstName')?.touched && publisherProjectForm.get('authorFirstName')?.invalid">
+                        <span *ngIf="publisherProjectForm.get('authorFirstName')?.errors?.['required']">
+                            إسم المؤلف الاول مطلوب.</span>
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <label>إسم المؤلف الاخير</label>
-                    <input type="text" formControlName="authorLastName" class="form-control" placeholder="إسم المؤلف الاخير">
+                    <label>إسم المؤلف الاخير*</label>
+                    <input type="text" formControlName="authorLastName" class="form-control"
+                        placeholder="إسم المؤلف الاخير*">
+
+                    <div class="validation-error"
+                        *ngIf="publisherProjectForm.get('authorLastName')?.touched && publisherProjectForm.get('authorLastName')?.invalid">
+                        <span *ngIf="publisherProjectForm.get('authorLastName')?.errors?.['required']">
+                            إسم المؤلف الاخير مطلوب.</span>
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <label>البريد الالكتروني للمؤلف</label>
+                    <label>البريد الالكتروني للمؤلف*</label>
                     <input type="email" formControlName="authorEmail" class="form-control"
-                        placeholder="البريد الالكتروني للمؤلف">
+                        placeholder="البريد الالكتروني للمؤلف*">
+
+                    <div class="validation-error"
+                        *ngIf="publisherProjectForm.get('authorEmail')?.touched && publisherProjectForm.get('authorEmail')?.invalid">
+                        <span *ngIf="publisherProjectForm.get('authorEmail')?.errors?.['required']">البريد الالكتروني
+                            مطلوب.</span>
+                        <span *ngIf="publisherProjectForm.get('authorEmail')?.errors?.['email']">البريد الالكتروني غير
+                            صحيح.</span>
+                    </div>
                 </div>
 
                 <!-- Specializations -->
                 <div class="panel panel-default">
                     <div class="panel-heading wt-panel-heading py-3">
-                        <h4 class="panel-title m-a0">الخدمات المطلوبة</h4>
+                        <h4 class="panel-title m-a0">الخدمات المطلوبة*</h4>
                     </div>
                     <div class="my-3">
                         <div class="d-flex flex-wrap gap-3">
@@ -49,7 +77,7 @@
             </div>
             <div class="form-actions">
                 <button class="cancel-btn" type="button" (click)="onClose()">إلغاء</button>
-                <button class="save-btn" type="submit">حفظ</button>
+                <button class="save-btn" type="submit" [disabled]="publisherProjectForm.invalid">حفظ</button>
             </div>
         </div>
     </div>

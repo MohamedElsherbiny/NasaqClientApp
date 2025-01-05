@@ -62,13 +62,13 @@ export class PublisherRequestEditorComponent implements OnInit {
 
       this.http.post(`Requests/${this.user['publisherId']}/assign-evaluator`, formData).subscribe({
         next: () => {
+          this.toastr.success('تم تعيين مقيم بنجاح', 'نجاح');
           this.requestForm.reset();
           this.close.emit(true);
-        },
-        error: (error) => {
         }
       });
     } else {
+      this.toastr.error('يرجى ملئ النموذج بشكل صحيح', 'فشل');
     }
   }
 

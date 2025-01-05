@@ -4,11 +4,12 @@ import { HttpService } from '../../../../core/services/http.service';
 import { HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-company-signup',
   standalone: true,
-  imports: [ReactiveFormsModule, HttpClientModule],
+  imports: [ReactiveFormsModule, HttpClientModule, CommonModule],
   providers: [HttpService],
   templateUrl: './company-signup.component.html',
   styleUrl: './company-signup.component.scss'
@@ -27,8 +28,7 @@ export class CompanySignupComponent {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
-      type: ['', Validators.required]
+      password: ['', Validators.required]
     });
   }
 
@@ -39,11 +39,7 @@ export class CompanySignupComponent {
         {
           next: () => {
             this.toastr.success('تم إنشاء الحساب بنجاح', 'نجاح');
-            this.router.navigate(['/corporate-dashboard']);
-          },
-          error: (error) => {
-            console.error('فشل في إنشاء الحساب', error);
-            this.toastr.error('فشل في إنشاء الحساب، يرجى المحاولة مرة أخرى لاحقًا', 'فشل إنشاء الحساب');
+            this.router.navigate(['/publisher-dashboard']);
           }
         }
       );

@@ -62,6 +62,10 @@ export class PublisherContractEditorComponent implements OnInit {
     });
   }
 
+  showPrice(): boolean {
+    return this.requests.find(request => request.requestId == this.contractForm.get('requestId')?.value)?.isPublishService || false;
+  }
+
   onSubmit(): void {
     if (this.contractForm.valid) {
       const formData = {
@@ -72,6 +76,7 @@ export class PublisherContractEditorComponent implements OnInit {
       if (this.contract) {
         this.http.put(`Publishers/Contracts`, formData).subscribe({
           next: () => {
+            this.toastr.success('تم تعديل العقد بنجاح', 'نجاح');
             this.contractForm.reset();
             this.close.emit(true);
           }
@@ -79,6 +84,7 @@ export class PublisherContractEditorComponent implements OnInit {
       } else {
         this.http.post(`Publishers/Contracts`, formData).subscribe({
           next: () => {
+            this.toastr.success('تم إنشاء العقد بنجاح', 'نجاح');
             this.contractForm.reset();
             this.close.emit(true);
           }

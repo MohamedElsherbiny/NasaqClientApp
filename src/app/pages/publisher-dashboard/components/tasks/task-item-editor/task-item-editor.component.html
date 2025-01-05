@@ -11,12 +11,22 @@
                 <div class="form-group">
                     <label> اسم المهمة</label>
                     <input type="text" formControlName="taskName" class="form-control" placeholder="اسم المهمة">
+                    <div class="validation-error"
+                        *ngIf="projectTaskForm.get('taskName')?.touched && projectTaskForm.get('taskName')?.invalid">
+                        <span *ngIf="projectTaskForm.get('taskName')?.errors?.['required']">اسم المهمة مطلوب.</span>
+                    </div>
                 </div>
 
                 <div class="form-group">
                     <label> نبذة عن المهمة</label>
-                    <input type="text" formControlName="taskDescription" class="form-control"
-                        placeholder="نبذة عن المهمة">
+                    <textarea formControlName="taskDescription" class="form-control"
+                        placeholder="نبذة عن المهمة"></textarea>
+
+                    <div class="validation-error"
+                        *ngIf="projectTaskForm.get('taskDescription')?.touched && projectTaskForm.get('taskDescription')?.invalid">
+                        <span *ngIf="projectTaskForm.get('taskDescription')?.errors?.['required']">نبذة عن المهمة
+                            مطلوب.</span>
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -46,7 +56,7 @@
             </div>
             <div class="form-actions">
                 <button class="cancel-btn" type="button" (click)="onClose()">إلغاء</button>
-                <button class="save-btn" type="submit">حفظ</button>
+                <button class="save-btn" type="submit" [disabled]="projectTaskForm.invalid">حفظ</button>
             </div>
         </div>
     </div>

@@ -97,7 +97,7 @@ export class PublisherProjectEditorComponent implements OnInit {
       };
 
       if (this.projectServiceIds.length === 0) {
-        this.toastr.error('يجب اختيار على الأقل دور واحد', 'خطأ في النموذج');
+        this.toastr.error('يجب اختيار على الأقل خدمة واحدة', 'خطأ في النموذج');
         return;
       }
 
@@ -106,10 +106,6 @@ export class PublisherProjectEditorComponent implements OnInit {
           this.toastr.success('تم إضافة المشروع بنجاح', 'نجاح');
           this.publisherProjectForm.reset();
           this.close.emit(true);
-        },
-        error: (error) => {
-          console.error('فشل في إضافة المشروع', error);
-          this.toastr.error('فشل في إضافة المشروع، يرجى المحاولة مرة أخرى لاحقًا', 'فشل');
         }
       });
     } else {

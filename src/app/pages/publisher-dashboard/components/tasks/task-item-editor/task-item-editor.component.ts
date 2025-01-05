@@ -27,7 +27,7 @@ export class TaskItemEditorComponent {
   user = JSON.parse(localStorage.getItem('user') ?? '{}');
   projectTaskForm: FormGroup;
   ProjectTaskStatus = ProjectTaskStatus;
-  
+
   faTimes = faTimes;
   employees: PublisherEmployee[] = [];
   public get taskList(): ProjectTask[] {
@@ -78,8 +78,7 @@ export class TaskItemEditorComponent {
           next: () => {
             this.projectTaskForm.reset();
             this.close.emit(true);
-          },
-          error: (error) => {
+            this.tostar.success('تم تحديث المهمة بنجاح', 'نجاح');
           }
         });
       } else {
@@ -88,8 +87,7 @@ export class TaskItemEditorComponent {
             this.projectTaskForm.reset();
             this.onClose();
             this.close.emit(true);
-          },
-          error: (error) => {
+            this.tostar.success('تم إضافة المهمة بنجاح', 'نجاح');
           }
         });
       }
@@ -106,9 +104,6 @@ export class TaskItemEditorComponent {
     this.http.get<PublisherEmployee[]>(`Publisher/${this.user['publisherId']}/employees`).subscribe({
       next: (data) => {
         this.employees = data.filter(employee => !employee.isAdmin);
-      },
-      error: (error) => {
-        // this.toastr.error('فشل في تحميل قائمة الموظفين، يرجى المحاولة مرة أخرى لاحقًا', 'خطأ');
       }
     });
   }

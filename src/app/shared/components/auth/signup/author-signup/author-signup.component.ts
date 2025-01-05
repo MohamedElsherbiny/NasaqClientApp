@@ -4,11 +4,12 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-author-signup',
   standalone: true,
-  imports: [ReactiveFormsModule, HttpClientModule],
+  imports: [ReactiveFormsModule, HttpClientModule, CommonModule],
   providers: [HttpService],
   templateUrl: './author-signup.component.html',
   styleUrl: './author-signup.component.scss'
@@ -36,7 +37,7 @@ export class AuthorSignupComponent {
         {
           next: () => {
             this.toastr.success('تم إنشاء الحساب بنجاح', 'نجاح');
-            this.router.navigate(['/personal-dashboard']);
+            this.router.navigate(['/author-dashboard']);
           },
           error: (error) => {
             console.error('فشل في إنشاء الحساب', error);

@@ -18,7 +18,7 @@ import { PublisherEmployee } from '../../../../../shared/models/PublisherEmploye
 })
 export class TeamMemberEditorComponent {
   @Input() teamMember: PublisherEmployee | null = null;
-  @Output() close = new EventEmitter<void>();
+  @Output() close = new EventEmitter<boolean>();
   user = JSON.parse(localStorage.getItem('user') ?? '{}');
   teamMemberForm: FormGroup;
   publisherRoleIdsOptions: any[] = [];
@@ -41,7 +41,7 @@ export class TeamMemberEditorComponent {
   ngOnInit(): void {
     this.getPublisherEmployeeRoles();
   }
-  
+
   get publisherRoleIds(): FormArray {
     return this.teamMemberForm.get('publisherRoleIds') as FormArray;
   }
@@ -72,23 +72,20 @@ export class TeamMemberEditorComponent {
       };
 
       if (this.publisherRoleIds.length === 0) {
-        this.toastr.error('يجب اختيار على الأقل تخصص واحد', 'فشل');
+        this.toastr.error('يجب اختيار على الأقل دور واحد لضيفه للاهتمام', 'فشل');
         return;
       }
 
       this.http.post(`Publisher/AddEmployee/${this.user['publisherId']}`, formData).subscribe({
         next: () => {
           this.toastr.success('تم إرسال الدعوة بنجاح', 'نجاح');
+          this.close.emit(true);
           this.teamMemberForm.reset();
-        },
-        error: (error) => {
-          console.error('فشل في إرسال الدعوة', error);
-          this.toastr.error('فشل في إرسال الدعوة، يرجى المحاولة مرة أخرى لاحقًا', 'فشل');
         }
       });
     } else {
       console.warn('فشل إرسال النموذج: النموذج غير صالح');
-      this.toastr.error('النموذج غير صالح، يرجى تصحيح الأخطاء والمحاولة مرة أخرى', 'فشل');
+      this.toastr.error('يرجى ملئ النموذج بشكل صحيح', 'فشل');
     }
   }
 

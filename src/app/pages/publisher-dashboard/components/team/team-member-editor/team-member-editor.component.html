@@ -2,31 +2,44 @@
     <div class="team-member-form-overlay" (click)="onClose()">
         <div class="team-member-form" (click)="$event.stopPropagation()">
             <div class="form-header">
-                <h2>{{ false ? 'تعديل الكتاب' : 'دعوة مقدم خدمة' }}</h2>
+                <h2>دعوة مقدم خدمة</h2>
                 <button class="close-btn" (click)="onClose()">
                     <fa-icon [icon]="faTimes"></fa-icon>
                 </button>
             </div>
             <div class="form-content">
                 <div class="form-group">
-                    <label>الإسم الاول</label>
-                    <input type="text" formControlName="firstName" class="form-control" placeholder="الاسم الاول">
+                    <label>الإسم الاول*</label>
+                    <input type="text" formControlName="firstName" class="form-control" placeholder="الاسم الاول*">
+                    <div class="validation-error"
+                        *ngIf="teamMemberForm.get('firstName')?.touched && teamMemberForm.get('firstName')?.invalid">
+                        <span *ngIf="teamMemberForm.get('firstName')?.errors?.['required']">الإسم الاول مطلوب.</span>
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <label>الإسم الاخير</label>
-                    <input type="text" formControlName="lastName" class="form-control" placeholder="الاسم الاخير">
+                    <label>الإسم الاخير*</label>
+                    <input type="text" formControlName="lastName" class="form-control" placeholder="الاسم الاخير*">
+                    <div class="validation-error"
+                        *ngIf="teamMemberForm.get('lastName')?.touched && teamMemberForm.get('lastName')?.invalid">
+                        <span *ngIf="teamMemberForm.get('lastName')?.errors?.['required']">الإسم الاخير مطلوب.</span>
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <label> البريد الالكتروني</label>
-                    <input type="email" formControlName="email" class="form-control" placeholder="البريد الالكتروني">
+                    <label> البريد الالكتروني*</label>
+                    <input type="email" formControlName="email" class="form-control" placeholder="البريد الالكتروني*">
+                    <div class="validation-error"
+                        *ngIf="teamMemberForm.get('email')?.touched && teamMemberForm.get('email')?.invalid">
+                        <span *ngIf="teamMemberForm.get('email')?.errors?.['required']">البريد الالكتروني مطلوب.</span>
+                        <span *ngIf="teamMemberForm.get('email')?.errors?.['email']">البريد الالكتروني غير صحيح.</span>
+                    </div>
                 </div>
 
                 <!-- Specializations -->
                 <div class="panel panel-default">
                     <div class="panel-heading wt-panel-heading py-3">
-                        <h4 class="panel-title m-a0">الخدمات المقدمة</h4>
+                        <h4 class="panel-title m-a0">الخدمات المقدمة*</h4>
                     </div>
                     <div class="my-3">
                         <div class="d-flex flex-wrap gap-3"> <!-- Added gap-3 between checkbox items -->
@@ -43,7 +56,7 @@
             </div>
             <div class="form-actions">
                 <button class="cancel-btn" type="button" (click)="onClose()">إلغاء</button>
-                <button class="save-btn" type="submit">حفظ</button>
+                <button class="save-btn" type="submit" [disabled]="teamMemberForm.invalid">حفظ</button>
             </div>
         </div>
     </div>

@@ -9,7 +9,7 @@
             </div>
             <div class="form-content">
                 <div class="form-group">
-                    <label>اختر الطلب</label>
+                    <label>اختر الطلب*</label>
                     <select formControlName="requestId" class="form-control">
                         <option *ngFor="let request of requests" [value]="request.requestId"
                             [disabled]="contract != null">
@@ -17,7 +17,7 @@
                         </option>
                     </select>
                 </div>
-                <div class="form-group">
+                <div class="form-group" *ngIf="showPrice()">
                     <input type="number" formControlName="totalPrice" class="form-control"
                         placeholder="السعر الإجمالي" />
                 </div>

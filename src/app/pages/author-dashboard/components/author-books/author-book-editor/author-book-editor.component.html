@@ -9,25 +9,38 @@
             </div>
             <div class="form-content">
                 <div class="form-group">
-                    <label>اسم الكتاب</label>
-                    <input type="text" formControlName="title" class="form-control" placeholder="عنوان العمل">
+                    <label>اسم الكتاب*</label>
+                    <input type="text" formControlName="title" class="form-control" placeholder="عنوان العمل*">
+                    <div class="validation-error"
+                        *ngIf="bookForm.get('title')?.touched && bookForm.get('title')?.invalid">
+                        <span *ngIf="bookForm.get('title')?.errors?.['required']">اسم الكتاب مطلوب</span>
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <label>رقم الكتاب الدولي (ISBN)</label>
+                    <label>رقم الكتاب الدولي (ISBN)*</label>
                     <input type="text" formControlName="isbn" class="form-control"
-                        placeholder="رقم الكتاب الدولي (ISBN)">
+                        placeholder="رقم الكتاب الدولي (ISBN)*">
+                    <div class="validation-error"
+                        *ngIf="bookForm.get('isbn')?.touched && bookForm.get('isbn')?.invalid">
+                        <span *ngIf="bookForm.get('isbn')?.errors?.['required']">رقم الكتاب الدولي (ISBN) مطلوب</span>
+                    </div>
                 </div>
 
                 <div class="form-group">
-                    <label>تاريخ النشر</label>
+                    <label>تاريخ النشر*</label>
                     <input formControlName="publicationDate" class="form-control" type="date">
                 </div>
 
                 <div class="form-group">
-                    <label>نبذة عن الكتاب</label>
-                    <textarea formControlName="description" placeholder="نبذة عن الكتاب" class="form-control"
+                    <label>نبذة عن الكتاب*</label>
+                    <textarea formControlName="description" placeholder="نبذة عن الكتاب*" class="form-control"
                         rows="3"></textarea>
+
+                    <div class="validation-error"
+                        *ngIf="bookForm.get('description')?.touched && bookForm.get('description')?.invalid">
+                        <span *ngIf="bookForm.get('description')?.errors?.['required']">نبذة عن الكتاب مطلوبة</span>
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -48,7 +61,7 @@
             </div>
             <div class="form-actions">
                 <button class="cancel-btn" type="button" (click)="onClose()">إلغاء</button>
-                <button class="save-btn" type="submit">حفظ</button>
+                <button class="save-btn" type="submit" [disabled]="bookForm.invalid">حفظ</button>
             </div>
         </div>
     </div>

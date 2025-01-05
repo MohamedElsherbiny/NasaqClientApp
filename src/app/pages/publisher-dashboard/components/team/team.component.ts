@@ -115,7 +115,11 @@ export class TeamComponent implements OnInit {
     this.activeMenu = null;
   }
 
-  closeForm(): void {
+  closeForm(event: boolean): void {
+    if (event) {
+      this.getEmployees();
+    }
+
     this.showForm = false;
     this.selectedPublisherEmployee = null;
   }
