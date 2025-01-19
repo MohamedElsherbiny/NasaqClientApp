@@ -51,12 +51,13 @@ export class AuthorContractsComponent implements OnInit {
 
   onFileSelected(event: any, contractId: number): void {
     const file: File = event.target.files[0];
+    this.uploadFile(file, contractId);
 
-    if (file && (file.type === 'application/msword' || file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document')) {
-      this.uploadFile(file, contractId);
-    } else {
-      alert('Please select a valid Word document (.doc or .docx)');
-    }
+    // if (file && (file.type === 'application/msword' || file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document')) {
+    //   this.uploadFile(file, contractId);
+    // } else {
+    //   alert('Please select a valid Word document (.doc or .docx)');
+    // }
   }
 
   uploadFile(file: File, contractId: number): void {
