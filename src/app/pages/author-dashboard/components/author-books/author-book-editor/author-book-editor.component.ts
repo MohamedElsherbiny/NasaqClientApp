@@ -26,17 +26,80 @@ export class AuthorBookEditorComponent implements OnInit {
   fileError: boolean = false;
 
   faTimes = faTimes;
+  categories = [
+    { value: 'F', label: 'Fiction' },
+    { value: 'FA', label: 'Modern & contemporary fiction' },
+    { value: 'FB', label: 'Classic fiction' },
+    { value: 'FC', label: 'Crime & mystery' },
+    { value: 'FD', label: 'Adventure fiction' },
+    { value: 'FF', label: 'Science fiction' },
+    { value: 'FG', label: 'Fantasy' },
+    { value: 'FH', label: 'Horror & ghost stories' },
+    { value: 'FJ', label: 'War & combat fiction' },
+    { value: 'FK', label: 'Historical fiction' },
+    { value: 'FL', label: 'Romance' },
+    { value: 'FM', label: 'Erotic fiction' },
+    { value: 'FP', label: 'Thriller / suspense' },
+    { value: 'FQ', label: 'Humorous fiction' },
+    { value: 'FR', label: 'Religious & spiritual fiction' },
+    { value: 'FS', label: 'Family life fiction' },
+    { value: 'FT', label: 'Short stories' },
+    { value: 'FV', label: 'Narrative & experimental fiction' },
+
+    { value: 'A', label: 'The Arts (art, photography, music, film, theater)' },
+    { value: 'B', label: 'Biography, literature & literary studies' },
+    { value: 'C', label: 'Language & linguistics' },
+    { value: 'D', label: 'Society & social sciences (politics, law, education, sociology)' },
+    { value: 'E', label: 'Economics, finance, business & management' },
+    { value: 'G', label: 'Reference, information & interdisciplinary subjects' },
+    { value: 'H', label: 'History & archaeology' },
+    { value: 'J', label: 'Lifestyle, sport & leisure (cooking, health, self-help, crafts)' },
+    { value: 'K', label: 'Mathematics & science' },
+    { value: 'L', label: 'Medicine & nursing' },
+    { value: 'M', label: 'Technology, engineering & agriculture' },
+    { value: 'N', label: 'Earth sciences, geography, environment & planning' },
+    { value: 'P', label: 'Philosophy & religion' },
+    { value: 'Q', label: 'Psychology' },
+    { value: 'R', label: 'Regional & national interest' },
+    { value: 'T', label: 'Children’s, young adult & educational' },
+    { value: 'U', label: 'Computing & information technology' },
+    { value: 'V', label: 'English language teaching (ELT)' },
+    { value: 'W', label: 'Transport, travel & tourism' },
+    { value: 'X', label: 'Graphic novels, comics & manga' },
+    { value: 'Y', label: 'Children’s fiction & non-fiction' },
+    { value: 'Z', label: 'Unclassified' },
+
+    { value: '5AB', label: 'Pre-school (0–5 years)' },
+    { value: '5AC', label: 'Children’s (5–12 years)' },
+    { value: '5AD', label: 'Teenage / Young Adult (12–18 years)' },
+    { value: '5AF', label: 'Educational / Academic' },
+    { value: '5AG', label: 'Professional / Technical' },
+    { value: '5AL', label: 'ELT / English as a Second Language' },
+    { value: '5AM', label: 'Adult' },
+    { value: '5AP', label: 'General / Trade' },
+    { value: '5AQ', label: 'Specialist / Niche Interest' },
+    { value: '5AR', label: 'Research & Scholarly' }
+  ];
+
   constructor(
     private fb: FormBuilder,
     private http: HttpService,
-    private toastr: ToastrService,
-    private router: Router
-  ) {
+    private toastr: ToastrService) {
     this.bookForm = this.fb.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
       isbn: ['', Validators.required],
-      publicationDate: ['', Validators.required]
+      publicationDate: ['', Validators.required],
+      authorOne: ['', Validators.required],
+      authorTwo: [''],
+      authorThree: [''],
+      category: [''],
+      hasPublishedBefore: [''],
+      previousPublisherName: [''],
+      hasClearedBefore: [''],
+      depositNumber: [''],
+      targetAudience: [''],
+      authorDescription: ['']
     });
   }
   ngOnInit(): void {
@@ -73,6 +136,17 @@ export class AuthorBookEditorComponent implements OnInit {
       formData.append('description', this.bookForm.get('description')?.value);
       formData.append('isbn', this.bookForm.get('isbn')?.value);
       formData.append('publicationDate', this.bookForm.get('publicationDate')?.value);
+      formData.append('authorOne', this.bookForm.get('authorOne')?.value);
+      formData.append('authorTwo', this.bookForm.get('authorTwo')?.value);
+      formData.append('authorThree', this.bookForm.get('authorThree')?.value);
+      formData.append('category', this.bookForm.get('category')?.value);
+      formData.append('hasPublishedBefore', this.bookForm.get('hasPublishedBefore')?.value);
+      formData.append('previousPublisherName', this.bookForm.get('previousPublisherName')?.value);
+      formData.append('hasClearedBefore', this.bookForm.get('hasClearedBefore')?.value);
+      formData.append('depositNumber', this.bookForm.get('depositNumber')?.value);
+      formData.append('targetAudience', this.bookForm.get('targetAudience')?.value);
+      formData.append('authorDescription', this.bookForm.get('authorDescription')?.value);
+
       formData.append('authorId', this.user['authorId']);
       formData.append('formFile', this.selectedFile, this.selectedFile.name);
       formData.append('fileName', this.selectedFile.name);

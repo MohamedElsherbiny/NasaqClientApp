@@ -27,6 +27,8 @@ import { ResetPasswordEmailComponent } from './pages/reset-password-email/reset-
 import { PublisherContractsComponent } from './pages/publisher-dashboard/components/publisher-contracts/publisher-contracts.component';
 import { AuthorContractsComponent } from './pages/author-dashboard/components/author-contracts/author-contracts.component';
 import { ContarctTemplateEditorComponent } from './pages/publisher-dashboard/components/publisher-contracts/template-editor/template-editor.component';
+import { completeProfileGuard } from './shared/core/guards/complete-profile.guard';
+import { PublisherProfileEditorComponent } from './pages/publisher-dashboard/components/publisher-profile-editor/publisher-profile-editor.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -45,6 +47,7 @@ export const routes: Routes = [
       { path: 'books', component: AuthorBooksComponent },
       { path: 'projects', component: AuthorProjectsComponent },
       { path: 'publishers', component: PublishersComponent },
+      { path: 'complete-profile', component: PublishersComponent },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
     ],
   }, {
@@ -52,14 +55,15 @@ export const routes: Routes = [
     canActivate: [tokenValidationGuard, publisherGuard],
     component: PublisherDashboardComponent,
     children: [
-      { path: 'home', component: PublisherDashboardIndexComponent },
-      { path: 'requests', component: PublisherRequestsComponent },
-      { path: 'contracts', component: PublisherContractsComponent },
-      { path: 'projects', component: PublisherProjectsComponent },
-      { path: 'team', component: TeamComponent },
-      { path: 'tasks', component: TasksComponent },
-      { path: 'contract-template', component: ContarctTemplateEditorComponent },
-      { path: 'evaluations', component: PublisherRequestEvaluationsComponent },
+      { path: 'home', component: PublisherDashboardIndexComponent, canActivate: [completeProfileGuard] },
+      { path: 'requests', component: PublisherRequestsComponent, canActivate: [completeProfileGuard] },
+      { path: 'contracts', component: PublisherContractsComponent, canActivate: [completeProfileGuard] },
+      { path: 'projects', component: PublisherProjectsComponent, canActivate: [completeProfileGuard] },
+      { path: 'team', component: TeamComponent, canActivate: [completeProfileGuard] },
+      { path: 'tasks', component: TasksComponent, canActivate: [completeProfileGuard] },
+      { path: 'contract-template', component: ContarctTemplateEditorComponent, canActivate: [completeProfileGuard] },
+      { path: 'evaluations', component: PublisherRequestEvaluationsComponent, canActivate: [completeProfileGuard] },
+      { path: 'complete-profile', component: PublisherProfileEditorComponent },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
     ],
   },

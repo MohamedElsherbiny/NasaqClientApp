@@ -1,9 +1,18 @@
 import { Injectable } from '@angular/core';
+import { HttpService } from './http.service';
+import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RoleService {
+  constructor(
+    private http: HttpService,
+    private router: Router,
+    private toastr: ToastrService) { }
+
   private readonly roleKey = 'http://schemas.microsoft.com/ws/2008/06/identity/claims/role';
 
   getUserRoles(): string[] {

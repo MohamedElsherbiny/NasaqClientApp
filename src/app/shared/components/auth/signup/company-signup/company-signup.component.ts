@@ -24,9 +24,9 @@ export class CompanySignupComponent {
     private toastr: ToastrService
   ) {
     this.signupForm = this.fb.group({
-      publisherName: ['', Validators.required],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
+      // publisherName: ['', Validators.required],
+      // firstName: ['', Validators.required],
+      // lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required]
     });

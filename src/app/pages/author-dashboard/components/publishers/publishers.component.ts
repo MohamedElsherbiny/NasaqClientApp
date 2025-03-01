@@ -1,8 +1,9 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpParams } from '@angular/common/http';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { HttpService } from '../../../../shared/core/services/http.service';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import {
   faEnvelope,
   faPhone,
@@ -10,16 +11,27 @@ import {
   faStarHalf,
   faPalette,
   faBook,
-  faClipboardCheck
+  faClipboardCheck,
+  faThLarge,
+  faList,
+  faSearch,
+  faSort
 } from '@fortawesome/free-solid-svg-icons';
 import { Publisher, ServiceType } from '../../../../shared/models/Publisher';
 import { AddPublisherRequestEditorComponent } from "./add-publisher-request-editor/add-publisher-request-editor.component";
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-add-publisher-requests',
   standalone: true,
-  imports: [HttpClientModule, CommonModule, FontAwesomeModule, AddPublisherRequestEditorComponent],
+  imports: [
+    HttpClientModule,
+    CommonModule,
+    FormsModule,
+    MatPaginatorModule,
+    FontAwesomeModule,
+    AddPublisherRequestEditorComponent],
   providers: [HttpService],
   templateUrl: './publishers.component.html',
   styleUrl: './publishers.component.scss'
@@ -30,6 +42,17 @@ export class PublishersComponent implements OnInit {
   activeMenu: number | null = null;
   showForm = false;
   selectedPublisher: Publisher | null = null;
+  pageSize = 10;
+  currentPage = 0;
+  totalItems = 0;
+  viewMode: 'grid' | 'list' = 'list';
+  searchQuery = '';
+  availableServices = ['publishing', 'design', 'auditing'];
+  sortBy = '';
+  filters = {
+    publisher: true,
+    freelancer: false
+  };
 
   // Font Awesome icons
   faEnvelope = faEnvelope;
@@ -39,6 +62,10 @@ export class PublishersComponent implements OnInit {
   faPalette = faPalette;
   faBook = faBook;
   faClipboardCheck = faClipboardCheck;
+  faThLarge = faThLarge;
+  faList = faList;
+  faSearch = faSearch;
+  faSort = faSort;
 
   constructor(private http: HttpService, private router: Router) { }
 
@@ -47,7 +74,12 @@ export class PublishersComponent implements OnInit {
   }
 
   fetchPublishers(): void {
-    this.http.get<any>(`Publisher`).subscribe({
+    this.http.get<any>(`Publisher`, {
+      pageNumber: this.currentPage + 1,
+      pageSize: this.pageSize,
+      search: this.searchQuery,
+      sortBy: this.sortBy,
+    }).subscribe({
       next: (data) => {
         this.publishers = data;
       }
@@ -92,4 +124,24 @@ export class PublishersComponent implements OnInit {
       default: return this.faBook;
     }
   }
+  filterPublishers(): void {
+    console.log(this.searchQuery, this.filters, this.sortBy);
+    this.fetchPublishers();
+  }
+
+  setViewMode(mode: 'grid' | 'list'): void {
+    this.viewMode = mode;
+    if (mode === 'grid') {
+      this.pageSize = 15;
+    } else {
+      this.pageSize = 10;
+    }
+    this.currentPage = 0;
+  }
+
+  onPageChange(event: PageEvent): void {
+    this.currentPage = event.pageIndex;
+    this.pageSize = event.pageSize;
+  }
+
 }

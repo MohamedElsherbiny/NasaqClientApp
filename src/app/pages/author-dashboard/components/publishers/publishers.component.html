@@ -1,4 +1,4 @@
-<div class="publisher-list">
+<!-- <div class="publisher-list">
   <div class="publisher-list-header">
     <h2>دور النشر</h2>
   </div>
@@ -35,6 +35,94 @@
     </div>
   </div>
 </div>
+-->
 
 <app-add-publisher-request-editor *ngIf="showForm" [publisher]="selectedPublisher"
   (close)="closeForm($event)"></app-add-publisher-request-editor>
+
+<div class="publisher-list">
+  <div class="publisher-list-header">
+    <div class="header-content">
+      <h2>دور النشر</h2>
+      <div class="view-toggle">
+        <button class="toggle-btn" [class.active]="viewMode === 'grid'" (click)="setViewMode('grid')">
+          <fa-icon [icon]="faThLarge"></fa-icon>
+        </button>
+        <button class="toggle-btn" [class.active]="viewMode === 'list'" (click)="setViewMode('list')">
+          <fa-icon [icon]="faList"></fa-icon>
+        </button>
+      </div>
+    </div>
+
+    <div class="filters-row">
+      <div class="search-box">
+        <fa-icon [icon]="faSearch"></fa-icon>
+        <input type="text" [(ngModel)]="searchQuery" (ngModelChange)="filterPublishers()" placeholder="ابحث...">
+      </div>
+
+      <div class="filters">
+        <div class="filter-group">
+          <label class="filter-option">
+            <input type="checkbox" [(ngModel)]="filters.publisher" (ngModelChange)="filterPublishers()">
+            دور النشر
+          </label>
+          <label class="filter-option">
+            <input type="checkbox" [(ngModel)]="filters.freelancer" (ngModelChange)="filterPublishers()">
+            مستقل
+          </label>
+        </div>
+
+        <!-- <div class="filter-group">
+          <label class="filter-option" *ngFor="let service of availableServices">
+            <input 
+                type="checkbox" 
+                [(ngModel)]="filters.services[service]"
+                (ngModelChange)="filterPublishers()"
+              >
+            {{ getServiceLabel(service) }}
+          </label>
+        </div> -->
+
+        <div class="sort-dropdown">
+          <fa-icon [icon]="faSort"></fa-icon>
+          <select [(ngModel)]="sortBy" (ngModelChange)="filterPublishers()">
+            <option value="">ترتيب حسب</option>
+            <option value="createDateAsc">تاريخ الإنشاء: المضاف حديثا</option>
+            <option value="createDateDesc">تاريخ الإنشاء: المضاف قديما</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="publisher-content">
+    <div class="scrollable-content py-5">
+      <div class="publisher-grid" [class.grid-view]="viewMode === 'grid'">
+        <div class="publisher-card" *ngFor="let publisher of publishers">
+          <div class="publisher-content">
+            <div class="publisher-header">
+              <div class="name-services">
+                <h3>{{ publisher.companyName }}</h3>
+                <div class="services">
+                  <div class="service-tag" *ngFor="let service of publisher.serviceTypes">
+                    <fa-icon [icon]="getServiceIcon(service)"></fa-icon>
+                    {{ service.name }}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <p class="description">{{ publisher.description }}</p>
+          </div>
+
+          <button class="request-btn" (click)="addRequest(publisher)">
+            طلب خدمة
+          </button>
+        </div>
+      </div>
+      <mat-paginator [length]="totalItems" [pageSize]="pageSize" [pageSizeOptions]="[5, 10, 15, 20]"
+        (page)="onPageChange($event)" aria-label="اختر الصفحة" class="custom-paginator">
+      </mat-paginator>
+    </div>
+  </div>
+</div>

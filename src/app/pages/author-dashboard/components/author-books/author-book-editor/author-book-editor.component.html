@@ -28,6 +28,80 @@
                 </div>
 
                 <div class="form-group">
+                    <label>إسم المؤلف*</label>
+                    <input type="text" formControlName="authorOne" class="form-control" placeholder="اسم المؤلف*">
+                    <div class="validation-error"
+                        *ngIf="bookForm.get('authorOne')?.touched && bookForm.get('authorOne')?.invalid">
+                        <span *ngIf="bookForm.get('authorOne')?.errors?.['required']"> إسم المؤلف مطلوب</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>إسم المؤلف الثاني</label>
+                    <input type="text" formControlName="authorTwo" class="form-control"
+                        placeholder="اسم المؤلف الثاني*">
+                </div>
+
+                <div class="form-group">
+                    <label>إسم المؤلف الثالث</label>
+                    <input type="text" formControlName="authorThree" class="form-control"
+                        placeholder="اسم المؤلف الثالث*">
+                </div>
+
+                <div class="form-group">
+                    <label>نبذة عن المؤلف</label>
+                    <textarea formControlName="authorDescription" placeholder="نبذة عن المؤلف*" class="form-control"
+                        rows="3"></textarea>
+
+                    <div class="validation-error"
+                        *ngIf="bookForm.get('authorDescription')?.touched && bookForm.get('authorDescription')?.invalid">
+                        <span *ngIf="bookForm.get('authorDescription')?.errors?.['required']">نبذة عن المؤلف
+                            مطلوبة</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>التصنيف</label>
+                    <select class="form-control" formControlName="category" placeholder="التصنيف*">
+                        <option *ngFor="let category of categories" [value]="category.value"> {{category.label}}
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>هل سبق نشر الكتاب</label>
+                    <select class="form-control" formControlName="hasPublishedBefore" placeholder="هل سبق نشر الكتاب*">
+                        <option value="yes"> نعم </option>
+                        <option value="no"> لا </option>
+                    </select>
+                </div>
+
+                <div class="form-group" *ngIf="bookForm.get('hasPublishedBefore')?.value === 'yes'">
+                    <label>اسم دار النشر</label>
+                    <input type="text" class="form-control" formControlName="previousPublisherName"
+                        placeholder="ادخل اسم دار النشر">
+                </div>
+
+                <div class="form-group">
+                    <label>هل سبق فسح الكتاب</label>
+                    <select class="form-control" formControlName="hasClearedBefore" placeholder="هل سبق فسح الكتاب">
+                        <option value="yes"> نعم </option>
+                        <option value="no"> لا </option>
+                    </select>
+                </div>
+
+                <div class="form-group" *ngIf="bookForm.get('hasClearedBefore')?.value === 'yes'">
+                    <label>رقم الإيداع</label>
+                    <input type="text" class="form-control" formControlName="depositNumber" placeholder="رقم الإيداع">
+                </div>
+
+                <div class="form-group">
+                    <label>الفئة المستهدفة من الكتاب</label>
+                    <input type="text" class="form-control" formControlName="targetAudience"
+                        placeholder="الفئة المستهدفة من الكتاب">
+                </div>
+
+                <div class="form-group">
                     <label>تاريخ النشر*</label>
                     <input formControlName="publicationDate" class="form-control" type="date">
                 </div>

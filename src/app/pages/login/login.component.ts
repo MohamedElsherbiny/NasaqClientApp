@@ -1,8 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { CommonModule } from '@angular/common';
-import { faEnvelope, faLock, faSpinner } from '@fortawesome/free-solid-svg-icons';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { LoginCredentials, LoginFormComponent, LoginResponse } from "./login-form/login-form.component";
 import { Router } from '@angular/router';
 import { HttpService } from '../../shared/core/services/http.service';
@@ -25,8 +24,6 @@ export class LoginComponent {
     private http: HttpService,
     private router: Router,
     private toastr: ToastrService) { }
-
-
 
   onSubmit(credentials: LoginCredentials) {
     try {
@@ -53,7 +50,6 @@ export class LoginComponent {
       this.isLoading = false;
     }
   }
-
 
   redirectToDashboard(): void {
     const user = JSON.parse(localStorage.getItem('user') ?? '{}');
