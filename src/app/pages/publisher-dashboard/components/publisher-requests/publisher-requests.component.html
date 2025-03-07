@@ -2,7 +2,7 @@
   <div class="request-table">
     <div class="request-table-header">
       <div class="request-cell">اسم العمل </div>
-      <div class="request-cell">عدد الكلمات </div>
+      <!-- <div class="request-cell">عدد الكلمات </div> -->
       <div class="request-cell">اسم المؤلف</div>
       <div class="request-cell">تاريخ انشاء الطلب </div>
       <div class="request-cell">الحالة</div>
@@ -30,18 +30,18 @@
             </button>
             <div class="menu-dropdown" *ngIf="activeMenu === request.requestId">
               <button class="menu-item"
-                *ngIf="request.status == RequestStatus.Pending || request.status == RequestStatus.EvaluationCompleted"
-                (click)="approveRequest(request.requestId)">
+                *ngIf="request.status == RequestStatus.Pending || request.status == RequestStatus.EvaluationCompleted || roleService.isIndividual()"
+                (click)="approveRequest(request)">
                 <fa-icon [icon]="faCheckCircle"></fa-icon>
                 قبول
               </button>
               <button class="menu-item"
-                *ngIf="request.status == RequestStatus.Pending || request.status == RequestStatus.EvaluationCompleted"
-                (click)="rejectRequest(request.requestId)">
+                *ngIf="request.status == RequestStatus.Pending || request.status == RequestStatus.EvaluationCompleted || roleService.isIndividual()"
+                (click)="rejectRequest(request)">
                 <fa-icon [icon]="faCancel"></fa-icon>
                 رفض
               </button>
-              <button class="menu-item" (click)="editRequest(request)">
+              <button class="menu-item" (click)="editRequest(request)" *ngIf="!roleService.isIndividual()">
                 <fa-icon [icon]="faPerson"></fa-icon>
                 تعيين المُقيِّم
               </button>

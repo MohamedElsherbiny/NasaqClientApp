@@ -7,6 +7,8 @@ import { faEllipsisVertical, faCheckCircle, faCancel, faPerson, faFileContract, 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PublisherRequestEditorComponent } from "./publisher-request-editor/publisher-request-editor.component";
 import { BookDocumentsComponent } from "../../../../shared/components/book-documents/book-documents.component";
+import { RoleService } from '../../../../shared/core/services/role.service';
+import { ProjectInvitationStatus } from '../../../../shared/models/ProjectInvitationStatus';
 
 @Component({
   selector: 'app-publisher-requests',
@@ -33,7 +35,7 @@ export class PublisherRequestsComponent implements OnInit {
   faFileContract = faFileContract;
   faDownload = faDownload;
 
-  constructor(private http: HttpService) { }
+  constructor(private http: HttpService, public roleService: RoleService) { }
 
   ngOnInit(): void {
     this.fetchRequests();
@@ -68,10 +70,9 @@ export class PublisherRequestsComponent implements OnInit {
       this.fetchRequests();
     }
   }
-
-  approveRequest(requestId: number): void {
+  updateInvitationStatus(invitationId: number, status: ProjectInvitationStatus) {
     this.http
-      .post(`Requests/${this.user['publisherId']}/approve`, { requestId })
+      .post(`Projects/${invitationId}/UpdateStatus/${status}`, {  })
       .subscribe({
         next: () => {
           this.fetchRequests();
@@ -82,9 +83,32 @@ export class PublisherRequestsComponent implements OnInit {
       });
   }
 
-  rejectRequest(requestId: number): void {
+  approveRequest(request: BookRequest): void {
+    if (request.isInvitation) {
+      this.updateInvitationStatus(request.requestId, ProjectInvitationStatus.Accepted);
+      return;
+    }
+
     this.http
-      .post(`Requests/${this.user['publisherId']}/reject`, { requestId })
+      .post(`Requests/${this.user['publisherId']}/approve`, { requestId: request.requestId })
+      .subscribe({
+        next: () => {
+          this.fetchRequests();
+        },
+        error: (error) => {
+          console.error('Failed to approve the request', error);
+        },
+      });
+  }
+
+  rejectRequest(request: BookRequest): void {
+    if (request.isInvitation) {
+      this.updateInvitationStatus(request.requestId, ProjectInvitationStatus.Rejected);
+      return;
+    }
+
+    this.http
+      .post(`Requests/${this.user['publisherId']}/reject`, { requestId: request.requestId })
       .subscribe({
         next: () => {
           this.fetchRequests();

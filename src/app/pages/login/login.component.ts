@@ -66,7 +66,7 @@ export class LoginComponent {
       this.router.navigate(['/publisher-dashboard/tasks']);
       return;
     } else if ((user[this.roleKey] as string)?.includes('Publisher')) {
-      this.router.navigate(['/publisher-dashboard/team']);
+      this.router.navigate(['/publisher-dashboard/home']);
       return;
     } else if ((user[this.roleKey] as string)?.includes('Admin')) {
       this.router.navigate(['/admin-dashboard']);

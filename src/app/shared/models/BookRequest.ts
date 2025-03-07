@@ -20,4 +20,5 @@ export interface BookRequest {
   evaluator: PublisherEmployee;
   evaluation: Evaluation;
   isPublishService: boolean;
+  isInvitation: boolean;
 }

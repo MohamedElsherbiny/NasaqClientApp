@@ -26,6 +26,16 @@ export class RoleService {
     return Array.isArray(roles) ? roles : [roles];
   }
 
+  isIndividual(): boolean {
+    const user = localStorage.getItem('user');
+    if (!user) {
+      return false;
+    }
+
+    const decodedToken = JSON.parse(user);
+    return decodedToken?.['publisherType'] === "Individual";
+  }
+
   hasRole(role: string): boolean {
     return this.getUserRoles().includes(role);
   }
