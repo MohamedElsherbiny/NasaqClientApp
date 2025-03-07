@@ -5,6 +5,7 @@ export interface PublisherEmployee {
     email: string;
     isAdmin: boolean;
     roles: PublisherEmployeeRole[];
+    avatar: string;
   }
 
   export interface PublisherEmployeeRole {

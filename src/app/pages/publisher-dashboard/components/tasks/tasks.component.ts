@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, input, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpService } from '../../../../shared/core/services/http.service';
 import {
@@ -21,6 +21,7 @@ import { TaskItemComponent } from "./task-item/task-item.component";
 import { TaskItemDetailsComponent } from "./task-item-details/task-item-details.component";
 import { RoleService } from '../../../../shared/core/services/role.service';
 import { BookDocumentsComponent } from "../../../../shared/components/book-documents/book-documents.component";
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-tasks',
@@ -41,6 +42,8 @@ import { BookDocumentsComponent } from "../../../../shared/components/book-docum
   styleUrl: './tasks.component.scss'
 })
 export class TasksComponent implements OnInit {
+  @Input() projectId: number | null = null;
+
   tasks: ProjectTask[] = [];
   showSortMenu = false;
   showFilterMenu = false;
@@ -64,19 +67,25 @@ export class TasksComponent implements OnInit {
     private http: HttpService,
     private projectService: ProjectService,
     private elementRef: ElementRef,
-    public roleService: RoleService
+    public roleService: RoleService,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    this.projectService.getProjects().subscribe(
-      projects => {
-        this.projects = projects;
-        this.selectedProjectId = projects[0]?.projectId;
-        if (this.selectedProjectId) {
-          this.fetchProject(this.selectedProjectId);
-        }
-      }
-    );
+    this.route.paramMap.subscribe(params => {
+      this.projectId = Number(params.get('id'));
+      this.fetchProject(this.projectId!);
+    });
+
+    // console.log(this.projectId);
+    // this.projectService.getProjects().subscribe(
+    //   projects => {
+    //     this.projects = projects;
+    //     this.selectedProjectId = projects[0]?.projectId;
+    //     if (this.selectedProjectId) {
+    //     }
+    //   }
+    // );
   }
 
   fetchProject(selectedProjectId: number): void {

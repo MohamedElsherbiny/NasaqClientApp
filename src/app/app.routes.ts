@@ -29,6 +29,7 @@ import { AuthorContractsComponent } from './pages/author-dashboard/components/au
 import { ContarctTemplateEditorComponent } from './pages/publisher-dashboard/components/publisher-contracts/template-editor/template-editor.component';
 import { completeProfileGuard } from './shared/core/guards/complete-profile.guard';
 import { PublisherProfileEditorComponent } from './pages/publisher-dashboard/components/publisher-profile-editor/publisher-profile-editor.component';
+import { PublisherProjectComponent } from './pages/publisher-dashboard/components/project/publisher-project.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -59,6 +60,7 @@ export const routes: Routes = [
       { path: 'requests', component: PublisherRequestsComponent, canActivate: [completeProfileGuard] },
       { path: 'contracts', component: PublisherContractsComponent, canActivate: [completeProfileGuard] },
       { path: 'projects', component: PublisherProjectsComponent, canActivate: [completeProfileGuard] },
+      { path: 'projects/:id', component: PublisherProjectComponent, canActivate: [completeProfileGuard] },
       { path: 'team', component: TeamComponent, canActivate: [completeProfileGuard] },
       { path: 'tasks', component: TasksComponent, canActivate: [completeProfileGuard] },
       { path: 'contract-template', component: ContarctTemplateEditorComponent, canActivate: [completeProfileGuard] },

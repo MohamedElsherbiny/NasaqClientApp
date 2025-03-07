@@ -73,12 +73,21 @@ export class PublishersComponent implements OnInit {
     this.fetchPublishers();
   }
 
+
   fetchPublishers(): void {
+    let publisherType = null;
+    if (this.filters.publisher && !this.filters.freelancer) {
+      publisherType = 1;
+    } else if (!this.filters.publisher && this.filters.freelancer) {
+      publisherType = 2;
+    }
+
     this.http.get<any>(`Publisher`, {
       pageNumber: this.currentPage + 1,
       pageSize: this.pageSize,
-      search: this.searchQuery,
+      keyword: this.searchQuery,
       sortBy: this.sortBy,
+      publisherType: publisherType
     }).subscribe({
       next: (data) => {
         this.publishers = data;
@@ -125,7 +134,8 @@ export class PublishersComponent implements OnInit {
     }
   }
   filterPublishers(): void {
-    console.log(this.searchQuery, this.filters, this.sortBy);
+    console.log(this.filters)
+
     this.fetchPublishers();
   }
 

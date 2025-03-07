@@ -124,9 +124,6 @@ export class PublisherBookRequestDetailsComponent implements OnInit {
       this.evaluationForm.patchValue({
         ...this.bookRequest.evaluation
       });
-
-      console.log(this.evaluationForm.get('languageLevel')?.value);
-
     }
   }
 

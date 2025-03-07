@@ -16,11 +16,17 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { PublisherProjectDetailsComponent } from "./project-details/publisher-project-details.component";
 import { PublisherProjectEditorComponent } from "./publisher-project-editor/publisher-project-editor.component";
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-publisher-projects',
   standalone: true,
-  imports: [CommonModule, FontAwesomeModule, PublisherProjectDetailsComponent, PublisherProjectEditorComponent],
+  imports: [
+    CommonModule,
+    FontAwesomeModule,
+    RouterLink,
+    PublisherProjectDetailsComponent,
+    PublisherProjectEditorComponent],
   templateUrl: './publisher-projects.component.html',
   styleUrl: './publisher-projects.component.scss',
 })

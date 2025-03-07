@@ -11,7 +11,7 @@
     </div>
   </div>
   <div class="project-grid">
-    <div class="project-card" *ngFor="let project of projects" (click)="editProject(project)">
+    <div class="project-card" *ngFor="let project of projects" [routerLink]="['/publisher-dashboard/projects', project.projectId]">
       <div class="project-header">
         <!-- <div class="project-status" [class]="project.status">
           <fa-icon [icon]="faCircle"></fa-icon>
