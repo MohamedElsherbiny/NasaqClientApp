@@ -66,8 +66,7 @@ export class AuthorContractsComponent implements OnInit {
     formData.append('contractId', contractId.toString());
 
     this.http.post(`Publishers/Contracts/UploadContractFile`, formData).subscribe({
-      next: (response) => {
-        console.log('File uploaded successfully', response);
+      next: () => {
         this.fetchContracts();
       },
       error: (error) => {

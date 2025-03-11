@@ -3,78 +3,91 @@
         <div class="request-form" (click)="$event.stopPropagation()">
             <div class="form-header">
                 <h2>تعديل الحساب</h2>
-                <!-- <button class="close-btn" (click)="onClose()">
-                    <fa-icon [icon]="faTimes"></fa-icon>
-                </button> -->
             </div>
             <div class="form-content">
                 <div class="profile-page">
                     <div class="profile-form">
                         <div class="profile-section">
+                            <!-- Email Field -->
                             <div class="form-group mt-3">
                                 <label for="email">البريد الإلكتروني</label>
                                 <input type="text" formControlName="email" class="form-control"
                                     placeholder="البريد الإلكتروني*" readonly />
+                                <small class="text-danger"
+                                    *ngIf="profileForm.get('email')?.invalid && profileForm.get('email')?.touched">
+                                    البريد الإلكتروني غير صحيح
+                                </small>
                             </div>
-                            <div class="form-group">
-                                <label> نوع الحساب</label>
-                                <select class="form-control" formControlName="publisherType">
-                                    <option
-                                        *ngFor="let publisherType of [{label:'مؤسسة',value:'1'},{label:'فرد',value:'2'}]"
-                                        [value]="publisherType.value"> {{publisherType.label}}
-                                    </option>
-                                </select>
-                            </div>
-                            <div class="form-group mt-3" *ngIf="profileForm.get('publisherType')?.value === '1'">
-                                <label for="email">إسم المؤسسة</label>
-                                <input type="text" formControlName="companyName" class="form-control"
-                                    placeholder="اسم المؤسسة*" />
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label>الاسم الأول</label>
-                                        <input type="text" formControlName="firstName" class="form-control"
-                                            placeholder="الاسم الأول*" />
-                                    </div>
-                                </div>
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label>الاسم الأخير</label>
-                                        <input type="text" formControlName="lastName" class="form-control"
-                                            placeholder="الاسم الأخير*" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label>رقم السجل التجاري </label>
-                                        <input type="text" formControlName="cRNumber" class="form-control"
-                                            placeholder="رقم السجل التجاري*" />
-                                    </div>
 
-                                </div>
-                                <div class="col">
-                                    <div class="form-group">
-                                        <label>الرقم الضريبي</label>
-                                        <input type="text" formControlName="taxNumber" class="form-control"
-                                            placeholder="الرقم الضريبي*" />
-                                    </div>
-                                </div>
+                            <!-- First Name -->
+                            <div class="form-group">
+                                <label>الاسم الأول</label>
+                                <input type="text" formControlName="firstName" class="form-control"
+                                    placeholder="الاسم الأول*" />
+                                <small class="text-danger"
+                                    *ngIf="profileForm.get('firstName')?.invalid && profileForm.get('firstName')?.touched">
+                                    يجب أن يكون الاسم الأول 2 أحرف على الأقل
+                                </small>
                             </div>
+
+                            <!-- Last Name -->
+                            <div class="form-group">
+                                <label>الاسم الأخير</label>
+                                <input type="text" formControlName="lastName" class="form-control"
+                                    placeholder="الاسم الأخير*" />
+                                <small class="text-danger"
+                                    *ngIf="profileForm.get('lastName')?.invalid && profileForm.get('lastName')?.touched">
+                                    يجب أن يكون الاسم الأخير 2 أحرف على الأقل
+                                </small>
+                            </div>
+
+                            <!-- Commercial Registration Number -->
+                            <div class="form-group">
+                                <label>رقم السجل التجاري</label>
+                                <input type="text" formControlName="cRNumber" class="form-control"
+                                    placeholder="رقم السجل التجاري*" />
+                                <small class="text-danger"
+                                    *ngIf="profileForm.get('cRNumber')?.invalid && profileForm.get('cRNumber')?.touched">
+                                    يجب إدخال رقم السجل التجاري صالح (أرقام فقط)
+                                </small>
+                            </div>
+
+                            <!-- Tax Number -->
+                            <div class="form-group">
+                                <label>الرقم الضريبي</label>
+                                <input type="text" formControlName="taxNumber" class="form-control"
+                                    placeholder="الرقم الضريبي*" />
+                                <small class="text-danger"
+                                    *ngIf="profileForm.get('taxNumber')?.invalid && profileForm.get('taxNumber')?.touched">
+                                    يجب إدخال الرقم الضريبي صالح (أرقام فقط)
+                                </small>
+                            </div>
+
+                            <!-- Contact Email -->
                             <div class="form-group mt-3">
                                 <label>البريد الإلكتروني للتواصل</label>
                                 <input type="text" formControlName="contactEmail" class="form-control"
                                     placeholder="البريد الإلكتروني للتواصل*" />
+                                <small class="text-danger"
+                                    *ngIf="profileForm.get('contactEmail')?.invalid && profileForm.get('contactEmail')?.touched">
+                                    البريد الإلكتروني غير صحيح
+                                </small>
                             </div>
+
+                            <!-- Address -->
                             <div class="form-group mt-3">
-                                <label> العنوان</label>
+                                <label>العنوان</label>
                                 <input type="text" formControlName="address" class="form-control"
-                                    placeholder=" العنوان*" />
+                                    placeholder="العنوان*" />
+                                <small class="text-danger"
+                                    *ngIf="profileForm.get('address')?.invalid && profileForm.get('address')?.touched">
+                                    يجب أن يكون العنوان 5 أحرف على الأقل
+                                </small>
                             </div>
 
                         </div>
+                        <app-publisher-services-form [services]="services"></app-publisher-services-form>
+
                     </div>
                 </div>
             </div>

@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -124,15 +124,10 @@ interface FreelancerProfile {
             </div>
           </div>
 
-          <!-- <mat-paginator
-            [length]="filteredFreelancers.length"
-            [pageSize]="pageSize"
-            [pageSizeOptions]="[6, 12, 18, 24]"
-            (page)="onPageChange($event)"
-            aria-label="اختر الصفحة"
-            class="custom-paginator"
-          >
-          </mat-paginator> -->
+          <mat-paginator [length]="totalCount" [pageSize]="pageSize" (page)="onPageChange($event)" aria-label="اختر الصفحة"
+              class="custom-paginator">
+          </mat-paginator>
+
         </ng-container>
       </div>
     </div>
@@ -269,6 +264,7 @@ interface FreelancerProfile {
       padding: 1.5rem;
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
       gap: 1rem;
     }
 
@@ -374,30 +370,32 @@ interface FreelancerProfile {
       cursor: default;
     }
 
-    .custom-paginator {
-      border-top: 1px solid var(--border-color);
-      background: transparent;
+    
+.custom-paginator {
+    background: transparent;
+    color: var(--text-color);
+    border-top: 1px solid var(--border-color);
+}
+
+::ng-deep .custom-paginator {
+    .mat-mdc-paginator-range-label,
+    .mat-mdc-paginator-page-size-label {
+        color: var(--text-color);
     }
 
-    ::ng-deep .custom-paginator {
-      .mat-mdc-paginator {
-        background: transparent;
-      }
-
-      .mat-mdc-paginator-container {
-        direction: ltr;
-      }
-
-      .mat-mdc-paginator-range-label,
-      .mat-mdc-paginator-page-size-label {
+    .mat-mdc-paginator-navigation-previous,
+    .mat-mdc-paginator-navigation-next {
         color: var(--text-color);
-      }
+    }
 
-      .mat-mdc-paginator-navigation-previous,
-      .mat-mdc-paginator-navigation-next {
+    .mat-mdc-select-value,
+    .mat-mdc-select-arrow {
         color: var(--text-color);
-      }
+    }
 
+    .mat-mdc-paginator-page-size-select {
+        margin: 0 4px;
+    }
       .mat-mdc-select-value,
       .mat-mdc-select-arrow {
         color: var(--text-color);
@@ -440,6 +438,7 @@ interface FreelancerProfile {
   `]
 })
 export class FreelancerInviteModalComponent {
+  @Input() canInvitePublishers = false;
   @Output() close = new EventEmitter<void>();
   @Output() invite = new EventEmitter<Publisher>();
 
@@ -451,62 +450,40 @@ export class FreelancerInviteModalComponent {
 
   searchQuery = '';
   selectedServices: { [key: number]: boolean } = {};
-  pageSize = 12;
+  totalCount = 0;
+  pageSize = 3;
   currentPage = 0;
   selectedFreelancer: Publisher | null = null;
   services: any[] = [];
-
-  // availableServices = [
-  //   { id: 'design', name: 'تصميم' },
-  //   { id: 'publishing', name: 'نشر' },
-  //   { id: 'auditing', name: 'تدقيق' },
-  //   { id: 'translation', name: 'ترجمة' },
-  //   { id: 'review', name: 'مراجعة محتوى' }
-  // ];
-
   displayedFreelancers: FreelancerProfile[] = [];
   publishers: Publisher[] = [];
 
   constructor(private http: HttpService, private router: Router) { }
 
   ngOnInit() {
-    // this.updateDisplayedFreelancers();
     this.fetchPublishers();
     this.getPublisherServiceTypes();
   }
 
   fetchPublishers(): void {
-    console.log(this.services)
     this.http.get<any>(`Publisher`, {
       pageNumber: this.currentPage + 1,
       pageSize: this.pageSize,
       keyword: this.searchQuery,
-      publisherType: 2,
+      publisherType: this.canInvitePublishers ? null : 2,
       serviceTypes: this.services.filter(s => s.isSelected).map(s => s.value)
     }).subscribe({
       next: (data) => {
-        this.publishers = data;
-        console.log(this.publishers)
+        this.publishers = data.items;
+        this.totalCount = data.totalCount;
       }
     });
   }
 
   onPageChange(event: PageEvent): void {
     this.currentPage = event.pageIndex;
-    this.pageSize = event.pageSize;
-    // this.updateDisplayedFreelancers();
+    this.fetchPublishers();
   }
-
-  // updateDisplayedFreelancers(): void {
-  //   const start = this.currentPage * this.pageSize;
-  //   const end = start + this.pageSize;
-  //   this.displayedFreelancers = this.filteredFreelancers.slice(start, end);
-  // }
-
-  // getServiceLabel(serviceId: string): string {
-  //   const service = this.availableServices.find(s => s.id === serviceId);
-  //   return service ? service.name : serviceId;
-  // }
 
   inviteFreelancer(freelancer: Publisher): void {
     freelancer.invited = true;

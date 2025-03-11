@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { HttpService } from '../../shared/core/services/http.service';
 import { ToastrService } from 'ngx-toastr';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { ProjectService } from '../publisher-dashboard/components/publisher-projects/projects.service';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,8 @@ export class LoginComponent {
   constructor(
     private http: HttpService,
     private router: Router,
-    private toastr: ToastrService) { }
+    private toastr: ToastrService,
+    private projectService: ProjectService) { }
 
   onSubmit(credentials: LoginCredentials) {
     try {
@@ -64,9 +66,11 @@ export class LoginComponent {
       return;
     } else if ((user[this.roleKey] as string)?.includes('PublisherEmployee')) {
       this.router.navigate(['/publisher-dashboard/tasks']);
+      this.projectService.fetchProjects();
       return;
     } else if ((user[this.roleKey] as string)?.includes('Publisher')) {
       this.router.navigate(['/publisher-dashboard/home']);
+      this.projectService.fetchProjects();
       return;
     } else if ((user[this.roleKey] as string)?.includes('Admin')) {
       this.router.navigate(['/admin-dashboard']);

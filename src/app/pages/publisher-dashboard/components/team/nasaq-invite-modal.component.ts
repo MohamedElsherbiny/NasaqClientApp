@@ -350,6 +350,7 @@ interface NasaqFreelancer {
       padding: 1.5rem;
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
       gap: 1rem;
     }
 
@@ -687,7 +688,6 @@ export class NasaqInviteModalComponent {
     }).subscribe({
       next: (data) => {
         this.publishers = data;
-        console.log(this.publishers) 
       }
     });
   }

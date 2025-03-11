@@ -35,26 +35,12 @@
             <fa-icon [icon]="faDownload"></fa-icon>
           </button>
         </div>
-        <!-- <div class="book-cell">
-          <div class="actions-menu">
-            <button class="menu-btn" (click)="toggleMenu($event, book.bookId!)">
-              <fa-icon [icon]="faEllipsisVertical"></fa-icon>
-            </button>
-            <div class="menu-dropdown" *ngIf="activeMenu === book.bookId">
-              <button class="menu-item">
-                <fa-icon [icon]="faPen"></fa-icon>
-                تعديل
-              </button>
-              <button class="menu-item">
-                <fa-icon [icon]="faTrash"></fa-icon>
-                حذف
-              </button>
-            </div>
-          </div>
-        </div> -->
       </div>
     </div>
   </div>
+  <mat-paginator [length]="totalCount" [pageSize]="pageSize" (page)="onPageChange($event)" aria-label="اختر الصفحة"
+    class="custom-paginator">
+  </mat-paginator>
 </div>
 
 <app-author-book-editor *ngIf="showForm" (close)="closeForm($event)" [book]="selectedBook"></app-author-book-editor>

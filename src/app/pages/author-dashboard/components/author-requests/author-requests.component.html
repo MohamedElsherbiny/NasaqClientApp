@@ -1,4 +1,4 @@
-<div class="request-list">
+<div class="request-list" style="max-height: 36rem;">
   <div class="request-list-header">
     <div class="header-controls">
       <span></span>
@@ -50,7 +50,13 @@
         </div> -->
       </div>
     </div>
+
   </div>
+  <mat-paginator [length]="totalCount" [pageSize]="pageSize" (page)="onPageChange($event)" aria-label="اختر الصفحة"
+    class="custom-paginator">
+  </mat-paginator>
 </div>
+
+
 <app-book-documents *ngIf="showDocuments" [bookDocuments]="selectedBookRequest?.book?.documents"
   (close)="closeDocuments()"></app-book-documents>

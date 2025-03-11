@@ -113,14 +113,7 @@ export class CommentsComponent implements OnInit {
     this.http.post(`Tasks/${user['publisherId']}/${this.projectTask?.projectTaskId}/add-employee-comment`, {
       content: comment.content,
       taskId: this.projectTask?.projectTaskId
-    }).subscribe({
-      next: (response) => {
-        console.log('Comment created successfully', response);
-      },
-      error: (error) => {
-        console.error('Failed to create comment', error);
-      }
-    });
+    }).subscribe();
   }
 }
 

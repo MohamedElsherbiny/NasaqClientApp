@@ -36,7 +36,6 @@
     border: 1px solid var(--border-color);
     border-radius: 4px;
     overflow: hidden;
-    padding-bottom: 10rem;
 }
 
 .request-table-header {
@@ -134,3 +133,8 @@
         display: none;
     }
 }
+.custom-paginator {
+    background: transparent;
+    color: var(--text-color);
+    border-top: 1px solid var(--border-color);
+  }

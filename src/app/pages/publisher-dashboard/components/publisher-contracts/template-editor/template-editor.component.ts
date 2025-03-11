@@ -51,7 +51,7 @@ import { DEFAULT_CONTRACT_TEMPLATE } from './default-contract-template';
 })
 export class ContarctTemplateEditorComponent implements OnInit {
   content = DEFAULT_CONTRACT_TEMPLATE;
-    
+
   editorConfig = DEFAULT_EDITOR_CONFIG;
 
   constructor(private router: Router, private http: HttpService) { }
@@ -78,8 +78,8 @@ export class ContarctTemplateEditorComponent implements OnInit {
       next: () => {
         this.router.navigate(['/publisher-dashboard/contracts']);
       },
-      error: (error) => {
-        console.log(error);
+
+      error: () => {
       }
     });
   }

@@ -30,6 +30,7 @@ import { ContarctTemplateEditorComponent } from './pages/publisher-dashboard/com
 import { completeProfileGuard } from './shared/core/guards/complete-profile.guard';
 import { PublisherProfileEditorComponent } from './pages/publisher-dashboard/components/publisher-profile-editor/publisher-profile-editor.component';
 import { PublisherProjectComponent } from './pages/publisher-dashboard/components/project/publisher-project.component';
+import { AuthorProjectComponent } from './pages/author-dashboard/components/project/author-project.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -49,6 +50,7 @@ export const routes: Routes = [
       { path: 'projects', component: AuthorProjectsComponent },
       { path: 'publishers', component: PublishersComponent },
       { path: 'complete-profile', component: PublishersComponent },
+      { path: 'projects/:id', component: AuthorProjectComponent },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
     ],
   }, {

@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../../../../shared/core/services/http.service';
 import { CommonModule } from '@angular/common';
 import { Book } from '../../../../shared/models/Book';
-import { BookRequest } from '../../../../shared/models/BookRequest';
 import { MetricsCardComponent } from "./metrics-card/metrics-card.component";
 import { RequestCardComponent } from "./request-card/request-card.component";
+import { ProjectService } from '../publisher-projects/projects.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,11 +19,11 @@ export class DashboardComponent implements OnInit {
   currentDate = new Date();
   user = JSON.parse(localStorage.getItem('user') ?? '{}');
 
-  constructor(private http: HttpService) { }
+  constructor(private http: HttpService, private projectService: ProjectService) { }
 
   ngOnInit(): void {
     this.fetchDashboard();
-    // this.fetchBooks();
+    this.projectService.fetchProjects();
   }
 
   fetchDashboard(): void {

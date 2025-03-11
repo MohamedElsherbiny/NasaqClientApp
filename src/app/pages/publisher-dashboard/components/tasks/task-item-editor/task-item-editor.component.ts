@@ -6,7 +6,6 @@ import { HttpService } from '../../../../../shared/core/services/http.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { ProjectTask } from '../../../../../shared/models/ProjectTask';
-import { ProjectService } from '../../publisher-projects/projects.service';
 import { PublisherEmployee } from '../../../../../shared/models/PublisherEmployee';
 import { ToastrService } from 'ngx-toastr';
 import { ProjectTaskStatus } from '../../../../../shared/models/ProjectTaskStatus';
@@ -22,8 +21,10 @@ import { ProjectTaskStatus } from '../../../../../shared/models/ProjectTaskStatu
 export class TaskItemEditorComponent {
   @Input() tasks: ProjectTask[] = [];
   @Input() projectTask: ProjectTask | null = null;
+  @Input() projectId: number | null = null;
+  @Input() hideAssignedTo: boolean | null = null;
+
   @Output() close = new EventEmitter<boolean>();
-  projectId: number | null = null;
   user = JSON.parse(localStorage.getItem('user') ?? '{}');
   projectTaskForm: FormGroup;
   ProjectTaskStatus = ProjectTaskStatus;
@@ -37,7 +38,6 @@ export class TaskItemEditorComponent {
   constructor(
     private fb: FormBuilder,
     private http: HttpService,
-    private projectsService: ProjectService,
     private tostar: ToastrService
   ) {
     this.projectTaskForm = this.fb.group({
@@ -60,8 +60,6 @@ export class TaskItemEditorComponent {
         dueDate: this.projectTask.dueDate?.toString().split('T')[0],
       });
     }
-
-    this.projectsService?.selectedProjectId.subscribe((projectId) => { this.projectId = projectId });
   }
 
   onSubmit(): void {
@@ -74,7 +72,7 @@ export class TaskItemEditorComponent {
       };
 
       if (this.projectTask) {
-        this.http.put(`Tasks/${this.user['publisherId']}`, formData).subscribe({
+        this.http.put(`Tasks`, formData).subscribe({
           next: () => {
             this.projectTaskForm.reset();
             this.close.emit(true);
@@ -82,7 +80,7 @@ export class TaskItemEditorComponent {
           }
         });
       } else {
-        this.http.post(`Tasks/${this.user['publisherId']}`, formData).subscribe({
+        this.http.post(`Tasks`, formData).subscribe({
           next: () => {
             this.projectTaskForm.reset();
             this.onClose();

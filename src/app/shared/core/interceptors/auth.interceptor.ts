@@ -21,6 +21,12 @@ export class ErrorInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(req).pipe(
             catchError((error: HttpErrorResponse) => {
+                const excludedUrls = ['getProfile'];
+
+                if (excludedUrls.some(url => req.url.includes(url))) {
+                    return throwError(() => error);
+                }
+
                 let errorMessage = 'An unexpected error occurred.';
                 if (error.error?.message) {
                     errorMessage = error.error.message;

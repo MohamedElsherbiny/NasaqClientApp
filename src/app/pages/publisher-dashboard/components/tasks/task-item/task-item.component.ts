@@ -19,6 +19,7 @@ import { RoleService } from '../../../../../shared/core/services/role.service';
 })
 export class TaskItemComponent {
   @Input() task!: ProjectTask;
+  @Input() hideAssignedTo: boolean | null = null;
   @Input() index!: number;
   @Output() editTaskEvent = new EventEmitter<ProjectTask>();
   @Output() viewDetailsEvent = new EventEmitter<ProjectTask>();
@@ -98,14 +99,6 @@ export class TaskItemComponent {
     formData.append('formFile', file);
     formData.append('taskId', taskId.toString());
 
-    this.http.post(`Publisher/${user['publisherId']}/tasks/upload-file`, formData).subscribe({
-      next: (response) => {
-        console.log('File uploaded successfully', response);
-        // this.fetchTasks();
-      },
-      error: (error) => {
-        console.error('Failed to upload file', error);
-      },
-    });
+    this.http.post(`Publisher/${user['publisherId']}/tasks/upload-file`, formData).subscribe();
   }
 }

@@ -23,7 +23,7 @@ export class TaskItemDetailsComponent {
   @Input() tasks: ProjectTask[] = [];
   @Input() projectTask: ProjectTask | null = null;
   @Output() close = new EventEmitter<boolean>();
-  projectId: number | null = null;
+
   user = JSON.parse(localStorage.getItem('user') ?? '{}');
   projectTaskForm: FormGroup;
   ProjectTaskStatus = ProjectTaskStatus;

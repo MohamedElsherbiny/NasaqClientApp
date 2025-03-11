@@ -8,7 +8,7 @@ import { RoleService } from '../../../../shared/core/services/role.service';
     providedIn: 'root'
 })
 export class ProjectService {
-    selectedProjectId = new BehaviorSubject<number>(0);
+    // selectedProjectId = new BehaviorSubject<number>(0);
     private projects = new BehaviorSubject<Project[]>([]);
 
     constructor(private http: HttpService, private roleService: RoleService) {
@@ -26,7 +26,6 @@ export class ProjectService {
             this.http.get(`Publisher/${user['publisherId']}/employee-projects`).subscribe({
                 next: (response: any) => {
                     this.projects.next(response || []);
-                    this.selectedProjectId.next(response[0]?.projectId);
                 },
                 error: (error) => {
                     console.error('Failed to fetch projects', error);
@@ -36,7 +35,6 @@ export class ProjectService {
             this.http.get(`Publisher/${user['publisherId']}/projects`).subscribe({
                 next: (response: any) => {
                     this.projects.next(response || []);
-                    this.selectedProjectId.next(response[0]?.projectId);
                 },
                 error: (error) => {
                     console.error('Failed to fetch projects', error);
@@ -45,9 +43,4 @@ export class ProjectService {
         }
 
     }
-
-    setSelectedProjectId(selectedProjectId: any) {
-        this.selectedProjectId.next(selectedProjectId);
-    }
-    //   this.projects.next([...currentProjects, project]);
 }

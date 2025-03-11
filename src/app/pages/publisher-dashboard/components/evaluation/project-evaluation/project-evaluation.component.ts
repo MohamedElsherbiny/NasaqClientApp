@@ -271,6 +271,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
       padding: 2rem;
       background: var(--bg-color);
       color: var(--text-color);
+      overflow: scroll;
+      max-height: 29rem;
     }
 
     .evaluation-header {
@@ -494,14 +496,11 @@ export class ProjectEvaluationComponent implements OnInit {
   }
 
   submitEvaluation() {
-    // console.log('Evaluation submitted:', this.ratings);
-    // Here you would typically send the ratings to your backend
   }
 
   getProjectEvaluation(): void {
     this.http.get(`Projects/evaluation`, { projectId: this.projectId }).subscribe({
       next: (response: any) => {
-        console.log('Fetched requests to evaluate:', response);
         this.evaluationForm.patchValue({
           ...response.evaluation
         });

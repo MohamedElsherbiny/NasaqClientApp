@@ -1,0 +1,25 @@
+<form [formGroup]="authorProjectForm" (ngSubmit)="onSubmit()">
+    <div class="author-project-form-overlay" (click)="onClose()">
+        <div class="author-project-form" (click)="$event.stopPropagation()">
+            <div class="form-header">
+                <h2>إضافة مشروع جديد</h2>
+                <button class="close-btn" (click)="onClose()">
+                    <fa-icon [icon]="faTimes"></fa-icon>
+                </button>
+            </div>
+            <div class="form-content">
+                <div class="form-group">
+                    <label>الكتاب</label>
+                    <select class="form-control" formControlName="bookId" placeholder="الكتاب">
+                        <option *ngFor="let book of books" [value]="book.bookId"> {{book.title}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button class="cancel-btn" type="button" (click)="onClose()">إلغاء</button>
+                <button class="save-btn" type="submit" [disabled]="authorProjectForm.invalid">حفظ</button>
+            </div>
+        </div>
+    </div>
+</form>

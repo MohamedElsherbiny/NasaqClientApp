@@ -2,6 +2,8 @@
   background: var(--bg-color);
   flex: 1;
   overflow-y: auto;
+  overflow: scroll;
+  max-height: 29rem;
 }
 
 .task-list-header {

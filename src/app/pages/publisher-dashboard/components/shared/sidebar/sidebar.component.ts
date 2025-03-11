@@ -70,8 +70,4 @@ export class SidebarComponent {
     localStorage.clear();
     this.router.navigate(['/']);
   }
-
-  toggleProjectSelector($event: any): void {
-    this.projectService.setSelectedProjectId($event.target.value);
-  }
 }

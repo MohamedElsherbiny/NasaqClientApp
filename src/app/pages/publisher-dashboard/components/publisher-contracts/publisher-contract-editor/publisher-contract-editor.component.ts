@@ -40,7 +40,6 @@ export class PublisherContractEditorComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.contract);
     if (this.contract) {
       this.contractForm.patchValue({
         requestId: this.contract?.requestId,

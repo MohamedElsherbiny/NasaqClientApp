@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { Component, ElementRef, HostListener, Input, input, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpService } from '../../../../shared/core/services/http.service';
 import {
@@ -13,9 +13,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ProjectTask } from '../../../../shared/models/ProjectTask';
-import { ProjectService } from '../publisher-projects/projects.service';
 import { Project } from '../../../../shared/models/Project';
-import { filter } from 'rxjs';
 import { TaskItemEditorComponent } from "./task-item-editor/task-item-editor.component";
 import { TaskItemComponent } from "./task-item/task-item.component";
 import { TaskItemDetailsComponent } from "./task-item-details/task-item-details.component";
@@ -43,6 +41,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class TasksComponent implements OnInit {
   @Input() projectId: number | null = null;
+  @Input() hideAssignedTo: boolean | null = null;
 
   tasks: ProjectTask[] = [];
   showSortMenu = false;
@@ -52,8 +51,7 @@ export class TasksComponent implements OnInit {
   selectedTask: ProjectTask | null = null;
   selectedProject: Project | null = null;
   showDocuments = false;
-  selectedProjectId: number | null = null;
-
+  
   // Font Awesome icons
   faPlus = faPlus;
   faFilter = faFilter;
@@ -65,7 +63,6 @@ export class TasksComponent implements OnInit {
 
   constructor(
     private http: HttpService,
-    private projectService: ProjectService,
     private elementRef: ElementRef,
     public roleService: RoleService,
     private route: ActivatedRoute
@@ -76,16 +73,6 @@ export class TasksComponent implements OnInit {
       this.projectId = Number(params.get('id'));
       this.fetchProject(this.projectId!);
     });
-
-    // console.log(this.projectId);
-    // this.projectService.getProjects().subscribe(
-    //   projects => {
-    //     this.projects = projects;
-    //     this.selectedProjectId = projects[0]?.projectId;
-    //     if (this.selectedProjectId) {
-    //     }
-    //   }
-    // );
   }
 
   fetchProject(selectedProjectId: number): void {
@@ -119,17 +106,11 @@ export class TasksComponent implements OnInit {
   closeForm(event: boolean): void {
     this.showForm = false;
     this.selectedTask = null;
-    if (event) {
-      this.fetchProject(this.projectService.selectedProjectId.value);
-    }
   }
 
   closeDetails(event: boolean): void {
     this.showDetails = false;
     this.selectedTask = null;
-    if (event) {
-      this.fetchProject(this.projectService.selectedProjectId.value);
-    }
   }
 
   toggleSortMenu(event: Event): void {
@@ -196,9 +177,5 @@ export class TasksComponent implements OnInit {
   }
   openDocuments() {
     this.showDocuments = true;
-  }
-
-  toggleProjectSelector($event: any) {
-    this.projectService.setSelectedProjectId($event.target.value);
   }
 }

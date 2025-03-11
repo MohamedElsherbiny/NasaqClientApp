@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { TeamMemberInviteComponent } from './team-member-invite.component';
@@ -87,7 +87,9 @@ interface InviteData {
             <h3>{{ member.individual.companyName }}</h3>
             </div>
             <div class="col">
-              <p *ngIf="member.status == 1">في انتظار الموافقة</p>
+              <p *ngIf="member.status == 1">قيد المراجعة</p>
+              <p *ngIf="member.status == 2">دعوة مقبولة</p>
+              <p *ngIf="member.status == 3">دعوة مرفوضة</p>
             </div>
             </div>
               <div class="member-email">
@@ -115,6 +117,7 @@ interface InviteData {
     ></app-employee-details>
     <app-freelancer-invite-modal
       *ngIf="showFreelancerModal"
+      [canInvitePublishers]="canInvitePublishers"
       (close)="showFreelancerModal = false"
       (invite)="inviteFreelancer($event)"
     ></app-freelancer-invite-modal>
@@ -276,15 +279,18 @@ interface InviteData {
   `]
 })
 export class TeamListComponent implements OnInit {
+  @Input() projectId: number | null = null;
+  @Input() canInvitePublishers = false;
+  
   showInviteForm = false;
   showFreelancerModal = false;
   showExternalForm = false;
   showEmployeeDetailsModal = false;
+  showEmployees = false;
   user = JSON.parse(localStorage.getItem('user') ?? '{}');
   employees: PublisherEmployee[] = [];
   invitations: any[] = [];
   selectedEmployee: PublisherEmployee | null = null;
-  projectId: number | null = null;
 
   // Font Awesome icons
   faUserPlus = faUserPlus;
@@ -304,7 +310,9 @@ export class TeamListComponent implements OnInit {
       this.getInvitations(this.projectId);
     });
     // Load team members
-    this.getEmployees()
+    if (this.showEmployees) {
+      this.getEmployees()
+    }
   }
 
   getEmployees(): void {
@@ -384,7 +392,6 @@ export class TeamListComponent implements OnInit {
   }
 
   inviteExternalFreelancer(data: InviteData): void {
-    console.log('Inviting external freelancer:', data);
     this.showExternalForm = false;
 
 

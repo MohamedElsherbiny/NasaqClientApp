@@ -42,9 +42,9 @@ export class PublishersComponent implements OnInit {
   activeMenu: number | null = null;
   showForm = false;
   selectedPublisher: Publisher | null = null;
-  pageSize = 10;
-  currentPage = 0;
-  totalItems = 0;
+  pageSize = 4;
+  pageIndex = 0;
+  totalCount = 0;
   viewMode: 'grid' | 'list' = 'list';
   searchQuery = '';
   availableServices = ['publishing', 'design', 'auditing'];
@@ -83,14 +83,15 @@ export class PublishersComponent implements OnInit {
     }
 
     this.http.get<any>(`Publisher`, {
-      pageNumber: this.currentPage + 1,
+      pageNumber: this.pageIndex + 1,
       pageSize: this.pageSize,
       keyword: this.searchQuery,
       sortBy: this.sortBy,
       publisherType: publisherType
     }).subscribe({
       next: (data) => {
-        this.publishers = data;
+        this.publishers = data.items;
+        this.totalCount = data.totalCount;
       }
     });
   }
@@ -133,9 +134,8 @@ export class PublishersComponent implements OnInit {
       default: return this.faBook;
     }
   }
-  filterPublishers(): void {
-    console.log(this.filters)
 
+  filterPublishers(): void {
     this.fetchPublishers();
   }
 
@@ -144,14 +144,15 @@ export class PublishersComponent implements OnInit {
     if (mode === 'grid') {
       this.pageSize = 15;
     } else {
-      this.pageSize = 10;
+      this.pageSize = 4;
     }
-    this.currentPage = 0;
+    this.pageIndex = 0;
   }
 
   onPageChange(event: PageEvent): void {
-    this.currentPage = event.pageIndex;
+    this.pageIndex = event.pageIndex;
     this.pageSize = event.pageSize;
+    this.fetchPublishers();
   }
 
 }

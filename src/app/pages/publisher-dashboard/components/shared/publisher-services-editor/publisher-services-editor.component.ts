@@ -237,7 +237,6 @@ export class PublisherServicesEditorComponent implements OnInit {
         }
       });
     }
-    console.log('Services:', this.services);
   }
   saveServices() {
     const selectedServices = this.services.filter(s => s.isSelected);
