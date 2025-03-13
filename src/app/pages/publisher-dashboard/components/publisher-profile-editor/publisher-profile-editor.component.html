@@ -8,6 +8,14 @@
                 <div class="profile-page">
                     <div class="profile-form">
                         <div class="profile-section">
+                            <div class="form-group">
+                                <label>نوع الحساب</label>
+                                <select class="form-control" formControlName="publisherType" placeholder="نوع الحساب*">
+                                    <option *ngFor="let type of publisherTypes" [value]="type.value"> {{type.label}}
+                                    </option>
+                                </select>
+                            </div>
+
                             <!-- Email Field -->
                             <div class="form-group mt-3">
                                 <label for="email">البريد الإلكتروني</label>

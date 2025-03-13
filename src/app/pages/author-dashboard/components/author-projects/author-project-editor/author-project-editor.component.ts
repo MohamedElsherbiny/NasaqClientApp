@@ -41,9 +41,9 @@ export class AuthorProjectEditorComponent implements OnInit {
   }
 
   fetchBooks(): void {
-    this.http.get(`Author/${this.user['authorId']}/books`).subscribe({
+    this.http.get(`Author/${this.user['authorId']}/books`, { pageSize: 1000, pageNumber: 1 }).subscribe({
       next: (response: any) => {
-        this.books = response || [];
+        this.books = response?.items || [];
       },
       error: (error) => {
         console.error('Failed to fetch books', error);

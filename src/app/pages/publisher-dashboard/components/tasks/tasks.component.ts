@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { Component, ElementRef, HostListener, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, Input, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpService } from '../../../../shared/core/services/http.service';
 import {
@@ -42,6 +42,8 @@ import { ActivatedRoute } from '@angular/router';
 export class TasksComponent implements OnInit {
   @Input() projectId: number | null = null;
   @Input() hideAssignedTo: boolean | null = null;
+  @Output() tasksUpdated = new EventEmitter<boolean>();
+
 
   tasks: ProjectTask[] = [];
   showSortMenu = false;
@@ -51,7 +53,7 @@ export class TasksComponent implements OnInit {
   selectedTask: ProjectTask | null = null;
   selectedProject: Project | null = null;
   showDocuments = false;
-  
+
   // Font Awesome icons
   faPlus = faPlus;
   faFilter = faFilter;
@@ -106,6 +108,7 @@ export class TasksComponent implements OnInit {
   closeForm(event: boolean): void {
     this.showForm = false;
     this.selectedTask = null;
+    this.fetchProject(this.projectId!);
   }
 
   closeDetails(event: boolean): void {

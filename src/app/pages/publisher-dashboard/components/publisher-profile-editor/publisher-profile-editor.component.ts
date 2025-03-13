@@ -18,7 +18,10 @@ import { PublisherServicesFormComponent } from "../shared/publisher-services-edi
 export class PublisherProfileEditorComponent implements OnInit {
   profileForm: FormGroup;
   services: any[] = [];
-
+  publisherTypes = [
+    { value: '1', label: 'مؤسسة' },
+    { value: '2', label: 'فرد' }
+  ]
   // Font Awesome icons
   faTimes = faTimes;
   faUser = faUser;
