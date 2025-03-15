@@ -46,9 +46,9 @@ export class AuthorRequestEditorComponent implements OnInit {
   }
 
   fetchBooks(): void {
-    this.http.get(`Author/${this.user['authorId']}/books`).subscribe({
+    this.http.get(`Author/${this.user['authorId']}/books`, { pageSize: 1000, pageNumber: 1 }).subscribe({
       next: (response: any) => {
-        this.books = response || [];
+        this.books = response?.items || [];
         this.selectedBookId = this.books[0]?.bookId ?? null;
       },
       error: (error) => {

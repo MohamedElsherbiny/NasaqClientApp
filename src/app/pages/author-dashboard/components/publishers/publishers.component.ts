@@ -51,7 +51,7 @@ export class PublishersComponent implements OnInit {
   sortBy = '';
   filters = {
     publisher: true,
-    freelancer: false
+    freelancer: true
   };
 
   // Font Awesome icons

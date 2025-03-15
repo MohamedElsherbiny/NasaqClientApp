@@ -9,16 +9,18 @@ import { PublisherRequestEditorComponent } from "./publisher-request-editor/publ
 import { BookDocumentsComponent } from "../../../../shared/components/book-documents/book-documents.component";
 import { RoleService } from '../../../../shared/core/services/role.service';
 import { ProjectInvitationStatus } from '../../../../shared/models/ProjectInvitationStatus';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-publisher-requests',
   standalone: true,
-  imports: [CommonModule, FontAwesomeModule, PublisherRequestEditorComponent, BookDocumentsComponent],
+  imports: [CommonModule, FontAwesomeModule, PublisherRequestEditorComponent, BookDocumentsComponent, MatPaginator],
   templateUrl: './publisher-requests.component.html',
   styleUrl: './publisher-requests.component.scss'
 })
 export class PublisherRequestsComponent implements OnInit {
   requests: BookRequest[] = [];
+  invitations: BookRequest[] = [];
   RequestStatus = RequestStatus;
   user = JSON.parse(localStorage.getItem('user') ?? '{}');
   selectedRequest: BookRequest | null = null;
@@ -26,6 +28,10 @@ export class PublisherRequestsComponent implements OnInit {
   showForm = false;
   showCreateContractForm = false;
   showDocuments = false;
+  totalCount = 0
+  searchQuery = ''
+  pageIndex = 0
+  pageSize = 4
 
   // Font Awesome icons
   faEllipsisVertical = faEllipsisVertical;
@@ -42,9 +48,15 @@ export class PublisherRequestsComponent implements OnInit {
   }
 
   fetchRequests(): void {
-    this.http.get(`Requests/${this.user['publisherId']}`).subscribe({
+    this.http.get(`Requests/${this.user['publisherId']}`, {
+      pageNumber: this.pageIndex + 1,
+      pageSize: this.pageSize,
+      keyword: this.searchQuery
+    }).subscribe({
       next: (response: any) => {
-        this.requests = response || [];
+        this.requests = response?.items?.filter((x: any) => !x.isInvitation) || [];
+        this.invitations = response?.items?.filter((x: any) => x.isInvitation) || [];
+        this.totalCount = response?.totalCount || 0;
       },
       error: (error) => {
         console.error('Failed to fetch requests', error);
@@ -72,7 +84,7 @@ export class PublisherRequestsComponent implements OnInit {
   }
   updateInvitationStatus(invitationId: number, status: ProjectInvitationStatus) {
     this.http
-      .post(`Projects/${invitationId}/UpdateStatus/${status}`, {  })
+      .post(`Projects/${invitationId}/UpdateStatus/${status}`, {})
       .subscribe({
         next: () => {
           this.fetchRequests();
@@ -127,5 +139,10 @@ export class PublisherRequestsComponent implements OnInit {
   openDocuments(request: BookRequest): void {
     this.showDocuments = true;
     this.selectedRequest = request;
+  }
+
+  onPageChange(page: any): void {
+    this.pageIndex = page.pageIndex;
+    this.fetchRequests();
   }
 }

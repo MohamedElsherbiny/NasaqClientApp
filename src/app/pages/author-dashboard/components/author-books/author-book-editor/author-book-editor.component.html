@@ -18,13 +18,13 @@
                 </div>
 
                 <div class="form-group">
-                    <label>رقم الكتاب الدولي (ISBN)*</label>
+                    <label>رقم الكتاب الدولي (ISBN)</label>
                     <input type="text" formControlName="isbn" class="form-control"
-                        placeholder="رقم الكتاب الدولي (ISBN)*">
-                    <div class="validation-error"
+                        placeholder="رقم الكتاب الدولي (ISBN)">
+                    <!-- <div class="validation-error"
                         *ngIf="bookForm.get('isbn')?.touched && bookForm.get('isbn')?.invalid">
                         <span *ngIf="bookForm.get('isbn')?.errors?.['required']">رقم الكتاب الدولي (ISBN) مطلوب</span>
-                    </div>
+                    </div> -->
                 </div>
 
                 <div class="form-group">
@@ -77,9 +77,23 @@
                 </div>
 
                 <div class="form-group" *ngIf="bookForm.get('hasPublishedBefore')?.value === 'yes'">
+                    <label>تاريخ النشر*</label>
+                    <input formControlName="publicationDate" class="form-control" type="date">
+                    <div class="validation-error"
+                        *ngIf="bookForm.get('publicationDate')?.touched && bookForm.get('publicationDate')?.invalid">
+                        <span *ngIf="bookForm.get('publicationDate')?.errors?.['required']">تاريخ النشر مطلوب</span>
+                    </div>
+                </div>
+
+                <div class="form-group" *ngIf="bookForm.get('hasPublishedBefore')?.value === 'yes'">
                     <label>اسم دار النشر</label>
                     <input type="text" class="form-control" formControlName="previousPublisherName"
                         placeholder="ادخل اسم دار النشر">
+                    <div class="validation-error"
+                        *ngIf="bookForm.get('previousPublisherName')?.touched && bookForm.get('previousPublisherName')?.invalid">
+                        <span *ngIf="bookForm.get('previousPublisherName')?.errors?.['required']">اسم دار النشر
+                            مطلوب</span>
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -93,18 +107,28 @@
                 <div class="form-group" *ngIf="bookForm.get('hasClearedBefore')?.value === 'yes'">
                     <label>رقم الإيداع</label>
                     <input type="text" class="form-control" formControlName="depositNumber" placeholder="رقم الإيداع">
+                    <div class="validation-error"
+                        *ngIf="bookForm.get('depositNumber')?.touched && bookForm.get('depositNumber')?.invalid">
+                        <span *ngIf="bookForm.get('depositNumber')?.errors?.['required']">رقم الإيداع مطلوب</span>
+                    </div>
                 </div>
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label>الفئة المستهدفة من الكتاب</label>
                     <input type="text" class="form-control" formControlName="targetAudience"
                         placeholder="الفئة المستهدفة من الكتاب">
-                </div>
+                </div> -->
 
                 <div class="form-group">
-                    <label>تاريخ النشر*</label>
-                    <input formControlName="publicationDate" class="form-control" type="date">
+                    <label>الفئة المستهدفة من الكتاب</label>
+                    <select class="form-control" formControlName="targetAudience"
+                        placeholder=">الفئة المستهدفة من الكتا*">
+                        <option *ngFor="let targetAudience of targetAudiences" [value]="targetAudience.value">
+                            {{targetAudience.label}}
+                        </option>
+                    </select>
                 </div>
+
 
                 <div class="form-group">
                     <label>نبذة عن الكتاب*</label>

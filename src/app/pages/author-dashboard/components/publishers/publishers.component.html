@@ -120,7 +120,7 @@
           </button>
         </div>
       </div>
-      <mat-paginator [length]="totalCount" [pageSize]="pageSize" (page)="onPageChange($event)" aria-label="اختر الصفحة"
+      <mat-paginator [hidePageSize]="true" [length]="totalCount" [pageSize]="pageSize" (page)="onPageChange($event)" aria-label="اختر الصفحة"
         class="custom-paginator">
       </mat-paginator>
     </div>

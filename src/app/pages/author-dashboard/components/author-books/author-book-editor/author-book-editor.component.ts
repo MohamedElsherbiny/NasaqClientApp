@@ -26,6 +26,12 @@ export class AuthorBookEditorComponent implements OnInit {
   fileError: boolean = false;
 
   faTimes = faTimes;
+  targetAudiences = [
+    { value: '5AB', label: 'Pre-school (0–5 years)' },
+    { value: '5AC', label: 'Children’s (5–12 years)' },
+    { value: '5AD', label: 'Teenage / Young Adult (12–18 years)' },
+    { value: '5AM', label: 'Adult' },
+  ];
   categories = [
     { value: 'F', label: 'Fiction' },
     { value: 'FA', label: 'Modern & contemporary fiction' },
@@ -69,13 +75,13 @@ export class AuthorBookEditorComponent implements OnInit {
     { value: 'Y', label: 'Children’s fiction & non-fiction' },
     { value: 'Z', label: 'Unclassified' },
 
-    { value: '5AB', label: 'Pre-school (0–5 years)' },
-    { value: '5AC', label: 'Children’s (5–12 years)' },
-    { value: '5AD', label: 'Teenage / Young Adult (12–18 years)' },
+    // { value: '5AB', label: 'Pre-school (0–5 years)' },
+    // { value: '5AC', label: 'Children’s (5–12 years)' },
+    // { value: '5AD', label: 'Teenage / Young Adult (12–18 years)' },
+    // { value: '5AM', label: 'Adult' },
     { value: '5AF', label: 'Educational / Academic' },
     { value: '5AG', label: 'Professional / Technical' },
     { value: '5AL', label: 'ELT / English as a Second Language' },
-    { value: '5AM', label: 'Adult' },
     { value: '5AP', label: 'General / Trade' },
     { value: '5AQ', label: 'Specialist / Niche Interest' },
     { value: '5AR', label: 'Research & Scholarly' }
@@ -88,8 +94,8 @@ export class AuthorBookEditorComponent implements OnInit {
     this.bookForm = this.fb.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
-      isbn: ['', Validators.required],
-      publicationDate: ['', Validators.required],
+      isbn: [''],
+      publicationDate: [''],
       authorOne: ['', Validators.required],
       authorTwo: [''],
       authorThree: [''],
@@ -109,6 +115,27 @@ export class AuthorBookEditorComponent implements OnInit {
         publicationDate: this.book.publicationDate?.split('T')[0]
       });
     }
+
+    this.bookForm.get('hasPublishedBefore')?.valueChanges.subscribe(value => {
+      if (value === 'yes') {
+        this.bookForm.get('publicationDate')?.setValidators(Validators.required);
+        this.bookForm.get('previousPublisherName')?.setValidators(Validators.required);
+      } else {
+        this.bookForm.get('publicationDate')?.clearValidators();
+        this.bookForm.get('previousPublisherName')?.clearValidators();
+      }
+      this.bookForm.get('publicationDate')?.updateValueAndValidity();
+      this.bookForm.get('previousPublisherName')?.updateValueAndValidity();
+    });
+
+    this.bookForm.get('hasClearedBefore')?.valueChanges.subscribe(value => {
+      if (value === 'yes') {
+        this.bookForm.get('depositNumber')?.setValidators(Validators.required);
+      } else {
+        this.bookForm.get('depositNumber')?.clearValidators();
+      }
+      this.bookForm.get('depositNumber')?.updateValueAndValidity();
+    });
   }
 
   onFileSelected(event: Event): void {
