@@ -16,6 +16,16 @@
                                 </select>
                             </div>
 
+                            <div class="form-group" *ngIf="profileForm.get('publisherType')?.value === '1'">
+                                <label>اسم الشركة</label>
+                                <input type="text" formControlName="companyName" class="form-control"
+                                    placeholder="اسم الشركة*" />
+                                <small class="text-danger"
+                                    *ngIf="profileForm.get('companyName')?.invalid && profileForm.get('companyName')?.touched">
+                                    يرجى إدخال اسم الشركة
+                                </small>
+                            </div>
+
                             <!-- Email Field -->
                             <div class="form-group mt-3">
                                 <label for="email">البريد الإلكتروني</label>
@@ -49,8 +59,8 @@
                                 </small>
                             </div>
 
-                            <!-- Commercial Registration Number -->
-                            <div class="form-group">
+                            <!-- Commercial Registration Number (Conditional) -->
+                            <div class="form-group" *ngIf="profileForm.get('publisherType')?.value === '1'">
                                 <label>رقم السجل التجاري</label>
                                 <input type="text" formControlName="cRNumber" class="form-control"
                                     placeholder="رقم السجل التجاري*" />
@@ -60,8 +70,8 @@
                                 </small>
                             </div>
 
-                            <!-- Tax Number -->
-                            <div class="form-group">
+                            <!-- Tax Number (Conditional) -->
+                            <div class="form-group" *ngIf="profileForm.get('publisherType')?.value === '1'">
                                 <label>الرقم الضريبي</label>
                                 <input type="text" formControlName="taxNumber" class="form-control"
                                     placeholder="الرقم الضريبي*" />
@@ -94,14 +104,16 @@
                             </div>
 
                         </div>
-                        <app-publisher-services-form [services]="services"></app-publisher-services-form>
+                        <app-publisher-services-form [services]="services"
+                            (servicesChange)="onServicesChange($event)"></app-publisher-services-form>
 
                     </div>
                 </div>
             </div>
-
             <div class="form-actions">
-                <button class="save-btn" type="button" (click)="onSubmit()"> حفظ</button>
+
+                <button class="save-btn" type="button" (click)="onSubmit()"
+                    [disabled]="profileForm.invalid || !areServicesValid()"> حفظ</button>
             </div>
         </div>
     </div>

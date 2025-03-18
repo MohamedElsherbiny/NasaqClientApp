@@ -29,8 +29,6 @@ export class PublisherProfileEditorComponent implements OnInit {
   faCalendar = faCalendar;
   faCheck = faCheck;
 
-
-
   constructor(
     private fb: FormBuilder,
     private http: HttpService,
@@ -42,8 +40,8 @@ export class PublisherProfileEditorComponent implements OnInit {
       companyName: [''],
       firstName: ['', [Validators.required, Validators.minLength(2)]],
       lastName: ['', [Validators.required, Validators.minLength(2)]],
-      cRNumber: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
-      taxNumber: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+      cRNumber: ['', []], // No validators initially
+      taxNumber: ['', []], // No validators initially
       contactEmail: ['', [Validators.required, Validators.email]],
       address: ['', [Validators.required, Validators.minLength(5)]],
     });
@@ -56,7 +54,26 @@ export class PublisherProfileEditorComponent implements OnInit {
         companyNameControl?.clearValidators();
       }
       companyNameControl?.updateValueAndValidity();
+
+      const cRNumberControl = this.profileForm.get('cRNumber');
+      const taxNumberControl = this.profileForm.get('taxNumber');
+
+      if (value === '1') {
+        // Add required and pattern validators for مؤسسة
+        cRNumberControl?.setValidators([Validators.required, Validators.pattern('^[0-9]*$')]);
+        taxNumberControl?.setValidators([Validators.required, Validators.pattern('^[0-9]*$')]);
+      } else {
+        // Clear validators for فرد
+        cRNumberControl?.clearValidators();
+        taxNumberControl?.clearValidators();
+      }
+
+      // Update the control's validity
+      cRNumberControl?.updateValueAndValidity();
+      taxNumberControl?.updateValueAndValidity();
     });
+
+
   }
 
   ngOnInit(): void {
@@ -72,6 +89,12 @@ export class PublisherProfileEditorComponent implements OnInit {
   }
 
   onClose() {
+  }
+
+  areServicesValid(): boolean {
+    return this.services
+      .filter(service => service.isSelected)
+      .every(service => service.price && service.description);
   }
 
   private getPublisherServiceTypes() {
@@ -105,8 +128,12 @@ export class PublisherProfileEditorComponent implements OnInit {
     }
   }
 
+  onServicesChange(services: any[]) {
+    this.services = services;
+  }
+
   onSubmit(): void {
-    if (this.profileForm.invalid) {
+    if (this.profileForm.invalid || !this.areServicesValid()) {
       this.profileForm.markAllAsTouched();
       this.toastr.error('يرجى ملء جميع الحقول المطلوبة بشكل صحيح', 'خطأ');
       return;

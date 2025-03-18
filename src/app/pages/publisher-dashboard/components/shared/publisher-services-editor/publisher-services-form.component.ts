@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
             <input 
               type="checkbox" 
               [(ngModel)]="service.isSelected"
+              (change)="onServiceChange()"
             >
             {{ service.name }}
           </label>
@@ -26,6 +27,7 @@ import { FormsModule } from '@angular/forms';
               [(ngModel)]="service.description"
               rows="3"
               placeholder="أدخل وصف الخدمة"
+              (ngModelChange)="onServiceChange()"
             ></textarea>
           </div>
 
@@ -36,14 +38,15 @@ import { FormsModule } from '@angular/forms';
               [(ngModel)]="service.price"
               placeholder="أدخل السعر"
               min="0"
+              (ngModelChange)="onServiceChange()"
             >
           </div>
         </div>
       </div>
     </div>
   `,
-  styles: [`
-    .service-item {
+  styles: [
+    `.service-item {
       margin-bottom: 1.5rem;
       padding: 1rem;
       border: 1px solid var(--border-color);
@@ -86,9 +89,14 @@ import { FormsModule } from '@angular/forms';
 
     .form-group textarea {
       resize: vertical;
-    }
-  `]
+    }`
+  ]
 })
 export class PublisherServicesFormComponent {
   @Input() services: any[] = [];
+  @Output() servicesChange = new EventEmitter<any[]>();
+
+  onServiceChange() {
+    this.servicesChange.emit(this.services);
+  }
 }
