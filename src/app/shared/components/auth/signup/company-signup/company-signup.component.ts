@@ -33,7 +33,6 @@ export class CompanySignupComponent {
   }
 
   onSubmit(): void {
-    debugger
     if (this.signupForm.valid) {
       this.http.post('publisher', this.signupForm.value).subscribe(
         {

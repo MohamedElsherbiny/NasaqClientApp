@@ -59,7 +59,6 @@ export class ContarctTemplateEditorComponent implements OnInit {
   ngOnInit(): void {
     this.http.get('Publishers/Contracts/GetContractTemplate').subscribe({
       next: (response: any) => {
-        debugger
         if (response.template) {
           this.content = response.template;
         }
