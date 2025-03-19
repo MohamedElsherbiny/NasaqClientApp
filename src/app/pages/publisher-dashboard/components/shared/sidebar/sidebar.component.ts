@@ -12,7 +12,8 @@ import {
   faElevator,
   faFileContract,
   faDashboard,
-  faChevronRight
+  faChevronRight,
+  faCog
 } from '@fortawesome/free-solid-svg-icons';
 import { RoleService } from '../../../../../shared/core/services/role.service';
 import { LogoutComponent } from '../../../../../shared/components/logout/logout.component';
@@ -40,6 +41,7 @@ export class SidebarComponent {
   faBook = faBook;
   faStarHalf = faStarHalf;
   faBuilding = faBuilding;
+  faCog = faCog;
   faShareSquare = faShareSquare;
   faElevator = faElevator;
   faFileContract = faFileContract;

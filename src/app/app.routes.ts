@@ -31,6 +31,7 @@ import { completeProfileGuard } from './shared/core/guards/complete-profile.guar
 import { PublisherProfileEditorComponent } from './pages/publisher-dashboard/components/publisher-profile-editor/publisher-profile-editor.component';
 import { PublisherProjectComponent } from './pages/publisher-dashboard/components/project/publisher-project.component';
 import { AuthorProjectComponent } from './pages/author-dashboard/components/project/author-project.component';
+import { PublisherSettingsComponent } from './pages/publisher-dashboard/components/publisher-settings/settings.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -68,6 +69,7 @@ export const routes: Routes = [
       { path: 'contract-template', component: ContarctTemplateEditorComponent, canActivate: [completeProfileGuard] },
       { path: 'evaluations', component: PublisherRequestEvaluationsComponent, canActivate: [completeProfileGuard] },
       { path: 'complete-profile', component: PublisherProfileEditorComponent },
+      { path: 'settings', component: PublisherSettingsComponent, canActivate: [completeProfileGuard] },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
     ],
   },

@@ -18,13 +18,14 @@
         </div>
 
         <div class="recent-projects" [class.hidden]="isCollapsed">
-            <a *ngFor="let project of projects.slice(0, 3)" [routerLink]="['/publisher-dashboard/projects', project.projectId]" class="project-item"
+            <a *ngFor="let project of projects.slice(0, 3)"
+                [routerLink]="['/publisher-dashboard/projects', project.projectId]" class="project-item"
                 routerLinkActive="active">
                 <fa-icon [icon]="faChevronRight" class="item-icon"></fa-icon>
                 {{ project.bookName }}
             </a>
             <a routerLink="/publisher-dashboard/projects" class="nav-item" routerLinkActive="active"
-            *ngIf="roleService.isPublisher()" class="view-all">
+                *ngIf="roleService.isPublisher()" class="view-all">
                 عرض كل المشاريع
             </a>
         </div>
@@ -45,6 +46,11 @@
             *ngIf="roleService.isPublisher()">
             <fa-icon [icon]="faBuilding"></fa-icon>
             <span class="nav-text" [class.hidden]="isCollapsed">الطلبات</span>
+        </a>
+        <a routerLink="/publisher-dashboard/settings" class="nav-item" routerLinkActive="active"
+            *ngIf="roleService.isPublisher()">
+            <fa-icon [icon]="faCog"></fa-icon>
+            <span class="nav-text" [class.hidden]="isCollapsed">الإعدادات</span>
         </a>
         <!-- <a routerLink="/publisher-dashboard/contracts" class="nav-item" routerLinkActive="active"
             *ngIf="roleService.isPublisher()">
