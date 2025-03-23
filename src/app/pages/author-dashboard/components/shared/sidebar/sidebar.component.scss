@@ -8,6 +8,75 @@
   border-left: 1px solid var(--border-color);
 }
 
+.projects-section {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem;
+  color: var(--text-color);
+  opacity: 0.7;
+  font-size: 0.9rem;
+}
+
+.section-title {
+  font-weight: 500;
+}
+
+.recent-projects {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-top: 0.5rem;
+}
+
+.project-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  color: var(--text-color);
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.project-item:hover {
+  background: var(--hover-bg);
+}
+
+.project-item.active {
+  background: var(--hover-bg);
+  color: #4573d2;
+}
+
+.item-icon {
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+.view-all {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  color: #4573d2;
+  text-decoration: none;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 4px;
+}
+
+.view-all:hover {
+  background: var(--hover-bg);
+}
+
+
 .sidebar.collapsed {
   width: 72px;
 }

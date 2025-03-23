@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router, RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   faTasks,
@@ -10,13 +10,14 @@ import {
   faBuilding,
   faShareSquare,
   faFileContract,
-  faDashboard
+  faDashboard,
+  faChevronRight
 } from '@fortawesome/free-solid-svg-icons';
 import { RoleService } from '../../../../../shared/core/services/role.service';
 import { LogoutComponent } from '../../../../../shared/components/logout/logout.component';
-import { Project } from '../models/project.model';
 import { SidebarService } from '../services/sidebar.service';
-import { ProjectService } from '../services/project.service';
+import { HttpService } from '../../../../../shared/core/services/http.service';
+import { Project } from '../../../../../shared/models/Project';
 
 @Component({
   selector: 'app-sidebar',
@@ -26,9 +27,10 @@ import { ProjectService } from '../services/project.service';
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss'
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit {
   isCollapsed = false;
   projects: Project[] = [];
+  user = JSON.parse(localStorage.getItem('user') ?? '{}');
 
   // Font Awesome icons
   faTasks = faTasks;
@@ -39,10 +41,11 @@ export class SidebarComponent {
   faShareSquare = faShareSquare;
   faFileContract = faFileContract;
   faDashboard = faDashboard;
+  faChevronRight = faChevronRight;
 
   constructor(
     private sidebarService: SidebarService,
-    private projectService: ProjectService,
+    private http: HttpService,
     private router: Router
   ) { }
 
@@ -51,9 +54,18 @@ export class SidebarComponent {
       collapsed => this.isCollapsed = collapsed
     );
 
-    this.projectService.getProjects().subscribe(
-      projects => this.projects = projects
-    );
+    this.fetchProjects();
+  }
+
+  fetchProjects(): void {
+    this.http.get(`Author/${this.user['authorId']}/projects`).subscribe({
+      next: (response: any) => {
+        this.projects = response || [];
+      },
+      error: (error) => {
+        console.error('Failed to fetch projects', error);
+      },
+    });
   }
 
   logout() {

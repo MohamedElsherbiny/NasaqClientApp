@@ -1,15 +1,29 @@
 <aside class="sidebar" [class.collapsed]="isCollapsed">
-    <!-- <div class="project-selector">
-        <select class="project-select">
-            <option value="">اختر المشروع</option>
-            <option *ngFor="let project of projects" [value]="project.id">
-                {{ project.name }}
-            </option>
-        </select>
-    </div> -->
+
     <div>
         <img src="assets/images/nasaq-logo.png" alt="logo" class="logo" />
     </div>
+
+    <!-- Projects Section -->
+    <div class="projects-section">
+        <div class="section-header">
+            <fa-icon [icon]="faProjectDiagram"></fa-icon>
+            <span class="section-title" [class.hidden]="isCollapsed">المشاريع</span>
+        </div>
+
+        <div class="recent-projects" [class.hidden]="isCollapsed">
+            <a *ngFor="let project of projects.slice(0, 3)"
+                [routerLink]="['/author-dashboard/projects', project.projectId]" class="project-item"
+                routerLinkActive="active">
+                <fa-icon [icon]="faChevronRight" class="item-icon"></fa-icon>
+                {{ project.bookName }}
+            </a>
+            <a routerLink="/author-dashboard/projects" class="nav-item" routerLinkActive="active" class="view-all">
+                عرض كل المشاريع
+            </a>
+        </div>
+    </div>
+
     <nav class="nav-menu pt-4">
         <a routerLink="/author-dashboard/home" class="nav-item" routerLinkActive="active">
             <fa-icon [icon]="faDashboard"></fa-icon>
