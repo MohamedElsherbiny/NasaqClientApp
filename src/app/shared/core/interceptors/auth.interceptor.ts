@@ -27,7 +27,11 @@ export class ErrorInterceptor implements HttpInterceptor {
                     return throwError(() => error);
                 }
 
-                let errorMessage = 'An unexpected error occurred.';
+                if (error.status === 401) {
+                    return throwError(() => error);
+                }
+
+                let errorMessage = 'حدث خطأ غير متوقع.'; // Translated to Arabic
                 if (error.error?.message) {
                     errorMessage = error.error.message;
                 }
