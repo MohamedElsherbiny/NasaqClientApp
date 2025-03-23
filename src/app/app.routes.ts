@@ -31,7 +31,7 @@ import { completeProfileGuard } from './shared/core/guards/complete-profile.guar
 import { PublisherProfileEditorComponent } from './pages/publisher-dashboard/components/publisher-profile-editor/publisher-profile-editor.component';
 import { PublisherProjectComponent } from './pages/publisher-dashboard/components/project/publisher-project.component';
 import { AuthorProjectComponent } from './pages/author-dashboard/components/project/author-project.component';
-import { PublisherSettingsComponent } from './pages/publisher-dashboard/components/publisher-settings/settings.component';
+import { AuthorProfileEditorComponent } from './pages/author-dashboard/components/author-profile-editor/author-profile-editor.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -44,14 +44,14 @@ export const routes: Routes = [
     canActivate: [tokenValidationGuard, authorGuard],
     component: AuthorDashboardComponent,
     children: [
-      { path: 'home', component: AuthorDashboardIndexComponent },
-      { path: 'requests', component: AuthorRequestsComponent },
-      { path: 'contracts', component: AuthorContractsComponent },
-      { path: 'books', component: AuthorBooksComponent },
-      { path: 'projects', component: AuthorProjectsComponent },
-      { path: 'publishers', component: PublishersComponent },
-      { path: 'complete-profile', component: PublishersComponent },
-      { path: 'projects/:id', component: AuthorProjectComponent },
+      { path: 'home', component: AuthorDashboardIndexComponent, canActivate: [completeProfileGuard] },
+      { path: 'requests', component: AuthorRequestsComponent, canActivate: [completeProfileGuard] },
+      { path: 'contracts', component: AuthorContractsComponent, canActivate: [completeProfileGuard] },
+      { path: 'books', component: AuthorBooksComponent, canActivate: [completeProfileGuard] },
+      { path: 'projects', component: AuthorProjectsComponent, canActivate: [completeProfileGuard] },
+      { path: 'publishers', component: PublishersComponent, canActivate: [completeProfileGuard] },
+      { path: 'projects/:id', component: AuthorProjectComponent, canActivate: [completeProfileGuard] },
+      { path: 'complete-profile', component: AuthorProfileEditorComponent },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
     ],
   }, {
@@ -69,7 +69,6 @@ export const routes: Routes = [
       { path: 'contract-template', component: ContarctTemplateEditorComponent, canActivate: [completeProfileGuard] },
       { path: 'evaluations', component: PublisherRequestEvaluationsComponent, canActivate: [completeProfileGuard] },
       { path: 'complete-profile', component: PublisherProfileEditorComponent },
-      { path: 'settings', component: PublisherSettingsComponent, canActivate: [completeProfileGuard] },
       { path: '', redirectTo: 'home', pathMatch: 'full' },
     ],
   },

@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ContractTemplatesComponent } from './contract-templates/contract-templates.component';
-import { UsersComponent } from './users/users.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faFileContract, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { TeamComponent } from "../team/team.component";
@@ -10,7 +8,7 @@ import { PublisherContractsComponent } from "../publisher-contracts/publisher-co
 @Component({
   selector: 'app-publisher-settings',
   standalone: true,
-  imports: [CommonModule, ContractTemplatesComponent, UsersComponent, FontAwesomeModule, TeamComponent, PublisherContractsComponent],
+  imports: [CommonModule, FontAwesomeModule, TeamComponent, PublisherContractsComponent],
   template: `
     <div class="settings-page">
       <div class="settings-content">

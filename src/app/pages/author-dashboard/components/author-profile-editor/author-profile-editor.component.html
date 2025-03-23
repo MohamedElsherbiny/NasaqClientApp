@@ -1,0 +1,82 @@
+<form [formGroup]="profileForm">
+    <div class="request-form-overlay" (click)="onClose()">
+        <div class="request-form" (click)="$event.stopPropagation()">
+            <div class="form-header">
+                <h2>تعديل الحساب</h2>
+            </div>
+            <div class="form-content">
+                <div class="profile-page">
+                    <div class="profile-form">
+                        <div class="profile-section">
+                            <div class="form-group mt-3">
+                                <label for="email">البريد الإلكتروني</label>
+                                <input type="text" formControlName="email" class="form-control"
+                                    placeholder="البريد الإلكتروني*" readonly />
+                            </div>
+
+                            <!-- First Name -->
+                            <div class="form-group">
+                                <label>الاسم الأول</label>
+                                <input type="text" formControlName="firstName" class="form-control"
+                                    placeholder="الاسم الأول*" />
+                                <small class="text-danger"
+                                    *ngIf="profileForm.get('firstName')?.invalid && profileForm.get('firstName')?.touched">
+                                    يجب أن يكون الاسم الأول 2 أحرف على الأقل
+                                </small>
+                            </div>
+
+                            <!-- Last Name -->
+                            <div class="form-group">
+                                <label>الاسم الأخير</label>
+                                <input type="text" formControlName="lastName" class="form-control"
+                                    placeholder="الاسم الأخير*" />
+                                <small class="text-danger"
+                                    *ngIf="profileForm.get('lastName')?.invalid && profileForm.get('lastName')?.touched">
+                                    يجب أن يكون الاسم الأخير 2 أحرف على الأقل
+                                </small>
+                            </div>
+
+                             <!-- ID Number -->
+                             <div class="form-group">
+                                <label>رقم الهوية</label>
+                                <input type="text" formControlName="idNumber" class="form-control"
+                                    placeholder="رقم الهوية*" />
+                                <small class="text-danger"
+                                    *ngIf="profileForm.get('idNumber')?.invalid && profileForm.get('idNumber')?.touched">
+                                    رقم الهوية مطلوب
+                                </small>
+                            </div>
+
+                            <!-- Address -->
+                            <div class="form-group">
+                                <label>العنوان</label>
+                                <input type="text" formControlName="address" class="form-control"
+                                    placeholder="العنوان*" />
+                                <small class="text-danger"
+                                    *ngIf="profileForm.get('address')?.invalid && profileForm.get('address')?.touched">
+                                    يجب أن يكون العنوان 2 أحرف على الأقل
+                                </small>
+                            </div>
+
+                            <!-- Phone Number -->
+                            <div class="form-group">
+                                <label>رقم الهاتف</label>
+                                <input type="text" formControlName="phoneNumber" class="form-control"
+                                    placeholder="رقم الهاتف*" />
+                                <small class="text-danger"
+                                    *ngIf="profileForm.get('phoneNumber')?.invalid && profileForm.get('phoneNumber')?.touched">
+                                    رقم الهاتف مطلوب
+                                </small>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions">
+                <button class="save-btn" type="button" (click)="onSubmit()" [disabled]="profileForm.invalid">
+                    حفظ</button>
+            </div>
+        </div>
+    </div>
+</form>
