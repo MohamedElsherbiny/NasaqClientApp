@@ -40,6 +40,7 @@ export class PublisherProfileEditorComponent implements OnInit {
       companyName: [''],
       firstName: ['', [Validators.required, Validators.minLength(2)]],
       lastName: ['', [Validators.required, Validators.minLength(2)]],
+      description: ['', [Validators.required, Validators.minLength(2)]],
       cRNumber: ['', []], // No validators initially
       taxNumber: ['', []], // No validators initially
       contactEmail: ['', [Validators.required, Validators.email]],

@@ -5,13 +5,13 @@ import { ThemeService } from '../services/theme.service';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faBars, faChevronDown, faCog, faSignOutAlt, faUser } from '@fortawesome/free-solid-svg-icons';
 import { Router } from '@angular/router';
-import { PublisherProfileEditorComponent } from "../publisher-profile-editor/publisher-profile-editor.component";
+// import { PublisherProfileEditorComponent } from "../publisher-profile-editor/publisher-profile-editor.component";
 import { PublisherServicesEditorComponent } from "../publisher-services-editor/publisher-services-editor.component";
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, FontAwesomeModule, PublisherProfileEditorComponent, PublisherServicesEditorComponent],
+  imports: [CommonModule, FontAwesomeModule, PublisherServicesEditorComponent],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.scss'
 })

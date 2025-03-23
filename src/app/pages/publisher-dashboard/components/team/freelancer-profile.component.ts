@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { 
+import {
   faArrowLeft,
   faStar,
   faCheck
@@ -42,9 +42,9 @@ interface FreelancerProfile {
 
       <div class="profile-content">
         <div class="profile-info">
-          <div class="profile-avatar">
-            <!-- <img [src]="freelancer.avatar" [alt]="freelancer.name"> -->
-          </div>
+          <!-- <div class="profile-avatar">
+            <img [src]="freelancer.avatar" [alt]="freelancer.name">
+          </div> -->
           <div class="profile-details">
             <h2>{{ freelancer.companyName }}</h2>
             <div class="rating">
@@ -65,17 +65,17 @@ interface FreelancerProfile {
           <p class="bio">{{ freelancer.description || 'لا يوجد وصف متاح.' }}</p>
         </div>
 
-        <!-- <div class="profile-section">
+        <div class="profile-section">
           <h3>الخدمات والأسعار</h3>
           <div class="services-grid">
-            <div class="service-price-card" *ngFor="let service of freelancer.services">
-              <span class="service-name">{{ getServiceLabel(service) }}</span>
-              <span class="service-price">{{ freelancer.servicePrices?.[service] || '-' }} ريال</span>
+            <div class="service-price-card" *ngFor="let service of freelancer.serviceTypes">
+              <span class="service-name">{{ service.name }}</span>
+              <span class="service-price">{{ service.price || '-' }} ريال</span>
             </div>
           </div>
-        </div> -->
+        </div>
 
-        <!-- <div class="profile-section">
+        <div class="profile-section">
           <h3>التقييمات</h3>
           <div class="evaluations-grid">
             <div class="evaluation-item">
@@ -109,7 +109,7 @@ interface FreelancerProfile {
               </div>
             </div>
           </div>
-        </div> -->
+        </div>
 
         <div class="profile-actions">
           <button 
@@ -126,6 +126,9 @@ interface FreelancerProfile {
     </div>
   `,
   styles: [`
+  :host {
+    overflow: scroll;
+  }
     .profile-view {
       height: 100%;
       display: flex;

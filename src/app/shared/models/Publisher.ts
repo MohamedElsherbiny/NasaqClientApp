@@ -15,5 +15,6 @@ export interface Publisher {
     contactEmail: string;
     phoneNumber: string;
     invited?: boolean;
+    evaluations?: any;
     serviceTypes: ServiceType[];
 }
