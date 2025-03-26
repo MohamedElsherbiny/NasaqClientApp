@@ -45,9 +45,9 @@ export class AddPublisherRequestEditorComponent implements OnInit {
   }
 
   fetchBooks(): void {
-    this.http.get(`Author/${this.user['authorId']}/books`).subscribe({
+    this.http.get(`Author/${this.user['authorId']}/books`, { pageNumber: 1, pageSize: 1000 }).subscribe({
       next: (response: any) => {
-        this.books = response || [];
+        this.books = response?.items || [];
         this.requestForm.patchValue({ bookId: this.books[0]?.bookId });
       },
       error: (error) => {
@@ -59,17 +59,7 @@ export class AddPublisherRequestEditorComponent implements OnInit {
   getPublisherServiceTypes() {
     return this.publisher ? this.publisher.serviceTypes : [];
   }
-
-  // toggleServiceSelection(serviceType: any) {
-  //   if (this.selectedServices.some((s) => s.serviceTypeId === serviceType.serviceTypeId)) {
-  //     this.selectedServices = this.selectedServices.filter(
-  //       (s) => s.serviceTypeId !== serviceType.serviceTypeId
-  //     );
-  //   } else {
-  //     this.selectedServices.push(serviceType);
-  //   }
-  // }
-
+  
   isServiceSelected(serviceType: any): boolean {
     return this.selectedServices.some(
       (s) => s.serviceTypeId === serviceType.serviceTypeId
@@ -138,7 +128,7 @@ export class AddPublisherRequestEditorComponent implements OnInit {
       }
     }
   }
-  
+
   // Check whether a service is disabled
   isServiceDisabled(serviceType: ServiceType): boolean {
     const isServiceType1Selected = this.selectedServices.some((s) => s.serviceTypeId === 1);
@@ -148,5 +138,5 @@ export class AddPublisherRequestEditorComponent implements OnInit {
     }
     return isServiceType1Selected; // Disable other services if serviceTypeId 1 is selected
   }
-  
+
 }

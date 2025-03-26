@@ -44,7 +44,8 @@
             </div>
             <div class="form-actions">
                 <button class="cancel-btn" type="button" (click)="onClose()">إلغاء</button>
-                <button class="save-btn" type="submit">حفظ</button>
+                <button class="save-btn" type="submit"
+                    [disabled]="requestForm.invalid || selectedServices.length === 0">حفظ</button>
             </div>
         </div>
     </div>

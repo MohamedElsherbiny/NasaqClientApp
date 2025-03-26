@@ -87,8 +87,10 @@
           <fa-icon [icon]="faSort"></fa-icon>
           <select [(ngModel)]="sortBy" (ngModelChange)="filterPublishers()">
             <option value="">ترتيب حسب</option>
-            <option value="createDateAsc">تاريخ الإنشاء: المضاف حديثا</option>
-            <option value="createDateDesc">تاريخ الإنشاء: المضاف قديما</option>
+            <option value="createDateDesc">تاريخ الإنشاء: المضاف حديثا</option>
+            <option value="createDateAsc">تاريخ الإنشاء: المضاف قديما</option>
+            <option value="priceDesc">السعر: الأعلى أولا</option>
+            <option value="priceAsc">السعر: الأقل أولا</option>
           </select>
         </div>
       </div>
@@ -120,8 +122,8 @@
           </button>
         </div>
       </div>
-      <mat-paginator [hidePageSize]="true" [length]="totalCount" [pageSize]="pageSize" (page)="onPageChange($event)" aria-label="اختر الصفحة"
-        class="custom-paginator">
+      <mat-paginator [hidePageSize]="true" [length]="totalCount" [pageSize]="pageSize" (page)="onPageChange($event)"
+        aria-label="اختر الصفحة" class="custom-paginator">
       </mat-paginator>
     </div>
   </div>

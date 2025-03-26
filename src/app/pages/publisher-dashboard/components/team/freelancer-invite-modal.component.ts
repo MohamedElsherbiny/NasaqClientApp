@@ -9,7 +9,8 @@ import {
   faSearch,
   faFilter,
   faCheck,
-  faStar
+  faStar,
+  faSort
 } from '@fortawesome/free-solid-svg-icons';
 import { HttpService } from '../../../../shared/core/services/http.service';
 import { Router } from '@angular/router';
@@ -79,6 +80,16 @@ interface FreelancerProfile {
                 </label>
               </div>
             </div>
+            <div class="sort-dropdown">
+                <fa-icon [icon]="faSort"></fa-icon>
+                <select [(ngModel)]="sortBy" (ngModelChange)="fetchPublishers()">
+                  <option value="">ترتيب حسب</option>
+                  <option value="createDateDesc">تاريخ الإنشاء: المضاف حديثا</option>
+                  <option value="createDateAsc">تاريخ الإنشاء: المضاف قديما</option>
+                  <option value="priceDesc">السعر: الأعلى أولا</option>
+                  <option value="priceAsc">السعر: الأقل أولا</option>
+                </select>
+              </div>
           </div>
 
           <div class="freelancers-grid">
@@ -370,6 +381,34 @@ interface FreelancerProfile {
       cursor: default;
     }
 
+    .sort-dropdown {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--input-bg);
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+}
+
+.sort-dropdown select {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 0.95rem;
+    cursor: pointer;
+    padding-right: 0.5rem;
+}
+
+.sort-dropdown select:focus {
+    outline: none;
+}
+
+.sort-dropdown option {
+    background: var(--bg-color);
+    color: var(--text-color);
+}
+
     
 .custom-paginator {
     background: transparent;
@@ -447,8 +486,10 @@ export class FreelancerInviteModalComponent {
   faFilter = faFilter;
   faCheck = faCheck;
   faStar = faStar;
+  faSort = faSort;
 
   searchQuery = '';
+  sortBy = '';
   selectedServices: { [key: number]: boolean } = {};
   totalCount = 0;
   pageSize = 3;
@@ -470,6 +511,7 @@ export class FreelancerInviteModalComponent {
       pageNumber: this.currentPage + 1,
       pageSize: this.pageSize,
       keyword: this.searchQuery,
+      sortBy: this.sortBy,
       publisherType: this.canInvitePublishers ? null : 2,
       serviceTypes: this.services.filter(s => s.isSelected).map(s => s.value)
     }).subscribe({
