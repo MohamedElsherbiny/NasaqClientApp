@@ -4,12 +4,14 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   faTasks,
   faUsers,
-  faStarHalf
+  faStarHalf,
+  faBook
 } from '@fortawesome/free-solid-svg-icons';
 import { TeamListComponent } from '../team/team-list.component';
 import { TasksComponent } from "../tasks/tasks.component";
 import { ActivatedRoute } from '@angular/router';
 import { ProjectEvaluationComponent } from "../evaluation/project-evaluation/project-evaluation.component";
+import { OnixFormComponent } from "../../../author-dashboard/components/project/onix-form/onix-form.component";
 
 @Component({
   selector: 'app-publisher-project',
@@ -19,7 +21,8 @@ import { ProjectEvaluationComponent } from "../evaluation/project-evaluation/pro
     TeamListComponent,
     FontAwesomeModule,
     TasksComponent,
-    ProjectEvaluationComponent
+    ProjectEvaluationComponent,
+    OnixFormComponent
   ],
   template: `
     <div class="publisher-project-page">
@@ -49,13 +52,22 @@ import { ProjectEvaluationComponent } from "../evaluation/project-evaluation/pro
             <fa-icon [icon]="faStarHalf"></fa-icon>
             التقييم
           </button>
+          <button 
+            class="tab-btn" 
+            [class.active]="activeTab === 'onix'"
+            (click)="activeTab = 'onix'"
+          >
+            <fa-icon [icon]="faBook"></fa-icon>
+            ONIX
+          </button>
         </div>
 
         <div class="tab-content">
           <app-team-list *ngIf="activeTab === 'team'"></app-team-list>
           <app-tasks  *ngIf="activeTab === 'tasks'" [projectId]="projectId"></app-tasks>
           <app-evaluation [projectId]="projectId" *ngIf="activeTab === 'evaluation'"></app-evaluation>
-        </div>
+           <app-onix-form *ngIf="activeTab === 'onix'"></app-onix-form>
+          </div>
       </div>
     </div>
   `,
@@ -137,12 +149,13 @@ import { ProjectEvaluationComponent } from "../evaluation/project-evaluation/pro
   `]
 })
 export class PublisherProjectComponent {
-  activeTab: 'tasks' | 'team' | 'evaluation' = 'tasks';
+  activeTab: 'tasks' | 'team' | 'evaluation' | 'onix' = 'tasks';
   projectId: number | null = null;
 
   faTasks = faTasks;
   faUsers = faUsers;
   faStarHalf = faStarHalf;
+  faBook = faBook;
 
   constructor(private route: ActivatedRoute) { }
 

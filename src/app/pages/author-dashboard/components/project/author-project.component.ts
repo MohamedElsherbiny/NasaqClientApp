@@ -4,12 +4,14 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {
   faTasks,
   faUsers,
-  faStarHalf
+  faStarHalf,
+  faBook
 } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute } from '@angular/router';
 import { TasksComponent } from "../../../publisher-dashboard/components/tasks/tasks.component";
 import { ProjectEvaluationComponent } from "../../../publisher-dashboard/components/evaluation/project-evaluation/project-evaluation.component";
 import { TeamListComponent } from "../../../publisher-dashboard/components/team/team-list.component";
+import { OnixFormComponent } from "./onix-form/onix-form.component";
 
 @Component({
   selector: 'app-author-project',
@@ -20,7 +22,8 @@ import { TeamListComponent } from "../../../publisher-dashboard/components/team/
     FontAwesomeModule,
     TasksComponent,
     ProjectEvaluationComponent,
-    TeamListComponent
+    TeamListComponent,
+    OnixFormComponent
   ],
   template: `
     <div class="author-project-page">
@@ -50,12 +53,21 @@ import { TeamListComponent } from "../../../publisher-dashboard/components/team/
             <fa-icon [icon]="faStarHalf"></fa-icon>
             التقييم
           </button>
+          <button 
+            class="tab-btn" 
+            [class.active]="activeTab === 'onix'"
+            (click)="activeTab = 'onix'"
+          >
+            <fa-icon [icon]="faBook"></fa-icon>
+            ONIX
+          </button>
         </div>
 
         <div class="tab-content">
           <app-tasks [hideAssignedTo]="true"  *ngIf="activeTab === 'tasks'" [projectId]="projectId" [hideAssignedTo]="true"></app-tasks>
           <app-team-list [canInvitePublishers]="true" *ngIf="activeTab === 'team'" [projectId]="projectId" ></app-team-list>
           <app-evaluation [projectId]="projectId" *ngIf="activeTab === 'evaluation'"></app-evaluation>
+          <app-onix-form *ngIf="activeTab === 'onix'"></app-onix-form>
         </div>
       </div>
     </div>
@@ -138,12 +150,13 @@ import { TeamListComponent } from "../../../publisher-dashboard/components/team/
   `]
 })
 export class AuthorProjectComponent {
-  activeTab: 'tasks' | 'team' | 'evaluation' = 'tasks';
+  activeTab: 'tasks' | 'team' | 'evaluation' | 'onix' = 'tasks';
   projectId: number | null = null;
 
   faTasks = faTasks;
   faUsers = faUsers;
   faStarHalf = faStarHalf;
+  faBook = faBook;
 
   constructor(private route: ActivatedRoute) { }
 
